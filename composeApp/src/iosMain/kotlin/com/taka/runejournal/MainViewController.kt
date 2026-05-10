@@ -1,4 +1,4 @@
-package com.example.kmpstarter
+package com.taka.runejournal
 
 import androidx.compose.ui.window.ComposeUIViewController
 

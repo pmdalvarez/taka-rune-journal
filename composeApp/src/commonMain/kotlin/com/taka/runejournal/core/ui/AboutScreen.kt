@@ -1,4 +1,4 @@
-package com.example.kmpstarter.core.ui
+package com.taka.runejournal.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

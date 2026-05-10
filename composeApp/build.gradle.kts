@@ -44,11 +44,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.kmpstarter"
+    namespace = "com.taka.runejournal"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.kmpstarter"
+        applicationId = "com.example.runejournal"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

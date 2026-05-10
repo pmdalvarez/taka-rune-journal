@@ -1,4 +1,4 @@
-package com.example.kmpstarter
+package com.taka.runejournal
 
 import android.os.Build
 

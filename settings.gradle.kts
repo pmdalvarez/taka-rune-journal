@@ -1,4 +1,4 @@
-rootProject.name = "Androidkmpstarter"
+rootProject.name = "taka-rune-journal"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

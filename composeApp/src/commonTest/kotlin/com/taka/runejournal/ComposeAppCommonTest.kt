@@ -1,4 +1,4 @@
-package com.example.kmpstarter
+package com.taka.runejournal
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

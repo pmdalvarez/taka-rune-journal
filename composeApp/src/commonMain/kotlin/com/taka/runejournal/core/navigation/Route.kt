@@ -1,4 +1,4 @@
-package com.example.kmpstarter.core.navigation
+package com.taka.runejournal.core.navigation
 
 sealed class Route(val value: String) {
     data object Home : Route("home")

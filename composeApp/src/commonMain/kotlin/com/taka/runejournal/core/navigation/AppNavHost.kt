@@ -1,11 +1,11 @@
-package com.example.kmpstarter.core.navigation
+package com.taka.runejournal.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.kmpstarter.core.ui.HomeScreen
-import com.example.kmpstarter.core.ui.AboutScreen
+import com.taka.runejournal.core.ui.HomeScreen
+import com.taka.runejournal.core.ui.AboutScreen
 
 @Composable
 fun AppNavHost() {

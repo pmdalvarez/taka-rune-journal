@@ -1,4 +1,4 @@
-package com.example.kmpstarter
+package com.taka.runejournal
 
 import platform.UIKit.UIDevice
 
