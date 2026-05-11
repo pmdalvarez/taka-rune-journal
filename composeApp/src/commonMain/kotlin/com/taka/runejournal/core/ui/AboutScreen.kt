@@ -53,7 +53,7 @@ private fun RunePreview() {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         RuneId.entries
-            .chunked(2)
+            .chunked(4)
             .forEach { rowRunes ->
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
