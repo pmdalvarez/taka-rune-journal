@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.model.RuneId
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.rune_empty
 
 @Composable
 fun AboutScreen(
@@ -78,5 +80,25 @@ private fun RunePreview() {
                     }
                 }
             }
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(Res.drawable.rune_empty),
+                    contentDescription = "empty",
+                    modifier = Modifier.size(width = 48.dp, height = 72.dp)
+                )
+
+                Text(
+                    text = "empty",
+                    modifier = Modifier.padding(top = 4.dp),
+                    color = Color.Black,
+                    fontSize = 10.sp
+                )
+            }
+        }
     }
 }
