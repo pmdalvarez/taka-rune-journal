@@ -1,4 +1,4 @@
-package com.taka.runejournal.core.model
+package com.taka.runejournal.core.domain.model
 
 import org.jetbrains.compose.resources.DrawableResource
 import taka_rune_journal.composeapp.generated.resources.*

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.taka.runejournal.core.model.RuneId
+import com.taka.runejournal.core.domain.model.RuneId
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import taka_rune_journal.composeapp.generated.resources.Res
