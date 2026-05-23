@@ -9,14 +9,6 @@ data class DrawnRuneEmbedded(
   val orientation: RuneOrientation,
 )
 
-fun DrawnRuneEmbedded.toDomain(): DrawnRune =
-  DrawnRune(
-    id = id,
-    orientation = orientation,
-  )
+fun DrawnRuneEmbedded.toDomain(): DrawnRune = DrawnRune(id = id, orientation = orientation)
 
-fun DrawnRune.toEmbedded(): DrawnRuneEmbedded =
-  DrawnRuneEmbedded(
-    id = id,
-    orientation = orientation,
-  )
+fun DrawnRune.toEmbedded(): DrawnRuneEmbedded = DrawnRuneEmbedded(id = id, orientation = orientation)

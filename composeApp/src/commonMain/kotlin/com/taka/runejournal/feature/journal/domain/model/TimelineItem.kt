@@ -11,7 +11,7 @@ sealed class TimelineItem {
   data class JournalEntry(
     override val id: Int,
     override val createdAt: Instant,
-    override val notes: String,
+    override val notes: String?,
     val imageFileName: String?
   ) : TimelineItem()
 

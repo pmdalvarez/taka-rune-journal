@@ -8,6 +8,6 @@ data class TimelineItemEntity(
   @PrimaryKey(autoGenerate = true)
   val id: Int = 0,
   val createdAt: Long,
-  val notes: String,
+  val notes: String?,
   val imageFileName: String?,
 )
