@@ -65,7 +65,7 @@ private fun RunePreview() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Image(
-                                painter = painterResource(runeId.drawable),
+                                painter = painterResource(runeId.drawable()),
                                 contentDescription = runeId.key,
                                 modifier = Modifier.size(width = 48.dp, height = 72.dp)
                             )

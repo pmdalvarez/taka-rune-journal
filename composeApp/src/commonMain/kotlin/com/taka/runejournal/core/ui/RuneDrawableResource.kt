@@ -4,7 +4,7 @@ import com.taka.runejournal.core.domain.model.RuneId
 import org.jetbrains.compose.resources.DrawableResource
 import taka_rune_journal.composeapp.generated.resources.*
 
-fun RuneId.drawableResource(): DrawableResource =
+fun RuneId.drawable(): DrawableResource =
   when (this) {
     RuneId.FEHU -> Res.drawable.rune_fehu
     RuneId.URUZ -> Res.drawable.rune_uruz

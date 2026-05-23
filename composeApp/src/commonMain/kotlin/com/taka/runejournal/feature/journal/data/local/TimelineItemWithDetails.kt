@@ -27,7 +27,6 @@ fun TimelineItemWithDetails.toTimelineItem() = when {
     notes = timelineItem.notes,
     rune = singleRuneReading.rune.toDomain()
   )
-
   ppfRuneReading != null -> TimelineItem.PpfRuneReading(
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
