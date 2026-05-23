@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "journal_entries")
 data class JournalEntryEntity(
-    @PrimaryKey val id: String,
-    val text: String,
-    val imageFileName: String?,
-    val imageCaption: String?,
-    val createdAtEpochMillis: Long,
-    val updatedAtEpochMillis: Long,
+  @PrimaryKey val id: String,
+  val text: String,
+  val imageFileName: String?,
+  val imageCaption: String?,
+  val createdAtEpochMillis: Long,
+  val updatedAtEpochMillis: Long,
 )
