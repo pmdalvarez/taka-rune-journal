@@ -4,7 +4,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.taka.runejournal.core.domain.model.DrawnRune
 
 @Entity(
   tableName = "single_rune_readings",
@@ -19,5 +18,5 @@ import com.taka.runejournal.core.domain.model.DrawnRune
 data class SingleRuneReadingEntity(
   @PrimaryKey
   val timelineItemId: Int,
-  @Embedded(prefix = "rune_") val rune: DrawnRune
+  @Embedded(prefix = "rune_") val rune: DrawnRuneEmbedded
 )
