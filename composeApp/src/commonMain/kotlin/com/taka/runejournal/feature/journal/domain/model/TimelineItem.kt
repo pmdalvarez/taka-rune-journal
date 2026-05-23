@@ -3,7 +3,7 @@ package com.taka.runejournal.feature.journal.domain.model
 import com.taka.runejournal.core.domain.model.DrawnRune
 import kotlin.time.Instant
 
-sealed class TimelineEntry {
+sealed class TimelineItem {
   abstract val id: Int
   abstract val createdAt: Instant
   abstract val notes: String?
@@ -13,14 +13,14 @@ sealed class TimelineEntry {
     override val createdAt: Instant,
     override val notes: String,
     val imageFileName: String?
-  ) : TimelineEntry()
+  ) : TimelineItem()
 
   data class SingleRuneReading(
     override val id: Int,
     override val createdAt: Instant,
     override val notes: String?,
     val rune: DrawnRune,
-  ) : TimelineEntry()
+  ) : TimelineItem()
 
   data class PpfRuneReading(
     override val id: Int,
@@ -29,7 +29,7 @@ sealed class TimelineEntry {
     val pastRune: DrawnRune,
     val presentRune: DrawnRune,
     val futureRune: DrawnRune,
-  ) : TimelineEntry()
+  ) : TimelineItem()
 
 
 }
