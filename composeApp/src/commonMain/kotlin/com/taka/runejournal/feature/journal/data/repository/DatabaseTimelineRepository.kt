@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.feature.journal.data.local.TimelineItemDao
 import com.taka.runejournal.feature.journal.data.local.toTimelineItem
 import com.taka.runejournal.feature.journal.domain.model.TimelineItem
@@ -22,19 +23,20 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     }
   }
 
-  override suspend fun addJournalEntry(journalEntry: TimelineItem.JournalEntry) {
+  override suspend fun addJournalEntry(notes: String, imageFileName: String?) {
 
   }
 
-  override suspend fun addSingleRuneReading(reading: TimelineItem.SingleRuneReading) {
+
+  override suspend fun addSingleRuneReading(rune: DrawnRune, notes: String?) {
 
   }
 
-  override suspend fun addPpfRuneReading(reading: TimelineItem.PpfRuneReading) {
+  override suspend fun addPpfRuneReading(pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?) {
 
   }
 
-  override suspend fun editTimelineItem(id: Int, notes: String) {
+  override suspend fun editTimelineItem(id: Int, notes: String?, imageFileName: String?) {
 
   }
 
