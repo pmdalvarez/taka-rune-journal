@@ -56,6 +56,7 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
 
   override suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?) {
     timelineItemDao.updateTimelineItem(id, notes, imageFileName)
+    // TODO - make sure old image deleted if this is changed
     // TODO: confirm is we dont need to do anything if nothing was found to update
   }
 
