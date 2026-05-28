@@ -15,8 +15,8 @@ interface TimelineRepository {
 
   suspend fun addPpfRuneReading(pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?)
 
-  suspend fun editTimelineItem(id: Int, notes: String?, imageFileName: String?)
+  suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?)
 
-  suspend fun deleteTimelineitem(id: Int)
+  suspend fun deleteTimelineitem(id: Long)
 
 }

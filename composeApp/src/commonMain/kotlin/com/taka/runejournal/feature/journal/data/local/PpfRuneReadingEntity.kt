@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.taka.runejournal.feature.journal.domain.model.TimelineItem
 
 @Entity(
   tableName = "ppf_rune_readings",
@@ -17,7 +18,7 @@ import androidx.room.PrimaryKey
 )
 data class PpfRuneReadingEntity(
   @PrimaryKey
-  val timelineItemId: Int,
+  val timelineItemId: Long,
   @Embedded(prefix = "past_rune_") val pastRune: DrawnRuneEmbedded,
   @Embedded(prefix = "present_rune_") val presentRune: DrawnRuneEmbedded,
   @Embedded(prefix = "future_rune_") val futureRune: DrawnRuneEmbedded
