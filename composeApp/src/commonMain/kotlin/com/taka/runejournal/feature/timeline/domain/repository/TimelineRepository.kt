@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface TimelineRepository {
 
-  fun observePagedTimelineItems(): Flow<PagingData<TimelineItem>>
+  fun observeTimelineItems(): Flow<PagingData<TimelineItem>>
+
+  suspend fun getTimelineItem(id: Long): TimelineItem?
 
   suspend fun addJournalEntry(notes: String, imageFileName: String?)
 
@@ -15,8 +17,8 @@ interface TimelineRepository {
 
   suspend fun addPpfRuneReading(pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?)
 
-  suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?)
+  suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?): Boolean
 
-  suspend fun deleteTimelineitem(id: Long)
+  suspend fun deleteTimelineItem(id: Long): Boolean
 
 }

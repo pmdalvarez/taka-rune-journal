@@ -2,9 +2,9 @@ package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Upsert
 
 @Dao
 interface TimelineItemDao {
@@ -13,14 +13,18 @@ interface TimelineItemDao {
   @Query("SELECT * FROM timeline_items ORDER BY createdAt DESC")
   fun getTimelineItems(): PagingSource<Int, TimelineItemWithDetails>
 
-  @Upsert
-  suspend fun insert(timelineItemEntity: TimelineItemEntity) : Long
+  @Transaction
+  @Query("SELECT * FROM timeline_items WHERE id = :id")
+  suspend fun getTimelineItem(id: Long): TimelineItemWithDetails?
 
-  @Upsert
-  suspend fun insert(singleRuneReadingEntity: SingleRuneReadingEntity) : Long
+  @Insert
+  suspend fun insert(timelineItemEntity: TimelineItemEntity): Long
 
-  @Upsert
-  suspend fun insert(ppfRuneReadingEntity: PpfRuneReadingEntity) : Long
+  @Insert
+  suspend fun insert(singleRuneReadingEntity: SingleRuneReadingEntity): Long
+
+  @Insert
+  suspend fun insert(ppfRuneReadingEntity: PpfRuneReadingEntity): Long
 
   @Transaction
   suspend fun insertSingleRuneReading(

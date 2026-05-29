@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 
 class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) : TimelineRepository {
 
-  override fun observePagedTimelineItems(): Flow<PagingData<TimelineItem>> {
+  override fun observeTimelineItems(): Flow<PagingData<TimelineItem>> {
     return Pager(
       config = PagingConfig(pageSize = 30),
       pagingSourceFactory = { timelineItemDao.getTimelineItems() }
@@ -24,6 +24,8 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
       pagingData.map { it.toTimelineItem() }
     }
   }
+
+  override suspend fun getTimelineItem(id: Long): TimelineItem? = timelineItemDao.getTimelineItem(id)?.toTimelineItem()
 
   override suspend fun addJournalEntry(notes: String, imageFileName: String?) {
     val timelineItemEntity = TimelineItemEntity(
@@ -37,7 +39,6 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     val timelineItemEntity = TimelineItemEntity(notes = notes)
     val runeEmbedded = rune.toEmbedded()
     timelineItemDao.insertSingleRuneReading(timelineItemEntity, runeEmbedded)
-    // TODO: confirm is we dont need to do anything if we werent able to insert
   }
 
   override suspend fun addPpfRuneReading(pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?) {
@@ -51,18 +52,16 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
       presentRune = presentRuneEmbedded,
       futureRune = futureRuneEmbedded
     )
-    // TODO: confirm is we dont need to do anything if we werent able to insert
   }
 
-  override suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?) {
-    timelineItemDao.updateTimelineItem(id, notes, imageFileName)
-    // TODO - make sure old image deleted if this is changed
-    // TODO: confirm is we dont need to do anything if nothing was found to update
+  override suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?): Boolean {
+    val rowsUpdated = timelineItemDao.updateTimelineItem(id, notes, imageFileName)
+    return rowsUpdated > 0
   }
 
-  override suspend fun deleteTimelineitem(id: Long) {
-    timelineItemDao.deleteTimelineItem(id)
-    //TODO: confirm is we dont need to do anything if nothing was found to delete
+  override suspend fun deleteTimelineItem(id: Long): Boolean {
+    val rowsDeleted = timelineItemDao.deleteTimelineItem(id)
+    return rowsDeleted > 0
   }
 
 
