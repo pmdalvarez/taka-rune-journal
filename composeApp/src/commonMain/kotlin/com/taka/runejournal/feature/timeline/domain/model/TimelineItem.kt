@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.journal.domain.model
+package com.taka.runejournal.feature.timeline.domain.model
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import kotlin.time.Instant

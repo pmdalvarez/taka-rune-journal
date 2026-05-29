@@ -1,8 +1,8 @@
-package com.taka.runejournal.feature.journal.data.local
+package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.taka.runejournal.feature.journal.domain.model.TimelineItem
+import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlin.time.Instant
 
 data class TimelineItemWithDetails(

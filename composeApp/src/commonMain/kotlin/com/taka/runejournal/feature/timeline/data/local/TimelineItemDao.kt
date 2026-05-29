@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.journal.data.local
+package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

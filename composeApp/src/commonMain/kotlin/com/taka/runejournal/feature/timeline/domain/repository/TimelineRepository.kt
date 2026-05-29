@@ -1,8 +1,8 @@
-package com.taka.runejournal.feature.journal.domain.repository
+package com.taka.runejournal.feature.timeline.domain.repository
 
 import androidx.paging.PagingData
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.feature.journal.domain.model.TimelineItem
+import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlinx.coroutines.flow.Flow
 
 interface TimelineRepository {

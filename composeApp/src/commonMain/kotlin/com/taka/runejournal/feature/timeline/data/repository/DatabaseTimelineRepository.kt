@@ -1,16 +1,16 @@
-package com.taka.runejournal.feature.journal.data.repository
+package com.taka.runejournal.feature.timeline.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.feature.journal.data.local.TimelineItemDao
-import com.taka.runejournal.feature.journal.data.local.TimelineItemEntity
-import com.taka.runejournal.feature.journal.data.local.toEmbedded
-import com.taka.runejournal.feature.journal.data.local.toTimelineItem
-import com.taka.runejournal.feature.journal.domain.model.TimelineItem
-import com.taka.runejournal.feature.journal.domain.repository.TimelineRepository
+import com.taka.runejournal.feature.timeline.data.local.TimelineItemDao
+import com.taka.runejournal.feature.timeline.data.local.TimelineItemEntity
+import com.taka.runejournal.feature.timeline.data.local.toEmbedded
+import com.taka.runejournal.feature.timeline.data.local.toTimelineItem
+import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
+import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

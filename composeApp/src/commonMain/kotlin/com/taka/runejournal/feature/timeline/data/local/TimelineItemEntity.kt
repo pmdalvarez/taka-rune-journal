@@ -1,8 +1,8 @@
-package com.taka.runejournal.feature.journal.data.local
+package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.taka.runejournal.feature.journal.domain.model.TimelineItem
+import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlin.time.Clock
 
 @Entity(tableName = "timeline_items")

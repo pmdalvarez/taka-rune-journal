@@ -1,10 +1,9 @@
-package com.taka.runejournal.feature.journal.data.local
+package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.taka.runejournal.feature.journal.domain.model.TimelineItem
 
 @Entity(
   tableName = "ppf_rune_readings",
