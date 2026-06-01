@@ -18,5 +18,7 @@ import androidx.room.PrimaryKey
 data class SingleRuneReadingEntity(
   @PrimaryKey
   val timelineItemId: Long,
+  val question: String?,
+  val category: String,
   @Embedded(prefix = "rune_") val rune: DrawnRuneEmbedded
 )

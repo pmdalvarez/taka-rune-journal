@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.taka.runejournal.core.domain.model.DrawnRune
+import com.taka.runejournal.core.domain.model.ReadingCategory
 import com.taka.runejournal.feature.timeline.data.local.TimelineItemDao
 import com.taka.runejournal.feature.timeline.data.local.TimelineItemEntity
 import com.taka.runejournal.feature.timeline.data.local.toEmbedded
@@ -35,19 +36,26 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     timelineItemDao.insert(timelineItemEntity)
   }
 
-  override suspend fun addSingleRuneReading(rune: DrawnRune, notes: String?) {
+  override suspend fun addSingleRuneReading(
+    question: String?,
+    category: ReadingCategory,
+    rune: DrawnRune,
+    notes: String?
+  ) {
     val timelineItemEntity = TimelineItemEntity(notes = notes)
     val runeEmbedded = rune.toEmbedded()
-    timelineItemDao.insertSingleRuneReading(timelineItemEntity, runeEmbedded)
+    timelineItemDao.insertSingleRuneReading(timelineItemEntity, question, category.key, runeEmbedded)
   }
 
-  override suspend fun addPpfRuneReading(pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?) {
+  override suspend fun addPpfRuneReading(question: String?, category: ReadingCategory, pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?) {
     val timelineItemEntity = TimelineItemEntity(notes = notes)
     val pastRuneEmbedded = pastRune.toEmbedded()
     val presentRuneEmbedded = presentRune.toEmbedded()
     val futureRuneEmbedded = futureRune.toEmbedded()
     timelineItemDao.insertPpfRuneReading(
       timelineItemEntity = timelineItemEntity,
+      question = question,
+      category = category.key,
       pastRune =pastRuneEmbedded,
       presentRune = presentRuneEmbedded,
       futureRune = futureRuneEmbedded

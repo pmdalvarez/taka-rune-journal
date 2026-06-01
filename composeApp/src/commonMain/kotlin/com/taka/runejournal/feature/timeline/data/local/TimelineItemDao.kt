@@ -29,11 +29,15 @@ interface TimelineItemDao {
   @Transaction
   suspend fun insertSingleRuneReading(
     timelineItemEntity: TimelineItemEntity,
+    question: String?,
+    category: String,
     rune: DrawnRuneEmbedded,
   ) {
     val timelineItemId = insert(timelineItemEntity)
     val singleRuneReadingEntity = SingleRuneReadingEntity(
       timelineItemId = timelineItemId,
+      question = question,
+      category = category,
       rune = rune,
     )
     insert(singleRuneReadingEntity)
@@ -42,6 +46,8 @@ interface TimelineItemDao {
   @Transaction
   suspend fun insertPpfRuneReading(
     timelineItemEntity: TimelineItemEntity,
+    question: String?,
+    category: String,
     pastRune: DrawnRuneEmbedded,
     presentRune: DrawnRuneEmbedded,
     futureRune: DrawnRuneEmbedded
@@ -49,6 +55,8 @@ interface TimelineItemDao {
     val timelineItemId = insert(timelineItemEntity)
     val ppfRuneReadingEntity = PpfRuneReadingEntity(
       timelineItemId = timelineItemId,
+      question = question,
+      category = category,
       pastRune = pastRune,
       presentRune = presentRune,
       futureRune = futureRune

@@ -1,7 +1,7 @@
 package com.taka.runejournal.core.domain.model
 
 enum class RuneId(
-    val key: String,
+    val key: String, // Changing key values can break existing references in db or string files
 ) {
     FEHU("fehu"),
     URUZ("uruz"),

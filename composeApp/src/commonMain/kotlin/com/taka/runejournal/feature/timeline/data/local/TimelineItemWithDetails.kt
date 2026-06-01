@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.taka.runejournal.core.domain.model.ReadingCategory
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlin.time.Instant
 
@@ -25,12 +26,16 @@ fun TimelineItemWithDetails.toTimelineItem() = when {
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
     notes = timelineItem.notes,
+    question = singleRuneReading.question,
+    category = ReadingCategory.fromKey(singleRuneReading.category) ?: error("Unknown category: $ppfRuneReading.category"),
     rune = singleRuneReading.rune.toDomain()
   )
   ppfRuneReading != null -> TimelineItem.PpfRuneReading(
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
     notes = timelineItem.notes,
+    question = ppfRuneReading.question,
+    category = ReadingCategory.fromKey(ppfRuneReading.category) ?: error("Unknown category: $ppfRuneReading.category"),
     pastRune = ppfRuneReading.pastRune.toDomain(),
     presentRune = ppfRuneReading.presentRune.toDomain(),
     futureRune = ppfRuneReading.futureRune.toDomain()
