@@ -1,0 +1,5 @@
+<resources>
+    <string name="timeline_entry_journal">Journal entry</string>
+    <string name="timeline_entry_single_rune">Single Rune</string>
+    <string name="timeline_entry_ppf">Three Norns</string>
+</resources>

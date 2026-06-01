@@ -45,7 +45,7 @@ fun TimelineItemWithDetails.toTimelineItem() = when {
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
     notes = timelineItem.notes,
-    imageFileName = timelineItem.imageFileName
+    title = timelineItem.title
   )
 }
 

@@ -12,7 +12,7 @@ interface TimelineRepository {
 
   suspend fun getTimelineItem(id: Long): TimelineItem?
 
-  suspend fun addJournalEntry(notes: String, imageFileName: String?)
+  suspend fun addJournalEntry(notes: String, title: String?)
 
   suspend fun addSingleRuneReading(question: String?, category: ReadingCategory, rune: DrawnRune, notes: String?)
 

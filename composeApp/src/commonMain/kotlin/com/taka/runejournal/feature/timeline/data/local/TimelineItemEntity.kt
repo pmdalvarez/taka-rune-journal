@@ -11,7 +11,7 @@ data class TimelineItemEntity(
   val id: Long = 0,
   val createdAt: Long = Clock.System.now().toEpochMilliseconds(),
   val notes: String?,
-  val imageFileName: String? = null,
+  val title: String? = null,
 )
 
 fun TimelineItem.toTimelineItemEntity(): TimelineItemEntity = TimelineItemEntity(
@@ -24,6 +24,6 @@ fun TimelineItem.JournalEntry.toTimelineItemEntity(): TimelineItemEntity = Timel
   id = id,
   createdAt = createdAt.toEpochMilliseconds(),
   notes = notes,
-  imageFileName = imageFileName
+  title = title
 )
 

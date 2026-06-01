@@ -28,10 +28,10 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
 
   override suspend fun getTimelineItem(id: Long): TimelineItem? = timelineItemDao.getTimelineItem(id)?.toTimelineItem()
 
-  override suspend fun addJournalEntry(notes: String, imageFileName: String?) {
+  override suspend fun addJournalEntry(notes: String, title: String?) {
     val timelineItemEntity = TimelineItemEntity(
       notes = notes,
-      imageFileName = imageFileName
+      title = title
     )
     timelineItemDao.insert(timelineItemEntity)
   }
@@ -71,6 +71,5 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     val rowsDeleted = timelineItemDao.deleteTimelineItem(id)
     return rowsDeleted > 0
   }
-
 
 }

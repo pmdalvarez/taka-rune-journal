@@ -13,7 +13,7 @@ sealed class TimelineItem {
     override val id: Long,
     override val createdAt: Instant,
     override val notes: String?,
-    val imageFileName: String?
+    val title: String?
   ) : TimelineItem()
 
   data class SingleRuneReading(
