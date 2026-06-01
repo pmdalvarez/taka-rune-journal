@@ -7,29 +7,28 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.taka.runejournal.feature.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class DataStoreSettingsRepository(private val dataStore: DataStore<Preferences>) : SettingsRepository {
 
-  override val username: Flow<String> = dataStore.data.map { it[USERNAME_KEY] ?: "" }
+  override val reversedRunesEnabled: Flow<Boolean> = dataStore.data.map { it[REVERSED_RUNES_ENABLED_KEY] ?: true }
 
-  override suspend fun areReversedRunesEnabled(): Boolean= dataStore.data.map { it[USE_REVERSED_RUNES_KEY] ?: true }.first()
+  override val displayName: Flow<String> = dataStore.data.map { it[DISPLAY_NAME_KEY] ?: "" }
 
   override suspend fun setReversedRunesEnabled(enabled: Boolean) {
     dataStore.edit { preferences ->
-      preferences[USE_REVERSED_RUNES_KEY] = enabled
+      preferences[REVERSED_RUNES_ENABLED_KEY] = enabled
     }
   }
 
-  override suspend fun setUsername(username: String) {
+  override suspend fun setDisplayName(displayName: String) {
     dataStore.edit { preferences ->
-      preferences[USERNAME_KEY] = username
+      preferences[DISPLAY_NAME_KEY] = displayName
     }
   }
 
   companion object {
-    private val USERNAME_KEY = stringPreferencesKey("name")
-    private val USE_REVERSED_RUNES_KEY = booleanPreferencesKey("USE_REVERSED_RUNES")
+    private val DISPLAY_NAME_KEY = stringPreferencesKey("display_name")
+    private val REVERSED_RUNES_ENABLED_KEY = booleanPreferencesKey("reversed_runes_enabled")
   }
 }
