@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.taka.runejournal.core.ui.HomeScreen
+import com.taka.runejournal.feature.timeline.ui.TimelineScreen
 import com.taka.runejournal.core.ui.AboutScreen
 
 @Composable
@@ -16,7 +16,7 @@ fun AppNavHost() {
         startDestination = Route.Home.value
     ) {
         composable(Route.Home.value) {
-            HomeScreen(
+            TimelineScreen(
                 onAboutClick = {
                     navController.navigate(Route.About.value)
                 }

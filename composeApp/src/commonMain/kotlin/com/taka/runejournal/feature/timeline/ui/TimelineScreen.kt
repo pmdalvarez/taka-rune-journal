@@ -1,4 +1,4 @@
-package com.taka.runejournal.core.ui
+package com.taka.runejournal.feature.timeline.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeScreen(
+fun TimelineScreen(
     onAboutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
