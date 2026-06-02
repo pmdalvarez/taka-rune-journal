@@ -1,4 +1,5 @@
 package com.taka.runejournal.feature.timeline.ui
 
-class TimelineUiState {
-}
+data class TimelineUiState(
+  val displayName: String? = null,
+)

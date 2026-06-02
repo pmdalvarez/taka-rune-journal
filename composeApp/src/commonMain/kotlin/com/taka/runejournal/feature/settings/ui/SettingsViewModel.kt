@@ -23,7 +23,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
       )
     }.stateIn(
       scope = viewModelScope,
-      started = SharingStarted.WhileSubscribed(5000),
+      started = SharingStarted.WhileSubscribed(5_000),
       initialValue = SettingsUiState(),
     )
 
