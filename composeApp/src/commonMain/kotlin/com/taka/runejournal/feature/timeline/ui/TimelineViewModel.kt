@@ -58,10 +58,10 @@ class TimelineViewModel(
     }
   }
 
-  fun updateTimelineItem(id: Long, notes: String) {
+  fun updateTimelineItem(id: Long, notes: String, title: String?) {
     val imageFileName = null // TODO: implement image upload to journal entries
     viewModelScope.launch {
-      val isDeleted = timelineRepository.updateTimelineItem(id, notes, imageFileName)
+      val isDeleted = timelineRepository.updateTimelineItem(id = id, notes = notes, title = title)
       if (isDeleted) {
         // TODO: Update UI state to show success
       } else {

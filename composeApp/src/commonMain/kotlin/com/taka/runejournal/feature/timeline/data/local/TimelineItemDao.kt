@@ -64,8 +64,8 @@ interface TimelineItemDao {
     insert(ppfRuneReadingEntity)
   }
 
-  @Query("UPDATE timeline_items SET notes = :notes, imageFileName = :imageFileName WHERE id = :id")
-  suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?): Int
+  @Query("UPDATE timeline_items SET notes = :notes, title = :title WHERE id = :id")
+  suspend fun updateTimelineItem(id: Long, notes: String?, title: String?): Int
 
   @Query("DELETE FROM timeline_items WHERE id = :id")
   suspend fun deleteTimelineItem(id: Long): Int

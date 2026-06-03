@@ -62,8 +62,8 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     )
   }
 
-  override suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?): Boolean {
-    val rowsUpdated = timelineItemDao.updateTimelineItem(id, notes, imageFileName)
+  override suspend fun updateTimelineItem(id: Long, notes: String?, title: String?): Boolean {
+    val rowsUpdated = timelineItemDao.updateTimelineItem(id, notes, title)
     return rowsUpdated > 0
   }
 

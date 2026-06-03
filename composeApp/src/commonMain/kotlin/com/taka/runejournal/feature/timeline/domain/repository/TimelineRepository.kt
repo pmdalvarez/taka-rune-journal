@@ -25,7 +25,7 @@ interface TimelineRepository {
     notes: String?
   )
 
-  suspend fun updateTimelineItem(id: Long, notes: String?, imageFileName: String?): Boolean
+  suspend fun updateTimelineItem(id: Long, notes: String?, title: String?): Boolean
 
   suspend fun deleteTimelineItem(id: Long): Boolean
 
