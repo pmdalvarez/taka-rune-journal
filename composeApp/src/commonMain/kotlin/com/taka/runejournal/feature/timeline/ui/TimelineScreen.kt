@@ -8,6 +8,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -23,6 +25,8 @@ fun TimelineScreen(
     onAboutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val uiState by viewModel.uiState.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -30,17 +34,15 @@ fun TimelineScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (viewModel.uiState.value.displayName.isNullOrBlank()) {
-            Text(
-                text = stringResource(Res.string.timeline_greeting_without_name),
-                style = MaterialTheme.typography.headlineMedium
-            )
+        val greeting = if (uiState.displayName.isNullOrBlank()) {
+            stringResource(Res.string.timeline_greeting_without_name)
         } else {
-            Text(
-                text = stringResource(Res.string.timeline_greeting_with_name, viewModel.uiState.value.displayName!!),
-                style = MaterialTheme.typography.headlineMedium
-            )
+            stringResource(Res.string.timeline_greeting_with_name, uiState.displayName!!)
         }
+        Text(
+            text = greeting,
+            style = MaterialTheme.typography.headlineMedium
+        )
 
         Text(
             text = stringResource(Res.string.timeline_prompt1),
