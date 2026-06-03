@@ -11,9 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
+import taka_rune_journal.composeapp.generated.resources.timeline_greeting_without_name
+import taka_rune_journal.composeapp.generated.resources.timeline_prompt1
 
 @Composable
 fun TimelineScreen(
+    viewModel: TimelineViewModel,
     onAboutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -24,13 +30,20 @@ fun TimelineScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Android KMP Starter",
-            style = MaterialTheme.typography.headlineMedium
-        )
+        if (viewModel.uiState.value.displayName.isNullOrBlank()) {
+            Text(
+                text = stringResource(Res.string.timeline_greeting_without_name),
+                style = MaterialTheme.typography.headlineMedium
+            )
+        } else {
+            Text(
+                text = stringResource(Res.string.timeline_greeting_with_name, viewModel.uiState.value.displayName!!),
+                style = MaterialTheme.typography.headlineMedium
+            )
+        }
 
         Text(
-            text = "Your Compose Multiplatform foundation is running.",
+            text = stringResource(Res.string.timeline_prompt1),
             modifier = Modifier.padding(top = 8.dp),
             style = MaterialTheme.typography.bodyLarge
         )

@@ -45,6 +45,9 @@ kotlin {
             implementation(libs.androidx.paging.compose)
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(libs.navigation.compose)
             implementation(compose.components.uiToolingPreview)
         }
