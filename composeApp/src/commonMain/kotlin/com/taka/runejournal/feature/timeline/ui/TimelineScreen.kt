@@ -54,5 +54,12 @@ fun TimelineScreen(
         ) {
             Text("Open About")
         }
+
+        Button(
+            onClick = { viewModel.setDisplayName("Paolo") },
+            modifier = Modifier.padding(top = 24.dp)
+        ) {
+            Text("Change name to Paolo")
+        }
     }
 }

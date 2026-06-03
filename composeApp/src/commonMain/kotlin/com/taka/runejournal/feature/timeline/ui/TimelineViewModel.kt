@@ -39,6 +39,13 @@ class TimelineViewModel(
   // TODO: close add dialog
   // TODO: close edit dialog
 
+  fun setDisplayName(displayName: String) {
+    viewModelScope.launch {
+      settingsRepository.setDisplayName(displayName)
+      // TODO: Update UI state to show success
+    }
+  }
+
   fun addJournalEntry(id: Long, notes: String) {
     val imageFileName = null // TODO: implement image upload to journal entries
     viewModelScope.launch {
