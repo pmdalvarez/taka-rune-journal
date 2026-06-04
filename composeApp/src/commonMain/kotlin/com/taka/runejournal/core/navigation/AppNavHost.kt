@@ -98,6 +98,12 @@ fun AppNavHost() {
                 viewModel,
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onReadingFinished = {
+                    navController.popBackStack(
+                        route = Route.Timeline.value,
+                        inclusive = false
+                    )
                 }
             )
         }
