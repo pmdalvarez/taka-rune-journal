@@ -5,11 +5,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.taka.runejournal.feature.settings.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.random.Random
+import kotlin.time.Clock
 
 class TimelineViewModel(
   private val timelineRepository: TimelineRepository,
@@ -18,19 +20,18 @@ class TimelineViewModel(
 
   val timelineItems = timelineRepository.observeTimelineItems().cachedIn(viewModelScope)
 
-  val uiState: StateFlow<TimelineUiState> =
-    settingsRepository.displayName
-      .map { displayName ->
-        TimelineUiState(
-          displayName = displayName,
-        )
-      }
-      .stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = TimelineUiState(),
-      )
+  private val _uiState = MutableStateFlow(TimelineUiState())
+  val uiState: StateFlow<TimelineUiState> = _uiState.asStateFlow()
 
+  init {
+    viewModelScope.launch {
+      settingsRepository.displayName.collect { displayName ->
+        _uiState.update {
+          it.copy(displayName = displayName)
+        }
+      }
+    }
+  }
   // TODO: show add dialog
   // TODO: show delete confirmation dialog
   // TODO: show edit dialog
@@ -43,6 +44,16 @@ class TimelineViewModel(
     viewModelScope.launch {
       settingsRepository.setDisplayName(displayName)
       // TODO: Update UI state to show success
+    }
+  }
+
+  fun setDailyPrompt(prompts: List<String>) {
+    if (prompts.isEmpty() || _uiState.value.prompt != null) return
+    // todayInDays = number of days since epoch, used as seed for random prompt to ensure same index for same day
+    val todayInDays = Clock.System.now().epochSeconds / (24 * 60 * 60)
+    val randomPromptIndex = Random(todayInDays).nextInt(prompts.size)
+    _uiState.update {
+      it.copy(prompt = prompts[randomPromptIndex])
     }
   }
 

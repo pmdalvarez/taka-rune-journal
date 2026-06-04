@@ -1,8 +1,7 @@
 <resources>
     <string name="timeline_greeting_with_name">Hello %1$s</string>
     <string name="timeline_greeting_without_name">Hello friend</string>
-    <string name="timeline_prompt1">Take a moment. Choose what you want to reflect on.</string>
-    <string name="welcome_message">Welcome to taka. Rune Journal. </string>
+    <string name="timeline_welcome_message">Welcome to taka. Rune Journal. </string>
     <string name="timeline_entry_journal">Journal entry</string>
     <string name="timeline_entry_single_rune">Single Rune</string>
     <string name="timeline_entry_ppf">Three Norns</string>

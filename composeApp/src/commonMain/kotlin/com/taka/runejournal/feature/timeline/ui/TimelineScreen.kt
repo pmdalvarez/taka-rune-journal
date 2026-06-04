@@ -8,16 +8,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_without_name
-import taka_rune_journal.composeapp.generated.resources.timeline_prompt1
+import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 
 @Composable
 fun TimelineScreen(
@@ -26,6 +28,10 @@ fun TimelineScreen(
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val prompts = stringArrayResource(Res.array.timeline_prompts)
+    LaunchedEffect(prompts) {
+        viewModel.setDailyPrompt(prompts)
+    }
 
     Column(
         modifier = modifier
@@ -44,11 +50,13 @@ fun TimelineScreen(
             style = MaterialTheme.typography.headlineMedium
         )
 
-        Text(
-            text = stringResource(Res.string.timeline_prompt1),
-            modifier = Modifier.padding(top = 8.dp),
-            style = MaterialTheme.typography.bodyLarge
-        )
+        uiState.prompt?.let { prompt ->
+            Text(
+                text = prompt,
+                modifier = Modifier.padding(top = 8.dp),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
 
         Button(
             onClick = onAboutClick,

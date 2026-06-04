@@ -15,9 +15,9 @@ fun AppNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = Route.Home.value
+        startDestination = Route.Timeline.value
     ) {
-        composable(Route.Home.value) {
+        composable(Route.Timeline.value) {
             val viewModel = koinViewModel<TimelineViewModel>()
             TimelineScreen(
                 viewModel,
@@ -26,6 +26,10 @@ fun AppNavHost() {
                 }
             )
         }
+
+//        composable(Route.TimelineDetail.value) {
+//            TimelineDetailScreen()
+//        }
 
         composable(Route.About.value) {
             AboutScreen()
