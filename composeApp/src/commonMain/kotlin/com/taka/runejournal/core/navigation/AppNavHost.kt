@@ -52,6 +52,9 @@ fun AppNavHost() {
                 viewModel,
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onSaved = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -62,7 +65,8 @@ fun AppNavHost() {
                 viewModel,
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+
             )
         }
 
