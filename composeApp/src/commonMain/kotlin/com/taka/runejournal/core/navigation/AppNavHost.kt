@@ -66,7 +66,9 @@ fun AppNavHost() {
                 onBackClick = {
                     navController.popBackStack()
                 },
-
+                onSaved = {
+                    navController.popBackStack()
+                }
             )
         }
 

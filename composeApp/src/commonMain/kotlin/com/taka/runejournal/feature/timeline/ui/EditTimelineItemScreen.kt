@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 fun EditTimelineItemScreen(
   viewModel: TimelineViewModel,
   onBackClick: () -> Unit,
+  onSaved: () -> Unit,
   modifier: Modifier = Modifier
 ) {
 }
