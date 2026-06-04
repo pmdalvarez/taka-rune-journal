@@ -86,7 +86,7 @@ fun AppNavHost() {
             )
         }
 
-        composable(Route.NewReadingStart.value) {
+        composable(Route.NewReadingInterpretation.value) {
             val viewModel = koinViewModel<ReadingViewModel>()
             NewReadingInterpretationScreen(
                 viewModel,

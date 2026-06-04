@@ -12,11 +12,11 @@ interface TimelineRepository {
 
   suspend fun getTimelineItem(id: Long): TimelineItem?
 
-  suspend fun addJournalEntry(notes: String, title: String?)
+  suspend fun createJournalEntry(notes: String, title: String?)
 
-  suspend fun addSingleRuneReading(question: String?, category: ReadingCategory, rune: DrawnRune, notes: String?)
+  suspend fun createSingleRuneReading(question: String?, category: ReadingCategory, rune: DrawnRune, notes: String?)
 
-  suspend fun addPpfRuneReading(
+  suspend fun createPpfRuneReading(
     question: String?,
     category: ReadingCategory,
     pastRune: DrawnRune,
