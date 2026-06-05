@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
@@ -46,10 +47,13 @@ kotlin {
             implementation(libs.androidx.room.paging)
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
+            implementation(libs.jetbrains.navigation3.ui)
+            implementation(libs.jetbrains.navigation3.lifecycle.viewmodel)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.serialization.core)
+            implementation(libs.kotlinx.serialization.json)
             implementation(compose.components.uiToolingPreview)
         }
     }

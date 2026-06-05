@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 class NewReadingStartScreen(
   viewModel: ReadingViewModel,
   onBackClick: () -> Unit,
+  onContinueClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
 }

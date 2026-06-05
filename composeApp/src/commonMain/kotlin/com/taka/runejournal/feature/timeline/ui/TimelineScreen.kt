@@ -25,7 +25,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 fun TimelineScreen(
     viewModel: TimelineViewModel,
     onAboutClick: () -> Unit,
-    onTimelineDetailClick: (id: Long) -> Unit,
+    onTimelineDetailClick: (Long) -> Unit,
     onNewJournalEntryClick: () -> Unit,
     onNewReadingClick: () -> Unit,
     modifier: Modifier = Modifier

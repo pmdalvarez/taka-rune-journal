@@ -6,7 +6,9 @@ import androidx.compose.ui.Modifier
 @Composable
 fun TimelineDetailScreen(
   viewModel: TimelineViewModel,
+  timelineItemId: Long?,
   onBackClick: () -> Unit,
+  onSaved: () -> Unit,
   modifier: Modifier = Modifier
 ) {
 }
