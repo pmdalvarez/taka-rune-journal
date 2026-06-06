@@ -57,10 +57,9 @@ class TimelineViewModel(
     }
   }
 
-  fun createJournalEntry(id: Long, notes: String) {
-    val imageFileName = null // TODO: implement image upload to journal entries
+  fun createJournalEntry(notes: String, title: String?) {
     viewModelScope.launch {
-      timelineRepository.createJournalEntry(notes, imageFileName)
+      timelineRepository.createJournalEntry(notes, title)
       // TODO: Update UI state to show success
     }
   }

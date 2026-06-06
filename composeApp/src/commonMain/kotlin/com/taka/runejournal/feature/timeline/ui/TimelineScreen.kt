@@ -74,5 +74,14 @@ fun TimelineScreen(
         ) {
             Text("Change name to Paolo + random number")
         }
+
+
+        Button(
+            onClick = { viewModel.createJournalEntry("This is a random journal entry with a random number: " + (0..100).random() , "Title" + (0..100).random()) },
+            modifier = Modifier.padding(top = 24.dp)
+        ) {
+            Text("Add random journal entry")
+        }
+
     }
 }
