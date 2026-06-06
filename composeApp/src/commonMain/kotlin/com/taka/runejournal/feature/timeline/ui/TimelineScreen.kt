@@ -20,6 +20,7 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_without_name
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
+import taka_rune_journal.composeapp.generated.resources.timeline_welcome_message
 
 @Composable
 fun TimelineScreen(
@@ -53,9 +54,14 @@ fun TimelineScreen(
             style = MaterialTheme.typography.headlineMedium
         )
 
-        uiState.prompt?.let { prompt ->
+        val postGreetingText = if (uiState.displayName.isNullOrBlank()) {
+            stringResource(Res.string.timeline_welcome_message)
+        } else {
+            uiState.prompt
+        }
+        postGreetingText?.let { postGreetingText ->
             Text(
-                text = prompt,
+                text = postGreetingText,
                 modifier = Modifier.padding(top = 8.dp),
                 style = MaterialTheme.typography.bodyLarge
             )
@@ -75,6 +81,12 @@ fun TimelineScreen(
             Text("Change name to Paolo + random number")
         }
 
+        Button(
+            onClick = { viewModel.setDisplayName("") },
+            modifier = Modifier.padding(top = 24.dp)
+        ) {
+            Text("Change name to empty")
+        }
 
         Button(
             onClick = { viewModel.createJournalEntry("This is a random journal entry with a random number: " + (0..100).random() , "Title" + (0..100).random()) },
