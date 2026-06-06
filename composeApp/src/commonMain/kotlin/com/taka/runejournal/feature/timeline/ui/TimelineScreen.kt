@@ -24,7 +24,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 @Composable
 fun TimelineScreen(
     viewModel: TimelineViewModel,
-    onAboutClick: () -> Unit,
+    onSettingsClick: () -> Unit,
     onTimelineDetailClick: (Long) -> Unit,
     onNewJournalEntryClick: () -> Unit,
     onNewReadingClick: () -> Unit,
@@ -62,17 +62,17 @@ fun TimelineScreen(
         }
 
         Button(
-            onClick = onAboutClick,
+            onClick = onSettingsClick,
             modifier = Modifier.padding(top = 24.dp)
         ) {
-            Text("Open About")
+            Text("Open Settings")
         }
 
         Button(
-            onClick = { viewModel.setDisplayName("Paolo") },
+            onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
             modifier = Modifier.padding(top = 24.dp)
         ) {
-            Text("Change name to Paolo")
+            Text("Change name to Paolo + random number")
         }
     }
 }

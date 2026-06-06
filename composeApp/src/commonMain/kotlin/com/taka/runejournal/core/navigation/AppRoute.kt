@@ -23,6 +23,3 @@ data object ReadingFlowRoute : AppRoute
 @Serializable
 data object SettingsRoute : AppRoute
 
-@Serializable
-data object AboutRoute : AppRoute
-
