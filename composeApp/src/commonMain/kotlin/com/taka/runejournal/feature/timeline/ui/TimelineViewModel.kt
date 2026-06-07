@@ -3,11 +3,14 @@ package com.taka.runejournal.feature.timeline.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.taka.runejournal.feature.settings.domain.repository.SettingsRepository
+import com.taka.runejournal.feature.timeline.data.local.toTimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -18,7 +21,9 @@ class TimelineViewModel(
   private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-  val timelineItems = timelineRepository.observeTimelineItems().cachedIn(viewModelScope)
+  val timelineItems = timelineRepository.observeTimelineItems().map { pagingData ->
+      pagingData.map { it.toUiModel() }
+    }.cachedIn(viewModelScope)
 
   private val _uiState = MutableStateFlow(TimelineUiState())
   val uiState: StateFlow<TimelineUiState> = _uiState.asStateFlow()

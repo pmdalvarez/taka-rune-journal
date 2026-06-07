@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.feature.timeline.ui.components.TimelineItemList
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -71,12 +73,10 @@ fun TimelineScreen(
             )
         }
 
-        Button(
-            onClick = onSettingsClick,
-            modifier = Modifier.padding(top = 24.dp)
-        ) {
-            Text("Open Settings")
-        }
+        TimelineItemList(
+            timelineItems = viewModel.timelineItems,
+            onTimelineDetailClick = onTimelineDetailClick
+        )
 
         Button(
             onClick = onNewReadingClick,
@@ -92,18 +92,25 @@ fun TimelineScreen(
             Text(stringResource(Res.string.timeline_button_new_journal))
         }
 
-        testArea(viewModel)
+        testArea(viewModel, onSettingsClick)
 
     }
 }
 
 @Composable
-private fun testArea(viewModel: TimelineViewModel) {
+private fun testArea(viewModel: TimelineViewModel, onSettingsClick: () -> Unit) {
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outlineVariant
     )
+    Button(
+        onClick = onSettingsClick,
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        Text("Open Settings (TODO Move to top bar)")
+    }
+
     Button(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
         modifier = Modifier.padding(top = 24.dp)
