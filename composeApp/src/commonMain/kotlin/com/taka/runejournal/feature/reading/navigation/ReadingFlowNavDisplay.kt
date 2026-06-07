@@ -1,6 +1,7 @@
 package com.taka.runejournal.feature.reading.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -17,6 +18,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun ReadingFlowNavDisplay(
   onExitReadingFlow: () -> Unit,
   onReadingFinished: () -> Unit,
+  modifier: Modifier = Modifier
 ) {
   val readingBackStack = rememberNavBackStack(appNavSavedStateConfiguration, NewReadingStartRoute)
 
@@ -45,6 +47,7 @@ fun ReadingFlowNavDisplay(
           onContinueClick = {
             readingBackStack.add(NewReadingDrawRoute)
           },
+          modifier = modifier
         )
       }
 
@@ -57,6 +60,7 @@ fun ReadingFlowNavDisplay(
           onContinueClick = {
             readingBackStack.add(NewReadingInterpretationRoute)
           },
+          modifier = modifier
         )
       }
 
@@ -69,6 +73,7 @@ fun ReadingFlowNavDisplay(
           onReadingFinished = {
             onReadingFinished()
           },
+          modifier = modifier
         )
       }
     },

@@ -1,6 +1,7 @@
 package com.taka.runejournal.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -16,7 +17,7 @@ import com.taka.runejournal.feature.timeline.ui.TimelineViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AppNavDisplay() {
+fun AppNavDisplay(modifier: Modifier = Modifier) {
     val backStack = rememberNavBackStack(appNavSavedStateConfiguration, TimelineRoute)
 
     NavDisplay(
@@ -49,7 +50,8 @@ fun AppNavDisplay() {
                     },
                     onNewJournalEntryClick = {
                         backStack.add(NewJournalEntryRoute)
-                    }
+                    },
+                    modifier = modifier
                 )
             }
 
@@ -64,7 +66,8 @@ fun AppNavDisplay() {
                     },
                     onSaved = {
                         backStack.removeLastOrNull()
-                    }
+                    },
+                    modifier = modifier
                 )
             }
 
@@ -78,7 +81,8 @@ fun AppNavDisplay() {
                     },
                     onSaved = {
                         backStack.removeLastOrNull()
-                    }
+                    },
+                    modifier = modifier
                 )
             }
 
@@ -90,6 +94,7 @@ fun AppNavDisplay() {
                     onReadingFinished = {
                         backStack.removeLastOrNull()
                     },
+                    modifier = modifier
                 )
             }
 
@@ -98,6 +103,7 @@ fun AppNavDisplay() {
 
                 SettingsScreen(
                     viewModel = viewModel,
+                    modifier = modifier
                 )
             }
 

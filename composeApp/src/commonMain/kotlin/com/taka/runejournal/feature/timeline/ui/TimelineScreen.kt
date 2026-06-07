@@ -48,7 +48,6 @@ fun TimelineScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item { GreetingSection(uiState.displayName, uiState.prompt) }
