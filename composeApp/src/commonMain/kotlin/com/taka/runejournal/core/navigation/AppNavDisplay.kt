@@ -44,12 +44,12 @@ fun AppNavDisplay() {
                             TimelineDetailRoute(timelineItemId = id)
                         )
                     },
-                    onNewJournalEntryClick = {
-                        backStack.add(NewJournalEntryRoute)
-                    },
                     onNewReadingClick = {
                         backStack.add(ReadingFlowRoute)
                     },
+                    onNewJournalEntryClick = {
+                        backStack.add(NewJournalEntryRoute)
+                    }
                 )
             }
 

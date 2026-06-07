@@ -14,11 +14,17 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun TimelineItemList(
+  displayName: String?,
+  prompt: String?,
   timelineItems: Flow<PagingData<TimelineItemUiModel>>,
   onTimelineDetailClick: (Long) -> Unit,
+  onNewReadingClick: () -> Unit,
+  onNewJournalEntryClick: () -> Unit,
+  testArea: @Composable () -> Unit
 ) {
   val pagingItems = timelineItems.collectAsLazyPagingItems()
   LazyColumn (modifier = Modifier.padding(top = 24.dp)) {
+    item { GreetingSection(displayName, prompt) }
     items(
       count = pagingItems.itemCount,
       key = pagingItems.itemKey { it.id }
@@ -31,5 +37,7 @@ fun TimelineItemList(
         )
       }
     }
+    item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
+    item { testArea() }
   }
 }

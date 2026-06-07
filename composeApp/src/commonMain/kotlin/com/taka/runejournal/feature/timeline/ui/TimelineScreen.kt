@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -19,22 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemList
 import org.jetbrains.compose.resources.stringArrayResource
-import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal
-import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
-import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
-import taka_rune_journal.composeapp.generated.resources.timeline_greeting_without_name
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_message
 
 @Composable
 fun TimelineScreen(
     viewModel: TimelineViewModel,
     onSettingsClick: () -> Unit,
     onTimelineDetailClick: (Long) -> Unit,
-    onNewJournalEntryClick: () -> Unit,
     onNewReadingClick: () -> Unit,
+    onNewJournalEntryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -50,49 +43,16 @@ fun TimelineScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val greeting = if (uiState.displayName.isNullOrBlank()) {
-            stringResource(Res.string.timeline_greeting_without_name)
-        } else {
-            stringResource(Res.string.timeline_greeting_with_name, uiState.displayName!!)
-        }
-        Text(
-            text = greeting,
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        val postGreetingText = if (uiState.displayName.isNullOrBlank()) {
-            stringResource(Res.string.timeline_welcome_message)
-        } else {
-            uiState.prompt
-        }
-        postGreetingText?.let { postGreetingText ->
-            Text(
-                text = postGreetingText,
-                modifier = Modifier.padding(top = 8.dp),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
 
         TimelineItemList(
+            displayName = uiState.displayName,
+            prompt = uiState.prompt,
             timelineItems = viewModel.timelineItems,
-            onTimelineDetailClick = onTimelineDetailClick
+            onTimelineDetailClick = onTimelineDetailClick,
+            onNewReadingClick = onNewReadingClick,
+            onNewJournalEntryClick = onNewJournalEntryClick,
+            testArea = { testArea(viewModel, onSettingsClick) }
         )
-
-        Button(
-            onClick = onNewReadingClick,
-            modifier = Modifier.padding(top = 24.dp)
-        ) {
-            Text(stringResource(Res.string.timeline_button_new_reading))
-        }
-
-        Button(
-            onClick = onNewJournalEntryClick,
-            modifier = Modifier.padding(top = 24.dp)
-        ) {
-            Text(stringResource(Res.string.timeline_button_new_journal))
-        }
-
-        testArea(viewModel, onSettingsClick)
 
     }
 }
