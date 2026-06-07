@@ -4,9 +4,9 @@ import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.timeline_entry_journal
-import taka_rune_journal.composeapp.generated.resources.timeline_entry_ppf
-import taka_rune_journal.composeapp.generated.resources.timeline_entry_single_rune
+import taka_rune_journal.composeapp.generated.resources.timeline_entry_type_journal
+import taka_rune_journal.composeapp.generated.resources.timeline_entry_type_ppf
+import taka_rune_journal.composeapp.generated.resources.timeline_entry_type_single_rune
 import kotlin.collections.List
 import kotlin.time.Instant
 
@@ -25,7 +25,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.SingleRuneReading -> TimelineItemUiModel(
     id = id,
     createdAt = createdAt,
-    entryTypeText = Res.string.timeline_entry_single_rune,
+    entryTypeText = Res.string.timeline_entry_type_single_rune,
     title = question,
     drawnRunes = listOf(rune)
   )
@@ -33,7 +33,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(
     id = id,
     createdAt = createdAt,
-    entryTypeText = Res.string.timeline_entry_ppf,
+    entryTypeText = Res.string.timeline_entry_type_ppf,
     title = question,
     drawnRunes = listOf(pastRune, presentRune, futureRune)
   )
@@ -42,7 +42,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     id = id,
     createdAt = createdAt,
     title = title,
-    entryTypeText = Res.string.timeline_entry_journal,
+    entryTypeText = Res.string.timeline_entry_type_journal,
     notesPreview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
   )
 }

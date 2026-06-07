@@ -3,8 +3,10 @@ package com.taka.runejournal.feature.timeline.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal
+import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_without_name
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
@@ -75,25 +79,50 @@ fun TimelineScreen(
         }
 
         Button(
-            onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
+            onClick = onNewReadingClick,
             modifier = Modifier.padding(top = 24.dp)
         ) {
-            Text("Change name to Paolo + random number")
+            Text(stringResource(Res.string.timeline_button_new_reading))
         }
 
         Button(
-            onClick = { viewModel.setDisplayName("") },
+            onClick = onNewJournalEntryClick,
             modifier = Modifier.padding(top = 24.dp)
         ) {
-            Text("Change name to empty")
+            Text(stringResource(Res.string.timeline_button_new_journal))
         }
 
-        Button(
-            onClick = { viewModel.createJournalEntry("This is a random journal entry with a random number: " + (0..100).random() , "Title" + (0..100).random()) },
-            modifier = Modifier.padding(top = 24.dp)
-        ) {
-            Text("Add random journal entry")
-        }
+        testArea(viewModel)
 
     }
+}
+
+@Composable
+private fun testArea(viewModel: TimelineViewModel) {
+    HorizontalDivider(
+        modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.outlineVariant
+    )
+    Button(
+        onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        Text("Change name to Paolo + random number")
+    }
+
+    Button(
+        onClick = { viewModel.setDisplayName("") },
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        Text("Change name to empty")
+    }
+
+    Button(
+        onClick = { viewModel.createJournalEntry("This is a random journal entry with a random number: " + (0..100).random() , "Title" + (0..100).random()) },
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        Text("Add random journal entry")
+    }
+
 }

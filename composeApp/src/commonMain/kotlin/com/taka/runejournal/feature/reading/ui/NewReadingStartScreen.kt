@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,12 +25,25 @@ import taka_rune_journal.composeapp.generated.resources.rune_empty
 import kotlin.collections.chunked
 import kotlin.collections.forEach
 
-class NewReadingStartScreen(
+@Composable
+fun NewReadingStartScreen(
   viewModel: ReadingViewModel,
   onBackClick: () -> Unit,
   onContinueClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
+  Column(
+    modifier = modifier
+      .fillMaxSize()
+      .padding(24.dp),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    Text(
+      text = "Reading start screen",
+      style = MaterialTheme.typography.headlineMedium
+    )
+  }
 }
 
 @Preview

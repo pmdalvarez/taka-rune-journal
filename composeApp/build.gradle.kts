@@ -55,6 +55,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.core)
             implementation(libs.kotlinx.serialization.json)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.preview)
         }
     }
 }

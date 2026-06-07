@@ -1,8 +1,10 @@
 <resources>
     <string name="timeline_greeting_with_name">Hello %1$s</string>
     <string name="timeline_greeting_without_name">Hello friend</string>
-    <string name="timeline_welcome_message">Welcome to taka. Rune Journal. </string>
-    <string name="timeline_entry_journal">Journal entry</string>
-    <string name="timeline_entry_single_rune">Single Rune</string>
-    <string name="timeline_entry_ppf">Three Norns</string>
+    <string name="timeline_welcome_message">Welcome to taka. Rune Journal. This text will contain a short explanation of what taka is and what you can use it for.</string>
+    <string name="timeline_entry_type_journal">Journal entry</string>
+    <string name="timeline_entry_type_single_rune">Single Rune</string>
+    <string name="timeline_entry_type_ppf">Three Norns</string>
+    <string name="timeline_button_new_reading">New Reading</string>
+    <string name="timeline_button_new_journal">New Journal Entry</string>
 </resources>
