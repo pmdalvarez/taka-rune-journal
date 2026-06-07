@@ -1,5 +1,6 @@
 package com.taka.runejournal.feature.timeline.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +15,11 @@ fun TimelineItemRow(
   item: TimelineItemUiModel,
   onTimelineDetailClick: (Long) -> Unit,
 ) {
-  Row {
+  Row(
+    modifier = Modifier.clickable(
+      onClick = { onTimelineDetailClick(item.id) }
+    )
+  ) {
     Text(
       text = item.createdAt.toString(),
       modifier = Modifier.padding(top = 8.dp),

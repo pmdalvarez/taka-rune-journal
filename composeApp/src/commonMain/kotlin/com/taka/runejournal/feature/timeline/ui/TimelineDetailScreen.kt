@@ -27,7 +27,7 @@ fun TimelineDetailScreen(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     Text(
-      text = "Timeline detail screen",
+      text = "Timeline detail screen clicked id: $timelineItemId",
       style = MaterialTheme.typography.headlineMedium
     )
   }
