@@ -36,9 +36,12 @@ fun TimelineScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
-    val prompts = stringArrayResource(Res.array.timeline_prompts)
-    LaunchedEffect(prompts) {
-        viewModel.setDailyPrompt(prompts)
+
+    if (uiState.prompt == null) {
+        val prompts = stringArrayResource(Res.array.timeline_prompts)
+        LaunchedEffect(prompts) {
+            viewModel.setDailyPrompt(prompts)
+        }
     }
 
     LazyColumn(
@@ -57,7 +60,8 @@ fun TimelineScreen(
             item?.let {
                 TimelineItemRow(
                     it,
-                    onTimelineDetailClick
+                    onTimelineDetailClick,
+                    viewModel::deleteTimelineItem
                 )
             }
         }

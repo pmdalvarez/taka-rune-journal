@@ -3,6 +3,7 @@ package com.taka.runejournal.feature.timeline.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 fun TimelineItemRow(
   item: TimelineItemUiModel,
   onTimelineDetailClick: (Long) -> Unit,
+  onDeleteClick: (Long) -> Unit,
 ) {
   Row(
     modifier = Modifier.clickable(
@@ -36,4 +38,18 @@ fun TimelineItemRow(
       style = MaterialTheme.typography.bodyLarge
     )
   }
+  Row(
+    modifier = Modifier.clickable(
+      onClick = { onTimelineDetailClick(item.id) }
+    )
+  ) {
+    Button(
+      onClick = { onDeleteClick(item.id) },
+      modifier = Modifier.padding(top = 24.dp)
+    ) {
+      Text("Delete")
+    }
+  }
+
+
 }
