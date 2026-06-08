@@ -52,13 +52,13 @@ class TimelineViewModel(
     }
   }
 
-  fun setDailyPrompt(prompts: List<String>) {
-    if (prompts.isEmpty() || _uiState.value.prompt != null) return
+  fun initializeDailyPrompt(prompts: List<String>) {
+    if (prompts.isEmpty() || _uiState.value.dailyPrompt != null) return
     // todayInDays = number of days since epoch, used as seed for random prompt to ensure same index for same day
     val todayInDays = Clock.System.now().epochSeconds / (24 * 60 * 60)
     val randomPromptIndex = Random(todayInDays).nextInt(prompts.size)
     _uiState.update {
-      it.copy(prompt = prompts[randomPromptIndex])
+      it.copy(dailyPrompt = prompts[randomPromptIndex])
     }
   }
 
