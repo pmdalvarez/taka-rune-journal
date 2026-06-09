@@ -1,11 +1,11 @@
-package com.taka.runejournal.feature.settings.data.repository
+package com.taka.runejournal.feature.more.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.taka.runejournal.feature.settings.domain.repository.SettingsRepository
+import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

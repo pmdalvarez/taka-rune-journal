@@ -1,9 +1,9 @@
 package com.taka.runejournal.core.di
 
 import com.taka.runejournal.feature.reading.ui.ReadingViewModel
-import com.taka.runejournal.feature.settings.data.repository.DataStoreSettingsRepository
-import com.taka.runejournal.feature.settings.domain.repository.SettingsRepository
-import com.taka.runejournal.feature.settings.ui.SettingsViewModel
+import com.taka.runejournal.feature.more.data.repository.DataStoreSettingsRepository
+import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
+import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.timeline.data.repository.DatabaseTimelineRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import com.taka.runejournal.feature.timeline.ui.TimelineViewModel

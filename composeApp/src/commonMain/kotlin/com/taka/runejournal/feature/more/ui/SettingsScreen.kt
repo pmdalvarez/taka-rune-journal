@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.settings.ui
+package com.taka.runejournal.feature.more.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

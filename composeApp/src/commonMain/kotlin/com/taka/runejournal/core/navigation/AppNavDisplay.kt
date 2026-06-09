@@ -8,8 +8,8 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
-import com.taka.runejournal.feature.settings.ui.SettingsScreen
-import com.taka.runejournal.feature.settings.ui.SettingsViewModel
+import com.taka.runejournal.feature.more.ui.SettingsScreen
+import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
 import com.taka.runejournal.feature.timeline.ui.TimelineDetailScreen
 import com.taka.runejournal.feature.timeline.ui.TimelineScreen
