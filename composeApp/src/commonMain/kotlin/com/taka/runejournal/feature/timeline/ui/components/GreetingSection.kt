@@ -1,5 +1,6 @@
 package com.taka.runejournal.feature.timeline.ui.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.timeline_feedback_name_given
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 import taka_rune_journal.composeapp.generated.resources.timeline_textfield_label_your_name
@@ -33,12 +35,12 @@ fun GreetingSection(
   onDisplayNameEntered: (String) -> Unit
 ) {
 
-  // show Welcome screen there is no display name
+  // Show Welcome if there is no display name (i.e. first time user opens app)
   // OR if display name but was only just saved (to stay in welcome screen)
   var displayNameEntered by rememberSaveable { mutableStateOf(false) }
-  val showWelcomeScreen = displayName.isNullOrEmpty() || displayNameEntered
+  val showWelcome = displayName.isNullOrEmpty() || displayNameEntered
 
-  if (showWelcomeScreen) {
+  if (showWelcome) {
     // If no name given, show welcome greeting + prompt asking for name
     Text(
       text = stringResource(Res.string.timeline_welcome_greeting),
@@ -46,19 +48,29 @@ fun GreetingSection(
     )
     Text(
       text = stringResource(Res.string.timeline_welcome_prompt),
-      modifier = Modifier.padding(top = 8.dp),
+      modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )
-    DisplayNameTextField(
-      onSaveName = {
-        val displayName = it.trim()
-        if (displayName.isNotEmpty()) {
-          onDisplayNameEntered(displayName)
-          displayNameEntered = true
-        }
-      },
-      modifier = Modifier.padding(top = 24.dp)
-    )
+    // If logic ensures that after user enters a name, the text field changed to a greeting
+    if (displayName.isNullOrEmpty()) {
+      DisplayNameTextField(
+        onSaveName = {
+          val displayName = it.trim()
+          if (displayName.isNotEmpty()) {
+            onDisplayNameEntered(displayName)
+            displayNameEntered = true
+          }
+        },
+        modifier = Modifier.padding(top = 24.dp)
+      )
+    } else {
+      Text(
+        text = stringResource(Res.string.timeline_feedback_name_given, displayName),
+        modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
+        style = MaterialTheme.typography.bodyLarge
+      )
+    }
+
   } else {
     // If name is set, show greeting using their name with daily prompt
 

@@ -35,6 +35,7 @@ fun TimelineScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
+            .fillMaxWidth()
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

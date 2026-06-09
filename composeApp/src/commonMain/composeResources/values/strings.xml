@@ -2,8 +2,9 @@
     <string name="button_save">Save</string>
     <string name="timeline_greeting">Hello %1$s</string>
     <string name="timeline_welcome_greeting">Welcome to Taka</string>
-    <string name="timeline_welcome_prompt">Take is a quiet place for rune readings and reflection.\n\nWhat should Taka call you?</string>
+    <string name="timeline_welcome_prompt">Take is your personal space for rune readings and reflection.\n\nWhat should Taka call you?</string>
     <string name="timeline_textfield_label_your_name">Your Name</string>
+    <string name="timeline_feedback_name_given">Hello %1$s, nice to meet you.</string>
     <string name="timeline_entry_type_journal">Journal entry</string>
     <string name="timeline_entry_type_single_rune">Single Rune</string>
     <string name="timeline_entry_type_ppf">Three Norns</string>
