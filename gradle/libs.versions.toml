@@ -16,6 +16,7 @@ koin = "4.2.1"
 kotlin = "2.4.0"
 kotlinx-serialization = "1.11.0"
 ksp = "2.3.0"
+material-icons-core = "1.7.3"
 material3 = "1.9.0"
 multiplatform-nav3-ui = "1.1.1"
 paging = "3.5.0"
@@ -40,6 +41,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "ro
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose-multiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose-multiplatform" }
+compose-material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "material-icons-core" }
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose-multiplatform" }
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-multiplatform" }

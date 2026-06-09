@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
@@ -33,36 +35,50 @@ fun TimelineScreen(
     val uiState by viewModel.uiState.collectAsState()
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
 
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .fillMaxWidth()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        item {
-            GreetingSection(
-                uiState.displayName,
-                uiState.dailyPrompt,
-                viewModel::initializeDailyPrompt,
-                viewModel::setDisplayName
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        topBar = {
+            TakaTopBar(
+                canNavigateBack = false,
+                onBackClick = {},
+                showMoreMenu = true,
+                onSettingsClick = onSettingsClick,
+                onAboutClick = onAboutClick,
             )
         }
-        items(
-            count = pagingItems.itemCount,
-            key = pagingItems.itemKey { it.id }
-        ) { index ->
-            val item = pagingItems[index]
-            item?.let {
-                TimelineItemRow(
-                    it,
-                    onTimelineDetailClick,
-                    viewModel::deleteTimelineItem
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .fillMaxWidth()
+                .padding(innerPadding)
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                GreetingSection(
+                    uiState.displayName,
+                    uiState.dailyPrompt,
+                    viewModel::initializeDailyPrompt,
+                    viewModel::setDisplayName
                 )
             }
+            items(
+                count = pagingItems.itemCount,
+                key = pagingItems.itemKey { it.id }
+            ) { index ->
+                val item = pagingItems[index]
+                item?.let {
+                    TimelineItemRow(
+                        it,
+                        onTimelineDetailClick,
+                        viewModel::deleteTimelineItem
+                    )
+                }
+            }
+            item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
+            item { testArea(viewModel, onAboutClick, onSettingsClick) }
         }
-        item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
-        item { testArea(viewModel, onAboutClick, onSettingsClick) }
     }
 }
 
@@ -73,18 +89,6 @@ private fun testArea(viewModel: TimelineViewModel, onAboutClick: () -> Unit, onS
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outlineVariant
     )
-    Button(
-        onClick = onAboutClick,
-        modifier = Modifier.padding(top = 24.dp)
-    ) {
-        Text("Open About (TODO Move to top bar)")
-    }
-    Button(
-        onClick = onSettingsClick,
-        modifier = Modifier.padding(top = 24.dp)
-    ) {
-        Text("Open Settings (TODO Move to top bar)")
-    }
 
     Button(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },

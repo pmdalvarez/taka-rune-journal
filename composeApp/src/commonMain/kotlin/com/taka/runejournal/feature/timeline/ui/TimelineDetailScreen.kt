@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.TakaTopBar
 
 @Composable
 fun TimelineDetailScreen(
@@ -19,16 +21,28 @@ fun TimelineDetailScreen(
   onSaved: () -> Unit,
   modifier: Modifier = Modifier
 ) {
-  Column(
-    modifier = modifier
-      .fillMaxSize()
-      .padding(24.dp),
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    Text(
-      text = "Timeline detail screen clicked id: $timelineItemId",
-      style = MaterialTheme.typography.headlineMedium
-    )
+  Scaffold(
+    modifier = modifier.fillMaxSize(),
+    topBar = {
+      TakaTopBar(
+        title = "Timeline detail",
+        canNavigateBack = true,
+        onBackClick = onBackClick,
+      )
+    }
+  ) { innerPadding ->
+    Column(
+      modifier = modifier
+        .fillMaxSize()
+        .padding(innerPadding)
+        .padding(24.dp),
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Text(
+        text = "Timeline detail screen clicked id: $timelineItemId",
+        style = MaterialTheme.typography.headlineMedium
+      )
+    }
   }
 }
