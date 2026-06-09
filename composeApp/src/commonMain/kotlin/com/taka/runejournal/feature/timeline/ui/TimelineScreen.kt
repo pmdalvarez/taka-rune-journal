@@ -23,6 +23,7 @@ import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
 @Composable
 fun TimelineScreen(
     viewModel: TimelineViewModel,
+    onAboutClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onTimelineDetailClick: (Long) -> Unit,
     onNewReadingClick: () -> Unit,
@@ -61,17 +62,23 @@ fun TimelineScreen(
             }
         }
         item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
-        item { testArea(viewModel, onSettingsClick) }
+        item { testArea(viewModel, onAboutClick, onSettingsClick) }
     }
 }
 
 @Composable
-private fun testArea(viewModel: TimelineViewModel, onSettingsClick: () -> Unit) {
+private fun testArea(viewModel: TimelineViewModel, onAboutClick: () -> Unit, onSettingsClick: () -> Unit) {
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outlineVariant
     )
+    Button(
+        onClick = onAboutClick,
+        modifier = Modifier.padding(top = 24.dp)
+    ) {
+        Text("Open About (TODO Move to top bar)")
+    }
     Button(
         onClick = onSettingsClick,
         modifier = Modifier.padding(top = 24.dp)

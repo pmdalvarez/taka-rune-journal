@@ -7,6 +7,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.taka.runejournal.feature.more.ui.AboutScreen
 import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
@@ -37,6 +38,9 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
                 TimelineScreen(
                     viewModel = viewModel,
+                    onAboutClick = {
+                        backStack.add(AboutRoute)
+                    },
                     onSettingsClick = {
                         backStack.add(SettingsRoute)
                     },
@@ -103,6 +107,18 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
                 SettingsScreen(
                     viewModel = viewModel,
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<AboutRoute> {
+                AboutScreen(
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
                     modifier = modifier
                 )
             }

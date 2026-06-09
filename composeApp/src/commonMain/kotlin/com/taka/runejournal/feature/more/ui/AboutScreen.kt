@@ -12,8 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SettingsScreen(
-  viewModel: SettingsViewModel,
+fun AboutScreen(
   onBackClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
@@ -25,7 +24,7 @@ fun SettingsScreen(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     Text(
-      text = "Settings screen",
+      text = "About screen",
       style = MaterialTheme.typography.headlineMedium
     )
   }
