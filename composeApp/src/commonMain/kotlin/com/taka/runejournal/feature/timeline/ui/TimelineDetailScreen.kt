@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaTopBar
+import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 
 @Composable
 fun TimelineDetailScreen(
@@ -26,8 +27,8 @@ fun TimelineDetailScreen(
     topBar = {
       TakaTopBar(
         title = "Timeline detail",
-        canNavigateBack = true,
-        onBackClick = onBackClick,
+        navigationIcon = TakaTopBarNavigationIcon.Back,
+        onNavigationClick = onBackClick,
       )
     }
   ) { innerPadding ->

@@ -21,6 +21,7 @@ import com.taka.runejournal.core.domain.model.RuneId
 import com.taka.runejournal.core.ui.drawable
 import org.jetbrains.compose.resources.painterResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_app_icon
 import taka_rune_journal.composeapp.generated.resources.rune_empty
 import kotlin.collections.chunked
 import kotlin.collections.forEach
@@ -95,6 +96,26 @@ private fun RunePreview() {
 
         Text(
           text = "empty",
+          modifier = Modifier.padding(top = 4.dp),
+          color = Color.Black,
+          fontSize = 10.sp
+        )
+      }
+    }
+    Row(
+      horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        Image(
+          painter = painterResource(Res.drawable.ic_app_icon),
+          contentDescription = "empty",
+          modifier = Modifier.size(width = 48.dp, height = 72.dp)
+        )
+
+        Text(
+          text = "app icon",
           modifier = Modifier.padding(top = 4.dp),
           color = Color.Black,
           fontSize = 10.sp

@@ -39,11 +39,9 @@ fun TimelineScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TakaTopBar(
-                canNavigateBack = false,
-                onBackClick = {},
                 showMoreMenu = true,
                 onSettingsClick = onSettingsClick,
-                onAboutClick = onAboutClick,
+                onAboutClick = onAboutClick
             )
         }
     ) { innerPadding ->
@@ -77,13 +75,13 @@ fun TimelineScreen(
                 }
             }
             item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
-            item { testArea(viewModel, onAboutClick, onSettingsClick) }
+            item { testArea(viewModel) }
         }
     }
 }
 
 @Composable
-private fun testArea(viewModel: TimelineViewModel, onAboutClick: () -> Unit, onSettingsClick: () -> Unit) {
+private fun testArea(viewModel: TimelineViewModel) {
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         thickness = 1.dp,
