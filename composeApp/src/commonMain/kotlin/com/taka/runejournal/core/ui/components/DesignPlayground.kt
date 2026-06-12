@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,38 +18,27 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.taka.runejournal.core.ui.theme.Ash
-import com.taka.runejournal.core.ui.theme.Bone
-import com.taka.runejournal.core.ui.theme.Clay
-import com.taka.runejournal.core.ui.theme.ErrorBlush
-import com.taka.runejournal.core.ui.theme.ErrorInk
-import com.taka.runejournal.core.ui.theme.ErrorRed
-import com.taka.runejournal.core.ui.theme.Ink
-import com.taka.runejournal.core.ui.theme.LightClay
-import com.taka.runejournal.core.ui.theme.Moss
-import com.taka.runejournal.core.ui.theme.PaleMoss
-import com.taka.runejournal.core.ui.theme.Parchment
-import com.taka.runejournal.core.ui.theme.Sand
 import com.taka.runejournal.core.ui.theme.TakaTheme
-import com.taka.runejournal.core.ui.theme.Walnut
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
@@ -74,7 +62,52 @@ fun DesignPlayground(
       modifier = Modifier
         .verticalScroll(rememberScrollState())
         .padding(24.dp),
-      verticalArrangement = Arrangement.spacedBy(24.dp),
+      verticalArrangement = Arrangement.spacedBy(28.dp),
+    ) {
+      HeroSection()
+
+      SectionTitle("Buttons")
+      ButtonSamples()
+
+      SectionTitle("Typography")
+      TypographySamples(MaterialTheme.typography)
+
+      SectionTitle("Containers")
+      ContainerSamples()
+
+      SectionTitle("Cards")
+      CardSamples()
+
+      SectionTitle("Chips")
+      ChipSamples()
+
+      SectionTitle("Error states")
+      ErrorSamples()
+
+      SectionTitle("Surface hierarchy")
+      SurfaceHierarchySamples()
+
+      SectionTitle("Shapes")
+      ShapeSamples()
+
+      SectionTitle("Raw color role reference")
+      ColorRoleReference()
+    }
+  }
+}
+
+@Composable
+private fun HeroSection() {
+  Surface(
+    shape = MaterialTheme.shapes.extraLarge,
+    color = MaterialTheme.colorScheme.surfaceContainer,
+    contentColor = MaterialTheme.colorScheme.onSurface,
+  ) {
+    Column(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(24.dp),
+      verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
       Text(
         text = "Taka Design Playground",
@@ -82,147 +115,80 @@ fun DesignPlayground(
       )
 
       Text(
-        text = "A preview surface for checking theme colors, typography, shapes, and common Material components.",
+        text = "A preview of how the active theme looks in real UI components.",
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
       )
 
-      SectionTitle("Named palette")
-      FlowRow(
+      Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
       ) {
-        ColorSwatch("Parchment", Parchment, Ink)
-        ColorSwatch("Bone", Bone, Ink)
-        ColorSwatch("Walnut", Walnut, Bone)
-        ColorSwatch("Ash", Ash, Bone)
-        ColorSwatch("Ink", Ink, Bone)
-        ColorSwatch("Clay", Clay, Ink)
-        ColorSwatch("Moss", Moss, Bone)
-        ColorSwatch("PaleMoss", PaleMoss, Ink)
-        ColorSwatch("Sand", Sand, Ink)
-        ColorSwatch("LightClay", LightClay, Ink)
-        ColorSwatch("ErrorRed", ErrorRed, Color.White)
-        ColorSwatch("ErrorBlush", ErrorBlush, ErrorInk)
-        ColorSwatch("ErrorInk", ErrorInk, ErrorBlush)
+        Button(onClick = {}) {
+          Text("Start reading")
+        }
+
+        OutlinedButton(onClick = {}) {
+          Text("Journal")
+        }
       }
-
-      SectionTitle("Material color roles")
-      FlowRow(
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-      ) {
-        val colors = MaterialTheme.colorScheme
-
-        ColorRoleSwatch("primary", colors.primary, colors.onPrimary)
-        ColorRoleSwatch("primaryContainer", colors.primaryContainer, colors.onPrimaryContainer)
-
-        ColorRoleSwatch("secondary", colors.secondary, colors.onSecondary)
-        ColorRoleSwatch("secondaryContainer", colors.secondaryContainer, colors.onSecondaryContainer)
-
-        ColorRoleSwatch("tertiary", colors.tertiary, colors.onTertiary)
-        ColorRoleSwatch("tertiaryContainer", colors.tertiaryContainer, colors.onTertiaryContainer)
-
-        ColorRoleSwatch("background", colors.background, colors.onBackground)
-        ColorRoleSwatch("surface", colors.surface, colors.onSurface)
-        ColorRoleSwatch("surfaceVariant", colors.surfaceVariant, colors.onSurfaceVariant)
-
-        ColorRoleSwatch("outline", colors.outline, colors.onSurface)
-        ColorRoleSwatch("outlineVariant", colors.outlineVariant, colors.onSurface)
-
-        ColorRoleSwatch("error", colors.error, colors.onError)
-        ColorRoleSwatch("errorContainer", colors.errorContainer, colors.onErrorContainer)
-      }
-
-      SectionTitle("Typography")
-      TypographySamples(MaterialTheme.typography)
-
-      SectionTitle("Shapes")
-      ShapeSamples()
-
-      SectionTitle("Components")
-      ComponentSamples()
     }
   }
 }
 
 @Composable
-private fun SectionTitle(text: String) {
-  Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-    Text(
-      text = text,
-      style = MaterialTheme.typography.titleLarge,
-    )
-    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-  }
-}
-
-@Composable
-private fun ColorSwatch(
-  name: String,
-  color: Color,
-  contentColor: Color,
-  modifier: Modifier = Modifier,
-) {
-  Column(
-    modifier = modifier.width(132.dp),
-    verticalArrangement = Arrangement.spacedBy(8.dp),
-  ) {
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(72.dp)
-        .clip(MaterialTheme.shapes.medium)
-        .background(color)
-        .border(
-          width = 1.dp,
-          color = MaterialTheme.colorScheme.outlineVariant,
-          shape = MaterialTheme.shapes.medium,
-        )
-        .padding(12.dp),
+private fun ButtonSamples() {
+  Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    FlowRow(
+      horizontalArrangement = Arrangement.spacedBy(12.dp),
+      verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-      Text(
-        text = name,
-        style = MaterialTheme.typography.labelMedium,
-        color = contentColor,
-      )
+      Button(onClick = {}) {
+        Text("Primary")
+      }
+
+      Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(
+          containerColor = MaterialTheme.colorScheme.secondary,
+          contentColor = MaterialTheme.colorScheme.onSecondary,
+        ),
+      ) {
+        Text("Secondary")
+      }
+
+      Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(
+          containerColor = MaterialTheme.colorScheme.tertiary,
+          contentColor = MaterialTheme.colorScheme.onTertiary,
+        ),
+      ) {
+        Text("Tertiary")
+      }
+
+      Button(
+        onClick = {},
+        enabled = false,
+      ) {
+        Text("Disabled")
+      }
     }
 
-    Text(
-      text = name,
-      style = MaterialTheme.typography.bodySmall,
-      color = MaterialTheme.colorScheme.onSurfaceVariant,
-    )
-  }
-}
-
-@Composable
-private fun ColorRoleSwatch(
-  roleName: String,
-  color: Color,
-  contentColor: Color,
-  modifier: Modifier = Modifier,
-) {
-  Surface(
-    modifier = modifier.width(180.dp),
-    shape = MaterialTheme.shapes.medium,
-    color = color,
-    contentColor = contentColor,
-    tonalElevation = 0.dp,
-    shadowElevation = 0.dp,
-  ) {
-    Column(
-      modifier = Modifier.padding(12.dp),
-      verticalArrangement = Arrangement.spacedBy(4.dp),
+    FlowRow(
+      horizontalArrangement = Arrangement.spacedBy(12.dp),
+      verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-      Text(
-        text = roleName,
-        style = MaterialTheme.typography.labelLarge,
-      )
-      Text(
-        text = "The quick brown fox",
-        style = MaterialTheme.typography.bodySmall,
-      )
+      OutlinedButton(onClick = {}) {
+        Text("Outlined")
+      }
+
+      ElevatedButton(onClick = {}) {
+        Text("Elevated")
+      }
+
+      TextButton(onClick = {}) {
+        Text("Text button")
+      }
     }
   }
 }
@@ -230,31 +196,23 @@ private fun ColorRoleSwatch(
 @Composable
 private fun TypographySamples(
   typography: Typography,
-  modifier: Modifier = Modifier,
 ) {
   Column(
-    modifier = modifier.horizontalScroll(rememberScrollState()),
-    verticalArrangement = Arrangement.spacedBy(12.dp),
+    verticalArrangement = Arrangement.spacedBy(16.dp),
   ) {
-    TypographySample("displayLarge", typography.displayLarge)
-    TypographySample("displayMedium", typography.displayMedium)
-    TypographySample("displaySmall", typography.displaySmall)
-
-    TypographySample("headlineLarge", typography.headlineLarge)
-    TypographySample("headlineMedium", typography.headlineMedium)
-    TypographySample("headlineSmall", typography.headlineSmall)
-
-    TypographySample("titleLarge", typography.titleLarge)
-    TypographySample("titleMedium", typography.titleMedium)
-    TypographySample("titleSmall", typography.titleSmall)
-
-    TypographySample("bodyLarge", typography.bodyLarge)
-    TypographySample("bodyMedium", typography.bodyMedium)
-    TypographySample("bodySmall", typography.bodySmall)
-
-    TypographySample("labelLarge", typography.labelLarge)
-    TypographySample("labelMedium", typography.labelMedium)
-    TypographySample("labelSmall", typography.labelSmall)
+    TypographySample("displaySmall", typography.displaySmall, "Runes remember what words forget")
+    TypographySample("headlineLarge", typography.headlineLarge, "Today’s reading")
+    TypographySample("headlineMedium", typography.headlineMedium, "A quiet signal appears")
+    TypographySample("headlineSmall", typography.headlineSmall, "Past · Present · Path")
+    TypographySample("titleLarge", typography.titleLarge, "Journal entry")
+    TypographySample("titleMedium", typography.titleMedium, "What changed today?")
+    TypographySample("titleSmall", typography.titleSmall, "Reflection prompt")
+    TypographySample("bodyLarge", typography.bodyLarge, "You pulled a rune that suggests patience, protection, and careful movement.")
+    TypographySample("bodyMedium", typography.bodyMedium, "Notice what feels grounded before acting.")
+    TypographySample("bodySmall", typography.bodySmall, "Saved just now")
+    TypographySample("labelLarge", typography.labelLarge, "PRIMARY ACTION")
+    TypographySample("labelMedium", typography.labelMedium, "FILTER CHIP")
+    TypographySample("labelSmall", typography.labelSmall, "METADATA")
   }
 }
 
@@ -262,18 +220,254 @@ private fun TypographySamples(
 private fun TypographySample(
   name: String,
   style: TextStyle,
+  text: String,
 ) {
-  Column {
+  Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
     Text(
       text = name,
       style = MaterialTheme.typography.labelSmall,
       color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
+
     Text(
-      text = "Taka Rune Journal",
+      text = text,
       style = style,
-      color = MaterialTheme.colorScheme.onSurface,
+      color = MaterialTheme.colorScheme.onBackground,
     )
+  }
+}
+
+@Composable
+private fun ContainerSamples() {
+  Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    RoleContainer(
+      label = "primaryContainer / onPrimaryContainer",
+      containerColor = MaterialTheme.colorScheme.primaryContainer,
+      contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+      body = "Use for important highlighted areas tied to the primary action color.",
+    )
+
+    RoleContainer(
+      label = "secondaryContainer / onSecondaryContainer",
+      containerColor = MaterialTheme.colorScheme.secondaryContainer,
+      contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+      body = "Use for supporting information, filters, or quieter callouts.",
+    )
+
+    RoleContainer(
+      label = "tertiaryContainer / onTertiaryContainer",
+      containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+      contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+      body = "Use for alternate accents, special states, or warm emphasis.",
+    )
+
+    RoleContainer(
+      label = "surfaceVariant / onSurfaceVariant",
+      containerColor = MaterialTheme.colorScheme.surfaceVariant,
+      contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+      body = "Use for subdued panels, dividers, secondary content, or low-emphasis sections.",
+    )
+  }
+}
+
+@Composable
+private fun RoleContainer(
+  label: String,
+  containerColor: androidx.compose.ui.graphics.Color,
+  contentColor: androidx.compose.ui.graphics.Color,
+  body: String,
+) {
+  Surface(
+    modifier = Modifier.fillMaxWidth(),
+    shape = MaterialTheme.shapes.large,
+    color = containerColor,
+    contentColor = contentColor,
+  ) {
+    Column(
+      modifier = Modifier.padding(18.dp),
+      verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+      Text(
+        text = label,
+        style = MaterialTheme.typography.titleSmall,
+      )
+
+      Text(
+        text = body,
+        style = MaterialTheme.typography.bodyMedium,
+      )
+    }
+  }
+}
+
+@Composable
+private fun CardSamples() {
+  Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Card {
+      Column(
+        modifier = Modifier.padding(18.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+      ) {
+        Text(
+          text = "Default card",
+          style = MaterialTheme.typography.titleMedium,
+        )
+
+        Text(
+          text = "A standard surface for timeline entries, rune summaries, and journal previews.",
+          style = MaterialTheme.typography.bodyMedium,
+        )
+      }
+    }
+
+    ElevatedCard {
+      Column(
+        modifier = Modifier.padding(18.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+      ) {
+        Text(
+          text = "Elevated card",
+          style = MaterialTheme.typography.titleMedium,
+        )
+
+        Text(
+          text = "Useful when a card needs to feel slightly closer or more active.",
+          style = MaterialTheme.typography.bodyMedium,
+        )
+      }
+    }
+
+    OutlinedCard {
+      Column(
+        modifier = Modifier.padding(18.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+      ) {
+        Text(
+          text = "Outlined card",
+          style = MaterialTheme.typography.titleMedium,
+        )
+
+        Text(
+          text = "Useful for quieter sections where the boundary matters more than elevation.",
+          style = MaterialTheme.typography.bodyMedium,
+        )
+      }
+    }
+  }
+}
+
+@Composable
+private fun ChipSamples() {
+  FlowRow(
+    horizontalArrangement = Arrangement.spacedBy(8.dp),
+    verticalArrangement = Arrangement.spacedBy(8.dp),
+  ) {
+    AssistChip(
+      onClick = {},
+      label = { Text("Assist") },
+    )
+
+    FilterChip(
+      selected = true,
+      onClick = {},
+      label = { Text("Selected") },
+    )
+
+    FilterChip(
+      selected = false,
+      onClick = {},
+      label = { Text("Unselected") },
+    )
+
+    SuggestionChip(
+      onClick = {},
+      label = { Text("Suggestion") },
+    )
+  }
+}
+
+@Composable
+private fun ErrorSamples() {
+  Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Surface(
+      shape = MaterialTheme.shapes.large,
+      color = MaterialTheme.colorScheme.error,
+      contentColor = MaterialTheme.colorScheme.onError,
+    ) {
+      Text(
+        text = "error / onError",
+        modifier = Modifier.padding(18.dp),
+        style = MaterialTheme.typography.titleMedium,
+      )
+    }
+
+    Surface(
+      shape = MaterialTheme.shapes.large,
+      color = MaterialTheme.colorScheme.errorContainer,
+      contentColor = MaterialTheme.colorScheme.onErrorContainer,
+    ) {
+      Column(
+        modifier = Modifier.padding(18.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+      ) {
+        Text(
+          text = "errorContainer / onErrorContainer",
+          style = MaterialTheme.typography.titleMedium,
+        )
+
+        Text(
+          text = "Use this for validation errors, failed saves, destructive confirmations, or warnings.",
+          style = MaterialTheme.typography.bodyMedium,
+        )
+      }
+    }
+  }
+}
+
+@Composable
+private fun SurfaceHierarchySamples() {
+  val colors = MaterialTheme.colorScheme
+
+  Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    SurfaceRow("background", colors.background, colors.onBackground)
+    SurfaceRow("surfaceDim", colors.surfaceDim, colors.onSurface)
+    SurfaceRow("surface", colors.surface, colors.onSurface)
+    SurfaceRow("surfaceBright", colors.surfaceBright, colors.onSurface)
+    SurfaceRow("surfaceContainerLowest", colors.surfaceContainerLowest, colors.onSurface)
+    SurfaceRow("surfaceContainerLow", colors.surfaceContainerLow, colors.onSurface)
+    SurfaceRow("surfaceContainer", colors.surfaceContainer, colors.onSurface)
+    SurfaceRow("surfaceContainerHigh", colors.surfaceContainerHigh, colors.onSurface)
+    SurfaceRow("surfaceContainerHighest", colors.surfaceContainerHighest, colors.onSurface)
+  }
+}
+
+@Composable
+private fun SurfaceRow(
+  name: String,
+  containerColor: androidx.compose.ui.graphics.Color,
+  contentColor: androidx.compose.ui.graphics.Color,
+) {
+  Surface(
+    modifier = Modifier.fillMaxWidth(),
+    shape = MaterialTheme.shapes.medium,
+    color = containerColor,
+    contentColor = contentColor,
+  ) {
+    Row(
+      modifier = Modifier.padding(14.dp),
+      horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+      Text(
+        text = name,
+        modifier = Modifier.width(220.dp),
+        style = MaterialTheme.typography.labelLarge,
+      )
+
+      Text(
+        text = "Sample text",
+        style = MaterialTheme.typography.bodyMedium,
+      )
+    }
   }
 }
 
@@ -295,7 +489,7 @@ private fun ShapeSamples() {
 @Composable
 private fun ShapeSample(
   name: String,
-  shape: androidx.compose.ui.graphics.Shape,
+  shape: Shape,
 ) {
   Column(
     verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -311,6 +505,7 @@ private fun ShapeSample(
           shape = shape,
         ),
     )
+
     Text(
       text = name,
       style = MaterialTheme.typography.bodySmall,
@@ -320,95 +515,98 @@ private fun ShapeSample(
 }
 
 @Composable
-private fun ComponentSamples() {
-  Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-    Card {
-      Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-      ) {
-        Text(
-          text = "Card",
-          style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-          text = "A calm surface for readings, journal entries, prompts, and reflective content.",
-          style = MaterialTheme.typography.bodyMedium,
-        )
-      }
-    }
+private fun ColorRoleReference() {
+  val colors = MaterialTheme.colorScheme
 
-    OutlinedCard {
-      Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-      ) {
-        Text(
-          text = "Outlined card",
-          style = MaterialTheme.typography.titleMedium,
-        )
-        Text(
-          text = "Useful when you want a quieter container with a visible boundary.",
-          style = MaterialTheme.typography.bodyMedium,
-        )
-      }
-    }
+  FlowRow(
+    horizontalArrangement = Arrangement.spacedBy(12.dp),
+    verticalArrangement = Arrangement.spacedBy(12.dp),
+  ) {
+    ColorRoleCard("primary", colors.primary, colors.onPrimary)
+    ColorRoleCard("onPrimary", colors.onPrimary, colors.primary)
 
-    Row(
-      horizontalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-      Button(onClick = {}) {
-        Text("Primary")
-      }
+    ColorRoleCard("primaryContainer", colors.primaryContainer, colors.onPrimaryContainer)
+    ColorRoleCard("onPrimaryContainer", colors.onPrimaryContainer, colors.primaryContainer)
 
-      OutlinedButton(onClick = {}) {
-        Text("Outlined")
-      }
+    ColorRoleCard("secondary", colors.secondary, colors.onSecondary)
+    ColorRoleCard("onSecondary", colors.onSecondary, colors.secondary)
 
-      TextButton(onClick = {}) {
-        Text("Text")
-      }
-    }
+    ColorRoleCard("secondaryContainer", colors.secondaryContainer, colors.onSecondaryContainer)
+    ColorRoleCard("onSecondaryContainer", colors.onSecondaryContainer, colors.secondaryContainer)
 
-    Row(
-      horizontalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-      ElevatedButton(onClick = {}) {
-        Text("Elevated")
-      }
-    }
+    ColorRoleCard("tertiary", colors.tertiary, colors.onTertiary)
+    ColorRoleCard("onTertiary", colors.onTertiary, colors.tertiary)
 
-    FlowRow(
-      horizontalArrangement = Arrangement.spacedBy(8.dp),
-      verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-      AssistChip(
-        onClick = {},
-        label = { Text("Self") },
-      )
-      FilterChip(
-        selected = true,
-        onClick = {},
-        label = { Text("Purpose") },
-      )
-      SuggestionChip(
-        onClick = {},
-        label = { Text("Crossroads") },
-      )
-    }
+    ColorRoleCard("tertiaryContainer", colors.tertiaryContainer, colors.onTertiaryContainer)
+    ColorRoleCard("onTertiaryContainer", colors.onTertiaryContainer, colors.tertiaryContainer)
 
-    Surface(
-      shape = MaterialTheme.shapes.large,
-      color = MaterialTheme.colorScheme.errorContainer,
-      contentColor = MaterialTheme.colorScheme.onErrorContainer,
+    ColorRoleCard("background", colors.background, colors.onBackground)
+    ColorRoleCard("onBackground", colors.onBackground, colors.background)
+
+    ColorRoleCard("surface", colors.surface, colors.onSurface)
+    ColorRoleCard("onSurface", colors.onSurface, colors.surface)
+
+    ColorRoleCard("surfaceVariant", colors.surfaceVariant, colors.onSurfaceVariant)
+    ColorRoleCard("onSurfaceVariant", colors.onSurfaceVariant, colors.surfaceVariant)
+
+    ColorRoleCard("outline", colors.outline, colors.surface)
+    ColorRoleCard("outlineVariant", colors.outlineVariant, colors.onSurface)
+
+    ColorRoleCard("inverseSurface", colors.inverseSurface, colors.inverseOnSurface)
+    ColorRoleCard("inverseOnSurface", colors.inverseOnSurface, colors.inverseSurface)
+    ColorRoleCard("inversePrimary", colors.inversePrimary, colors.onPrimary)
+
+    ColorRoleCard("error", colors.error, colors.onError)
+    ColorRoleCard("onError", colors.onError, colors.error)
+
+    ColorRoleCard("errorContainer", colors.errorContainer, colors.onErrorContainer)
+    ColorRoleCard("onErrorContainer", colors.onErrorContainer, colors.errorContainer)
+
+    ColorRoleCard("scrim", colors.scrim, colors.onSurface)
+  }
+}
+
+@Composable
+private fun ColorRoleCard(
+  name: String,
+  containerColor: androidx.compose.ui.graphics.Color,
+  contentColor: androidx.compose.ui.graphics.Color,
+) {
+  Surface(
+    modifier = Modifier.width(180.dp),
+    shape = MaterialTheme.shapes.medium,
+    color = containerColor,
+    contentColor = contentColor,
+  ) {
+    Column(
+      modifier = Modifier
+        .height(84.dp)
+        .padding(12.dp),
+      verticalArrangement = Arrangement.SpaceBetween,
     ) {
       Text(
-        text = "Error container sample",
-        modifier = Modifier.padding(16.dp),
-        style = MaterialTheme.typography.bodyMedium,
+        text = name,
+        style = MaterialTheme.typography.labelLarge,
+      )
+
+      Text(
+        text = "Sample",
+        style = MaterialTheme.typography.bodySmall,
       )
     }
+  }
+}
 
-    Spacer(modifier = Modifier.height(8.dp))
+@Composable
+private fun SectionTitle(text: String) {
+  Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Text(
+      text = text,
+      style = MaterialTheme.typography.titleLarge,
+    )
+
+    HorizontalDivider(
+      color = MaterialTheme.colorScheme.outlineVariant,
+    )
   }
 }

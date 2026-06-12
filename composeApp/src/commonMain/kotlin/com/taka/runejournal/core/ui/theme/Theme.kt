@@ -1,41 +1,56 @@
 package com.taka.runejournal.core.ui.theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
-private val takaLightColorScheme = lightColorScheme(
-  primary = Walnut,
-  onPrimary = Bone,
-  primaryContainer = Clay,
-  onPrimaryContainer = Ink,
+private val takaDarkColorScheme = darkColorScheme(
+  primary = RuneGold,
+  onPrimary = NearBlack,
+  primaryContainer = DarkClay,
+  onPrimaryContainer = PureWhite,
 
-  secondary = Ash,
-  onSecondary = Bone,
-  secondaryContainer = Parchment,
-  onSecondaryContainer = Ink,
+  secondary = Lichen,
+  onSecondary = NearBlack,
+  secondaryContainer = DeepMoss,
+  onSecondaryContainer = PureWhite,
 
-  tertiary = Moss,
-  onTertiary = Bone,
-  tertiaryContainer = PaleMoss,
-  onTertiaryContainer = Ink,
+  tertiary = Ochre,
+  onTertiary = NearBlack,
+  tertiaryContainer = WalnutEarth,
+  onTertiaryContainer = PureWhite,
 
-  background = Parchment,
-  onBackground = Ink,
+  background = RuneStoneDark,
+  onBackground = PureWhite,
 
-  surface = Bone,
-  onSurface = Ink,
-  surfaceVariant = Sand,
-  onSurfaceVariant = Ash,
+  surface = Basalt,
+  onSurface = PureWhite,
 
-  outline = Clay,
-  outlineVariant = LightClay,
+  surfaceVariant = WornStone,
+  onSurfaceVariant = LightGray,
 
-  error = ErrorRed,
-  onError = Color.White,
-  errorContainer = ErrorBlush,
-  onErrorContainer = ErrorInk,
+  surfaceContainerLowest = DeepBasalt,
+  surfaceContainerLow = Basalt,
+  surfaceContainer = RaisedStone,
+  surfaceContainerHigh = WornStone,
+  surfaceContainerHighest = RuneStone,
+
+  surfaceDim = DeepBasalt,
+  surfaceBright = WornStone,
+
+  outline = StoneEdge,
+  outlineVariant = RuneStone,
+
+  inverseSurface = SoftWhite,
+  inverseOnSurface = NearBlack,
+  inversePrimary = BurntClay,
+
+  error = EmberRed,
+  onError = NearBlack,
+  errorContainer = DarkEmber,
+  onErrorContainer = PureWhite,
+
+  scrim = NearBlack,
 )
 
 @Composable
@@ -43,7 +58,7 @@ fun TakaTheme(
   content: @Composable () -> Unit,
 ) {
   MaterialTheme(
-    colorScheme = takaLightColorScheme,
+    colorScheme = takaDarkColorScheme,
     typography = takaTypography,
     shapes = takaShapes,
     content = content,
