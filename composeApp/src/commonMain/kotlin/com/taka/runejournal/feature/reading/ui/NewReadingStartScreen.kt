@@ -56,6 +56,42 @@ private fun RunePreview() {
       .padding(16.dp),
     verticalArrangement = Arrangement.spacedBy(12.dp)
   ) {
+    Row(
+      horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        Image(
+          painter = painterResource(Res.drawable.rune_empty),
+          contentDescription = "empty",
+          modifier = Modifier.size(width = 48.dp, height = 72.dp)
+        )
+
+        Text(
+          text = "empty",
+          modifier = Modifier.padding(top = 4.dp),
+          color = Color.Black,
+          fontSize = 10.sp
+        )
+      }
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        Image(
+          painter = painterResource(Res.drawable.ic_app_icon),
+          contentDescription = "empty",
+          modifier = Modifier.size(width = 48.dp, height = 72.dp)
+        )
+
+        Text(
+          text = "app icon",
+          modifier = Modifier.padding(top = 4.dp),
+          color = Color.Black,
+          fontSize = 10.sp
+        )
+      }
+    }
     RuneId.entries
       .chunked(4)
       .forEach { rowRunes ->
@@ -82,45 +118,5 @@ private fun RunePreview() {
           }
         }
       }
-    Row(
-      horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-      Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Image(
-          painter = painterResource(Res.drawable.rune_empty),
-          contentDescription = "empty",
-          modifier = Modifier.size(width = 48.dp, height = 72.dp)
-        )
-
-        Text(
-          text = "empty",
-          modifier = Modifier.padding(top = 4.dp),
-          color = Color.Black,
-          fontSize = 10.sp
-        )
-      }
-    }
-    Row(
-      horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-      Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Image(
-          painter = painterResource(Res.drawable.ic_app_icon),
-          contentDescription = "empty",
-          modifier = Modifier.size(width = 48.dp, height = 72.dp)
-        )
-
-        Text(
-          text = "app icon",
-          modifier = Modifier.padding(top = 4.dp),
-          color = Color.Black,
-          fontSize = 10.sp
-        )
-      }
-    }
   }
 }

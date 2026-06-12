@@ -30,6 +30,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.core.splashscreen)
             implementation(compose.uiTooling)
             implementation(libs.datastore.preferences.android)
         }
