@@ -78,6 +78,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false

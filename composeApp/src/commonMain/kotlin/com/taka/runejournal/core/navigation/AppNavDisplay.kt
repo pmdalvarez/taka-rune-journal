@@ -7,6 +7,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.taka.runejournal.core.ui.DesignPlaygroundScreen
 import com.taka.runejournal.feature.more.ui.AboutScreen
 import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
@@ -43,6 +44,9 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     },
                     onSettingsClick = {
                         backStack.add(SettingsRoute)
+                    },
+                    onDesignPlaygroundClick = {
+                        backStack.add(DesignSystemRoute)
                     },
                     onTimelineDetailClick = { id ->
                         backStack.add(
@@ -116,6 +120,15 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
             entry<AboutRoute> {
                 AboutScreen(
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<DesignSystemRoute> {
+                DesignPlaygroundScreen(
                     onBackClick = {
                         backStack.removeLastOrNull()
                     },

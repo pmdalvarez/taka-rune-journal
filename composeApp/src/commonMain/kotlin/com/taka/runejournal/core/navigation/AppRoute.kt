@@ -26,3 +26,6 @@ data object SettingsRoute : AppRoute
 
 @Serializable
 data object AboutRoute : AppRoute
+
+@Serializable
+data object DesignSystemRoute : AppRoute

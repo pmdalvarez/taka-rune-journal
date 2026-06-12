@@ -1,4 +1,4 @@
-package com.taka.runejournal.core.ui.components
+package com.taka.runejournal.core.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,18 +28,24 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.TakaTopBar
+import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.theme.TakaTheme
+import com.taka.runejournal.feature.timeline.ui.TimelineViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
@@ -46,6 +53,27 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun DesignPlaygroundPreview() {
   TakaTheme {
     DesignPlayground()
+  }
+}
+
+@Composable
+fun DesignPlaygroundScreen(
+  onBackClick: () -> Unit,
+  modifier: Modifier = Modifier
+) {
+  Scaffold(
+    modifier = modifier.fillMaxSize(),
+    topBar = {
+      TakaTopBar(
+        title = "Design Playground",
+        navigationIcon = TakaTopBarNavigationIcon.Back,
+        onNavigationClick = onBackClick,
+      )
+    }
+  ) { innerPadding ->
+    DesignPlayground(
+      modifier = Modifier.padding(innerPadding),
+    )
   }
 }
 
@@ -273,8 +301,8 @@ private fun ContainerSamples() {
 @Composable
 private fun RoleContainer(
   label: String,
-  containerColor: androidx.compose.ui.graphics.Color,
-  contentColor: androidx.compose.ui.graphics.Color,
+  containerColor: Color,
+  contentColor: Color,
   body: String,
 ) {
   Surface(
@@ -444,8 +472,8 @@ private fun SurfaceHierarchySamples() {
 @Composable
 private fun SurfaceRow(
   name: String,
-  containerColor: androidx.compose.ui.graphics.Color,
-  contentColor: androidx.compose.ui.graphics.Color,
+  containerColor: Color,
+  contentColor: Color,
 ) {
   Surface(
     modifier = Modifier.fillMaxWidth(),
@@ -569,8 +597,8 @@ private fun ColorRoleReference() {
 @Composable
 private fun ColorRoleCard(
   name: String,
-  containerColor: androidx.compose.ui.graphics.Color,
-  contentColor: androidx.compose.ui.graphics.Color,
+  containerColor: Color,
+  contentColor: Color,
 ) {
   Surface(
     modifier = Modifier.width(180.dp),

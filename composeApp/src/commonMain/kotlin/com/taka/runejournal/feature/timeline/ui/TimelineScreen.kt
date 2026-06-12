@@ -27,6 +27,7 @@ fun TimelineScreen(
     viewModel: TimelineViewModel,
     onAboutClick: () -> Unit,
     onSettingsClick: () -> Unit,
+    onDesignPlaygroundClick: () -> Unit,
     onTimelineDetailClick: (Long) -> Unit,
     onNewReadingClick: () -> Unit,
     onNewJournalEntryClick: () -> Unit,
@@ -41,7 +42,8 @@ fun TimelineScreen(
             TakaTopBar(
                 showMoreMenu = true,
                 onSettingsClick = onSettingsClick,
-                onAboutClick = onAboutClick
+                onAboutClick = onAboutClick,
+                onDesignPlaygroundClick = onDesignPlaygroundClick
             )
         }
     ) { innerPadding ->

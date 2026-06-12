@@ -24,9 +24,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.platform.AppBuildConfig
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_app_icon
+import taka_rune_journal.composeapp.generated.resources.overflow_menu_design_system
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -43,6 +46,7 @@ fun TakaTopBar(
   showMoreMenu: Boolean = false,
   onSettingsClick: () -> Unit = {},
   onAboutClick: () -> Unit = {},
+  onDesignPlaygroundClick: () -> Unit = {},
 ) {
   var isMenuExpanded by remember { mutableStateOf(false) }
 
@@ -110,6 +114,16 @@ fun TakaTopBar(
                 onAboutClick()
               },
             )
+
+            if (AppBuildConfig.isDebug) {
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.overflow_menu_design_system)) },
+                onClick = {
+                  isMenuExpanded = false
+                  onDesignPlaygroundClick()
+                },
+              )
+            }
           }
         }
       }
