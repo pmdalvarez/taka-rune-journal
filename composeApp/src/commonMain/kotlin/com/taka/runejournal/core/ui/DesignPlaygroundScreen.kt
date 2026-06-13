@@ -42,6 +42,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.ButtonStyle
+import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.theme.TakaTheme
@@ -182,31 +184,26 @@ private fun ButtonSamples() {
       horizontalArrangement = Arrangement.spacedBy(12.dp),
       verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-      Button(onClick = {}) {
+      TakaButton(onClick = {}) {
         Text("Primary")
       }
 
-      Button(
+      TakaButton(
         onClick = {},
-        colors = ButtonDefaults.buttonColors(
-          containerColor = MaterialTheme.colorScheme.secondary,
-          contentColor = MaterialTheme.colorScheme.onSecondary,
-        ),
+        style = ButtonStyle.Secondary,
       ) {
         Text("Secondary")
       }
 
-      Button(
+      TakaButton(
         onClick = {},
-        colors = ButtonDefaults.buttonColors(
-          containerColor = MaterialTheme.colorScheme.tertiary,
-          contentColor = MaterialTheme.colorScheme.onTertiary,
-        ),
+        style = ButtonStyle.Tertiary,
+        enabled = false,
       ) {
         Text("Tertiary")
       }
 
-      Button(
+      TakaButton(
         onClick = {},
         enabled = false,
       ) {
