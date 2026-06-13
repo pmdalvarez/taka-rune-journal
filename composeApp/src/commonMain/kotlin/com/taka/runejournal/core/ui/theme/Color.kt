@@ -3,7 +3,7 @@ package com.taka.runejournal.core.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Stone / rock palette
-val RuneStoneDark = Color(0xFF2E3431)      // Main app background
+val RuneStoneDark = Color(0xFF1A201D)      // Main app background
 val DeepBasalt = Color(0xFF1B1F1D)         // Deepest surfaces
 val Basalt = Color(0xFF252B28)             // Cards / regular surfaces
 val RaisedStone = Color(0xFF38403C)        // Raised containers
