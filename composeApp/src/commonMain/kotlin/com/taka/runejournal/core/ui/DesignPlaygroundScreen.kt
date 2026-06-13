@@ -48,7 +48,7 @@ import com.taka.runejournal.core.ui.theme.TakaTheme
 
 @Preview(
   showBackground = true,
-  heightDp = 2000,           // ← Force the preview to be tall
+  heightDp = 200000,           // ← Force the preview to be tall
   widthDp = 500
 )
 @Composable
@@ -82,7 +82,7 @@ fun DesignPlaygroundScreen(
       modifier = Modifier
         .padding(innerPadding)
         .fillMaxSize()
-        .verticalScroll(rememberScrollState())   // ← Add scroll here
+        .verticalScroll(rememberScrollState())
     ) {
       DesignPlayground()
     }
