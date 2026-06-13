@@ -1,8 +1,7 @@
 package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -28,8 +27,14 @@ import com.taka.runejournal.core.platform.AppBuildConfig
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.app_name
+import taka_rune_journal.composeapp.generated.resources.button_back
+import taka_rune_journal.composeapp.generated.resources.button_close
+import taka_rune_journal.composeapp.generated.resources.button_more_menu
 import taka_rune_journal.composeapp.generated.resources.ic_app_icon
-import taka_rune_journal.composeapp.generated.resources.overflow_menu_design_system
+import taka_rune_journal.composeapp.generated.resources.more_menu_about
+import taka_rune_journal.composeapp.generated.resources.more_menu_design_system
+import taka_rune_journal.composeapp.generated.resources.more_menu_settings
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -55,20 +60,20 @@ fun TakaTopBar(
     navigationIcon = {
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {
-          Image(
-            painter = painterResource(Res.drawable.ic_app_icon),
-            contentDescription = "Taka",
-            modifier = Modifier
-              .padding(start = 16.dp)
-              .size(32.dp),
-          )
+          IconButton(onClick = {}) {
+            Image(
+              painter = painterResource(Res.drawable.ic_app_icon),
+              contentDescription = stringResource(Res.string.app_name),
+              modifier = Modifier.size(32.dp),
+            )
+          }
         }
 
         TakaTopBarNavigationIcon.Back -> {
           IconButton(onClick = onNavigationClick) {
             Icon(
               imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-              contentDescription = "Back",
+              contentDescription = stringResource(Res.string.button_back),
             )
           }
         }
@@ -77,7 +82,7 @@ fun TakaTopBar(
           IconButton(onClick = onNavigationClick) {
             Icon(
               imageVector = Icons.Default.Close,
-              contentDescription = "Close",
+              contentDescription = stringResource(Res.string.button_more_menu),
             )
           }
         }
@@ -85,45 +90,44 @@ fun TakaTopBar(
     },
     actions = {
       if (showMoreMenu) {
-        Box {
-          IconButton(
-            onClick = { isMenuExpanded = true }
-          ) {
-            Icon(
-              imageVector = Icons.Default.MoreVert,
-              contentDescription = "More options",
-            )
-          }
+        IconButton(
+          onClick = { isMenuExpanded = true }
+        ) {
+          Icon(
+            imageVector = Icons.Default.MoreVert,
+            contentDescription = stringResource(Res.string.button_close),
+            modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
+          )
+        }
 
-          DropdownMenu(
-            expanded = isMenuExpanded,
-            onDismissRequest = { isMenuExpanded = false },
-          ) {
+        DropdownMenu(
+          expanded = isMenuExpanded,
+          onDismissRequest = { isMenuExpanded = false },
+        ) {
+          DropdownMenuItem(
+            text = { Text(stringResource(Res.string.more_menu_settings)) },
+            onClick = {
+              isMenuExpanded = false
+              onSettingsClick()
+            },
+          )
+
+          DropdownMenuItem(
+            text = { Text(stringResource(Res.string.more_menu_about)) },
+            onClick = {
+              isMenuExpanded = false
+              onAboutClick()
+            },
+          )
+
+          if (AppBuildConfig.isDebug) {
             DropdownMenuItem(
-              text = { Text("Settings") },
+              text = { Text(stringResource(Res.string.more_menu_design_system)) },
               onClick = {
                 isMenuExpanded = false
-                onSettingsClick()
+                onDesignPlaygroundClick()
               },
             )
-
-            DropdownMenuItem(
-              text = { Text("About") },
-              onClick = {
-                isMenuExpanded = false
-                onAboutClick()
-              },
-            )
-
-            if (AppBuildConfig.isDebug) {
-              DropdownMenuItem(
-                text = { Text(stringResource(Res.string.overflow_menu_design_system)) },
-                onClick = {
-                  isMenuExpanded = false
-                  onDesignPlaygroundClick()
-                },
-              )
-            }
           }
         }
       }
