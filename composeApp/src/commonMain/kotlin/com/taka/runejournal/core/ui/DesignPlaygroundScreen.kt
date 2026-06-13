@@ -46,13 +46,22 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.theme.TakaTheme
 
-@Preview
+@Preview(
+  showBackground = true,
+  heightDp = 2000,           // ← Force the preview to be tall
+  widthDp = 500
+)
 @Composable
 fun DesignPlaygroundPreview() {
   TakaTheme {
-    DesignPlayground()
-  }
-}
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())   // ← Scroll lives here in preview
+    ) {
+      DesignPlayground()
+    }
+  }}
 
 @Composable
 fun DesignPlaygroundScreen(
@@ -69,9 +78,14 @@ fun DesignPlaygroundScreen(
       )
     }
   ) { innerPadding ->
-    DesignPlayground(
-      modifier = Modifier.padding(innerPadding),
-    )
+    Box(
+      modifier = Modifier
+        .padding(innerPadding)
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())   // ← Add scroll here
+    ) {
+      DesignPlayground()
+    }
   }
 }
 
@@ -86,7 +100,7 @@ fun DesignPlayground(
   ) {
     Column(
       modifier = Modifier
-        .verticalScroll(rememberScrollState())
+        .fillMaxWidth()
         .padding(24.dp),
       verticalArrangement = Arrangement.spacedBy(28.dp),
     ) {
