@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
@@ -77,34 +77,34 @@ fun TimelineScreen(
                 }
             }
             item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
-            item { testArea(viewModel) }
+            item { TestArea(viewModel) }
         }
     }
 }
 
 @Composable
-private fun testArea(viewModel: TimelineViewModel) {
+private fun TestArea(viewModel: TimelineViewModel) {
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outlineVariant
     )
 
-    Button(
+    TakaButton(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
         modifier = Modifier.padding(top = 24.dp)
     ) {
         Text("Change name to Paolo + random number")
     }
 
-    Button(
+    TakaButton(
         onClick = { viewModel.setDisplayName("") },
         modifier = Modifier.padding(top = 24.dp)
     ) {
         Text("Change name to empty")
     }
 
-    Button(
+    TakaButton(
         onClick = { viewModel.createJournalEntry("This is a random journal entry with a random number: " + (0..100).random() , "Title" + (0..100).random()) },
         modifier = Modifier.padding(top = 24.dp)
     ) {
