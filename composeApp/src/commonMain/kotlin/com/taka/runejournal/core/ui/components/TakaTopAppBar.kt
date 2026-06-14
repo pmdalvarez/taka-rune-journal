@@ -27,14 +27,14 @@ import com.taka.runejournal.core.platform.AppBuildConfig
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.about_title
 import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_back
 import taka_rune_journal.composeapp.generated.resources.button_close
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
+import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_app_icon
-import taka_rune_journal.composeapp.generated.resources.more_menu_about
-import taka_rune_journal.composeapp.generated.resources.more_menu_design_system
-import taka_rune_journal.composeapp.generated.resources.more_menu_settings
+import taka_rune_journal.composeapp.generated.resources.settings_title
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -105,7 +105,7 @@ fun TakaTopBar(
           onDismissRequest = { isMenuExpanded = false },
         ) {
           DropdownMenuItem(
-            text = { Text(stringResource(Res.string.more_menu_settings)) },
+            text = { Text(stringResource(Res.string.settings_title)) },
             onClick = {
               isMenuExpanded = false
               onSettingsClick()
@@ -113,7 +113,7 @@ fun TakaTopBar(
           )
 
           DropdownMenuItem(
-            text = { Text(stringResource(Res.string.more_menu_about)) },
+            text = { Text(stringResource(Res.string.about_title)) },
             onClick = {
               isMenuExpanded = false
               onAboutClick()
@@ -122,7 +122,7 @@ fun TakaTopBar(
 
           if (AppBuildConfig.isDebug) {
             DropdownMenuItem(
-              text = { Text(stringResource(Res.string.more_menu_design_system)) },
+              text = { Text(stringResource(Res.string.design_system_title)) },
               onClick = {
                 isMenuExpanded = false
                 onDesignPlaygroundClick()

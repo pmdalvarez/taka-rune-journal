@@ -55,9 +55,9 @@ fun GreetingSection(
     if (displayName.isNullOrEmpty()) {
       DisplayNameTextField(
         onSaveName = {
-          val displayName = it.trim()
-          if (displayName.isNotEmpty()) {
-            onDisplayNameEntered(displayName)
+          val trimmedName = it.trim()
+          if (trimmedName.isNotEmpty()) {
+            onDisplayNameEntered(trimmedName)
             displayNameEntered = true
           }
         },
