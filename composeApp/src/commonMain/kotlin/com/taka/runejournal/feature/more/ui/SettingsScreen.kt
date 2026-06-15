@@ -34,6 +34,8 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.settings_reversible_runes_description
+import taka_rune_journal.composeapp.generated.resources.settings_reversible_runes_title
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
 
@@ -138,12 +140,12 @@ private fun SettingsContent(
         verticalArrangement = Arrangement.spacedBy(4.dp),
       ) {
         Text(
-          text = "Use reversed runes in readings",
+          text = stringResource(Res.string.settings_reversible_runes_title),
           style = MaterialTheme.typography.titleMedium,
         )
 
         Text(
-          text = "Allow reversible runes to appear upside down, adding blocked, hidden, or internalized meanings.",
+          text =  stringResource(Res.string.settings_reversible_runes_description),
           style = MaterialTheme.typography.bodyMedium,
           color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
