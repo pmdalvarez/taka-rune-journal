@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import org.jetbrains.compose.resources.stringResource
@@ -46,9 +47,8 @@ fun SettingsScreen(
   modifier: Modifier = Modifier,
 ) {
   val uiState by viewModel.uiState.collectAsState()
-
-  Scaffold(
-    modifier = modifier.fillMaxSize(),
+  TakaScaffold(
+    modifier = modifier,
     topBar = {
       TakaTopBar(
         title = stringResource(Res.string.settings_title),
@@ -56,16 +56,13 @@ fun SettingsScreen(
         onNavigationClick = onBackClick,
       )
     },
-  ) { innerPadding ->
+  ) { contentModifier ->
     SettingsContent(
       displayName = uiState.displayName,
       reversedRunesEnabled = uiState.reversedRunesEnabled,
       onDisplayNameChange = viewModel::setDisplayName,
       onReversedRunesEnabledChange = viewModel::setReversedRunesEnabled,
-      modifier = Modifier
-        .fillMaxSize()
-        .padding(innerPadding)
-        .padding(24.dp),
+      modifier = contentModifier
     )
   }
 }
