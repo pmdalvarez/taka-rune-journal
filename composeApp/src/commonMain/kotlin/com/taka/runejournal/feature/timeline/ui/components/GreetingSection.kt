@@ -118,7 +118,9 @@ fun DisplayNameTextField(
             onSaveName(nameInput)
           },
       ),
-      modifier = modifier.onFocusChanged() { focusState ->
+      modifier = modifier
+        .fillMaxWidth()
+        .onFocusChanged() { focusState ->
           if (!focusState.isFocused) {
             onSaveName(nameInput)
           }
