@@ -13,6 +13,7 @@ import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
+import com.taka.runejournal.feature.timeline.ui.NewJournalEntryViewModel
 import com.taka.runejournal.feature.timeline.ui.TimelineDetailScreen
 import com.taka.runejournal.feature.timeline.ui.TimelineScreen
 import com.taka.runejournal.feature.timeline.ui.TimelineViewModel
@@ -80,7 +81,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
             }
 
             entry<NewJournalEntryRoute> {
-                val viewModel = koinViewModel<TimelineViewModel>()
+                val viewModel = koinViewModel<NewJournalEntryViewModel>()
 
                 NewJournalEntryScreen(
                     viewModel = viewModel,

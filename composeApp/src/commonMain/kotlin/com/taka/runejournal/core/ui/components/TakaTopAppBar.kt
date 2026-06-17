@@ -42,16 +42,29 @@ enum class TakaTopBarNavigationIcon {
   Close,
 }
 
+sealed class TakaTopBarAction {
+  data object None : TakaTopBarAction()
+
+  data class Save(
+    val enabled: Boolean = true,
+    val onClick: () -> Unit,
+  ) : TakaTopBarAction()
+
+  data class MoreMenu(
+    val onSettingsClick: () -> Unit,
+    val onAboutClick: () -> Unit,
+    val onDesignPlaygroundClick: () -> Unit,
+  ) : TakaTopBarAction()
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TakaTopBar(
   title: String? = null,
   navigationIcon: TakaTopBarNavigationIcon = TakaTopBarNavigationIcon.None,
   onNavigationClick: () -> Unit = {},
-  showMoreMenu: Boolean = false,
-  onSettingsClick: () -> Unit = {},
-  onAboutClick: () -> Unit = {},
-  onDesignPlaygroundClick: () -> Unit = {},
+  action: TakaTopBarAction = TakaTopBarAction.None,
 ) {
   var isMenuExpanded by remember { mutableStateOf(false) }
 
@@ -89,45 +102,59 @@ fun TakaTopBar(
       }
     },
     actions = {
-      if (showMoreMenu) {
-        IconButton(
-          onClick = { isMenuExpanded = true }
-        ) {
-          Icon(
-            imageVector = Icons.Default.MoreVert,
-            contentDescription = stringResource(Res.string.button_close),
-            modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
-          )
+      when (action) {
+        is TakaTopBarAction.None -> {}
+        is TakaTopBarAction.Save -> {
+          IconButton(
+            onClick = action.onClick
+          ) {
+            Icon(
+              imageVector = Icons.Default.MoreVert,
+              contentDescription = stringResource(Res.string.button_close),
+              modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
+            )
+          }
         }
+        is TakaTopBarAction.MoreMenu -> {
+          IconButton(
+            onClick = { isMenuExpanded = true }
+          ) {
+            Icon(
+              imageVector = Icons.Default.MoreVert,
+              contentDescription = stringResource(Res.string.button_close),
+              modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
+            )
+          }
 
-        DropdownMenu(
-          expanded = isMenuExpanded,
-          onDismissRequest = { isMenuExpanded = false },
-        ) {
-          DropdownMenuItem(
-            text = { Text(stringResource(Res.string.settings_title)) },
-            onClick = {
-              isMenuExpanded = false
-              onSettingsClick()
-            },
-          )
-
-          DropdownMenuItem(
-            text = { Text(stringResource(Res.string.about_title)) },
-            onClick = {
-              isMenuExpanded = false
-              onAboutClick()
-            },
-          )
-
-          if (AppBuildConfig.isDebug) {
+          DropdownMenu(
+            expanded = isMenuExpanded,
+            onDismissRequest = { isMenuExpanded = false },
+          ) {
             DropdownMenuItem(
-              text = { Text(stringResource(Res.string.design_system_title)) },
+              text = { Text(stringResource(Res.string.settings_title)) },
               onClick = {
                 isMenuExpanded = false
-                onDesignPlaygroundClick()
+                action.onSettingsClick()
               },
             )
+
+            DropdownMenuItem(
+              text = { Text(stringResource(Res.string.about_title)) },
+              onClick = {
+                isMenuExpanded = false
+                action.onAboutClick()
+              },
+            )
+
+            if (AppBuildConfig.isDebug) {
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.design_system_title)) },
+                onClick = {
+                  isMenuExpanded = false
+                  action.onDesignPlaygroundClick()
+                },
+              )
+            }
           }
         }
       }

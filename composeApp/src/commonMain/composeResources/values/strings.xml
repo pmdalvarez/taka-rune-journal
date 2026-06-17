@@ -24,4 +24,6 @@
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal">New Journal Entry</string>
 
+    <string name="new_journal_entry_title">New Journal Entry</string>
+
 </resources>

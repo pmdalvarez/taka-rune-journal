@@ -17,6 +17,7 @@ import androidx.paging.compose.itemKey
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
+import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
@@ -39,10 +40,11 @@ fun TimelineScreen(
         modifier = modifier,
         topBar = {
             TakaTopBar(
-                showMoreMenu = true,
-                onSettingsClick = onSettingsClick,
-                onAboutClick = onAboutClick,
-                onDesignPlaygroundClick = onDesignPlaygroundClick
+                action = TakaTopBarAction.MoreMenu(
+                    onSettingsClick = onSettingsClick,
+                    onAboutClick = onAboutClick,
+                    onDesignPlaygroundClick = onDesignPlaygroundClick
+                ),
             )
         }
     ) { contentModifier ->
