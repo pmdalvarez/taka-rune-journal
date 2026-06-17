@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
@@ -32,6 +33,7 @@ import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_back
 import taka_rune_journal.composeapp.generated.resources.button_close
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
+import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_app_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
@@ -95,7 +97,7 @@ fun TakaTopBar(
           IconButton(onClick = onNavigationClick) {
             Icon(
               imageVector = Icons.Default.Close,
-              contentDescription = stringResource(Res.string.button_more_menu),
+              contentDescription = stringResource(Res.string.button_close),
             )
           }
         }
@@ -109,8 +111,8 @@ fun TakaTopBar(
             onClick = action.onClick
           ) {
             Icon(
-              imageVector = Icons.Default.MoreVert,
-              contentDescription = stringResource(Res.string.button_close),
+              imageVector = Icons.Default.Check,
+              contentDescription = stringResource(Res.string.button_save),
               modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
             )
           }
@@ -121,7 +123,7 @@ fun TakaTopBar(
           ) {
             Icon(
               imageVector = Icons.Default.MoreVert,
-              contentDescription = stringResource(Res.string.button_close),
+              contentDescription = stringResource(Res.string.button_more_menu),
               modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
             )
           }

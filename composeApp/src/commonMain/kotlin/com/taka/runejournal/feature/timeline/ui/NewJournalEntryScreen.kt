@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
+import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -28,6 +29,9 @@ fun NewJournalEntryScreen(
         title = stringResource(Res.string.new_journal_entry_title),
         navigationIcon = TakaTopBarNavigationIcon.Close,
         onNavigationClick = onBackClick,
+        action = TakaTopBarAction.Save(
+          onClick = onSaved
+        )
       )
     },
   ) { contentModifier ->
