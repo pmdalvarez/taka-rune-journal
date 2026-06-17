@@ -2,9 +2,15 @@ package com.taka.runejournal.feature.timeline.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaScaffold
@@ -13,6 +19,8 @@ import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.new_journal_entry_textfield_label_notes
+import taka_rune_journal.composeapp.generated.resources.new_journal_entry_textfield_label_title
 import taka_rune_journal.composeapp.generated.resources.new_journal_entry_title
 
 @Composable
@@ -22,6 +30,10 @@ fun NewJournalEntryScreen(
   onSaved: () -> Unit,
   modifier: Modifier = Modifier
 ) {
+  var titleInput by rememberSaveable { mutableStateOf("") }
+  var notesInput by rememberSaveable { mutableStateOf("") }
+
+
   TakaScaffold(
     modifier = modifier,
     topBar = {
@@ -30,7 +42,10 @@ fun NewJournalEntryScreen(
         navigationIcon = TakaTopBarNavigationIcon.Close,
         onNavigationClick = onBackClick,
         action = TakaTopBarAction.Save(
-          onClick = onSaved
+          onClick = {
+            viewModel.createJournalEntry(notesInput, titleInput)
+            onSaved()
+          }
         )
       )
     },
@@ -39,9 +54,19 @@ fun NewJournalEntryScreen(
       modifier = contentModifier,
       verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-      Text(
-        text = "New Journal Entry page",
-        style =  MaterialTheme.typography.bodyLarge,
+      OutlinedTextField(
+        value = titleInput,
+        onValueChange = { titleInput = it },
+        label = { Text(stringResource(Res.string.new_journal_entry_textfield_label_title)) },
+        singleLine = true,
+        modifier = Modifier.fillMaxWidth()
+      )
+      OutlinedTextField(
+        value = notesInput,
+        onValueChange = { notesInput = it },
+        label = { Text(stringResource(Res.string.new_journal_entry_textfield_label_notes)) },
+        minLines = 5,
+        modifier = Modifier.fillMaxWidth()
       )
     }
   }

@@ -36,13 +36,9 @@ class TimelineViewModel(
       }
     }
   }
-  // TODO: show add dialog
-  // TODO: show delete confirmation dialog
-  // TODO: show edit dialog
 
+  // TODO: show delete confirmation dialog
   // TODO: close delete dialog
-  // TODO: close add dialog
-  // TODO: close edit dialog
 
   fun setDisplayName(displayName: String) {
     viewModelScope.launch {
@@ -61,13 +57,6 @@ class TimelineViewModel(
     }
   }
 
-  fun createJournalEntry(notes: String, title: String?) {
-    viewModelScope.launch {
-      timelineRepository.createJournalEntry(notes, title)
-      // TODO: Update UI state to show success
-    }
-  }
-
   fun deleteTimelineItem(id: Long) {
     viewModelScope.launch {
       val isDeleted = timelineRepository.deleteTimelineItem(id)
@@ -79,6 +68,7 @@ class TimelineViewModel(
     }
   }
 
+  // TODO: Move this to TimelineDetailViewModel
   fun updateTimelineItem(id: Long, notes: String, title: String?) {
     val imageFileName = null // TODO: implement image upload to journal entries
     viewModelScope.launch {

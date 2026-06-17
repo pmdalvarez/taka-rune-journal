@@ -25,5 +25,7 @@
     <string name="timeline_button_new_journal">New Journal Entry</string>
 
     <string name="new_journal_entry_title">New Journal Entry</string>
+    <string name="new_journal_entry_textfield_label_title">Title</string>
+    <string name="new_journal_entry_textfield_label_notes">Notes</string>
 
 </resources>
