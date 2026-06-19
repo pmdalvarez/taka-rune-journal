@@ -110,10 +110,14 @@ fun TakaTopBar(
       when (action) {
         is TakaTopBarAction.None -> {}
         is TakaTopBarAction.Saving -> {
-          CircularProgressIndicator(
-            modifier = Modifier.size(20.dp),
-            strokeWidth = 2.dp,
-          )
+          IconButton(
+            onClick = {}
+          ) {
+            CircularProgressIndicator(
+              modifier = Modifier.size(24.dp),
+              strokeWidth = 2.dp,
+            )
+          }
         }
         is TakaTopBarAction.Save -> {
           IconButton(
@@ -122,7 +126,6 @@ fun TakaTopBar(
             Icon(
               imageVector = Icons.Default.Check,
               contentDescription = stringResource(Res.string.button_save),
-              modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
             )
           }
         }

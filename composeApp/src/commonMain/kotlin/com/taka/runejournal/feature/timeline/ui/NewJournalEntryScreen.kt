@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -57,7 +58,14 @@ fun NewJournalEntryScreen(
   TakaScaffold(
     modifier = modifier,
     snackbarHost = {
-      SnackbarHost(hostState = snackbarHostState)
+      SnackbarHost(hostState = snackbarHostState) { snackbarData ->
+        Snackbar(
+          snackbarData = snackbarData,
+          containerColor = MaterialTheme.colorScheme.errorContainer,
+          contentColor = MaterialTheme.colorScheme.onErrorContainer,
+          actionColor = MaterialTheme.colorScheme.onErrorContainer,
+        )
+      }
     },
     topBar = {
       TakaTopBar(
