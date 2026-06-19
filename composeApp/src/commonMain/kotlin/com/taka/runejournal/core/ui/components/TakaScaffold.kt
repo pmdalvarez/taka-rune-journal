@@ -13,12 +13,14 @@ val TakaScreenPadding = 24.dp
 @Composable
 fun TakaScaffold(
   modifier: Modifier = Modifier,
+  snackbarHost: @Composable () -> Unit = {},
   contentPadding: PaddingValues = PaddingValues(TakaScreenPadding),
   topBar: @Composable () -> Unit = {},
   content: @Composable (Modifier) -> Unit,
 ) {
   Scaffold(
     modifier = modifier.fillMaxSize(),
+    snackbarHost = snackbarHost,
     topBar = topBar,
   ) { innerPadding ->
     content(

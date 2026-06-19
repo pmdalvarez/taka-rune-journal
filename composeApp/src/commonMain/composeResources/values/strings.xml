@@ -27,5 +27,6 @@
     <string name="new_journal_entry_title">New Journal Entry</string>
     <string name="new_journal_entry_textfield_label_title">Title</string>
     <string name="new_journal_entry_textfield_label_notes">Notes</string>
+    <string name="new_journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
 </resources>

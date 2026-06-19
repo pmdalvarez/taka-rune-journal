@@ -8,6 +8,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,6 +47,8 @@ enum class TakaTopBarNavigationIcon {
 
 sealed class TakaTopBarAction {
   data object None : TakaTopBarAction()
+
+  data object Saving: TakaTopBarAction()
 
   data class Save(
     val enabled: Boolean = true,
@@ -106,6 +109,12 @@ fun TakaTopBar(
     actions = {
       when (action) {
         is TakaTopBarAction.None -> {}
+        is TakaTopBarAction.Saving -> {
+          CircularProgressIndicator(
+            modifier = Modifier.size(20.dp),
+            strokeWidth = 2.dp,
+          )
+        }
         is TakaTopBarAction.Save -> {
           IconButton(
             onClick = action.onClick
