@@ -1,6 +1,7 @@
 package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -111,11 +112,12 @@ fun TakaTopBar(
         is TakaTopBarAction.None -> {}
         is TakaTopBarAction.Saving -> {
           IconButton(
-            onClick = {}
+            onClick = {},
+            enabled = false
           ) {
-            CircularProgressIndicator(
-              modifier = Modifier.size(24.dp),
-              strokeWidth = 2.dp,
+            Icon(
+              imageVector = Icons.Default.Check,
+              contentDescription = stringResource(Res.string.button_save),
             )
           }
         }
