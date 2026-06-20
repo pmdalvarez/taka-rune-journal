@@ -20,9 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaScaffold
+import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
+import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -47,7 +49,7 @@ fun NewJournalEntryScreen(
       when (event) {
         is NewJournalEntryUiEvent.NavigateBack -> onBackClick()
         is NewJournalEntryUiEvent.ShowError -> {
-          snackbarHostState.showSnackbar(
+          snackbarHostState.showErrorSnackbar(
             message = getString(event.messageRes),
           )
         }
@@ -57,16 +59,7 @@ fun NewJournalEntryScreen(
 
   TakaScaffold(
     modifier = modifier,
-    snackbarHost = {
-      SnackbarHost(hostState = snackbarHostState) { snackbarData ->
-        Snackbar(
-          snackbarData = snackbarData,
-          containerColor = MaterialTheme.colorScheme.errorContainer,
-          contentColor = MaterialTheme.colorScheme.onErrorContainer,
-          actionColor = MaterialTheme.colorScheme.onErrorContainer,
-        )
-      }
-    },
+    snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
       TakaTopBar(
         title = stringResource(Res.string.new_journal_entry_title),
