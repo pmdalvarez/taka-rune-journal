@@ -36,7 +36,6 @@ import taka_rune_journal.composeapp.generated.resources.new_journal_entry_title
 fun NewJournalEntryScreen(
   viewModel: NewJournalEntryViewModel,
   onBackClick: () -> Unit,
-  onSaved: () -> Unit,
   modifier: Modifier = Modifier
 ) {
   val uiState by viewModel.uiState.collectAsState()
@@ -48,11 +47,7 @@ fun NewJournalEntryScreen(
     viewModel.uiEvent.collect { event ->
       when (event) {
         is NewJournalEntryUiEvent.NavigateBack -> onBackClick()
-        is NewJournalEntryUiEvent.ShowError -> {
-          snackbarHostState.showErrorSnackbar(
-            message = getString(event.messageRes),
-          )
-        }
+        is NewJournalEntryUiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
       }
     }
   }

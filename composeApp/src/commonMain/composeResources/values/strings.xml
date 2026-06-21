@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Taka</string>
+
     <string name="button_back">Back</string>
     <string name="button_close">Close</string>
     <string name="button_more_menu">More</string>
     <string name="button_save">Save</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_cancel">Cancel</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_your_name">Your Name</string>
@@ -18,11 +21,16 @@
     <string name="timeline_welcome_prompt">Take is your personal space for rune readings and reflection.\n\nWhat should Taka call you?</string>
     <string name="timeline_textfield_label_your_name">Your Name</string>
     <string name="timeline_feedback_name_given">Hello %1$s, nice to meet you.</string>
-    <string name="timeline_entry_type_journal">Journal entry</string>
-    <string name="timeline_entry_type_single_rune">Single Rune</string>
-    <string name="timeline_entry_type_ppf">Three Norns</string>
+    <string name="timeline_item_type_journal">Journal Entry</string>
+    <string name="timeline_item_type_single_rune">Single Rune</string>
+    <string name="timeline_item_type_ppf">Three Norns</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal">New Journal Entry</string>
+    <string name="timeline_delete_dialog_title">Delete %1$s</string>
+    <string name="timeline_delete_dialog_confirm_text">Delete entry "%1$s"?</string>
+    <string name="timeline_delete_dialog_confirm_text_no_name">Delete this entry?</string>
+    <string name="timeline_delete_dialog_error">Entry could not be deleted. Please try again.</string>
+    <string name="timeline_delete_dialog_success">Entry deleted</string>
 
     <string name="new_journal_entry_title">New Journal Entry</string>
     <string name="new_journal_entry_textfield_label_title">Title</string>

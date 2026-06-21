@@ -6,12 +6,17 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
+import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_success
 import kotlin.random.Random
 import kotlin.time.Clock
 
@@ -26,6 +31,9 @@ class TimelineViewModel(
 
   private val _uiState = MutableStateFlow(TimelineUiState())
   val uiState: StateFlow<TimelineUiState> = _uiState.asStateFlow()
+
+  private val _uiEvent = MutableSharedFlow<TimelineUiEvent>()
+  val uiEvent = _uiEvent.asSharedFlow()
 
   init {
     viewModelScope.launch {
@@ -57,20 +65,30 @@ class TimelineViewModel(
     }
   }
 
-  fun deleteTimelineItem(id: Long) {
+  fun openDeleteDialog(id: Long, title: String?, type: String) {
+    _uiState.update { it.copy(deleteDialogUiState = DeleteTimelineItemDialogUiState(id, title, type)) }
+  }
+
+  fun dismissDeleteDialog() {
+    _uiState.update { it.copy(deleteDialogUiState = null) }
+  }
+
+  fun deleteTimelineItem() {
     viewModelScope.launch {
-      val isDeleted = timelineRepository.deleteTimelineItem(id)
+      val isDeleted = _uiState.value.deleteDialogUiState?.let {
+        timelineRepository.deleteTimelineItem(it.id)
+      } ?: false
       if (isDeleted) {
-        // TODO: Update UI state to show success
+        _uiEvent.emit(TimelineUiEvent.ShowError(Res.string.timeline_delete_dialog_success))
       } else {
-        // TODO: Update UI state to show error message
+        _uiEvent.emit(TimelineUiEvent.ShowError(Res.string.timeline_delete_dialog_error))
       }
+      dismissDeleteDialog() // close dialog regardless if delete succeeded
     }
   }
 
   // TODO: Move this to TimelineDetailViewModel
   fun updateTimelineItem(id: Long, notes: String, title: String?) {
-    val imageFileName = null // TODO: implement image upload to journal entries
     viewModelScope.launch {
       val isDeleted = timelineRepository.updateTimelineItem(id = id, notes = notes, title = title)
       if (isDeleted) {

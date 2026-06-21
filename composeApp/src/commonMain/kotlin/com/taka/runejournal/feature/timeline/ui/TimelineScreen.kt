@@ -1,14 +1,18 @@
 package com.taka.runejournal.feature.timeline.ui
 
+import DeleteTimelineEntryDialog
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,9 +22,12 @@ import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
+import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.components.showInfoSnackbar
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
+import org.jetbrains.compose.resources.getString
 
 @Composable
 fun TimelineScreen(
@@ -35,6 +42,17 @@ fun TimelineScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is TimelineUiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
+                is TimelineUiEvent.ShowInfo -> { snackbarHostState.showInfoSnackbar(message = getString(event.messageRes)) }
+            }
+        }
+    }
+
 
     TakaScaffold (
         modifier = modifier,
@@ -69,7 +87,7 @@ fun TimelineScreen(
                     TimelineItemRow(
                         it,
                         onTimelineDetailClick,
-                        viewModel::deleteTimelineItem
+                        viewModel::openDeleteDialog
                     )
                 }
             }
@@ -77,6 +95,16 @@ fun TimelineScreen(
             item { TestArea(viewModel) }
         }
     }
+
+    uiState.deleteDialogUiState?.let {
+        DeleteTimelineEntryDialog(
+            onDismiss = viewModel::dismissDeleteDialog,
+            onConfirm = viewModel::deleteTimelineItem,
+            it.name,
+            it.type
+        )
+    }
+
 }
 
 @Composable
