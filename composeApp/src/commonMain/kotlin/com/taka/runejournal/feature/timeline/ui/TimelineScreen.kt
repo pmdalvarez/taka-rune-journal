@@ -20,6 +20,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
+import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
@@ -53,9 +54,9 @@ fun TimelineScreen(
         }
     }
 
-
     TakaScaffold (
         modifier = modifier,
+        snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TakaTopBar(
                 action = TakaTopBarAction.MoreMenu(

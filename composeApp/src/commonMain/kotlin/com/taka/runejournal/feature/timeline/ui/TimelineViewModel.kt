@@ -79,7 +79,7 @@ class TimelineViewModel(
         timelineRepository.deleteTimelineItem(it.id)
       } ?: false
       if (isDeleted) {
-        _uiEvent.emit(TimelineUiEvent.ShowError(Res.string.timeline_delete_dialog_success))
+        _uiEvent.emit(TimelineUiEvent.ShowInfo(Res.string.timeline_delete_dialog_success))
       } else {
         _uiEvent.emit(TimelineUiEvent.ShowError(Res.string.timeline_delete_dialog_error))
       }
