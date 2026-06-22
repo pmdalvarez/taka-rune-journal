@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -29,8 +31,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaScaffold
+import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
+import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.components.showInfoSnackbar
+import com.taka.runejournal.feature.timeline.ui.TimelineUiEvent
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.settings_reversible_runes_description
@@ -45,8 +52,19 @@ fun SettingsScreen(
   modifier: Modifier = Modifier,
 ) {
   val uiState by viewModel.uiState.collectAsState()
+  val snackbarHostState = remember { SnackbarHostState() }
+
+  LaunchedEffect(Unit) {
+    viewModel.uiEvent.collect { event ->
+      when (event) {
+        is SettingsUiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
+      }
+    }
+  }
+
   TakaScaffold(
     modifier = modifier,
+    snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
       TakaTopBar(
         title = stringResource(Res.string.settings_title),
