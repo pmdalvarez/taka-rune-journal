@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -48,8 +49,9 @@ fun TimelineScreen(
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is TimelineUiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
-                is TimelineUiEvent.ShowInfo -> { snackbarHostState.showInfoSnackbar(message = getString(event.messageRes)) }
+                is UiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
+                is UiEvent.ShowInfo -> { snackbarHostState.showInfoSnackbar(message = getString(event.messageRes)) }
+                else -> {} // No other events expected
             }
         }
     }

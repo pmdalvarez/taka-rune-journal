@@ -2,8 +2,8 @@ package com.taka.runejournal.feature.more.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
-import com.taka.runejournal.feature.timeline.ui.TimelineUiEvent
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.settings_save_error
-import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
 class SettingsViewModel(private val repository: SettingsRepository) : ViewModel() {
 
@@ -33,7 +32,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
       initialValue = SettingsUiState(),
     )
 
-  private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
+  private val _uiEvent = MutableSharedFlow<UiEvent>()
   val uiEvent = _uiEvent.asSharedFlow()
 
   fun setReversedRunesEnabled(enabled: Boolean) {
@@ -43,7 +42,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
       } catch (e: CancellationException) {
         throw e
       } catch (e: Exception) {
-        _uiEvent.emit(SettingsUiEvent.ShowError(Res.string.settings_save_error))
+        _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error))
       }
     }
   }
@@ -55,7 +54,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
       } catch (e: CancellationException) {
         throw e
       } catch (e: Exception) {
-        _uiEvent.emit(SettingsUiEvent.ShowError(Res.string.settings_save_error))
+        _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error))
       }
     }
   }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -32,7 +33,7 @@ class TimelineViewModel(
   private val _uiState = MutableStateFlow(TimelineUiState())
   val uiState: StateFlow<TimelineUiState> = _uiState.asStateFlow()
 
-  private val _uiEvent = MutableSharedFlow<TimelineUiEvent>()
+  private val _uiEvent = MutableSharedFlow<UiEvent>()
   val uiEvent = _uiEvent.asSharedFlow()
 
   init {
@@ -79,9 +80,9 @@ class TimelineViewModel(
         timelineRepository.deleteTimelineItem(it.id)
       } ?: false
       if (isDeleted) {
-        _uiEvent.emit(TimelineUiEvent.ShowInfo(Res.string.timeline_delete_dialog_success))
+        _uiEvent.emit(UiEvent.ShowInfo(Res.string.timeline_delete_dialog_success))
       } else {
-        _uiEvent.emit(TimelineUiEvent.ShowError(Res.string.timeline_delete_dialog_error))
+        _uiEvent.emit(UiEvent.ShowError(Res.string.timeline_delete_dialog_error))
       }
       dismissDeleteDialog() // close dialog regardless if delete succeeded
     }
