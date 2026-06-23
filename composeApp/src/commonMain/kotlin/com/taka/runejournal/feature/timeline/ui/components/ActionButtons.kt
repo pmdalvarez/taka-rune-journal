@@ -4,14 +4,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaButton
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
+import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
 
@@ -33,7 +39,18 @@ fun ActionButtons(
         .weight(1f)
         .padding(end = 8.dp),
     ) {
-      Text(stringResource(Res.string.timeline_button_new_reading))
+      Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        Icon(
+          painter = painterResource(Res.drawable.ic_new_reading_icon),
+          contentDescription = null,
+          modifier = Modifier.size(20.dp),
+          tint = MaterialTheme.colorScheme.onPrimary
+        )
+        Text(stringResource(Res.string.timeline_button_new_reading))
+      }
     }
 
     TakaButton(
@@ -42,7 +59,18 @@ fun ActionButtons(
         .weight(1f)
         .padding(end = 8.dp),
     ) {
-      Text(stringResource(Res.string.timeline_button_new_journal_entry))
+      Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        Icon(
+          painter = painterResource(Res.drawable.ic_new_journal_entry_icon),
+          contentDescription = null,
+          modifier = Modifier.size(20.dp),
+          tint = MaterialTheme.colorScheme.onPrimary
+        )
+        Text(stringResource(Res.string.timeline_button_new_journal_entry))
+      }
     }
   }
 }
