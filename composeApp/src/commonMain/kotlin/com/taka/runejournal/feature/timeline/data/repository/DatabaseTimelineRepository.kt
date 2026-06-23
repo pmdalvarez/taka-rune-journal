@@ -47,7 +47,14 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     timelineItemDao.insertSingleRuneReading(timelineItemEntity, question, category.key, runeEmbedded)
   }
 
-  override suspend fun createPpfRuneReading(question: String?, category: ReadingCategory, pastRune: DrawnRune, presentRune: DrawnRune, futureRune: DrawnRune, notes: String?) {
+  override suspend fun createPpfRuneReading(
+    question: String?,
+    category: ReadingCategory,
+    pastRune: DrawnRune,
+    presentRune: DrawnRune,
+    futureRune: DrawnRune,
+    notes: String?
+  ) {
     val timelineItemEntity = TimelineItemEntity(notes = notes)
     val pastRuneEmbedded = pastRune.toEmbedded()
     val presentRuneEmbedded = presentRune.toEmbedded()

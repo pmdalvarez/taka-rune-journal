@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.taka.runejournal.core.domain.model.DrawnRune
+import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.RuneId
+import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
@@ -85,7 +89,35 @@ class TimelineViewModel(
     }
   }
 
-  // TODO: Move this to TimelineDetailViewModel
+  // TODO: Remove
+  fun createSingleRuneReading() {
+    viewModelScope.launch {
+      timelineRepository.createSingleRuneReading(
+        question = "Should I take this job?",
+        category = ReadingCategory.PURPOSE,
+        rune = DrawnRune(RuneId.GEBO, orientation = RuneOrientation.UPRIGHT),
+        notes = "This reading was not so clear to me."
+      )
+      _uiEvent.emit(UiEvent.NavigateBack)
+    }
+  }
+
+  // TODO: Remove
+  fun createPpfRuneReading() {
+    viewModelScope.launch {
+      timelineRepository.createPpfRuneReading(
+        question = "Where should i live next year?",
+        category = ReadingCategory.PURPOSE,
+        pastRune = DrawnRune(RuneId.THURISAZ, orientation = RuneOrientation.UPRIGHT),
+        presentRune = DrawnRune(RuneId.WUNJO, orientation = RuneOrientation.UPRIGHT),
+        futureRune = DrawnRune(RuneId.ALGIZ, orientation = RuneOrientation.REVERSED),
+        notes = "I was very inspired by this reading."
+      )
+      _uiEvent.emit(UiEvent.NavigateBack)
+    }
+  }
+
+  // TODO: Remove
   fun updateTimelineItem(id: Long, notes: String, title: String?) {
     viewModelScope.launch {
       val isDeleted = timelineRepository.updateTimelineItem(id = id, notes = notes, title = title)
