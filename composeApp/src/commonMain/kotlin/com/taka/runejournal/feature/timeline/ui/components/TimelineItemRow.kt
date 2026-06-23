@@ -3,15 +3,20 @@ package com.taka.runejournal.feature.timeline.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.stringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_delete
 
 @Composable
 fun TimelineItemRow(
@@ -46,11 +51,14 @@ fun TimelineItemRow(
       onClick = { onTimelineDetailClick(item.id) }
     )
   ) {
-    TakaButton(
+    IconButton(
       onClick = { onDeleteClick(item.id, item.title, itemType) },
-      modifier = Modifier.padding(top = 24.dp)
+      modifier = Modifier.padding(top = 24.dp),
     ) {
-      Text("Delete")
+      Icon(
+        imageVector = Icons.Default.Delete,
+        contentDescription = stringResource(Res.string.button_delete),
+      )
     }
   }
 
