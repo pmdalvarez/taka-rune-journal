@@ -1,56 +1,67 @@
 package com.taka.runejournal.core.ui.theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-private val takaDarkColorScheme = darkColorScheme(
-  primary = RuneGold,
-  onPrimary = NearBlack,
-  primaryContainer = DarkClay,
-  onPrimaryContainer = PureWhite,
+private val takaLightColorScheme = lightColorScheme(
+  // Main actions / filled buttons
+  primary = Charcoal,
+  onPrimary = White,
+  primaryContainer = Ash,
+  onPrimaryContainer = Ink,
 
-  secondary = Lichen,
-  onSecondary = NearBlack,
-  secondaryContainer = DeepMoss,
-  onSecondaryContainer = PureWhite,
+  // Secondary actions
+  secondary = Graphite,
+  onSecondary = White,
+  secondaryContainer = Cloud,
+  onSecondaryContainer = Ink,
 
-  tertiary = Ochre,
-  onTertiary = NearBlack,
-  tertiaryContainer = WalnutEarth,
-  onTertiaryContainer = PureWhite,
+  // Tertiary actions
+  tertiary = Slate,
+  onTertiary = White,
+  tertiaryContainer = Ash,
+  onTertiaryContainer = Ink,
 
-  background = RuneStoneDark,
-  onBackground = PureWhite,
+  // Main app background
+  background = Mist,
+  onBackground = Ink,
 
-  surface = Basalt,
-  onSurface = PureWhite,
+  // Default surfaces: text fields, top-level content surfaces
+  surface = White,
+  onSurface = Ink,
 
-  surfaceVariant = WornStone,
-  onSurfaceVariant = LightGray,
+  // Secondary surfaces
+  surfaceVariant = Cloud,
+  onSurfaceVariant = Graphite,
 
-  surfaceContainerLowest = DeepBasalt,
-  surfaceContainerLow = Basalt,
-  surfaceContainer = RaisedStone,
-  surfaceContainerHigh = WornStone,
-  surfaceContainerHighest = RuneStone,
+  // Material 3 surface hierarchy
+  // Use these for cards, timeline rows, menus, containers, etc.
+  surfaceContainerLowest = White,
+  surfaceContainerLow = Snow,
+  surfaceContainer = Cloud,
+  surfaceContainerHigh = Ash,
+  surfaceContainerHighest = Silver,
 
-  surfaceDim = DeepBasalt,
-  surfaceBright = WornStone,
+  surfaceDim = Ash,
+  surfaceBright = White,
 
-  outline = StoneEdge,
-  outlineVariant = RuneStone,
+  // Borders / outlines
+  outline = Stone,
+  outlineVariant = Silver,
 
-  inverseSurface = SoftWhite,
-  inverseOnSurface = NearBlack,
-  inversePrimary = BurntClay,
+  // Inverse surfaces
+  inverseSurface = Ink,
+  inverseOnSurface = White,
+  inversePrimary = White,
 
-  error = EmberRed,
-  onError = NearBlack,
-  errorContainer = DarkEmber,
-  onErrorContainer = PureWhite,
+  // Error
+  error = Crimson,
+  onError = White,
+  errorContainer = Blush,
+  onErrorContainer = DeepCrimson,
 
-  scrim = NearBlack,
+  scrim = Black,
 )
 
 @Composable
@@ -58,7 +69,7 @@ fun TakaTheme(
   content: @Composable () -> Unit,
 ) {
   MaterialTheme(
-    colorScheme = takaDarkColorScheme,
+    colorScheme = takaLightColorScheme,
     typography = takaTypography,
     shapes = takaShapes,
     content = content,

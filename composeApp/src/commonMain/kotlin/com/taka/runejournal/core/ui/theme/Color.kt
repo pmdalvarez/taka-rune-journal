@@ -2,33 +2,30 @@ package com.taka.runejournal.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Stone / rock palette
-val RuneStoneDark = Color(0xFF1A201D)      // Main app background
-val DeepBasalt = Color(0xFF1B1F1D)         // Deepest surfaces
-val Basalt = Color(0xFF252B28)             // Cards / regular surfaces
-val RaisedStone = Color(0xFF38403C)        // Raised containers
-val WornStone = Color(0xFF4A5350)          // Surface variants
-val RuneStone = Color(0xFF737876)          // Original icon stone grey, now used as outline/accent
-val StoneEdge = Color(0xFF9AA09B)          // Light stone edge / outline
+// Whites / near-whites
+val White = Color(0xFFFFFFFF)
+val Snow = Color(0xFFFCFCFC)
+val Porcelain = Color(0xFFF9F9FA)
 
-// Earth / mineral accents
-val DarkSoil = Color(0xFF151210)
-val WalnutEarth = Color(0xFF5B4636)
-val BurntClay = Color(0xFF8A5A3C)
-val DarkClay = Color(0xFF4A3024)
-val Ochre = Color(0xFFC89A4B)
-val RuneGold = Color(0xFFFFC857)
-val DeepMoss = Color(0xFF34402F)
-val Lichen = Color(0xFFA8B989)
+// Light grays
+val Mist = Color(0xFFF7F7F8)
+val Cloud = Color(0xFFF4F4F4)
+val Ash = Color(0xFFEFEFEF)
+val Silver = Color(0xFFE6E6E6)
+val Stone = Color(0xFFD9D9D9)
 
-// Neutral text colors
-val PureWhite = Color(0xFFFFFFFF)
-val SoftWhite = Color(0xFFF2F2F2)
-val LightGray = Color(0xFFE0E0E0)
-val MediumLightGray = Color(0xFFC4C4C4)
-val NearBlack = Color(0xFF111111)
+// Mid grays
+val Smoke = Color(0xFF9B9B9B)
+val Slate = Color(0xFF6F6F6F)
+val Graphite = Color(0xFF444444)
 
-// Error colors
-val EmberRed = Color(0xFFFF8A70)
-val DarkEmber = Color(0xFF5A241C)
-val EmberBlush = Color(0xFFFFD7CB)
+// Dark grays / black
+val Charcoal = Color(0xFF2F2F2F)
+val Coal = Color(0xFF1F1F1F)
+val Ink = Color(0xFF111111)
+val Black = Color(0xFF000000)
+
+// Error
+val Crimson = Color(0xFFB42318)
+val Blush = Color(0xFFFFE4E0)
+val DeepCrimson = Color(0xFF5F120C)

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
+import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
@@ -116,17 +117,16 @@ private fun SettingsContent(
     },
     verticalArrangement = Arrangement.spacedBy(24.dp),
   ) {
-    OutlinedTextField(
+    TakaTextField(
       value = nameInput,
       onValueChange = { nameInput = it },
       modifier = Modifier
-        .fillMaxWidth()
         .onFocusChanged { focusState ->
           if (!focusState.isFocused) {
             onSaveName()
           }
         },
-      label = { Text(stringResource(Res.string.settings_your_name)) },
+      label = stringResource(Res.string.settings_your_name),
       singleLine = true,
       keyboardOptions = KeyboardOptions(
         imeAction = ImeAction.Done,

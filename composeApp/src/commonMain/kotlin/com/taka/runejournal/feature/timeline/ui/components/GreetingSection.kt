@@ -6,6 +6,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.TakaTextField
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -103,12 +105,10 @@ fun DisplayNameTextField(
 ) {
   var nameInput by rememberSaveable { mutableStateOf("") }
 
-  OutlinedTextField(
+  TakaTextField(
       value = nameInput,
       onValueChange = { nameInput = it },
-      label = {
-          Text(stringResource(Res.string.timeline_textfield_label_your_name))
-      },
+      label = stringResource(Res.string.timeline_textfield_label_your_name),
       singleLine = true,
       keyboardOptions = KeyboardOptions(
           imeAction = ImeAction.Done,
@@ -119,7 +119,6 @@ fun DisplayNameTextField(
           },
       ),
       modifier = modifier
-        .fillMaxWidth()
         .onFocusChanged() { focusState ->
           if (!focusState.isFocused) {
             onSaveName(nameInput)

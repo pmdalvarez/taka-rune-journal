@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.components.ButtonStyle
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -120,6 +121,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
+        style = ButtonStyle.Tertiary,
         modifier = Modifier.padding(top = 24.dp)
     ) {
         Text("Change name to Paolo + random number")
@@ -127,6 +129,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.setDisplayName("") },
+        style = ButtonStyle.Tertiary,
         modifier = Modifier.padding(top = 24.dp)
     ) {
         Text("Change name to empty")

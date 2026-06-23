@@ -26,7 +26,7 @@
     <string name="timeline_item_type_single_rune">Single Rune</string>
     <string name="timeline_item_type_ppf">Three Norns</string>
     <string name="timeline_button_new_reading">New Reading</string>
-    <string name="timeline_button_new_journal">New Journal Entry</string>
+    <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="timeline_delete_dialog_title">Delete %1$s</string>
     <string name="timeline_delete_dialog_confirm_text">Delete entry "%1$s"?</string>
     <string name="timeline_delete_dialog_confirm_text_no_name">Delete this entry?</string>
