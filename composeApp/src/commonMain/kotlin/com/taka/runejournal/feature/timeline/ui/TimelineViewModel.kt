@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.new_journal_entry_save_error_blank_notes
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_success
 import kotlin.random.Random
@@ -46,13 +47,9 @@ class TimelineViewModel(
     }
   }
 
-  // TODO: show delete confirmation dialog
-  // TODO: close delete dialog
-
   fun setDisplayName(displayName: String) {
     viewModelScope.launch {
       settingsRepository.setDisplayName(displayName)
-      // TODO: Update UI state to show success
     }
   }
 

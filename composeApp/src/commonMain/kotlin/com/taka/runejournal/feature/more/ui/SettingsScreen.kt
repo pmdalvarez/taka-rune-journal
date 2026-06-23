@@ -10,7 +10,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -101,9 +100,8 @@ private fun SettingsContent(
   }
 
   fun onSaveName() {
-    val trimmedName = nameInput.trim()
-    if (trimmedName != displayName) {
-      onDisplayNameChange(trimmedName)
+    if (nameInput != displayName) {
+      onDisplayNameChange(nameInput)
     }
   }
 
@@ -133,8 +131,7 @@ private fun SettingsContent(
       ),
       keyboardActions = KeyboardActions(
         onDone = {
-          onSaveName()
-          focusManager.clearFocus()
+          focusManager.clearFocus() // trigger the onFocusChanged lambda
         },
       ),
     )

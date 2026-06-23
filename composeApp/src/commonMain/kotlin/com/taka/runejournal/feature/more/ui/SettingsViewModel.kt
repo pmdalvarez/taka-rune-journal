@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.settings_save_error
+import taka_rune_journal.composeapp.generated.resources.settings_save_error_blank_name
 
 class SettingsViewModel(private val repository: SettingsRepository) : ViewModel() {
 
@@ -50,7 +51,11 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
   fun setDisplayName(displayName: String) {
     viewModelScope.launch {
       try {
-        repository.setDisplayName(displayName)
+        if (displayName.isBlank()) {
+          _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error_blank_name))
+        } else {
+          repository.setDisplayName(displayName)
+        }
       } catch (e: CancellationException) {
         throw e
       } catch (e: Exception) {

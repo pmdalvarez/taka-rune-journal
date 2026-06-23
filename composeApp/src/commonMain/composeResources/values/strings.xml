@@ -13,6 +13,7 @@
     <string name="settings_reversible_runes_title">Use reversed runes in readings</string>
     <string name="settings_reversible_runes_description">Allow reversible runes to appear upside down, adding blocked, hidden, or internalized meanings.</string>
     <string name="settings_save_error">Settings could not be saved. Please try again.</string>
+    <string name="settings_save_error_blank_name">Please enter a name</string>
     <string name="about_title">About</string>
     <string name="about_description">Take is your personal space for rune readings and reflection.</string>
     <string name="design_system_title">Design System</string>

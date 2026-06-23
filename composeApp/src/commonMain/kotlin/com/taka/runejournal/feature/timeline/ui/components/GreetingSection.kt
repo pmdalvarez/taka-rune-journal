@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaTextField
@@ -57,9 +58,8 @@ fun GreetingSection(
     if (displayName.isNullOrEmpty()) {
       DisplayNameTextField(
         onSaveName = {
-          val trimmedName = it.trim()
-          if (trimmedName.isNotEmpty()) {
-            onDisplayNameEntered(trimmedName)
+          if (it.isNotBlank()) {
+            onDisplayNameEntered(it)
             displayNameEntered = true
           }
         },
@@ -103,6 +103,7 @@ fun DisplayNameTextField(
     onSaveName: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+  val focusManager = LocalFocusManager.current
   var nameInput by rememberSaveable { mutableStateOf("") }
 
   TakaTextField(
@@ -115,7 +116,7 @@ fun DisplayNameTextField(
       ),
       keyboardActions = KeyboardActions(
           onDone = {
-            onSaveName(nameInput)
+            focusManager.clearFocus() // trigger the onFocusChanged lambda
           },
       ),
       modifier = modifier
