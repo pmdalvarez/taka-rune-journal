@@ -37,6 +37,8 @@ import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_app_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
+import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
+import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -47,14 +49,14 @@ enum class TakaTopBarNavigationIcon {
 sealed class TakaTopBarAction {
   data object None : TakaTopBarAction()
 
-  data object Saving: TakaTopBarAction()
-
   data class Save(
     val enabled: Boolean = true,
-    val onClick: () -> Unit,
+    val onClick: () -> Unit = {},
   ) : TakaTopBarAction()
 
-  data class MoreMenu(
+  data class TimelineActions(
+    val onNewReadingClick: () -> Unit,
+    val onNewJournalEntryClick: () -> Unit,
     val onSettingsClick: () -> Unit,
     val onAboutClick: () -> Unit,
     val onDesignPlaygroundClick: () -> Unit,
@@ -108,20 +110,10 @@ fun TakaTopBar(
     actions = {
       when (action) {
         is TakaTopBarAction.None -> {}
-        is TakaTopBarAction.Saving -> {
-          IconButton(
-            onClick = {},
-            enabled = false
-          ) {
-            Icon(
-              imageVector = Icons.Default.Check,
-              contentDescription = stringResource(Res.string.button_save),
-            )
-          }
-        }
         is TakaTopBarAction.Save -> {
           IconButton(
-            onClick = action.onClick
+            onClick = action.onClick,
+            enabled = action.enabled
           ) {
             Icon(
               imageVector = Icons.Default.Check,
@@ -129,7 +121,23 @@ fun TakaTopBar(
             )
           }
         }
-        is TakaTopBarAction.MoreMenu -> {
+        is TakaTopBarAction.TimelineActions -> {
+          IconButton(
+            onClick = action.onNewReadingClick
+          ) {
+            Icon(
+              imageVector = Icons.Default.Close,
+              contentDescription = stringResource(Res.string.timeline_button_new_reading),
+            )
+          }
+          IconButton(
+            onClick = action.onNewJournalEntryClick
+          ) {
+            Icon(
+              imageVector = Icons.Default.Check,
+              contentDescription = stringResource(Res.string.timeline_button_new_journal_entry),
+            )
+          }
           IconButton(
             onClick = { isMenuExpanded = true }
           ) {

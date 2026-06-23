@@ -42,7 +42,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
         repository.setReversedRunesEnabled(enabled)
       } catch (e: CancellationException) {
         throw e
-      } catch (e: Exception) {
+      } catch (_: Exception) {
         _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error))
       }
     }
@@ -58,7 +58,7 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
         }
       } catch (e: CancellationException) {
         throw e
-      } catch (e: Exception) {
+      } catch (_: Exception) {
         _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error))
       }
     }

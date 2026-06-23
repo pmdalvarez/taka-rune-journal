@@ -62,7 +62,9 @@ fun TimelineScreen(
         snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TakaTopBar(
-                action = TakaTopBarAction.MoreMenu(
+                action = TakaTopBarAction.TimelineActions(
+                    onNewReadingClick = onNewReadingClick,
+                    onNewJournalEntryClick = onNewJournalEntryClick,
                     onSettingsClick = onSettingsClick,
                     onAboutClick = onAboutClick,
                     onDesignPlaygroundClick = onDesignPlaygroundClick

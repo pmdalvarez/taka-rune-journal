@@ -60,12 +60,10 @@ fun NewJournalEntryScreen(
         navigationIcon = TakaTopBarNavigationIcon.Close,
         onNavigationClick = onBackClick,
         action = if (uiState.isSaving) {
-          TakaTopBarAction.Saving
+          TakaTopBarAction.Save(enabled = false)
         } else {
           TakaTopBarAction.Save(
-            onClick = {
-              viewModel.createJournalEntry(notesInput, titleInput)
-            }
+            onClick = { viewModel.createJournalEntry(notesInput, titleInput) }
           )
         }
       )
