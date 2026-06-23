@@ -93,9 +93,9 @@ class TimelineViewModel(
   fun createSingleRuneReading() {
     viewModelScope.launch {
       timelineRepository.createSingleRuneReading(
-        question = "Should I take this job?",
-        category = ReadingCategory.PURPOSE,
-        rune = DrawnRune(RuneId.GEBO, orientation = RuneOrientation.UPRIGHT),
+        question = listOf("What should I do to live a better life?","Why do I feel like this?","").random(),
+        category = ReadingCategory.entries.random(),
+        rune = DrawnRune(RuneId.entries.random(), orientation = RuneOrientation.entries.random()),
         notes = "This reading was not so clear to me."
       )
       _uiEvent.emit(UiEvent.NavigateBack)
@@ -106,11 +106,11 @@ class TimelineViewModel(
   fun createPpfRuneReading() {
     viewModelScope.launch {
       timelineRepository.createPpfRuneReading(
-        question = "Where should i live next year?",
+        question = listOf("What should I do next year?","Where should i live next year?","").random(),
         category = ReadingCategory.PURPOSE,
-        pastRune = DrawnRune(RuneId.THURISAZ, orientation = RuneOrientation.UPRIGHT),
-        presentRune = DrawnRune(RuneId.WUNJO, orientation = RuneOrientation.UPRIGHT),
-        futureRune = DrawnRune(RuneId.ALGIZ, orientation = RuneOrientation.REVERSED),
+        pastRune = DrawnRune(RuneId.entries.random(), orientation = RuneOrientation.entries.random()),
+        presentRune = DrawnRune(RuneId.entries.random(), orientation = RuneOrientation.entries.random()),
+        futureRune = DrawnRune(RuneId.entries.random(), orientation = RuneOrientation.entries.random()),
         notes = "I was very inspired by this reading."
       )
       _uiEvent.emit(UiEvent.NavigateBack)

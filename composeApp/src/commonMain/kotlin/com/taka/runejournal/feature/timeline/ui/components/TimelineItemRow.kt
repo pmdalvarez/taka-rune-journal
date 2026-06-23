@@ -43,7 +43,7 @@ fun TimelineItemRow(
       modifier = Modifier.padding(start = 8.dp)
     )
     Text(
-      text = item.title?: stringResource(item.itemTypeRes),
+      text = if (!item.title.isNullOrBlank()) item.title else stringResource(item.itemTypeRes),
       modifier = Modifier.padding(top = 8.dp),
       style = MaterialTheme.typography.bodyLarge
     )
@@ -53,7 +53,7 @@ fun TimelineItemRow(
       style = MaterialTheme.typography.bodyLarge
     )
     Text(
-      text = item.notesPreview?: "",
+      text = item.notesPreview ?: "",
       modifier = Modifier.padding(top = 8.dp),
       style = MaterialTheme.typography.bodyLarge
     )
