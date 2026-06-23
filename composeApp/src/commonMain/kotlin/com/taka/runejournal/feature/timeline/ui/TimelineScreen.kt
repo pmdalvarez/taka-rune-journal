@@ -1,6 +1,7 @@
 package com.taka.runejournal.feature.timeline.ui
 
 import DeleteTimelineEntryDialog
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
@@ -46,6 +49,7 @@ fun TimelineScreen(
     val uiState by viewModel.uiState.collectAsState()
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
     val snackbarHostState = remember { SnackbarHostState() }
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
@@ -73,7 +77,13 @@ fun TimelineScreen(
         }
     ) { contentModifier ->
         LazyColumn(
-            modifier = contentModifier,
+            modifier = contentModifier.pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = {
+                        focusManager.clearFocus()
+                    },
+                )
+            },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
