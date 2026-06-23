@@ -2,8 +2,11 @@ package com.taka.runejournal.feature.timeline.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_journal_entry_icon
+import taka_rune_journal.composeapp.generated.resources.ic_rune_reading_icon
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journal
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_ppf
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_single_rune
@@ -15,6 +18,7 @@ private const val NOTE_PREVIEW_MAX_LENGTH = 140
 data class TimelineItemUiModel(
   val id: Long,
   val createdAt: Instant,
+  val icon: DrawableResource,
   val itemTypeRes: StringResource,
   val title: String?,
   val drawnRunes: List<DrawnRune>? = null,
@@ -25,6 +29,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.SingleRuneReading -> TimelineItemUiModel(
     id = id,
     createdAt = createdAt,
+    icon = Res.drawable.ic_rune_reading_icon,
     itemTypeRes = Res.string.timeline_item_type_single_rune,
     title = question,
     drawnRunes = listOf(rune)
@@ -33,6 +38,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(
     id = id,
     createdAt = createdAt,
+    icon = Res.drawable.ic_rune_reading_icon,
     itemTypeRes = Res.string.timeline_item_type_ppf,
     title = question,
     drawnRunes = listOf(pastRune, presentRune, futureRune)
@@ -41,6 +47,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.JournalEntry -> TimelineItemUiModel(
     id = id,
     createdAt = createdAt,
+    icon = Res.drawable.ic_journal_entry_icon,
     title = title,
     itemTypeRes = Res.string.timeline_item_type_journal,
     notesPreview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
