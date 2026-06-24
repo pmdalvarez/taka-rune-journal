@@ -133,8 +133,8 @@ fun TimelineScreen(
         DeleteTimelineEntryDialog(
             onDismiss = viewModel::dismissDeleteDialog,
             onConfirm = viewModel::deleteTimelineItem,
-            it.name,
-            it.type
+            it.title,
+            it.preview
         )
     }
 

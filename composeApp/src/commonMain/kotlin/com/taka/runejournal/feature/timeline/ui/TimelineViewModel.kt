@@ -67,7 +67,7 @@ class TimelineViewModel(
     }
   }
 
-  fun openDeleteDialog(id: Long, title: String?, type: String) {
+  fun openDeleteDialog(id: Long, title: String, type: String?) {
     _uiState.update { it.copy(deleteDialogUiState = DeleteTimelineItemDialogUiState(id, title, type)) }
   }
 

@@ -33,14 +33,13 @@ import taka_rune_journal.composeapp.generated.resources.button_delete
 fun TimelineItemRow(
   item: TimelineItemUiModel,
   onTimelineDetailClick: (Long) -> Unit,
-  onDeleteClick: (Long, String?, String) -> Unit,
+  onDeleteClick: (Long, String, String?) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val itemType = stringResource(item.itemTypeRes)
   val title = if (!item.title.isNullOrBlank()) {
     item.title
   } else {
-    itemType
+    stringResource(item.titleRes)
   }
 
   Card(
@@ -72,7 +71,7 @@ fun TimelineItemRow(
       ) {
         Icon(
           painter = painterResource(item.icon),
-          contentDescription = itemType,
+          contentDescription = title,
           modifier = Modifier
             .padding(top = 1.dp)
             .size(36.dp),
@@ -103,7 +102,7 @@ fun TimelineItemRow(
           modifier = Modifier
             .size(36.dp)
             .clickable {
-              onDeleteClick(item.id, item.title, itemType)
+              onDeleteClick(item.id, title, item.preview)
             },
           contentAlignment = Alignment.TopEnd,
         ) {

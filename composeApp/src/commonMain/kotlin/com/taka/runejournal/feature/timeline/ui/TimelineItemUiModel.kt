@@ -7,9 +7,9 @@ import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_rune_reading_icon
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journal
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_ppf
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_single_rune
+import taka_rune_journal.composeapp.generated.resources.timeline_item_title_ppf
+import taka_rune_journal.composeapp.generated.resources.timeline_item_title_single_rune
+import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 import kotlin.collections.List
 import kotlin.time.Instant
 
@@ -19,8 +19,8 @@ data class TimelineItemUiModel(
   val id: Long,
   val createdAt: Instant,
   val icon: DrawableResource,
-  val itemTypeRes: StringResource,
-  val title: String? = null,
+  val titleRes: StringResource,
+  val title: String? = null, // if null then use titleRes
   val drawnRunes: List<DrawnRune>? = null,
   val preview: String? = null,
 )
@@ -30,7 +30,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     id = id,
     createdAt = createdAt,
     icon = Res.drawable.ic_rune_reading_icon,
-    itemTypeRes = Res.string.timeline_item_type_single_rune,
+    titleRes = Res.string.timeline_item_title_single_rune,
     drawnRunes = listOf(rune),
     preview = question
   )
@@ -39,7 +39,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     id = id,
     createdAt = createdAt,
     icon = Res.drawable.ic_rune_reading_icon,
-    itemTypeRes = Res.string.timeline_item_type_ppf,
+    titleRes = Res.string.timeline_item_title_ppf,
     drawnRunes = listOf(pastRune, presentRune, futureRune),
     preview = question
   )
@@ -49,7 +49,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     createdAt = createdAt,
     icon = Res.drawable.ic_journal_entry_icon,
     title = title,
-    itemTypeRes = Res.string.timeline_item_type_journal,
+    titleRes = Res.string.timeline_item_title_untitled, // used if title is null
     preview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
   )
 }
