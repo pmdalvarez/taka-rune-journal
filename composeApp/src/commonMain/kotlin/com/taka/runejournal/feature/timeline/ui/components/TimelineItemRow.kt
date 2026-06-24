@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
@@ -41,6 +42,11 @@ fun TimelineItemRow(
   } else {
     stringResource(item.titleRes)
   }
+  val runesText = item.drawnRunes?.joinToString(separator = " · ") { rune ->
+    rune.id.displayName + (if (rune.orientation == RuneOrientation.REVERSED) "ʳ" else "")
+  }
+  val dateText = item.createdAt.format()
+  val label = if (!runesText.isNullOrBlank()) "$dateText · $runesText" else dateText
 
   Card(
     modifier = modifier
@@ -92,7 +98,7 @@ fun TimelineItemRow(
           )
 
           Text(
-            text = item.createdAt.format(),
+            text = label,
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
           )
@@ -102,7 +108,7 @@ fun TimelineItemRow(
           modifier = Modifier
             .size(36.dp)
             .clickable {
-              onDeleteClick(item.id, title, item.preview)
+              onDeleteClick(item.id, title, if (runesText.isNullOrBlank()) item.preview else runesText)
             },
           contentAlignment = Alignment.TopEnd,
         ) {
