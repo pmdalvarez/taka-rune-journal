@@ -9,7 +9,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.taka.runejournal.core.navigation.appNavSavedStateConfiguration
 import com.taka.runejournal.feature.reading.ui.NewReadingDrawScreen
-import com.taka.runejournal.feature.reading.ui.NewReadingInterpretationScreen
+import com.taka.runejournal.feature.reading.ui.ReadingInterpretationScreen
 import com.taka.runejournal.feature.reading.ui.NewReadingStartScreen
 import com.taka.runejournal.feature.reading.ui.ReadingViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -58,14 +58,14 @@ fun ReadingFlowNavDisplay(
             readingBackStack.removeLastOrNull()
           },
           onContinueClick = {
-            readingBackStack.add(NewReadingInterpretationRoute)
+            readingBackStack.add(ReadingInterpretationRoute)
           },
           modifier = modifier
         )
       }
 
-      entry<NewReadingInterpretationRoute> {
-        NewReadingInterpretationScreen(
+      entry<ReadingInterpretationRoute> {
+        ReadingInterpretationScreen(
           viewModel = viewModel,
           onBackClick = {
             readingBackStack.removeLastOrNull()

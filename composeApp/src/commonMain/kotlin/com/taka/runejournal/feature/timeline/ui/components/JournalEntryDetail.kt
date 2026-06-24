@@ -23,7 +23,6 @@ fun JournalEntryDetail(
   ) {
     Text(
       text = title,
-      modifier = Modifier.padding(top = 24.dp),
       style = MaterialTheme.typography.headlineSmall,
       color = MaterialTheme.colorScheme.onBackground
     )
