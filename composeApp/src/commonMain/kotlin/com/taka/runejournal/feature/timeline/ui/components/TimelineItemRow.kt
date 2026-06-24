@@ -41,12 +41,12 @@ fun TimelineItemRow(
 ) {
   val runesText = buildString {
     item.drawnRunes?.forEachIndexed { index, rune ->
-      if (index > 0) append("\u2002·\u2002")
+      if (index > 0) append(" · ")
 
       if (rune.orientation == RuneOrientation.REVERSED) {
-        append(rune.id.glyph + "\u2009" + stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
+        append(stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
       } else {
-        append(rune.id.glyph + "\u2009" + rune.id.displayName)
+        append(rune.id.displayName)
       }
     }
   }
