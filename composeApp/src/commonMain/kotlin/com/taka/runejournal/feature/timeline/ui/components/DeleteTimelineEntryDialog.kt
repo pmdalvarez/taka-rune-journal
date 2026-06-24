@@ -1,3 +1,4 @@
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +29,10 @@ fun DeleteTimelineEntryDialog(
 ) {
   AlertDialog(
     onDismissRequest = onDismiss,
-    title = { Text(stringResource(Res.string.timeline_delete_dialog_title, title)) },
+    containerColor = MaterialTheme.colorScheme.surface,
+    title = {
+      Text(stringResource(Res.string.timeline_delete_dialog_title, title))
+    },
     text = {
       Column {
         Text(
@@ -41,12 +45,18 @@ fun DeleteTimelineEntryDialog(
 
           Surface(
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colorScheme.surfaceVariant,
+            color = MaterialTheme.colorScheme.surfaceContainer,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            border = BorderStroke(
+              width = 1.dp,
+              color = MaterialTheme.colorScheme.outlineVariant,
+            ),
             modifier = Modifier.fillMaxWidth()
           ) {
             Text(
-              text = preview,           // Your preview text
+              text = preview,
               style = MaterialTheme.typography.bodyMedium,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
               maxLines = 4,
               overflow = TextOverflow.Ellipsis,
               modifier = Modifier.padding(16.dp)
@@ -54,10 +64,13 @@ fun DeleteTimelineEntryDialog(
           }
         }
       }
-     },
+    },
     confirmButton = {
       TextButton(onClick = onConfirm) {
-        Text(stringResource(Res.string.button_delete))
+        Text(
+          text = stringResource(Res.string.button_delete),
+          color = MaterialTheme.colorScheme.error,
+        )
       }
     },
     dismissButton = {
