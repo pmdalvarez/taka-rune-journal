@@ -33,6 +33,7 @@
     <string name="timeline_delete_dialog_confirm_text_no_name">Delete this entry?</string>
     <string name="timeline_delete_dialog_error">Entry could not be deleted. Please try again.</string>
     <string name="timeline_delete_dialog_success">Entry deleted</string>
+    <string name="timeline_section_title">Your Timeline</string>
 
     <string name="new_journal_entry_title">New Journal Entry</string>
     <string name="new_journal_entry_textfield_label_title">Title</string>

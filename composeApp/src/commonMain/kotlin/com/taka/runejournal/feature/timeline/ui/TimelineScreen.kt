@@ -35,6 +35,9 @@ import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
 import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.timeline_section_title
 
 @Composable
 fun TimelineScreen(
@@ -97,6 +100,18 @@ fun TimelineScreen(
                 )
             }
             item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
+
+            item {
+                Text(
+                    text = stringResource(Res.string.timeline_section_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
+                )
+            }
+
             items(
                 count = pagingItems.itemCount,
                 key = pagingItems.itemKey { it.id }
