@@ -41,15 +41,16 @@ fun TimelineItemRow(
 ) {
   val runesText = buildString {
     item.drawnRunes?.forEachIndexed { index, rune ->
-      if (index > 0) append(" · ")
+      if (index > 0) append("\u2002·\u2002")
 
       if (rune.orientation == RuneOrientation.REVERSED) {
-        append(stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
+        append(rune.id.glyph + "\u2009" + stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
       } else {
-        append(rune.id.displayName)
+        append(rune.id.glyph + "\u2009" + rune.id.displayName)
       }
     }
   }
+
   val title = when {
     !runesText.isBlank() -> runesText
     !item.title.isNullOrBlank() -> item.title
@@ -59,7 +60,11 @@ fun TimelineItemRow(
   val dateText = item.createdAt.format()
   val itemType =  stringResource(item.typeRes)
   val label = dateText + " · " + itemType
-  val deleteDialogPreview = title + "\n\n" + item.preview
+  val deleteDialogPreview = if (item.preview.isNullOrBlank()) {
+    title
+  } else {
+    title + "\n\n" + item.preview
+  }
 
   Card(
     modifier = modifier
