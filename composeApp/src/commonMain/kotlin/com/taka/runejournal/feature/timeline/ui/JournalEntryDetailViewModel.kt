@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.journal_entry_load_error
+import taka_rune_journal.composeapp.generated.resources.journal_entry_save_error
+import taka_rune_journal.composeapp.generated.resources.journal_entry_save_error_blank_notes
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
 class JournalEntryDetailViewModel (
@@ -47,12 +49,38 @@ class JournalEntryDetailViewModel (
     }
   }
 
+  fun setMode(mode: JournalEntryDetailMode) {
+    _uiState.update { it.copy(mode = mode) }
+  }
+
+  fun updateJournalEntry(notes: String, title: String?) {
+    _uiState.update { it.copy(mode = JournalEntryDetailMode.isSaving) }
+    viewModelScope.launch {
+      if (notes.isBlank()) {
+        _uiEvent.emit(UiEvent.ShowError(Res.string.journal_entry_save_error_blank_notes))
+        return@launch
+      }
+      val isSaved = timelineRepository.updateTimelineItem(id = _uiState.value.id, notes = notes, title = title)
+      if (isSaved) {
+        _uiState.update { it.copy(
+            notes = notes,
+            title = title,
+            mode = JournalEntryDetailMode.isViewing
+          )
+        }
+      } else {
+        _uiState.update { it.copy(mode = JournalEntryDetailMode.isEditing) }
+        _uiEvent.emit(UiEvent.ShowError(Res.string.journal_entry_save_error))
+      }
+    }
+  }
+
   fun openDeleteDialog() {
-    _uiState.update { it.copy(showDeleteDialog = true) }
+    _uiState.update { it.copy(mode = JournalEntryDetailMode.isDeleting) }
   }
 
   fun dismissDeleteDialog() {
-    _uiState.update { it.copy(showDeleteDialog = false) }
+    _uiState.update { it.copy(mode = JournalEntryDetailMode.isViewing) }
   }
 
   fun deleteJournalEntry() {

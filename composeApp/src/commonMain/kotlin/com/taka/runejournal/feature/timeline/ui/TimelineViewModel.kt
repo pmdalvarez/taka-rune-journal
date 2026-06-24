@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.new_journal_entry_save_error_blank_notes
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_success
 import kotlin.random.Random
@@ -114,18 +113,6 @@ class TimelineViewModel(
         notes = "I was very inspired by this reading."
       )
       _uiEvent.emit(UiEvent.NavigateBack)
-    }
-  }
-
-  // TODO: Remove
-  fun updateTimelineItem(id: Long, notes: String, title: String?) {
-    viewModelScope.launch {
-      val isDeleted = timelineRepository.updateTimelineItem(id = id, notes = notes, title = title)
-      if (isDeleted) {
-        // TODO: Update UI state to show success
-      } else {
-        // TODO: Update UI state to show error message
-      }
     }
   }
 

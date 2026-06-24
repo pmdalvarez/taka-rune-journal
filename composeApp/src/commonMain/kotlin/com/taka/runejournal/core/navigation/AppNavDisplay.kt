@@ -79,9 +79,6 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     onBackClick = {
                         backStack.removeLastOrNull()
                     },
-                    onSaved = {
-                        backStack.removeLastOrNull()
-                    },
                     modifier = modifier
                 )
             }

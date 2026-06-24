@@ -16,6 +16,7 @@ fun TakaTextField(
   onValueChange: (String) -> Unit,
   label: String,
   singleLine: Boolean = false,
+  minLines: Int = 1,
   keyboardOptions : KeyboardOptions = KeyboardOptions.Default,
   keyboardActions: KeyboardActions = KeyboardActions.Default,
   modifier: Modifier = Modifier
@@ -25,6 +26,7 @@ fun TakaTextField(
     onValueChange = onValueChange,
     label = { Text(label) },
     singleLine = singleLine,
+    minLines = minLines,
     keyboardOptions = keyboardOptions,
     keyboardActions = keyboardActions,
     modifier = modifier.fillMaxWidth(),

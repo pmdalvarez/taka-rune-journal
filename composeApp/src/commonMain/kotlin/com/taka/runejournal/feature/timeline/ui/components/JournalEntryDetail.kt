@@ -9,9 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.utils.format
-import org.jetbrains.compose.resources.stringResource
-import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 import kotlin.time.Instant
 
 @Composable

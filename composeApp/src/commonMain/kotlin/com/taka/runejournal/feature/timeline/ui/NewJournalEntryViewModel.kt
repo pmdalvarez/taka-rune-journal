@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.new_journal_entry_save_error_blank_notes
+import taka_rune_journal.composeapp.generated.resources.journal_entry_save_error_blank_notes
 
 class NewJournalEntryViewModel(
   private val timelineRepository: TimelineRepository
@@ -33,7 +33,7 @@ class NewJournalEntryViewModel(
         _uiState.update {
           it.copy(isSaving = false)
         }
-        _uiEvent.emit(UiEvent.ShowError(Res.string.new_journal_entry_save_error_blank_notes))
+        _uiEvent.emit(UiEvent.ShowError(Res.string.journal_entry_save_error_blank_notes))
         return@launch
       }
       timelineRepository.createJournalEntry(notes, title)

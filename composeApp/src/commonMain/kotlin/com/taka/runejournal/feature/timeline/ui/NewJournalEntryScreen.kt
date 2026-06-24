@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
+import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
@@ -73,19 +74,17 @@ fun NewJournalEntryScreen(
       modifier = contentModifier,
       verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-      OutlinedTextField(
+      TakaTextField(
         value = titleInput,
         onValueChange = { titleInput = it },
-        label = { Text(stringResource(Res.string.new_journal_entry_textfield_label_title)) },
+        label = stringResource(Res.string.new_journal_entry_textfield_label_title),
         singleLine = true,
-        modifier = Modifier.fillMaxWidth()
       )
-      OutlinedTextField(
+      TakaTextField(
         value = notesInput,
         onValueChange = { notesInput = it },
-        label = { Text(stringResource(Res.string.new_journal_entry_textfield_label_notes)) },
+        label = stringResource(Res.string.new_journal_entry_textfield_label_notes),
         minLines = 5,
-        modifier = Modifier.fillMaxWidth()
       )
     }
   }

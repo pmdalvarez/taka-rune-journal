@@ -33,7 +33,7 @@
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="timeline_delete_dialog_title">Delete %1$s</string>
-    <string name="timeline_delete_dialog_body">This entry will be permanently deleted</string>
+    <string name="timeline_delete_dialog_body">Permanently delete this entry?</string>
     <string name="timeline_delete_dialog_error">Entry could not be deleted. Please try again.</string>
     <string name="timeline_delete_dialog_success">Entry deleted</string>
     <string name="timeline_section_title">Your Timeline</string>
@@ -41,9 +41,10 @@
     <string name="new_journal_entry_title">New Journal Entry</string>
     <string name="new_journal_entry_textfield_label_title">Title</string>
     <string name="new_journal_entry_textfield_label_notes">Notes</string>
-    <string name="new_journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
     <string name="journal_entry_detail_title">Journal Entry</string>
     <string name="journal_entry_load_error">Journal entry not found</string>
+    <string name="journal_entry_save_error">Changes could not be saved. Please try again.</string>
+    <string name="journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
 </resources>
