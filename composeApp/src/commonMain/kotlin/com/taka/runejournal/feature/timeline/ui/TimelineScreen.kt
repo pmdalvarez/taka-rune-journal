@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.timeline.ui
 
 import DeleteTimelineEntryDialog
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -84,7 +85,8 @@ fun TimelineScreen(
                     },
                 )
             },
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
                 GreetingSection(
@@ -94,6 +96,7 @@ fun TimelineScreen(
                     viewModel::setDisplayName
                 )
             }
+            item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
             items(
                 count = pagingItems.itemCount,
                 key = pagingItems.itemKey { it.id }
@@ -107,7 +110,6 @@ fun TimelineScreen(
                     )
                 }
             }
-            item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
             item { TestArea(viewModel) }
         }
     }
