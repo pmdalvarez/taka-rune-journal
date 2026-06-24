@@ -10,9 +10,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.journal_entry_load_error
+import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
 class JournalEntryDetailViewModel (
   private val timelineItemId: Long,
@@ -44,5 +46,26 @@ class JournalEntryDetailViewModel (
       )
     }
   }
+
+  fun openDeleteDialog() {
+    _uiState.update { it.copy(showDeleteDialog = true) }
+  }
+
+  fun dismissDeleteDialog() {
+    _uiState.update { it.copy(showDeleteDialog = false) }
+  }
+
+  fun deleteJournalEntry() {
+    viewModelScope.launch {
+      val isDeleted = timelineRepository.deleteTimelineItem(_uiState.value.id)
+      if (isDeleted) {
+        _uiEvent.emit(UiEvent.NavigateBack)
+      } else {
+        _uiEvent.emit(UiEvent.ShowError(Res.string.timeline_delete_dialog_error))
+      }
+      dismissDeleteDialog() // close dialog regardless if delete succeeded
+    }
+  }
+
 
 }

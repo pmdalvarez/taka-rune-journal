@@ -17,7 +17,7 @@ import kotlin.time.Instant
 @Composable
 fun JournalEntryDetail(
   modifier: Modifier,
-  title: String?,
+  title: String,
   createdAt: Instant,
   notes: String
 ) {
@@ -25,7 +25,7 @@ fun JournalEntryDetail(
     modifier = modifier.fillMaxSize()
   ) {
     Text(
-      text = if (!title.isNullOrBlank()) title else  stringResource(Res.string.timeline_item_title_untitled),
+      text = title,
       modifier = Modifier.padding(top = 24.dp),
       style = MaterialTheme.typography.headlineSmall,
       color = MaterialTheme.colorScheme.onBackground

@@ -7,4 +7,5 @@ data class JournalEntryDetailUiState(
   val createdAt: Instant = Instant.DISTANT_PAST,
   val title: String? = null,
   val notes: String = "",
+  val showDeleteDialog: Boolean = false
 )
