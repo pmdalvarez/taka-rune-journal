@@ -29,6 +29,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_delete
+import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
+import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 
 @Composable
 fun TimelineItemRow(
@@ -37,16 +39,27 @@ fun TimelineItemRow(
   onDeleteClick: (Long, String, String?) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val title = if (!item.title.isNullOrBlank()) {
-    item.title
-  } else {
-    stringResource(item.titleRes)
+  val runesText = buildString {
+    item.drawnRunes?.forEachIndexed { index, rune ->
+      if (index > 0) append(" · ")
+
+      if (rune.orientation == RuneOrientation.REVERSED) {
+        append(stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
+      } else {
+        append(rune.id.displayName)
+      }
+    }
   }
-  val runesText = item.drawnRunes?.joinToString(separator = " · ") { rune ->
-    rune.id.displayName + (if (rune.orientation == RuneOrientation.REVERSED) "ʳ" else "")
+  val title = when {
+    !runesText.isBlank() -> runesText
+    !item.title.isNullOrBlank() -> item.title
+    else -> stringResource(Res.string.timeline_item_title_untitled)
   }
+
   val dateText = item.createdAt.format()
-  val label = if (!runesText.isNullOrBlank()) "$dateText · $runesText" else dateText
+  val itemType =  stringResource(item.typeRes)
+  val label = dateText + " · " + itemType
+  val deleteDialogPreview = title + "\n\n" + item.preview
 
   Card(
     modifier = modifier
@@ -108,7 +121,7 @@ fun TimelineItemRow(
           modifier = Modifier
             .size(36.dp)
             .clickable {
-              onDeleteClick(item.id, title, if (runesText.isNullOrBlank()) item.preview else runesText)
+              onDeleteClick(item.id, itemType, deleteDialogPreview)
             },
           contentAlignment = Alignment.TopEnd,
         ) {

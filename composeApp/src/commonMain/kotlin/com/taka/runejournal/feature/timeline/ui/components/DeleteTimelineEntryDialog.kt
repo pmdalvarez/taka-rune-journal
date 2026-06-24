@@ -46,7 +46,7 @@ fun DeleteTimelineEntryDialog(
           Spacer(modifier = Modifier.height(16.dp))
 
           Surface(
-            shape = MaterialTheme.shapes.medium,
+            shape = MaterialTheme.shapes.small,
             color = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onSurface,
             border = BorderStroke(
