@@ -8,6 +8,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +34,8 @@ import taka_rune_journal.composeapp.generated.resources.about_title
 import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_back
 import taka_rune_journal.composeapp.generated.resources.button_close
+import taka_rune_journal.composeapp.generated.resources.button_delete
+import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
 import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
@@ -61,7 +65,12 @@ sealed class TakaTopBarAction {
     val onNewJournalEntryClick: () -> Unit,
     val onSettingsClick: () -> Unit,
     val onAboutClick: () -> Unit,
-    val onDesignPlaygroundClick: () -> Unit,
+    val onDesignPlaygroundClick: () -> Unit
+  ) : TakaTopBarAction()
+
+  data class TimelineDetailActions(
+    val onEditClick: () -> Unit,
+    val onDeleteClick: () -> Unit
   ) : TakaTopBarAction()
 }
 
@@ -123,6 +132,7 @@ fun TakaTopBar(
             )
           }
         }
+
         is TakaTopBarAction.TimelineActions -> {
           IconButton(
             onClick = action.onNewReadingClick
@@ -179,6 +189,20 @@ fun TakaTopBar(
                 },
               )
             }
+          }
+        }
+        is TakaTopBarAction.TimelineDetailActions -> {
+          IconButton(onClick = action.onEditClick) {
+            Icon(
+              imageVector = Icons.Outlined.Edit,
+              contentDescription = stringResource(Res.string.button_edit),
+            )
+          }
+          IconButton(onClick = action.onDeleteClick) {
+            Icon(
+              imageVector = Icons.Outlined.Delete,
+              contentDescription = stringResource(Res.string.button_delete),
+            )
           }
         }
       }

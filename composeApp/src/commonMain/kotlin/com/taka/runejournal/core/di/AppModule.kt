@@ -6,6 +6,7 @@ import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.timeline.data.repository.DatabaseTimelineRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
+import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryViewModel
 import com.taka.runejournal.feature.timeline.ui.TimelineViewModel
 import org.koin.core.module.dsl.viewModel
@@ -28,7 +29,14 @@ val appModule = module {
   viewModel {
     TimelineViewModel(
       timelineRepository = get(),
-      settingsRepository = get(),
+      settingsRepository = get()
+    )
+  }
+
+  viewModel { (timelineItemId: Long) ->
+    JournalEntryDetailViewModel(
+      timelineItemId = timelineItemId,
+      timelineRepository = get()
     )
   }
 
@@ -47,7 +55,7 @@ val appModule = module {
   viewModel {
     ReadingViewModel(
       settingsRepository = get(),
-      timelineRepository = get(),
+      timelineRepository = get()
     )
   }
 

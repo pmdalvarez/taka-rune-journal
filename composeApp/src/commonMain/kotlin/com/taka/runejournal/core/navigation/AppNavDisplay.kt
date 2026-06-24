@@ -14,10 +14,12 @@ import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryViewModel
-import com.taka.runejournal.feature.timeline.ui.TimelineDetailScreen
+import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailScreen
+import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailViewModel
 import com.taka.runejournal.feature.timeline.ui.TimelineScreen
 import com.taka.runejournal.feature.timeline.ui.TimelineViewModel
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun AppNavDisplay(modifier: Modifier = Modifier) {
@@ -51,7 +53,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     },
                     onTimelineDetailClick = { id ->
                         backStack.add(
-                            TimelineDetailRoute(timelineItemId = id)
+                            JournalEntryDetailRoute(timelineItemId = id)
                         )
                     },
                     onNewReadingClick = {
@@ -64,10 +66,15 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                 )
             }
 
-            entry<TimelineDetailRoute> { route ->
-                val viewModel = koinViewModel<TimelineViewModel>()
+            entry<JournalEntryDetailRoute> { route ->
+                val viewModel = koinViewModel<JournalEntryDetailViewModel>(
+                    key = "journal-entry-detail-${route.timelineItemId}",
+                    parameters = {
+                        parametersOf(route.timelineItemId)
+                    },
+                )
 
-                TimelineDetailScreen(
+                JournalEntryDetailScreen(
                     viewModel = viewModel,
                     timelineItemId = route.timelineItemId,
                     onBackClick = {

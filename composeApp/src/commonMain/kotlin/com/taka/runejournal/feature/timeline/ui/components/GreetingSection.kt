@@ -51,7 +51,7 @@ fun GreetingSection(
     )
     Text(
       text = stringResource(Res.string.timeline_welcome_prompt),
-      modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
+      modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )
     // If logic ensures that after user enters a name, the text field changed to a greeting
@@ -91,7 +91,7 @@ fun GreetingSection(
     dailyPrompt?.let {
       Text(
         text = it,
-        modifier = Modifier.padding(top = 8.dp),
+        modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
         style = MaterialTheme.typography.bodyLarge
       )
     }

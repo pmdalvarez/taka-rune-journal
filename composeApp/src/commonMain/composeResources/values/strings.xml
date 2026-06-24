@@ -4,6 +4,7 @@
     <string name="button_back">Back</string>
     <string name="button_close">Close</string>
     <string name="button_more_menu">More</string>
+    <string name="button_edit">Edit</string>
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
@@ -42,6 +43,7 @@
     <string name="new_journal_entry_textfield_label_notes">Notes</string>
     <string name="new_journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
-    <string name="timeline_detail_journal_entry_title">Journal Entry</string>
+    <string name="journal_entry_detail_title">Journal Entry</string>
+    <string name="journal_entry_load_error">Journal entry not found</string>
 
 </resources>

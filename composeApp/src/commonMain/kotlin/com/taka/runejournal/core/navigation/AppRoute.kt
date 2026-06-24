@@ -10,7 +10,7 @@ sealed interface AppRoute : NavKey
 data object TimelineRoute : AppRoute
 
 @Serializable
-data class TimelineDetailRoute(
+data class JournalEntryDetailRoute(
     val timelineItemId: Long,
 ) : AppRoute
 
