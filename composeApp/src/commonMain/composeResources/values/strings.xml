@@ -8,7 +8,7 @@
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
 
-    <string name="rune_display_name_reversed">%1$sʳ</string>
+    <string name="rune_display_name_reversed">%1$s\u2009(R)</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_your_name">Your Name</string>
@@ -41,5 +41,7 @@
     <string name="new_journal_entry_textfield_label_title">Title</string>
     <string name="new_journal_entry_textfield_label_notes">Notes</string>
     <string name="new_journal_entry_save_error_blank_notes">Please enter some notes.</string>
+
+    <string name="timeline_detail_journal_entry_title">Journal Entry</string>
 
 </resources>
