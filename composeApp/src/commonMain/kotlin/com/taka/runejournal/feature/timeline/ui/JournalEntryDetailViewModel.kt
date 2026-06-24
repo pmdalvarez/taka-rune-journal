@@ -57,6 +57,7 @@ class JournalEntryDetailViewModel (
     _uiState.update { it.copy(mode = JournalEntryDetailMode.isSaving) }
     viewModelScope.launch {
       if (notes.isBlank()) {
+        _uiState.update { it.copy(mode = JournalEntryDetailMode.isEditing) }
         _uiEvent.emit(UiEvent.ShowError(Res.string.journal_entry_save_error_blank_notes))
         return@launch
       }

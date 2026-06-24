@@ -36,7 +36,6 @@ fun JournalEntryDetailScreen(
   val uiState by viewModel.uiState.collectAsState()
   val topbarTitle = stringResource(Res.string.journal_entry_detail_title)
   val snackbarHostState = remember { SnackbarHostState() }
-  val journalEntryTitle: String = if (!uiState.title.isNullOrBlank()) uiState.title!! else stringResource(Res.string.timeline_item_title_untitled)
   var titleInput by rememberSaveable { mutableStateOf(uiState.title ?: "") }
   var notesInput by rememberSaveable { mutableStateOf(uiState.notes) }
 
@@ -89,21 +88,22 @@ fun JournalEntryDetailScreen(
       }
     }
   ) { contentModifier ->
-    if (uiState.mode == JournalEntryDetailMode.isEditing) {
-      JournalEntryEditor(
-        modifier = contentModifier,
-        titleValue = titleInput,
-        titleOnValueChange = { titleInput = it },
-        notesValue = notesInput,
-        notesOnValueChange = { notesInput = it }
-      )
-    } else {
-      JournalEntryDetail(
-        modifier = contentModifier,
-        title = journalEntryTitle,
-        createdAt = uiState.createdAt,
-        notes = uiState.notes
-      )
+    when (uiState.mode) {
+      JournalEntryDetailMode.isEditing, JournalEntryDetailMode.isSaving ->
+        JournalEntryEditor(
+          modifier = contentModifier,
+          titleValue = titleInput,
+          titleOnValueChange = { titleInput = it },
+          notesValue = notesInput,
+          notesOnValueChange = { notesInput = it }
+        )
+      else ->
+        JournalEntryDetail(
+          modifier = contentModifier,
+          title = if (!uiState.title.isNullOrBlank()) uiState.title!! else stringResource(Res.string.timeline_item_title_untitled),
+          createdAt = uiState.createdAt,
+          notes = uiState.notes
+        )
     }
   }
 
