@@ -1,6 +1,7 @@
 package com.taka.runejournal.feature.timeline.ui.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,23 +16,31 @@ import kotlin.time.Instant
 
 @Composable
 fun JournalEntryDetail(
+  modifier: Modifier,
   title: String?,
   createdAt: Instant,
   notes: String
 ) {
-  Text(
-    text = title ?: stringResource(Res.string.timeline_item_title_untitled),
-    modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
-    style = MaterialTheme.typography.headlineMedium
-  )
-  Text(
-    text = createdAt.format(),
-    modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
-    style = MaterialTheme.typography.bodySmall
-  )
-  Text(
-    text = notes,
-    modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
-    style = MaterialTheme.typography.bodyLarge
-  )
+  Column(
+    modifier = modifier.fillMaxSize()
+  ) {
+    Text(
+      text = if (!title.isNullOrBlank()) title else  stringResource(Res.string.timeline_item_title_untitled),
+      modifier = Modifier.padding(top = 24.dp),
+      style = MaterialTheme.typography.headlineSmall,
+      color = MaterialTheme.colorScheme.onBackground
+    )
+    Text(
+      text = createdAt.format(),
+      modifier = Modifier.padding(top = 4.dp),
+      style = MaterialTheme.typography.labelMedium,
+      color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+    Text(
+      text = notes,
+      modifier = Modifier.padding(top = 24.dp),
+      style = MaterialTheme.typography.bodyLarge,
+      color = MaterialTheme.colorScheme.onBackground
+    )
+  }
 }

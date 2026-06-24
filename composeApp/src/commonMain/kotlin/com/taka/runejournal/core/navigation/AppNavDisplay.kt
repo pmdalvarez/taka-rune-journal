@@ -76,7 +76,6 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
                 JournalEntryDetailScreen(
                     viewModel = viewModel,
-                    timelineItemId = route.timelineItemId,
                     onBackClick = {
                         backStack.removeLastOrNull()
                     },
