@@ -1,6 +1,5 @@
 package com.taka.runejournal.core.ui.utils
 
-import nl.jacobras.humanreadable.HumanReadable
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Instant
@@ -16,8 +15,6 @@ fun Instant.format(): String {
   }
 }
 
-fun Instant.formatRelative(now: Instant = Clock.System.now()): String {
-  return HumanReadable.timeAgo(this, now)
-}
+expect fun Instant.formatRelative(now: Instant): String
 
 expect fun Instant.formatAbsolute(): String

@@ -24,8 +24,8 @@
     <string name="timeline_textfield_label_your_name">Your Name</string>
     <string name="timeline_feedback_name_given">Hello %1$s, nice to meet you.</string>
     <string name="timeline_item_type_journal">Journal Entry</string>
-    <string name="timeline_item_type_single_rune">Single Rune</string>
-    <string name="timeline_item_type_ppf">Three Norns</string>
+    <string name="timeline_item_type_single_rune">Single Rune Reading</string>
+    <string name="timeline_item_type_ppf">Three Norns Reading</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="timeline_delete_dialog_title">Delete %1$s</string>

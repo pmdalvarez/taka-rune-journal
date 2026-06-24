@@ -9,6 +9,8 @@ import platform.Foundation.currentLocale
 import platform.Foundation.dateWithTimeIntervalSince1970
 import kotlin.time.Instant
 
+actual fun Instant.formatRelative(now: Instant) = this.formatAbsolute() // TODO this needs to be implemented properly
+
 actual fun Instant.formatAbsolute(): String {
   val date = NSDate.dateWithTimeIntervalSince1970(this.toEpochMilliseconds().toDouble() / 1000.0)
   val formatter = NSDateFormatter().apply {

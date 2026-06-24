@@ -56,7 +56,6 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kotlinx.serialization.core)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.nl.jacobras.human.readable)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.preview)
         }
