@@ -116,9 +116,9 @@ fun TimelineItemRow(
         }
       }
 
-      if (!item.notesPreview.isNullOrBlank()) {
+      if (!item.preview.isNullOrBlank()) {
         Text(
-          text = item.notesPreview,
+          text = item.preview,
           style = MaterialTheme.typography.bodyMedium,
           color = MaterialTheme.colorScheme.onSurfaceVariant,
           maxLines = 2,

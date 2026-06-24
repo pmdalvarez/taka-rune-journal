@@ -20,9 +20,9 @@ data class TimelineItemUiModel(
   val createdAt: Instant,
   val icon: DrawableResource,
   val itemTypeRes: StringResource,
-  val title: String?,
+  val title: String? = null,
   val drawnRunes: List<DrawnRune>? = null,
-  val notesPreview: String? = null,
+  val preview: String? = null,
 )
 
 fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
@@ -31,8 +31,8 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     createdAt = createdAt,
     icon = Res.drawable.ic_rune_reading_icon,
     itemTypeRes = Res.string.timeline_item_type_single_rune,
-    title = question,
-    drawnRunes = listOf(rune)
+    drawnRunes = listOf(rune),
+    preview = question
   )
 
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(
@@ -40,8 +40,8 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     createdAt = createdAt,
     icon = Res.drawable.ic_rune_reading_icon,
     itemTypeRes = Res.string.timeline_item_type_ppf,
-    title = question,
-    drawnRunes = listOf(pastRune, presentRune, futureRune)
+    drawnRunes = listOf(pastRune, presentRune, futureRune),
+    preview = question
   )
 
   is TimelineItem.JournalEntry -> TimelineItemUiModel(
@@ -50,6 +50,6 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     icon = Res.drawable.ic_journal_entry_icon,
     title = title,
     itemTypeRes = Res.string.timeline_item_type_journal,
-    notesPreview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
+    preview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
   )
 }
