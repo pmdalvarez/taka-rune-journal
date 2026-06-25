@@ -32,7 +32,8 @@
     <string name="timeline_item_type_ppf">Past Present Future</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
-    <string name="timeline_delete_dialog_title">Delete %1$s</string>
+    <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>
+    <string name="delete_dialog_title_rune_reading">Delete Rune Reading</string>
     <string name="timeline_delete_dialog_body">Permanently delete this entry?</string>
     <string name="timeline_delete_dialog_error">Entry could not be deleted. Please try again.</string>
     <string name="timeline_delete_dialog_success">Entry deleted</string>
@@ -47,6 +48,5 @@
     <string name="journal_entry_save_error">Changes could not be saved. Please try again.</string>
     <string name="journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
-    <string name="reading_interpretation_delete_dialog_title">Rune Reading</string>">
 
 </resources>

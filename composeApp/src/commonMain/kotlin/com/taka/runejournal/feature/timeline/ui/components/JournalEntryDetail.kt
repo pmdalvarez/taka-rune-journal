@@ -8,14 +8,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.taka.runejournal.core.ui.utils.format
-import kotlin.time.Instant
 
 @Composable
 fun JournalEntryDetail(
   modifier: Modifier,
   title: String,
-  createdAt: Instant,
+  formattedDate: String,
   notes: String
 ) {
   Column(
@@ -27,7 +25,7 @@ fun JournalEntryDetail(
       color = MaterialTheme.colorScheme.onBackground
     )
     Text(
-      text = createdAt.format(),
+      text = formattedDate,
       modifier = Modifier.padding(top = 4.dp),
       style = MaterialTheme.typography.labelMedium,
       color = MaterialTheme.colorScheme.onSurfaceVariant

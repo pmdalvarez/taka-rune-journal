@@ -23,9 +23,9 @@ import com.taka.runejournal.feature.timeline.ui.components.JournalEntryEditor
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_journal_entry
 import taka_rune_journal.composeapp.generated.resources.journal_entry_detail_title
 import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journal_entry
 
 @Composable
 fun JournalEntryDetailScreen(
@@ -101,7 +101,7 @@ fun JournalEntryDetailScreen(
         JournalEntryDetail(
           modifier = contentModifier,
           title = if (!uiState.title.isNullOrBlank()) uiState.title!! else stringResource(Res.string.timeline_item_title_untitled),
-          createdAt = uiState.createdAt,
+          formattedDate = uiState.formattedDate,
           notes = uiState.notes
         )
     }
@@ -111,7 +111,7 @@ fun JournalEntryDetailScreen(
     DeleteTimelineEntryDialog(
       onDismiss = viewModel::dismissDeleteDialog,
       onConfirm = viewModel::deleteJournalEntry,
-      stringResource(Res.string.timeline_item_type_journal_entry),
+      stringResource(Res.string.delete_dialog_title_journal_entry),
       null
     )
   }

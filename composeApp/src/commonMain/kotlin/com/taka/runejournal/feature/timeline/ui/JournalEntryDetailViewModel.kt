@@ -3,6 +3,7 @@ package com.taka.runejournal.feature.timeline.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -42,7 +43,7 @@ class JournalEntryDetailViewModel (
       }
       _uiState.value = JournalEntryDetailUiState(
         id = timelineItem.id,
-        createdAt = timelineItem.createdAt,
+        formattedDate = timelineItem.createdAt.format(),
         title = timelineItem.title,
         notes = timelineItem.notes ?: ""
       )

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,7 +18,6 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_cancel
 import taka_rune_journal.composeapp.generated.resources.button_delete
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_body
-import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_title
 
 @Composable
 fun DeleteTimelineEntryDialog(
@@ -33,7 +31,7 @@ fun DeleteTimelineEntryDialog(
     shape =  MaterialTheme.shapes.small,
     containerColor = MaterialTheme.colorScheme.surface,
     title = {
-      Text(stringResource(Res.string.timeline_delete_dialog_title, title))
+      Text(title)
     },
     text = {
       Column {

@@ -23,12 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
-import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_delete
+import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_journal_entry
+import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 
@@ -43,7 +44,6 @@ fun TimelineItemRow(
   val runesText = buildString {
     item.drawnRunes?.forEachIndexed { index, rune ->
       if (index > 0) append(" · ")
-
       if (rune.orientation == RuneOrientation.REVERSED) {
         append(stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
       } else {
@@ -51,15 +51,18 @@ fun TimelineItemRow(
       }
     }
   }
-  val isJournalEntry = runesText.isBlank()
   val title = when {
     !runesText.isBlank() -> runesText
     !item.title.isNullOrBlank() -> item.title
     else -> stringResource(Res.string.timeline_item_title_untitled)
   }
-  val dateText = item.createdAt.format()
-  val itemType =  stringResource(item.typeRes)
-  val label = dateText + " · " + itemType
+  val itemType = stringResource(item.typeRes)
+  val label = item.formattedDate + " · " + itemType
+  val deleteDialogTitle = if (item.isJournalEntry) {
+    stringResource(Res.string.delete_dialog_title_journal_entry)
+  } else {
+    stringResource(Res.string.delete_dialog_title_rune_reading)
+  }
   val deleteDialogPreview = if (item.preview.isNullOrBlank()) {
     title
   } else {
@@ -69,7 +72,7 @@ fun TimelineItemRow(
   Card(
     modifier = modifier
       .fillMaxWidth()
-      .clickable(onClick = { if (isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) }),
+      .clickable(onClick = { if (item.isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) }),
     shape = MaterialTheme.shapes.medium,
     colors = CardDefaults.cardColors(
       containerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -126,7 +129,7 @@ fun TimelineItemRow(
           modifier = Modifier
             .size(36.dp)
             .clickable {
-              onDeleteClick(item.id, itemType, deleteDialogPreview)
+              onDeleteClick(item.id, deleteDialogTitle, deleteDialogPreview)
             },
           contentAlignment = Alignment.TopEnd,
         ) {

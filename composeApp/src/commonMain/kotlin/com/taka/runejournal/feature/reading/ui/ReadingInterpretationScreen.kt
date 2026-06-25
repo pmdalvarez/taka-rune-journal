@@ -22,7 +22,7 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.reading_interpretation_delete_dialog_title
+import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -71,7 +71,7 @@ fun ReadingInterpretationScreen(
     DeleteTimelineEntryDialog(
       onDismiss = viewModel::dismissDeleteDialog,
       onConfirm = viewModel::deleteReading,
-      stringResource(Res.string.reading_interpretation_delete_dialog_title),
+      stringResource(Res.string.delete_dialog_title_rune_reading),
       null
     )
   }

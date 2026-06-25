@@ -1,6 +1,7 @@
 package com.taka.runejournal.feature.timeline.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
+import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -11,13 +12,13 @@ import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journ
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_ppf
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_single_rune
 import kotlin.collections.List
-import kotlin.time.Instant
 
 private const val NOTE_PREVIEW_MAX_LENGTH = 140
 
 data class TimelineItemUiModel(
   val id: Long,
-  val createdAt: Instant,
+  val isJournalEntry: Boolean,
+  val formattedDate: String,
   val icon: DrawableResource,
   val typeRes: StringResource,
   val title: String? = null,
@@ -28,7 +29,8 @@ data class TimelineItemUiModel(
 fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
   is TimelineItem.SingleRuneReading -> TimelineItemUiModel(
     id = id,
-    createdAt = createdAt,
+    isJournalEntry = false,
+    formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
     typeRes = Res.string.timeline_item_type_single_rune,
     drawnRunes = listOf(rune),
@@ -37,7 +39,8 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
 
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(
     id = id,
-    createdAt = createdAt,
+    isJournalEntry = false,
+    formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
     typeRes = Res.string.timeline_item_type_ppf,
     drawnRunes = listOf(pastRune, presentRune, futureRune),
@@ -46,7 +49,8 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
 
   is TimelineItem.JournalEntry -> TimelineItemUiModel(
     id = id,
-    createdAt = createdAt,
+    isJournalEntry = true,
+    formattedDate = createdAt.format(),
     icon = Res.drawable.ic_journal_entry_icon,
     title = title,
     typeRes = Res.string.timeline_item_type_journal_entry,
