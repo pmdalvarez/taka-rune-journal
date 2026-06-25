@@ -1,20 +1,20 @@
 package com.taka.runejournal.feature.timeline.data.local
 
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.RuneId
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 
 data class DrawnRuneEmbedded(
-  val id: String,
-  val orientation: String,
+  val runeKey: String,
+  val orientationKey: String,
 )
 
 fun DrawnRuneEmbedded.toDomain(): DrawnRune =
   DrawnRune(
-    id = RuneId.fromKey(id)
-      ?: error("Unknown rune id: $id"),
-    orientation = RuneOrientation.fromKey(orientation)
-      ?: error("Unknown rune orientation: $orientation")
+    rune = Rune.fromKey(runeKey)
+      ?: error("Unknown rune id: $runeKey"),
+    orientation = RuneOrientation.fromKey(orientationKey)
+      ?: error("Unknown rune orientation: $orientationKey")
   )
 
-fun DrawnRune.toEmbedded(): DrawnRuneEmbedded = DrawnRuneEmbedded(id = id.key, orientation = orientation.key)
+fun DrawnRune.toEmbedded(): DrawnRuneEmbedded = DrawnRuneEmbedded(runeKey = rune.key, orientationKey = orientation.key)

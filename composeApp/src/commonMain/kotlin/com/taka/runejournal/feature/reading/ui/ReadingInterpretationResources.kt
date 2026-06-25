@@ -25,5 +25,5 @@ fun getReadingInterpretationRes(
 }
 
 private fun getReadingInterpretationKey(drawnRune: DrawnRune, readingCategory: ReadingCategory): String {
-  return "interpretation_${drawnRune.id.key}_${drawnRune.orientation.key}_${readingCategory.key}"
+  return "interpretation_${drawnRune.rune.key}_${drawnRune.orientation.key}_${readingCategory.key}"
 }

@@ -1,6 +1,6 @@
 package com.taka.runejournal.core.domain.model
 
-enum class RuneId(
+enum class Rune(
     val key: String, // Changing key values can break existing references in db or string files
     val glyph: String,
     val displayName: String,
@@ -135,7 +135,7 @@ enum class RuneId(
     );
 
     companion object {
-        fun fromKey(key: String): RuneId? =
+        fun fromKey(key: String): Rune? =
             entries.firstOrNull { it.key == key }
     }
 }

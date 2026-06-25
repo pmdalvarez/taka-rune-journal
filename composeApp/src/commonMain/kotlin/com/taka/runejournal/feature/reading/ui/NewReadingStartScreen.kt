@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.taka.runejournal.core.domain.model.RuneId
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.ui.drawable
 import org.jetbrains.compose.resources.painterResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -92,7 +92,7 @@ private fun RunePreview() {
         )
       }
     }
-    RuneId.entries
+    Rune.entries
       .chunked(4)
       .forEach { rowRunes ->
         Row(

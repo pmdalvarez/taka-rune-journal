@@ -45,9 +45,9 @@ fun TimelineItemRow(
     item.drawnRunes?.forEachIndexed { index, rune ->
       if (index > 0) append(" · ")
       if (rune.orientation == RuneOrientation.REVERSED) {
-        append(stringResource(Res.string.rune_display_name_reversed, rune.id.displayName))
+        append(stringResource(Res.string.rune_display_name_reversed, rune.rune.displayName))
       } else {
-        append(rune.id.displayName)
+        append(rune.rune.displayName)
       }
     }
   }
