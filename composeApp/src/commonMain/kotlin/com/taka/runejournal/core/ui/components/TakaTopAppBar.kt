@@ -1,8 +1,10 @@
 package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -23,8 +25,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.platform.AppBuildConfig
 import org.jetbrains.compose.resources.painterResource
@@ -39,9 +43,9 @@ import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
 import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
-import taka_rune_journal.composeapp.generated.resources.ic_app_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
@@ -90,11 +94,19 @@ fun TakaTopBar(
     navigationIcon = {
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {
-          IconButton(onClick = {}) {
+          Box(
+            modifier = Modifier
+              .height(48.dp)
+              .width(48.dp),
+            contentAlignment = Alignment.CenterStart,
+          ) {
             Image(
-              painter = painterResource(Res.drawable.ic_app_icon),
+              painter = painterResource(Res.drawable.ic_topbar_icon),
               contentDescription = stringResource(Res.string.app_name),
-              modifier = Modifier.size(32.dp),
+              modifier = Modifier
+                .height(48.dp)
+                .width(48.dp),
+              contentScale = ContentScale.Fit,
             )
           }
         }
