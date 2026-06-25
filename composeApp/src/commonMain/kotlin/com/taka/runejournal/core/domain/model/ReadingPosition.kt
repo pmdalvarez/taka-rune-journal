@@ -3,7 +3,7 @@ package com.taka.runejournal.core.domain.model
 enum class ReadingPosition(
   val key: String,
 ) {
-  SINGLE_RUNE("single_rune"),
+  SINGLE("single"),
   PAST("past"),
   PRESENT("present"),
   FUTURE("future");

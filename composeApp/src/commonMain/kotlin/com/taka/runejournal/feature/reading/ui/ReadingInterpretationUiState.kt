@@ -13,7 +13,7 @@ data class RuneInterpretation(
 
 data class ReadingInterpretationUiState(
   val id: Long = 0L,
-  val createdAt: Instant = Instant.DISTANT_PAST,
+  val createdAt: String = "",
   val notes: String? = null,
   val category: ReadingCategory = ReadingCategory.GENERAL,
   val question: String? = null,

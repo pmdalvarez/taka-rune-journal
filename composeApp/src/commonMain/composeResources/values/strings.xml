@@ -48,5 +48,6 @@
     <string name="journal_entry_save_error">Changes could not be saved. Please try again.</string>
     <string name="journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
+    <string name="rune_reading_load_error">Rune Reading not found</string>
 
 </resources>
