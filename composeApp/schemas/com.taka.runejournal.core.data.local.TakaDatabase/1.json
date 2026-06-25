@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "668e139f9ea462ebf75a4713ccbe20da",
+    "identityHash": "ff94fde79f6f723b5cd7bcd736a3cbc4",
     "entities": [
       {
         "tableName": "timeline_items",
@@ -40,7 +40,7 @@
       },
       {
         "tableName": "single_rune_readings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timelineItemId` INTEGER NOT NULL, `question` TEXT, `category` TEXT NOT NULL, `rune_id` TEXT NOT NULL, `rune_orientation` TEXT NOT NULL, PRIMARY KEY(`timelineItemId`), FOREIGN KEY(`timelineItemId`) REFERENCES `timeline_items`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timelineItemId` INTEGER NOT NULL, `question` TEXT, `category` TEXT NOT NULL, `rune_runeKey` TEXT NOT NULL, `rune_orientationKey` TEXT NOT NULL, PRIMARY KEY(`timelineItemId`), FOREIGN KEY(`timelineItemId`) REFERENCES `timeline_items`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "timelineItemId",
@@ -60,14 +60,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "rune.id",
-            "columnName": "rune_id",
+            "fieldPath": "rune.runeKey",
+            "columnName": "rune_runeKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "rune.orientation",
-            "columnName": "rune_orientation",
+            "fieldPath": "rune.orientationKey",
+            "columnName": "rune_orientationKey",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -94,7 +94,7 @@
       },
       {
         "tableName": "ppf_rune_readings",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timelineItemId` INTEGER NOT NULL, `question` TEXT, `category` TEXT NOT NULL, `past_rune_id` TEXT NOT NULL, `past_rune_orientation` TEXT NOT NULL, `present_rune_id` TEXT NOT NULL, `present_rune_orientation` TEXT NOT NULL, `future_rune_id` TEXT NOT NULL, `future_rune_orientation` TEXT NOT NULL, PRIMARY KEY(`timelineItemId`), FOREIGN KEY(`timelineItemId`) REFERENCES `timeline_items`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timelineItemId` INTEGER NOT NULL, `question` TEXT, `category` TEXT NOT NULL, `past_rune_runeKey` TEXT NOT NULL, `past_rune_orientationKey` TEXT NOT NULL, `present_rune_runeKey` TEXT NOT NULL, `present_rune_orientationKey` TEXT NOT NULL, `future_rune_runeKey` TEXT NOT NULL, `future_rune_orientationKey` TEXT NOT NULL, PRIMARY KEY(`timelineItemId`), FOREIGN KEY(`timelineItemId`) REFERENCES `timeline_items`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "timelineItemId",
@@ -114,38 +114,38 @@
             "notNull": true
           },
           {
-            "fieldPath": "pastRune.id",
-            "columnName": "past_rune_id",
+            "fieldPath": "pastRune.runeKey",
+            "columnName": "past_rune_runeKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "pastRune.orientation",
-            "columnName": "past_rune_orientation",
+            "fieldPath": "pastRune.orientationKey",
+            "columnName": "past_rune_orientationKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "presentRune.id",
-            "columnName": "present_rune_id",
+            "fieldPath": "presentRune.runeKey",
+            "columnName": "present_rune_runeKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "presentRune.orientation",
-            "columnName": "present_rune_orientation",
+            "fieldPath": "presentRune.orientationKey",
+            "columnName": "present_rune_orientationKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "futureRune.id",
-            "columnName": "future_rune_id",
+            "fieldPath": "futureRune.runeKey",
+            "columnName": "future_rune_runeKey",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "futureRune.orientation",
-            "columnName": "future_rune_orientation",
+            "fieldPath": "futureRune.orientationKey",
+            "columnName": "future_rune_orientationKey",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -173,7 +173,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '668e139f9ea462ebf75a4713ccbe20da')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ff94fde79f6f723b5cd7bcd736a3cbc4')"
     ]
   }
 }
