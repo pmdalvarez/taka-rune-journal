@@ -1,0 +1,49 @@
+<resources>
+    <string name="interpretation_fehu_upright">Fehu stands for cattle</string>
+    <string name="interpretation_uruz_upright"></string>
+    <string name="interpretation_thurisaz_upright"></string>
+    <string name="interpretation_ansuz_upright"></string>
+    <string name="interpretation_raidho_upright"></string>
+    <string name="interpretation_kenaz_upright"></string>
+    <string name="interpretation_gebo_upright"></string>
+    <string name="interpretation_wunjo_upright"></string>
+    <string name="interpretation_hagalaz_upright"></string>
+    <string name="interpretation_nauthiz_upright"></string>
+    <string name="interpretation_isa_upright"></string>
+    <string name="interpretation_jera_upright"></string>
+    <string name="interpretation_eihwaz_upright"></string>
+    <string name="interpretation_perthro_upright"></string>
+    <string name="interpretation_algiz_upright"></string>
+    <string name="interpretation_sowilo_upright"></string>
+    <string name="interpretation_tiwaz_upright"></string>
+    <string name="interpretation_berkano_upright"></string>
+    <string name="interpretation_ehwaz_upright"></string>
+    <string name="interpretation_mannaz_upright"></string>
+    <string name="interpretation_laguz_upright"></string>
+    <string name="interpretation_ingwaz_upright"></string>
+    <string name="interpretation_dagaz_upright"></string>
+    <string name="interpretation_othala_upright"></string>
+
+    <string name="interpretation_fehu_reversed">Fehu reversed means</string>
+    <string name="interpretation_uruz_reversed"></string>
+    <string name="interpretation_thurisaz_reversed"></string>
+    <string name="interpretation_ansuz_reversed"></string>
+    <string name="interpretation_raidho_reversed"></string>
+    <string name="interpretation_kenaz_reversed"></string>
+    <string name="interpretation_wunjo_reversed"></string>
+    <string name="interpretation_hagalaz_reversed"></string>
+    <string name="interpretation_nauthiz_reversed"></string>
+    <string name="interpretation_perthro_reversed"></string>
+    <string name="interpretation_algiz_reversed"></string>
+    <string name="interpretation_tiwaz_reversed"></string>
+    <string name="interpretation_berkano_reversed"></string>
+    <string name="interpretation_ehwaz_reversed"></string>
+    <string name="interpretation_mannaz_reversed"></string>
+    <string name="interpretation_laguz_reversed"></string>
+    <string name="interpretation_othala_reversed"></string>
+
+    <string name="interpretation_fehu_upright_security">Since fehu represents wealth this means somethng good for your security</string>
+    <string name="interpretation_fehu_reversed_security">Since fehu represents wealth and this is reversed this means be mindful of your security</string>
+
+
+</resources>
