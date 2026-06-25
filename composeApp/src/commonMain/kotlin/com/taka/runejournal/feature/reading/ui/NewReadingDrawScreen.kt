@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 fun NewReadingDrawScreen(
   viewModel: ReadingViewModel,
   onBackClick: () -> Unit,
-  onContinueClick: () -> Unit,
+  onReadingSaved: (id: Long) -> Unit,
   modifier: Modifier = Modifier
 ) {
   Column(

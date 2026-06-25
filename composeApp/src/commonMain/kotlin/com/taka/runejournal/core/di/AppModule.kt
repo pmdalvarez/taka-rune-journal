@@ -4,6 +4,7 @@ import com.taka.runejournal.feature.reading.ui.ReadingViewModel
 import com.taka.runejournal.feature.more.data.repository.DataStoreSettingsRepository
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
+import com.taka.runejournal.feature.reading.ui.ReadingInterpretationViewModel
 import com.taka.runejournal.feature.timeline.data.repository.DatabaseTimelineRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailViewModel
@@ -33,12 +34,21 @@ val appModule = module {
     )
   }
 
-  viewModel { (timelineItemId: Long) ->
+  viewModel { (id: Long) ->
     JournalEntryDetailViewModel(
-      timelineItemId = timelineItemId,
+      id = id,
       timelineRepository = get()
     )
   }
+
+
+  viewModel { (id: Long) ->
+    ReadingInterpretationViewModel(
+      id = id,
+      timelineRepository = get()
+    )
+  }
+
 
   viewModel {
     NewJournalEntryViewModel(

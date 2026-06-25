@@ -80,7 +80,7 @@ fun JournalEntryDetailScreen(
             title = topbarTitle,
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
-            action = TakaTopBarAction.TimelineDetailActions(
+            action = TakaTopBarAction.JournalEntryDetailActions(
               onEditClick = { viewModel.setMode(JournalEntryDetailMode.isEditing) },
               onDeleteClick = { viewModel.openDeleteDialog() }
             )

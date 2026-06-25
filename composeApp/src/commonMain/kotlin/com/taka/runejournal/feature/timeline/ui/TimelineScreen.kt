@@ -45,7 +45,8 @@ fun TimelineScreen(
     onAboutClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onDesignPlaygroundClick: () -> Unit,
-    onTimelineDetailClick: (Long) -> Unit,
+    onJournalEntryClick: (Long) -> Unit,
+    onRuneReadingClick: (Long) -> Unit,
     onNewReadingClick: () -> Unit,
     onNewJournalEntryClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -119,9 +120,10 @@ fun TimelineScreen(
                 val item = pagingItems[index]
                 item?.let {
                     TimelineItemRow(
-                        it,
-                        onTimelineDetailClick,
-                        viewModel::openDeleteDialog
+                        item = it,
+                        onJournalEntryClick = onJournalEntryClick,
+                        onRuneReadingClick = onRuneReadingClick,
+                        onDeleteClick = viewModel::openDeleteDialog
                     )
                 }
             }

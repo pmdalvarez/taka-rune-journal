@@ -58,7 +58,6 @@ enum class TakaTopBarNavigationIcon {
 
 sealed class TakaTopBarAction {
   data object None : TakaTopBarAction()
-
   data class Save(
     val enabled: Boolean = true,
     val onClick: () -> Unit = {},
@@ -72,12 +71,16 @@ sealed class TakaTopBarAction {
     val onDesignPlaygroundClick: () -> Unit
   ) : TakaTopBarAction()
 
-  data class TimelineDetailActions(
+  data class JournalEntryDetailActions(
     val onEditClick: () -> Unit,
     val onDeleteClick: () -> Unit
   ) : TakaTopBarAction()
-}
 
+  data class RuneInterpretationActions(
+    val onDeleteClick: () -> Unit
+  ) : TakaTopBarAction()
+
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -144,7 +147,6 @@ fun TakaTopBar(
             )
           }
         }
-
         is TakaTopBarAction.TimelineActions -> {
           IconButton(
             onClick = action.onNewReadingClick
@@ -203,13 +205,21 @@ fun TakaTopBar(
             }
           }
         }
-        is TakaTopBarAction.TimelineDetailActions -> {
+        is TakaTopBarAction.JournalEntryDetailActions -> {
           IconButton(onClick = action.onEditClick) {
             Icon(
               imageVector = Icons.Outlined.Edit,
               contentDescription = stringResource(Res.string.button_edit),
             )
           }
+          IconButton(onClick = action.onDeleteClick) {
+            Icon(
+              imageVector = Icons.Outlined.Delete,
+              contentDescription = stringResource(Res.string.button_delete),
+            )
+          }
+        }
+        is TakaTopBarAction.RuneInterpretationActions -> {
           IconButton(onClick = action.onDeleteClick) {
             Icon(
               imageVector = Icons.Outlined.Delete,

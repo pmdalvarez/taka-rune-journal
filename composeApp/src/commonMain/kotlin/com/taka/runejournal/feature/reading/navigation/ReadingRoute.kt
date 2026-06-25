@@ -11,6 +11,3 @@ data object NewReadingStartRoute : ReadingRoute
 
 @Serializable
 data object NewReadingDrawRoute : ReadingRoute
-
-@Serializable
-data object ReadingInterpretationRoute : ReadingRoute

@@ -19,7 +19,7 @@ import taka_rune_journal.composeapp.generated.resources.journal_entry_save_error
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
 class JournalEntryDetailViewModel (
-  private val timelineItemId: Long,
+  private val id: Long,
   private val timelineRepository: TimelineRepository
 ) : ViewModel() {
 
@@ -35,7 +35,7 @@ class JournalEntryDetailViewModel (
 
   private fun loadJournalEntry() {
     viewModelScope.launch {
-      val timelineItem = timelineRepository.getTimelineItem(timelineItemId)
+      val timelineItem = timelineRepository.getTimelineItem(id)
       if (!(timelineItem is TimelineItem.JournalEntry)) {
         _uiEvent.emit(UiEvent.ShowError(Res.string.journal_entry_load_error))
         return@launch

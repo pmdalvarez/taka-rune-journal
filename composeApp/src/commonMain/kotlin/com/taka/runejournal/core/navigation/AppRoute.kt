@@ -11,7 +11,12 @@ data object TimelineRoute : AppRoute
 
 @Serializable
 data class JournalEntryDetailRoute(
-    val timelineItemId: Long,
+    val id: Long,
+) : AppRoute
+
+@Serializable
+data class ReadingInterpretationRoute(
+    val id: Long,
 ) : AppRoute
 
 @Serializable

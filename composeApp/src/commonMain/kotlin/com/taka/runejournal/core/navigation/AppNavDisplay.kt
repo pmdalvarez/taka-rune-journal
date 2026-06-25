@@ -12,6 +12,8 @@ import com.taka.runejournal.feature.more.ui.AboutScreen
 import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
+import com.taka.runejournal.feature.reading.ui.ReadingInterpretationScreen
+import com.taka.runejournal.feature.reading.ui.ReadingInterpretationViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryViewModel
 import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailScreen
@@ -51,9 +53,14 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     onDesignPlaygroundClick = {
                         backStack.add(DesignSystemRoute)
                     },
-                    onTimelineDetailClick = { id ->
+                    onJournalEntryClick = { id ->
                         backStack.add(
-                            JournalEntryDetailRoute(timelineItemId = id)
+                            JournalEntryDetailRoute(id = id)
+                        )
+                    },
+                    onRuneReadingClick = { id ->
+                        backStack.add(
+                            ReadingInterpretationRoute(id = id)
                         )
                     },
                     onNewReadingClick = {
@@ -68,13 +75,30 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
             entry<JournalEntryDetailRoute> { route ->
                 val viewModel = koinViewModel<JournalEntryDetailViewModel>(
-                    key = "journal-entry-detail-${route.timelineItemId}",
+                    key = "journal-entry-detail-${route.id}",
                     parameters = {
-                        parametersOf(route.timelineItemId)
+                        parametersOf(route.id)
                     },
                 )
 
                 JournalEntryDetailScreen(
+                    viewModel = viewModel,
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<ReadingInterpretationRoute> { route ->
+                val viewModel = koinViewModel<ReadingInterpretationViewModel>(
+                    key = "reading-interpretation-${route.id}",
+                    parameters = {
+                        parametersOf(route.id)
+                    },
+                )
+
+                ReadingInterpretationScreen(
                     viewModel = viewModel,
                     onBackClick = {
                         backStack.removeLastOrNull()
@@ -100,8 +124,9 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     onExitReadingFlow = {
                         backStack.removeLastOrNull()
                     },
-                    onReadingFinished = {
+                    onReadingSaved = { id ->
                         backStack.removeLastOrNull()
+                        JournalEntryDetailRoute(id = id)
                     },
                     modifier = modifier
                 )

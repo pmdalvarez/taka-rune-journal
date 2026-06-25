@@ -35,7 +35,8 @@ import taka_rune_journal.composeapp.generated.resources.timeline_item_title_unti
 @Composable
 fun TimelineItemRow(
   item: TimelineItemUiModel,
-  onTimelineDetailClick: (Long) -> Unit,
+  onJournalEntryClick: (Long) -> Unit,
+  onRuneReadingClick: (Long) -> Unit,
   onDeleteClick: (Long, String, String?) -> Unit,
   modifier: Modifier = Modifier,
 ) {
@@ -50,13 +51,12 @@ fun TimelineItemRow(
       }
     }
   }
-
+  val isJournalEntry = runesText.isBlank()
   val title = when {
     !runesText.isBlank() -> runesText
     !item.title.isNullOrBlank() -> item.title
     else -> stringResource(Res.string.timeline_item_title_untitled)
   }
-
   val dateText = item.createdAt.format()
   val itemType =  stringResource(item.typeRes)
   val label = dateText + " · " + itemType
@@ -69,7 +69,7 @@ fun TimelineItemRow(
   Card(
     modifier = modifier
       .fillMaxWidth()
-      .clickable(onClick = { onTimelineDetailClick(item.id) }),
+      .clickable(onClick = { if (isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) }),
     shape = MaterialTheme.shapes.medium,
     colors = CardDefaults.cardColors(
       containerColor = MaterialTheme.colorScheme.surfaceContainer,
