@@ -57,7 +57,7 @@ fun ReadingInterpretationScreen(
       }
   ) { contentModifier ->
     Column(
-      modifier = modifier.fillMaxSize()
+      modifier = contentModifier.fillMaxSize()
     ) {
       Text(
         text = "Reading interpretation screen",
