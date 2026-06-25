@@ -4,6 +4,7 @@ enum class RuneId(
     val key: String, // Changing key values can break existing references in db or string files
     val glyph: String,
     val displayName: String,
+    val isReversible: Boolean = true,
 ) {
     FEHU(
         key = "fehu",
@@ -39,6 +40,7 @@ enum class RuneId(
         key = "gebo",
         glyph = "ᚷ",
         displayName = "Gebo",
+        isReversible = false
     ),
     WUNJO(
         key = "wunjo",
@@ -59,16 +61,19 @@ enum class RuneId(
         key = "isa",
         glyph = "ᛁ",
         displayName = "Isa",
+        isReversible = false
     ),
     JERA(
         key = "jera",
         glyph = "ᛃ",
         displayName = "Jera",
+        isReversible = false
     ),
     EIHWAZ(
         key = "eihwaz",
         glyph = "ᛇ",
         displayName = "Eihwaz",
+        isReversible = false
     ),
     PERTHRO(
         key = "perthro",
@@ -84,6 +89,7 @@ enum class RuneId(
         key = "sowilo",
         glyph = "ᛋ",
         displayName = "Sowilo",
+        isReversible = false
     ),
     TIWAZ(
         key = "tiwaz",
@@ -114,11 +120,13 @@ enum class RuneId(
         key = "ingwaz",
         glyph = "ᛜ",
         displayName = "Ingwaz",
+        isReversible = false
     ),
     DAGAZ(
         key = "dagaz",
         glyph = "ᛞ",
         displayName = "Dagaz",
+        isReversible = false
     ),
     OTHALA(
         key = "othala",
