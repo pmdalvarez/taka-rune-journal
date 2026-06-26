@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
+import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -90,7 +92,7 @@ fun TimelineItemRow(
     ),
   ) {
     Column(
-      modifier = Modifier.padding(16.dp),
+      modifier = Modifier.padding(TakaCardPadding),
     ) {
       Row(
         modifier = Modifier.fillMaxWidth(),
@@ -105,7 +107,7 @@ fun TimelineItemRow(
           tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(TakaSpaceMd))
 
         Column(
           modifier = Modifier.weight(1f),
@@ -151,7 +153,7 @@ fun TimelineItemRow(
           overflow = TextOverflow.Ellipsis,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 12.dp),
+            .padding(TakaSpaceMd),
         )
       }
     }

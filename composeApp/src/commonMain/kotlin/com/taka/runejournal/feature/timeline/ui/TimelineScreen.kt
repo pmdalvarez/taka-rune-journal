@@ -31,6 +31,8 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.components.showInfoSnackbar
+import com.taka.runejournal.core.ui.theme.TakaCardSpacing
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
@@ -90,7 +92,7 @@ fun TimelineScreen(
                 )
             },
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(TakaCardSpacing),
         ) {
             item {
                 GreetingSection(
@@ -109,7 +111,7 @@ fun TimelineScreen(
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 24.dp),
+                        .padding(top = TakaSectionSpacing),
                 )
             }
 
@@ -145,7 +147,7 @@ fun TimelineScreen(
 @Composable
 private fun TestArea(viewModel: TimelineViewModel) {
     HorizontalDivider(
-        modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = TakaSectionSpacing),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outlineVariant
     )
@@ -153,7 +155,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = TakaSectionSpacing)
     ) {
         Text("Change name to Paolo + random number")
     }
@@ -161,7 +163,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.setDisplayName("") },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = TakaSectionSpacing)
     ) {
         Text("Change name to empty")
     }
@@ -169,7 +171,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.createSingleRuneReading() },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = TakaSectionSpacing)
     ) {
         Text("New Single Rune Reading")
     }
@@ -177,7 +179,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.createPpfRuneReading() },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = TakaSectionSpacing)
     ) {
         Text("New PPF Reading")
     }
