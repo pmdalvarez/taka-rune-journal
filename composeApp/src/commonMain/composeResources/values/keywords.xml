@@ -1,0 +1,49 @@
+<resources>
+    <string name="keywords_fehu_upright"> wealth, abundance, resources, prosperity</string>
+    <string name="keywords_uruz_upright"></string>
+    <string name="keywords_thurisaz_upright"></string>
+    <string name="keywords_ansuz_upright"></string>
+    <string name="keywords_raidho_upright"></string>
+    <string name="keywords_kenaz_upright"></string>
+    <string name="keywords_gebo_upright"></string>
+    <string name="keywords_wunjo_upright"></string>
+    <string name="keywords_hagalaz_upright"></string>
+    <string name="keywords_nauthiz_upright"></string>
+    <string name="keywords_isa_upright"></string>
+    <string name="keywords_jera_upright"></string>
+    <string name="keywords_eihwaz_upright"></string>
+    <string name="keywords_perthro_upright"></string>
+    <string name="keywords_algiz_upright"></string>
+    <string name="keywords_sowilo_upright"></string>
+    <string name="keywords_tiwaz_upright"></string>
+    <string name="keywords_berkano_upright"></string>
+    <string name="keywords_ehwaz_upright"></string>
+    <string name="keywords_mannaz_upright"></string>
+    <string name="keywords_laguz_upright"></string>
+    <string name="keywords_ingwaz_upright"></string>
+    <string name="keywords_dagaz_upright"></string>
+    <string name="keywords_othala_upright"></string>
+
+    <string name="keywords_fehu_reversed"></string>
+    <string name="keywords_uruz_reversed"></string>
+    <string name="keywords_thurisaz_reversed"></string>
+    <string name="keywords_ansuz_reversed"></string>
+    <string name="keywords_raidho_reversed"></string>
+    <string name="keywords_kenaz_reversed"></string>
+    <string name="keywords_wunjo_reversed"></string>
+    <string name="keywords_hagalaz_reversed"></string>
+    <string name="keywords_nauthiz_reversed"></string>
+    <string name="keywords_perthro_reversed"></string>
+    <string name="keywords_algiz_reversed"></string>
+    <string name="keywords_tiwaz_reversed"></string>
+    <string name="keywords_berkano_reversed"></string>
+    <string name="keywords_ehwaz_reversed"></string>
+    <string name="keywords_mannaz_reversed"></string>
+    <string name="keywords_laguz_reversed"></string>
+    <string name="keywords_othala_reversed"></string>
+
+    <string name="keywords_fehu_upright_relationships"></string>
+    <string name="keywords_fehu_reversed_relationships"></string>
+
+
+</resources>

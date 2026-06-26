@@ -15,6 +15,24 @@ enum class ReadingCategory(
   }
 }
 /************************************************************
+General
+Open reflection
+
+Relationships
+Love, family, friendship, connection
+
+Purpose
+Work, direction, calling, meaningful effort
+
+Security
+Money, stability, home, resources
+
+Self
+Inner life, growth, wellbeing, identity
+
+
+
+
 Self
 
 Self is for questions about inner state, identity, intuition, emotions, and personal clarity.
