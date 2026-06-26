@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.taka.runejournal.core.ui.components.TakaTextField
-import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.core.ui.theme.TakaFieldSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.new_journal_entry_textfield_label_notes
@@ -22,7 +22,7 @@ fun JournalEntryEditor(
 ) {
   Column(
     modifier = modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.spacedBy(TakaSectionSpacing),
+    verticalArrangement = Arrangement.spacedBy(TakaFieldSpacing),
   ) {
     TakaTextField(
       value = titleValue,
