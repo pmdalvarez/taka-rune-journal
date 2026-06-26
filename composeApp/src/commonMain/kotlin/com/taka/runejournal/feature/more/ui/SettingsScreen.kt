@@ -28,7 +28,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -36,6 +35,9 @@ import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceLg
+import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -113,7 +115,7 @@ private fun SettingsContent(
         },
       )
     },
-    verticalArrangement = Arrangement.spacedBy(24.dp),
+    verticalArrangement = Arrangement.spacedBy(TakaSectionSpacing),
   ) {
     TakaTextField(
       value = nameInput,
@@ -147,7 +149,7 @@ private fun SettingsContent(
     ) {
       Column(
         modifier = Modifier.weight(1f),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(TakaSpaceXs),
       ) {
         Text(
           text = stringResource(Res.string.settings_reversible_runes_title),
@@ -164,7 +166,7 @@ private fun SettingsContent(
       Switch(
         checked = reversedRunesEnabled,
         onCheckedChange = onReversedRunesEnabledChange,
-        modifier = Modifier.padding(start = 16.dp),
+        modifier = Modifier.padding(start = TakaSpaceLg),
       )
     }
   }

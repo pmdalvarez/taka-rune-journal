@@ -2,7 +2,7 @@ package com.taka.runejournal.core.ui.theme
 
 import androidx.compose.ui.unit.dp
 
-// Base spacing scale - don't use directly
+// Base spacing scale
 val TakaSpaceNone = 0.dp
 val TakaSpaceXxs = 2.dp
 val TakaSpaceXs = 4.dp
@@ -13,7 +13,7 @@ val TakaSpaceXl = 24.dp
 val TakaSpaceXxl = 32.dp
 val TakaSpaceXxxl = 40.dp
 
-// Common app-level spacing - use these values
+// Common app-level spacing
 val TakaScreenPadding = TakaSpaceXl
 val TakaSectionSpacing = TakaSpaceXl
 val TakaContentSpacing = TakaSpaceLg

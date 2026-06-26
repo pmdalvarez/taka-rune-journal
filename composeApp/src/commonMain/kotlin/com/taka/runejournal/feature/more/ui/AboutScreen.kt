@@ -6,10 +6,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.about_description
@@ -32,7 +32,7 @@ fun AboutScreen(
   ) { contentModifier ->
     Column(
       modifier = contentModifier,
-      verticalArrangement = Arrangement.spacedBy(24.dp),
+      verticalArrangement = Arrangement.spacedBy(TakaSectionSpacing),
     ) {
       Text(
         text = stringResource(Res.string.about_description),
