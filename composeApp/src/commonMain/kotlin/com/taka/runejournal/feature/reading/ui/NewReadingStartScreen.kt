@@ -35,8 +35,7 @@ fun NewReadingStartScreen(
 ) {
   Column(
     modifier = modifier
-      .fillMaxSize()
-      .padding(24.dp),
+      .fillMaxSize(),
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
