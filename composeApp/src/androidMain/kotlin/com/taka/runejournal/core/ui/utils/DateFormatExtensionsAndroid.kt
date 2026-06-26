@@ -3,6 +3,8 @@ package com.taka.runejournal.core.ui.utils
 import android.icu.text.DisplayContext
 import android.icu.text.RelativeDateTimeFormatter
 import android.icu.util.ULocale
+import android.util.Log
+import androidx.core.os.LocaleListCompat
 import java.time.Duration
 import kotlin.time.Instant
 import kotlin.time.toJavaInstant
@@ -11,6 +13,20 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 
+object LocaleProvider {
+  // Unfortunately we need to maintain a hard-coded list of supported languages here, currently no code that can fetch this info
+  private val supportedLocales = listOf(
+    Locale.ENGLISH
+  )
+  private val defaultLocale = Locale.ENGLISH
+
+  val currentLocale: Locale
+    get() {
+      val deviceLocale = LocaleListCompat.getDefault()[0] ?: Locale.getDefault()
+      return supportedLocales.firstOrNull { it.language == deviceLocale.language }
+        ?: defaultLocale
+    }
+}
 actual fun Instant.formatRelative(now: Instant): String {
   val duration = Duration.between(
     this.toJavaInstant(),
@@ -18,7 +34,7 @@ actual fun Instant.formatRelative(now: Instant): String {
   )
 
   val formatter = RelativeDateTimeFormatter.getInstance(
-    ULocale.getDefault(),
+    ULocale.forLocale(LocaleProvider.currentLocale),
     null,
     RelativeDateTimeFormatter.Style.NARROW,
     DisplayContext.CAPITALIZATION_NONE
@@ -72,6 +88,6 @@ actual fun Instant.formatAbsolute(): String {
     .format(
       DateTimeFormatter
         .ofLocalizedDate(FormatStyle.MEDIUM)
-        .withLocale(Locale.getDefault())
+        .withLocale(LocaleProvider.currentLocale)
     )
 }
