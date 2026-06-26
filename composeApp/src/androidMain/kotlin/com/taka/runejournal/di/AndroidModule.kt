@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.taka.runejournal.core.data.local.TakaDatabase
+import com.taka.runejournal.core.platform.AppBuildConfig
 import org.koin.dsl.module
 
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(
@@ -23,7 +24,8 @@ fun androidModule(context: Context) = module {
       context.applicationContext,
       TakaDatabase::class.java,
       "taka_database.db",
-    ).build()
+    )
+    .build()
   }
 
   single {
