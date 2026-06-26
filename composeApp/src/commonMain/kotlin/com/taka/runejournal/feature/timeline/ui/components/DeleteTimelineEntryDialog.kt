@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_cancel
@@ -41,7 +43,7 @@ fun DeleteTimelineEntryDialog(
         )
 
         if (!preview.isNullOrBlank()) {
-          Spacer(modifier = Modifier.height(16.dp))
+          Spacer(modifier = Modifier.height(TakaContentSpacing))
 
           Surface(
             shape = MaterialTheme.shapes.small,
@@ -59,7 +61,7 @@ fun DeleteTimelineEntryDialog(
               color = MaterialTheme.colorScheme.onSurfaceVariant,
               maxLines = 4,
               overflow = TextOverflow.Ellipsis,
-              modifier = Modifier.padding(16.dp)
+              modifier = Modifier.padding(TakaCardPadding)
             )
           }
         }
