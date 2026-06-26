@@ -92,7 +92,7 @@ fun TimelineItemRow(
     ),
   ) {
     Column(
-      modifier = Modifier.padding(TakaCardPadding),
+      modifier = Modifier.fillMaxWidth().padding(TakaCardPadding),
     ) {
       Row(
         modifier = Modifier.fillMaxWidth(),
@@ -153,7 +153,7 @@ fun TimelineItemRow(
           overflow = TextOverflow.Ellipsis,
           modifier = Modifier
             .fillMaxWidth()
-            .padding(TakaSpaceMd),
+            .padding(top = TakaSpaceMd),
         )
       }
     }
