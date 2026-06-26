@@ -3,6 +3,7 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.DrawnRune
+import com.taka.runejournal.core.domain.model.ReadingCategory
 import com.taka.runejournal.core.domain.model.ReadingPosition
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.utils.format
@@ -45,7 +46,7 @@ class ReadingInterpretationViewModel(
             notes = timelineItem.notes,
             category = timelineItem.category,
             question = timelineItem.question,
-            runeInterpretations = listOf(getRuneInterpretation(timelineItem.rune, ReadingPosition.SINGLE))
+            runeInterpretations = listOf(getRuneInterpretation(timelineItem.rune, ReadingPosition.SINGLE, timelineItem.category))
           )
         }
         is TimelineItem.PpfRuneReading -> {
@@ -56,9 +57,9 @@ class ReadingInterpretationViewModel(
             category = timelineItem.category,
             question = timelineItem.question,
             runeInterpretations = listOf(
-              getRuneInterpretation(timelineItem.pastRune, ReadingPosition.PAST),
-              getRuneInterpretation(timelineItem.presentRune, ReadingPosition.PRESENT),
-              getRuneInterpretation(timelineItem.futureRune, ReadingPosition.FUTURE)
+              getRuneInterpretation(timelineItem.pastRune, ReadingPosition.PAST, timelineItem.category),
+              getRuneInterpretation(timelineItem.presentRune, ReadingPosition.PRESENT, timelineItem.category),
+              getRuneInterpretation(timelineItem.futureRune, ReadingPosition.FUTURE, timelineItem.category)
             )
           )
         }
@@ -70,12 +71,14 @@ class ReadingInterpretationViewModel(
     }
   }
 
-  private fun getRuneInterpretation(rune: DrawnRune, position: ReadingPosition): RuneInterpretation {
-    // TODO - interpretation may need to be done inside composable functions
+  private fun getRuneInterpretation(rune: DrawnRune, position: ReadingPosition, category: ReadingCategory): RuneInterpretation {
     return RuneInterpretation(
       position = position,
       rune = rune,
-      interpretation = "Place interpretation here"
+      interpretation = rune.generalInterpretation(),
+      supplementalInterpretation = rune.supplementalInterpretation(category),
+      keywords = rune.generalKeywords(),
+      supplementalKeywords = rune.supplementalKeywords(category)
     )
   }
 

@@ -3,12 +3,15 @@ package com.taka.runejournal.feature.reading.ui
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingCategory
 import com.taka.runejournal.core.domain.model.ReadingPosition
-import kotlin.time.Instant
+import org.jetbrains.compose.resources.StringResource
 
 data class RuneInterpretation(
   val position: ReadingPosition,
   val rune: DrawnRune,
-  val interpretation: String
+  val interpretation: StringResource,
+  val supplementalInterpretation: StringResource?,
+  val keywords: StringResource,
+  val supplementalKeywords: StringResource?,
 )
 
 data class ReadingInterpretationUiState(
