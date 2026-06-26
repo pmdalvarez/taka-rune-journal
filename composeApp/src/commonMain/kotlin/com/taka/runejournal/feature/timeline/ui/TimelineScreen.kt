@@ -92,7 +92,7 @@ fun TimelineScreen(
                 )
             },
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(TakaCardSpacing),
+            verticalArrangement = Arrangement.Center,
         ) {
             item {
                 GreetingSection(

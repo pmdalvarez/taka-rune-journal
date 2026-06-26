@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 
 @Composable
 fun JournalEntryDetail(
@@ -29,7 +32,7 @@ fun JournalEntryDetail(
     )
     Text(
       text = formattedDate,
-      modifier = Modifier.padding(top = 4.dp),
+      modifier = Modifier.padding(top = TakaSpaceXs),
       style = MaterialTheme.typography.labelMedium,
       color = MaterialTheme.colorScheme.onSurfaceVariant
     )
@@ -43,11 +46,11 @@ fun JournalEntryDetail(
       ),
       modifier = Modifier
         .fillMaxWidth()
-        .padding(top = 24.dp)
+        .padding(top = TakaSectionSpacing)
     ) {
       Text(
         text = notes,
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(TakaCardPadding),
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
       )

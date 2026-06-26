@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaTextField
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -49,7 +49,7 @@ fun GreetingSection(
     )
     Text(
       text = stringResource(Res.string.timeline_welcome_prompt),
-      modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
+      modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )
     // If logic ensures that after user enters a name, the text field changed to a greeting
@@ -61,12 +61,12 @@ fun GreetingSection(
             displayNameEntered = true
           }
         },
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = TakaContentSpacing)
       )
     } else {
       Text(
         text = stringResource(Res.string.timeline_feedback_name_given, displayName),
-        modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
+        modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
         style = MaterialTheme.typography.bodyLarge
       )
     }
@@ -89,7 +89,7 @@ fun GreetingSection(
     dailyPrompt?.let {
       Text(
         text = it,
-        modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
+        modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
         style = MaterialTheme.typography.bodyLarge
       )
     }

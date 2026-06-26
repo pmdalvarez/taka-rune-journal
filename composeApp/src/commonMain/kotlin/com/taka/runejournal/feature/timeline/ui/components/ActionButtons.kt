@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaButton
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -29,7 +30,7 @@ fun ActionButtons(
   Row (
     modifier = Modifier
       .fillMaxWidth()
-      .padding(top = 24.dp, start = 8.dp, end = 8.dp),
+      .padding(top = TakaContentSpacing, start = 8.dp, end = 8.dp),
     horizontalArrangement = Arrangement.spacedBy(16.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {

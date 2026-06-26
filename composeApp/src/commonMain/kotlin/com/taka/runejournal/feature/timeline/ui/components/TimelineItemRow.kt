@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
@@ -74,6 +75,7 @@ fun TimelineItemRow(
   Card(
     modifier = modifier
       .fillMaxWidth()
+      .padding(top = TakaCardSpacing)
       .clickable(onClick = { if (item.isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) }),
     shape = MaterialTheme.shapes.medium,
     colors = CardDefaults.cardColors(
