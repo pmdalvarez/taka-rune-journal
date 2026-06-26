@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
+import com.taka.runejournal.core.ui.theme.TakaSpaceXl
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -30,18 +32,17 @@ fun ActionButtons(
   Row (
     modifier = Modifier
       .fillMaxWidth()
-      .padding(top = TakaContentSpacing, start = 8.dp, end = 8.dp),
-    horizontalArrangement = Arrangement.spacedBy(16.dp),
+      .padding(top = TakaContentSpacing),
+    horizontalArrangement = Arrangement.spacedBy(TakaSpaceXl),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     TakaButton(
       onClick = onNewReadingClick,
       modifier = Modifier
-        .weight(1f)
-        .padding(end = 8.dp),
+        .weight(1f),
     ) {
       Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(TakaSpaceSm),
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Icon(
@@ -57,8 +58,7 @@ fun ActionButtons(
     TakaButton(
       onClick = onNewJournalEntryClick,
       modifier = Modifier
-        .weight(1f)
-        .padding(end = 8.dp),
+        .weight(1f),
     ) {
       Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),

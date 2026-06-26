@@ -19,5 +19,3 @@ val TakaSectionSpacing = TakaSpaceXl
 val TakaContentSpacing = TakaSpaceLg
 val TakaCardPadding = TakaSpaceLg
 val TakaCardSpacing = TakaSpaceMd
-val TakaFieldSpacing = TakaSpaceMd
-val TakaButtonSpacing = TakaSpaceSm

@@ -31,7 +31,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.components.showInfoSnackbar
-import com.taka.runejournal.core.ui.theme.TakaCardSpacing
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
@@ -155,7 +155,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaSectionSpacing)
+        modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("Change name to Paolo + random number")
     }
@@ -163,7 +163,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.setDisplayName("") },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaSectionSpacing)
+        modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("Change name to empty")
     }
@@ -171,7 +171,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.createSingleRuneReading() },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaSectionSpacing)
+        modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New Single Rune Reading")
     }
@@ -179,7 +179,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
     TakaButton(
         onClick = { viewModel.createPpfRuneReading() },
         style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaSectionSpacing)
+        modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New PPF Reading")
     }
