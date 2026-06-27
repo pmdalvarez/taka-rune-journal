@@ -1,8 +1,7 @@
 package com.taka.runejournal.feature.timeline.ui.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -30,7 +27,6 @@ import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.button_delete
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_journal_entry
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
@@ -48,9 +44,9 @@ fun TimelineItemRow(
     item.drawnRunes?.forEachIndexed { index, drawnRune ->
       if (index > 0) append(" · ")
       if (drawnRune.orientation == RuneOrientation.REVERSED) {
-        append(stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.glyph + " " + drawnRune.rune.displayName))
+        append(stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName))
       } else {
-        append(drawnRune.rune.glyph + " " + drawnRune.rune.displayName)
+        append( drawnRune.rune.displayName)
       }
     }
   }
@@ -76,7 +72,10 @@ fun TimelineItemRow(
     modifier = modifier
       .fillMaxWidth()
       .padding(top = TakaCardSpacing)
-      .clickable(onClick = { if (item.isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) }),
+      .combinedClickable(
+        onClick = { if (item.isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) },
+        onLongClick = { onDeleteClick(item.id, deleteDialogTitle, deleteDialogPreview) },
+      ),
     shape = MaterialTheme.shapes.medium,
     colors = CardDefaults.cardColors(
       containerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -126,22 +125,6 @@ fun TimelineItemRow(
             text = label,
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-          )
-        }
-
-        Box(
-          modifier = Modifier
-            .size(36.dp)
-            .clickable {
-              onDeleteClick(item.id, deleteDialogTitle, deleteDialogPreview)
-            },
-          contentAlignment = Alignment.TopEnd,
-        ) {
-          Icon(
-            imageVector = Icons.Outlined.Delete,
-            contentDescription = stringResource(Res.string.button_delete),
-            modifier = Modifier.size(22.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
           )
         }
       }
