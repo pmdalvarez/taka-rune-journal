@@ -105,8 +105,8 @@ class TimelineViewModel(
   fun createPpfRuneReading() {
     viewModelScope.launch {
       timelineRepository.createPpfRuneReading(
-        question = listOf("What should I do next year?","Where should i live next year?","").random(),
-        category = ReadingCategory.PURPOSE,
+        question = listOf(null, "What should I do next year?","Where should i live next year?","").random(),
+        category = ReadingCategory.entries.random(),
         pastRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
         presentRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
         futureRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
