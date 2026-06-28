@@ -3,9 +3,7 @@ package com.taka.runejournal.feature.reading.ui
 import DeleteTimelineEntryDialog
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -19,10 +17,12 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
+import taka_rune_journal.composeapp.generated.resources.rune_reading_topbar_title
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -48,6 +48,7 @@ fun ReadingInterpretationScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
           TakaTopBar(
+            title = stringResource(uiState.category.topbarTitle()),
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
             action = TakaTopBarAction.RuneInterpretationActions(
@@ -59,10 +60,8 @@ fun ReadingInterpretationScreen(
     Column(
       modifier = contentModifier.fillMaxSize()
     ) {
-      Text(
-        text = "Reading interpretation screen",
-        style = MaterialTheme.typography.headlineSmall,
-        color = MaterialTheme.colorScheme.onBackground
+      ReadingInterpretationContextHeader(
+        question = uiState.question
       )
     }
   }
@@ -76,3 +75,4 @@ fun ReadingInterpretationScreen(
     )
   }
 }
+

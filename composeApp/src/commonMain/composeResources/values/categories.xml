@@ -1,0 +1,17 @@
+<resources>
+    <string name="reading_category_general_name">General</string>
+    <string name="reading_category_general_description">Open reflection</string>
+    <string name="reading_category_relationships_name">Relationships</string>
+    <string name="reading_category_relationships_description">Love, family, friendship, connection</string>
+    <string name="reading_category_purpose_name">Purpose</string>
+    <string name="reading_category_purpose_description">Work, direction, calling, meaningful effort</string>
+    <string name="reading_category_security_name">Security</string>
+    <string name="reading_category_security_description">Money, stability, home, resources</string>
+    <string name="reading_category_self_name">Self</string>
+    <string name="reading_category_self_description">Inner life, growth, wellbeing, identity</string>
+    <string name="reading_category_general_topbar_title">Reading</string>
+    <string name="reading_category_relationships_topbar_title">Relationships Reading</string>
+    <string name="reading_category_purpose_topbar_title">Purpose Reading</string>
+    <string name="reading_category_security_topbar_title">Security Reading</string>
+    <string name="reading_category_self_topbar_title">Self Reading</string>
+</resources>
