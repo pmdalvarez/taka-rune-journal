@@ -69,10 +69,10 @@ fun TimelineItemRow(
       }
     }
   }
-  val deleteDialogPreview = if (item.journalNotesPreview.isNullOrBlank()) {
+  val deleteDialogPreview = if (bodyText.isNullOrBlank()) {
     title
   } else {
-    title + "\n\n" + item.journalNotesPreview
+    title + "\n\n" + bodyText
   }
 
   Card(
