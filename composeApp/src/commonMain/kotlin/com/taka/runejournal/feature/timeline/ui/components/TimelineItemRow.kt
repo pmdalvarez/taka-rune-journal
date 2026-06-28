@@ -30,6 +30,7 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_journal_entry
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
+import taka_rune_journal.composeapp.generated.resources.timeline_item_title_no_question
 import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 
 @Composable
@@ -40,32 +41,38 @@ fun TimelineItemRow(
   onDeleteClick: (Long, String, String?) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val runesText = buildString {
-    item.drawnRunes?.forEachIndexed { index, drawnRune ->
-      if (index > 0) append(" · ")
-      if (drawnRune.orientation == RuneOrientation.REVERSED) {
-        append(stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName))
-      } else {
-        append(drawnRune.rune.displayName)
-      }
-    }
-  }
   val title = when {
-    !runesText.isBlank() -> runesText
     !item.title.isNullOrBlank() -> item.title
-    else -> stringResource(Res.string.timeline_item_title_untitled)
+    item.isJournalEntry -> stringResource(Res.string.timeline_item_title_untitled)
+    else -> stringResource(Res.string.timeline_item_title_no_question)
   }
-  val itemType = stringResource(item.typeRes)
-  val label = item.formattedDate + " · " + itemType
+  val label = item.formattedDate + " · " + stringResource(item.typeRes)
   val deleteDialogTitle = if (item.isJournalEntry) {
     stringResource(Res.string.delete_dialog_title_journal_entry)
   } else {
     stringResource(Res.string.delete_dialog_title_rune_reading)
   }
-  val deleteDialogPreview = if (item.preview.isNullOrBlank()) {
+  val bodyText = if (item.isJournalEntry) {
+    item.journalNotesPreview
+  } else {
+    // concatenated rune string e.g. Fehu · Raidho (R) · Algiz
+    item.drawnRunes?.let {
+      buildString {
+        it.forEachIndexed { index, drawnRune ->
+          if (index > 0) append(" · ")
+          if (drawnRune.orientation == RuneOrientation.REVERSED) {
+            append(stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName))
+          } else {
+            append(drawnRune.rune.displayName)
+          }
+        }
+      }
+    }
+  }
+  val deleteDialogPreview = if (item.journalNotesPreview.isNullOrBlank()) {
     title
   } else {
-    title + "\n\n" + item.preview
+    title + "\n\n" + item.journalNotesPreview
   }
 
   Card(
@@ -129,9 +136,9 @@ fun TimelineItemRow(
         }
       }
 
-      if (!item.preview.isNullOrBlank()) {
+      if (!bodyText.isNullOrBlank()) {
         Text(
-          text = item.preview,
+          text = bodyText,
           style = MaterialTheme.typography.bodyMedium,
           color = MaterialTheme.colorScheme.onSurfaceVariant,
           maxLines = 2,

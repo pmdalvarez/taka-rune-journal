@@ -22,7 +22,7 @@ data class TimelineItemUiModel(
   val typeRes: StringResource,
   val title: String? = null,
   val drawnRunes: List<DrawnRune>? = null,
-  val preview: String? = null,
+  val journalNotesPreview: String? = null,
 )
 
 fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
@@ -30,10 +30,10 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     id = id,
     isJournalEntry = false,
     formattedDate = createdAt.format(),
+    title = question,
     icon = Res.drawable.ic_rune_reading_icon,
     typeRes = category.readingType(),
     drawnRunes = listOf(rune),
-    preview = question
   )
 
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(
@@ -41,9 +41,9 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     isJournalEntry = false,
     formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
+    title = question,
     typeRes = category.readingType(),
     drawnRunes = listOf(pastRune, presentRune, futureRune),
-    preview = question
   )
 
   is TimelineItem.JournalEntry -> TimelineItemUiModel(
@@ -53,7 +53,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     icon = Res.drawable.ic_journal_entry_icon,
     title = title,
     typeRes = Res.string.timeline_item_type_journal_entry,
-    preview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
+    journalNotesPreview = notes.orEmpty().take(NOTE_PREVIEW_MAX_LENGTH)
   )
 
 }
