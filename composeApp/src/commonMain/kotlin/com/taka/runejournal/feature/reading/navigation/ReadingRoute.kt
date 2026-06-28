@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 sealed interface ReadingRoute : NavKey
 
 @Serializable
-data object NewReadingStartRoute : ReadingRoute
+data object ReadingStartRoute : ReadingRoute
 
 @Serializable
-data object NewReadingDrawRoute : ReadingRoute
+data object ReadingDrawRoute : ReadingRoute

@@ -27,7 +27,7 @@ import kotlin.collections.chunked
 import kotlin.collections.forEach
 
 @Composable
-fun NewReadingStartScreen(
+fun ReadingStartScreen(
   viewModel: ReadingViewModel,
   onBackClick: () -> Unit,
   onContinueClick: () -> Unit,
