@@ -22,7 +22,6 @@ import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
-import taka_rune_journal.composeapp.generated.resources.rune_reading_topbar_title
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -48,7 +47,7 @@ fun ReadingInterpretationScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
           TakaTopBar(
-            title = stringResource(uiState.category.topbarTitle()),
+            title = stringResource(uiState.category.readingType()),
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
             action = TakaTopBarAction.RuneInterpretationActions(

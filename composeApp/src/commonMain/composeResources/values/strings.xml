@@ -28,8 +28,6 @@
     <string name="timeline_feedback_name_given">Hello %1$s, nice to meet you.</string>
     <string name="timeline_item_title_untitled">Untitled</string>
     <string name="timeline_item_type_journal_entry">Journal Entry</string>
-    <string name="timeline_item_type_single_rune">Single Rune</string>
-    <string name="timeline_item_type_ppf">Past Present Future</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>

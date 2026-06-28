@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.timeline.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.ui.utils.format
+import com.taka.runejournal.feature.reading.ui.readingType
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -9,8 +10,6 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_rune_reading_icon
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journal_entry
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_ppf
-import taka_rune_journal.composeapp.generated.resources.timeline_item_type_single_rune
 import kotlin.collections.List
 
 private const val NOTE_PREVIEW_MAX_LENGTH = 140
@@ -32,7 +31,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     isJournalEntry = false,
     formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
-    typeRes = Res.string.timeline_item_type_single_rune,
+    typeRes = category.readingType(),
     drawnRunes = listOf(rune),
     preview = question
   )
@@ -42,7 +41,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     isJournalEntry = false,
     formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
-    typeRes = Res.string.timeline_item_type_ppf,
+    typeRes = category.readingType(),
     drawnRunes = listOf(pastRune, presentRune, futureRune),
     preview = question
   )
