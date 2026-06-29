@@ -2,12 +2,18 @@ package com.taka.runejournal.feature.reading.ui
 
 import DeleteTimelineEntryDialog
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,6 +22,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Modifier.Companion
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -23,7 +32,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
-import com.taka.runejournal.core.ui.theme.TakaScreenPadding
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationNotesTab
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationRuneTab
@@ -79,13 +88,22 @@ fun ReadingInterpretationScreen(
         )
       }
       if (uiState.tabs.isNotEmpty()) {
-        PrimaryScrollableTabRow(
+        PrimaryTabRow(
           selectedTabIndex = pagerState.currentPage,
-          edgePadding = TakaScreenPadding,
+          containerColor = MaterialTheme.colorScheme.background,
+          divider = {},
+          // SecondaryIndicator needed so that indicator takes up full length of tab instead of the text
+          indicator = {
+              TabRowDefaults.SecondaryIndicator(
+                modifier =  Modifier.tabIndicatorOffset(pagerState.currentPage, matchContentSize = false),
+              )
+          }
         ) {
           uiState.tabs.forEachIndexed { index, tab ->
             Tab(
               selected = pagerState.currentPage == index,
+              selectedContentColor = MaterialTheme.colorScheme.onBackground,
+              unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
               onClick = {
                 coroutineScope.launch {
                   pagerState.animateScrollToPage(index)
@@ -95,6 +113,7 @@ fun ReadingInterpretationScreen(
             )
           }
         }
+        Spacer(modifier = Modifier.height(TakaContentSpacing))
         HorizontalPager(
           state = pagerState,
           modifier = Modifier.weight(1f),
