@@ -16,10 +16,11 @@ sealed class ReadingInterpretationTab {
     val supplementalKeywords: StringResource?,
   ) : ReadingInterpretationTab()
 
-  data class Summary(
-    override val label: StringResource,
-    val summary: String,
-  ) : ReadingInterpretationTab()
+// TODO Implement this in the future
+//  data class Summary(
+//    override val label: StringResource,
+//    val summary: String,
+//  ) : ReadingInterpretationTab()
 
   data class Notes(
     override val label: StringResource,

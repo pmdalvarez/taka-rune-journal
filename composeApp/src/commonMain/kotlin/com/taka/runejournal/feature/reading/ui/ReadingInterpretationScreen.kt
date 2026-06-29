@@ -72,41 +72,39 @@ fun ReadingInterpretationScreen(
     Column(
       modifier = contentModifier.fillMaxSize()
     ) {
-      ReadingInterpretationContextHeader(
-        question = uiState.question
-      )
-
-      PrimaryScrollableTabRow(
-        selectedTabIndex = pagerState.currentPage,
-        edgePadding = TakaScreenPadding,
-      ) {
-        uiState.tabs.forEachIndexed { index, tab ->
-          Tab(
-            selected = pagerState.currentPage == index,
-            onClick = {
-              coroutineScope.launch {
-                pagerState.animateScrollToPage(index)
-              }
-            },
-            text = { Text(stringResource(tab.label)) },
-          )
+      if (!uiState.question.isNullOrBlank()) {
+        ReadingInterpretationContextHeader(
+          question = uiState.question
+        )
+      }
+      if (uiState.tabs.isNotEmpty()) {
+        PrimaryScrollableTabRow(
+          selectedTabIndex = pagerState.currentPage,
+          edgePadding = TakaScreenPadding,
+        ) {
+          uiState.tabs.forEachIndexed { index, tab ->
+            Tab(
+              selected = pagerState.currentPage == index,
+              onClick = {
+                coroutineScope.launch {
+                  pagerState.animateScrollToPage(index)
+                }
+              },
+              text = { Text(stringResource(tab.label)) },
+            )
+          }
+        }
+        HorizontalPager(
+          state = pagerState,
+          modifier = Modifier.weight(1f),
+        ) { page ->
+          val tab = uiState.tabs[page]
+          when (tab) {
+            is ReadingInterpretationTab.Rune -> RuneInterpretationTab()
+            is ReadingInterpretationTab.Notes -> RuneInterpretationTab()
+          }
         }
       }
-
-      HorizontalPager(
-        state = pagerState,
-        modifier = Modifier.weight(1f),
-      ) { page ->
-        val tab = uiState.tabs[page]
-        when (tab) {
-          is ReadingInterpretationTab.Rune -> RuneInterpretationTab()
-          is ReadingInterpretationTab.Notes -> RuneInterpretationTab()
-          else -> {}
-        }
-
-      }
-
-
     }
   }
 
