@@ -1,6 +1,5 @@
 package com.taka.runejournal.feature.timeline.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
+import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.theme.TakaCardPadding
 import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
@@ -75,79 +73,59 @@ fun TimelineItemRow(
     title + "\n\n" + bodyText
   }
 
-  Card(
+  TakaCard(
     modifier = modifier
-      .fillMaxWidth()
       .padding(top = TakaCardSpacing)
       .combinedClickable(
         onClick = { if (item.isJournalEntry) onJournalEntryClick(item.id) else onRuneReadingClick(item.id) },
         onLongClick = { onDeleteClick(item.id, deleteDialogTitle, deleteDialogPreview) },
-      ),
-    shape = MaterialTheme.shapes.medium,
-    colors = CardDefaults.cardColors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainer,
-      contentColor = MaterialTheme.colorScheme.onSurface,
-    ),
-    border = BorderStroke(
-      width = 1.dp,
-      color = MaterialTheme.colorScheme.outlineVariant,
-    ),
-    elevation = CardDefaults.cardElevation(
-      defaultElevation = 0.dp,
-      pressedElevation = 0.dp,
-      focusedElevation = 0.dp,
-      hoveredElevation = 0.dp,
-    ),
+      )
   ) {
-    Column(
-      modifier = Modifier.fillMaxWidth().padding(TakaCardPadding),
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      verticalAlignment = Alignment.Top,
     ) {
-      Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.Top,
+      Icon(
+        painter = painterResource(item.icon),
+        contentDescription = title,
+        modifier = Modifier
+          .padding(top = 1.dp)
+          .size(36.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+
+      Spacer(modifier = Modifier.width(TakaSpaceMd))
+
+      Column(
+        modifier = Modifier.weight(1f),
       ) {
-        Icon(
-          painter = painterResource(item.icon),
-          contentDescription = title,
-          modifier = Modifier
-            .padding(top = 1.dp)
-            .size(36.dp),
-          tint = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-
-        Spacer(modifier = Modifier.width(TakaSpaceMd))
-
-        Column(
-          modifier = Modifier.weight(1f),
-        ) {
-          Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-          )
-
-          Text(
-            text = label,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-          )
-        }
-      }
-
-      if (!bodyText.isNullOrBlank()) {
         Text(
-          text = bodyText,
-          style = MaterialTheme.typography.bodyMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant,
-          maxLines = 2,
+          text = title,
+          style = MaterialTheme.typography.titleMedium,
+          color = MaterialTheme.colorScheme.onSurface,
+          maxLines = 1,
           overflow = TextOverflow.Ellipsis,
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = TakaSpaceMd),
+        )
+
+        Text(
+          text = label,
+          style = MaterialTheme.typography.labelMedium,
+          color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
       }
+    }
+
+    if (!bodyText.isNullOrBlank()) {
+      Text(
+        text = bodyText,
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(top = TakaSpaceMd),
+      )
     }
   }
 }

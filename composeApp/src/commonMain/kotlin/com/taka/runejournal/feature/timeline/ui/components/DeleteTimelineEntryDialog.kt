@@ -1,19 +1,14 @@
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -45,23 +40,13 @@ fun DeleteTimelineEntryDialog(
         if (!preview.isNullOrBlank()) {
           Spacer(modifier = Modifier.height(TakaContentSpacing))
 
-          Surface(
-            shape = MaterialTheme.shapes.small,
-            color = MaterialTheme.colorScheme.surfaceContainer,
-            contentColor = MaterialTheme.colorScheme.onSurface,
-            border = BorderStroke(
-              width = 1.dp,
-              color = MaterialTheme.colorScheme.outlineVariant,
-            ),
-            modifier = Modifier.fillMaxWidth()
-          ) {
+          TakaCard {
             Text(
               text = preview,
               style = MaterialTheme.typography.bodyMedium,
               color = MaterialTheme.colorScheme.onSurfaceVariant,
               maxLines = 4,
-              overflow = TextOverflow.Ellipsis,
-              modifier = Modifier.padding(TakaCardPadding)
+              overflow = TextOverflow.Ellipsis
             )
           }
         }
