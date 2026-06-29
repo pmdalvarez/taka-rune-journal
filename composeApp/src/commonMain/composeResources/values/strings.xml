@@ -47,9 +47,16 @@
     <string name="journal_entry_save_error">Changes could not be saved. Please try again.</string>
     <string name="journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
-    <string name="rune_reading_topbar_title">Your Reading</string>
+    <string name="rune_reading_topbar_title">Reading</string>
     <string name="rune_reading_load_error">Rune Reading not found</string>
+    <string name="rune_reading_tab_single_rune">Rune</string>
+    <string name="rune_reading_tab_past_rune">Past</string>
+    <string name="rune_reading_tab_present_rune">Present</string>
+    <string name="rune_reading_tab_future_rune">Future</string>
+    <string name="rune_reading_tab_summary">Summary</string>
+    <string name="rune_reading_tab_notes">Notes</string>
 
+    <string name="rune_reading_summary_general">You are also encouraged to read more about the rune in the about section and come up with your interpretations. Feel free to write notes</string>
 
 
 </resources>

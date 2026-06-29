@@ -2,25 +2,36 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingCategory
-import com.taka.runejournal.core.domain.model.ReadingPosition
 import org.jetbrains.compose.resources.StringResource
 
-data class RuneInterpretation(
-  val position: ReadingPosition,
-  val rune: DrawnRune,
-  val interpretation: StringResource,
-  val supplementalInterpretation: StringResource?,
-  val keywords: StringResource,
-  val supplementalKeywords: StringResource?,
-)
+sealed class ReadingInterpretationTab {
+  abstract val label: StringResource
+
+  data class Rune(
+    override val label: StringResource,
+    val rune: DrawnRune,
+    val interpretation: StringResource,
+    val supplementalInterpretation: StringResource?,
+    val keywords: StringResource,
+    val supplementalKeywords: StringResource?,
+  ) : ReadingInterpretationTab()
+
+  data class Summary(
+    override val label: StringResource,
+    val summary: String,
+  ) : ReadingInterpretationTab()
+
+  data class Notes(
+    override val label: StringResource,
+    val notes: String? = null,
+  ): ReadingInterpretationTab()
+}
 
 data class ReadingInterpretationUiState(
   val id: Long = 0L,
   val createdAt: String = "",
-  val notes: String? = null,
   val category: ReadingCategory = ReadingCategory.GENERAL,
   val question: String? = null,
-  val runeInterpretations: List<RuneInterpretation> = emptyList(),
-  val summary: String? = null, // AI-generated summary of whole reading, nice to have
+  val tabs: List<ReadingInterpretationTab> = emptyList(),
   val showDeleteDialog: Boolean = false
 )
