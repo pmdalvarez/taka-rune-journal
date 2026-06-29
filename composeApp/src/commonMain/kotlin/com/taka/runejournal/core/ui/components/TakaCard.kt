@@ -2,6 +2,7 @@ package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import com.taka.runejournal.core.ui.theme.TakaCardPadding
 @Composable
 fun TakaCard(
   modifier: Modifier = Modifier,
+  verticalArrangement: Arrangement.Vertical = Arrangement.Top,
   shape: Shape = MaterialTheme.shapes.small,
   content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -36,6 +38,7 @@ fun TakaCard(
   ) {
     Column(
       modifier = Modifier.fillMaxWidth().padding(TakaCardPadding),
+      verticalArrangement = verticalArrangement,
     ) {
       content()
     }
