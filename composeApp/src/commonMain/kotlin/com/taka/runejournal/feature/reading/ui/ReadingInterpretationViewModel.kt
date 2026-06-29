@@ -78,14 +78,14 @@ class ReadingInterpretationViewModel(
     }
   }
 
-  private fun getRuneTab(rune: DrawnRune, tabName: StringResource, category: ReadingCategory): ReadingInterpretationTab.Rune {
+  private fun getRuneTab(drawnRune: DrawnRune, tabName: StringResource, category: ReadingCategory): ReadingInterpretationTab.Rune {
     return ReadingInterpretationTab.Rune(
       label = tabName,
-      rune = rune,
-      interpretation = rune.generalInterpretation(),
-      supplementalInterpretation = rune.supplementalInterpretation(category),
-      keywords = rune.generalKeywords(),
-      supplementalKeywords = rune.supplementalKeywords(category)
+      drawnRune = drawnRune,
+      interpretation = drawnRune.generalInterpretation(),
+      supplementalInterpretation = drawnRune.supplementalInterpretation(category),
+      keywords = drawnRune.generalKeywords(),
+      supplementalKeywords = drawnRune.supplementalKeywords(category)
     )
   }
 

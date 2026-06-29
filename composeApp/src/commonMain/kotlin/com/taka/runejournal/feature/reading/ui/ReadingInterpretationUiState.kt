@@ -9,7 +9,7 @@ sealed class ReadingInterpretationTab {
 
   data class Rune(
     override val label: StringResource,
-    val rune: DrawnRune,
+    val drawnRune: DrawnRune,
     val interpretation: StringResource,
     val supplementalInterpretation: StringResource?,
     val keywords: StringResource,

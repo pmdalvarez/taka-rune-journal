@@ -25,7 +25,8 @@ import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
-import com.taka.runejournal.feature.reading.ui.components.RuneInterpretationTab
+import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationNotesTab
+import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationRuneTab
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
@@ -100,8 +101,14 @@ fun ReadingInterpretationScreen(
         ) { page ->
           val tab = uiState.tabs[page]
           when (tab) {
-            is ReadingInterpretationTab.Rune -> RuneInterpretationTab()
-            is ReadingInterpretationTab.Notes -> RuneInterpretationTab()
+            is ReadingInterpretationTab.Rune -> ReadingInterpretationRuneTab(
+              tab.drawnRune,
+              tab.interpretation,
+              tab.supplementalInterpretation,
+              tab.keywords,
+              tab.supplementalKeywords
+            )
+            is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(tab.notes)
           }
         }
       }

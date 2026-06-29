@@ -118,3 +118,9 @@ fun DrawnRune.supplementalKeywords(readingCategory: ReadingCategory): StringReso
   val key = "keywords_${rune.key}_${orientation.key}_${readingCategory.key}"
   return Res.allStringResources[key]
 }
+
+fun String.toDotSeparatedKeywords(): String {
+  return this.split(",")
+    .map { it.trim() }
+    .joinToString(" · ")
+}
