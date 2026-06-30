@@ -35,7 +35,7 @@ fun ReadingInterpretationRuneTab(
   keywords: StringResource,
   supplementalKeywords: StringResource?
 ) {
-  val fullInterpretation = stringResource(drawnRune.rune.origin())
+  val fullInterpretation = stringResource(drawnRune.rune.origin()) + "\n\n" + stringResource(interpretation)
   TakaCard(
     modifier = Modifier
       .fillMaxHeight()
