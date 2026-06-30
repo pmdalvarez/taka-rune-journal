@@ -1,6 +1,7 @@
 package com.taka.runejournal.feature.reading.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,17 +15,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.ButtonStyle
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_add_notes
 import taka_rune_journal.composeapp.generated.resources.button_cancel
 import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_save
+import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_add_prompt
 import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_texfield_label
 import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_title
 
@@ -37,8 +42,8 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     modifier = Modifier
       .fillMaxHeight()
   ) {
-    if (isEditing) {
-      NotesTabEditMode(
+    when {
+      isEditing -> NotesTabEditMode(
         value = notesInput,
         onValueChange = { notesInput = it },
         onCancelClicked = {
@@ -51,16 +56,19 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
           isEditing = false
         }
       )
-    } else {
-      NotesTabViewMode(
-        notes = notes,
-        onEditClicked = { isEditing = true }
-      )
+      !notes.isNullOrBlank() -> {
+        NotesTabViewMode(
+          notes = notes,
+          onEditClicked = { isEditing = true }
+        )
+      }
+      else ->
+        NotesTabViewModeEmptyNotes(onEditClicked = { isEditing = true })
     }
   }
 }
 
-@Composable fun NotesTabViewMode(notes: String?, onEditClicked: () -> Unit) {
+@Composable fun NotesTabViewMode(notes: String, onEditClicked: () -> Unit) {
   Row(
     modifier = Modifier.fillMaxWidth(),
     horizontalArrangement = Arrangement.SpaceBetween,
@@ -70,20 +78,43 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       text = stringResource(Res.string.rune_reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
-
     TakaButton(
       style = ButtonStyle.Tertiary,
       onClick = onEditClicked,
+      contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align right
     ) {
       Text(stringResource(Res.string.button_edit))
     }
   }
-
   Text(
     modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
-    text = notes ?: "No notes yet",
+    text = notes,
     style = MaterialTheme.typography.bodyMedium
   )
+}
+
+@Composable fun NotesTabViewModeEmptyNotes(onEditClicked: () -> Unit) {
+  Text(
+    text = stringResource(Res.string.rune_reading_notes_title),
+    style = MaterialTheme.typography.titleMedium,
+  )
+  Text(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(top = TakaContentSpacing),
+    text = stringResource(Res.string.rune_reading_notes_add_prompt),
+    style = MaterialTheme.typography.bodyMedium,
+    color = MaterialTheme.colorScheme.onSurfaceVariant,
+  )
+  TakaButton(
+    modifier = Modifier
+      .padding(top = TakaSpaceSm),
+    style = ButtonStyle.Tertiary,
+    onClick = onEditClicked,
+    contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align left
+  ) {
+    Text(stringResource(Res.string.button_add_notes))
+  }
 }
 
 @Composable fun NotesTabEditMode(
@@ -92,7 +123,6 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
   onCancelClicked: () -> Unit,
   onSaveClicked: () -> Unit,
 ) {
-
   Row(
     modifier = Modifier.fillMaxWidth(),
     horizontalArrangement = Arrangement.SpaceBetween,
@@ -102,7 +132,6 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       text = stringResource(Res.string.rune_reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
-
     Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceXs)) {
       TakaButton(
         style = ButtonStyle.Tertiary,
@@ -113,12 +142,12 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       TakaButton(
         style = ButtonStyle.Tertiary,
         onClick = onSaveClicked,
+        contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align right
       ) {
         Text(stringResource(Res.string.button_save))
       }
     }
   }
-
   TakaTextField(
     value = value,
     onValueChange = onValueChange,
