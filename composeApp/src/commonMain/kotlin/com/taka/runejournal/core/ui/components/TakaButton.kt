@@ -38,6 +38,24 @@ fun TakaButton(
   }
 
   ButtonStyle.Secondary -> {
+    FilledTonalButton(
+      onClick = onClick,
+      enabled = enabled,
+      shape = MaterialTheme.shapes.small,
+      colors = ButtonDefaults.filledTonalButtonColors(
+        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+      ),
+      border = BorderStroke(
+        width = 1.dp,
+        color = MaterialTheme.colorScheme.outlineVariant,
+      ),
+      modifier = modifier,
+      content = content
+    )
+  }
+
+  ButtonStyle.Tertiary -> {
     OutlinedButton(
       onClick = onClick,
       enabled = enabled,
@@ -48,25 +66,7 @@ fun TakaButton(
       ),
       border = BorderStroke(
         width = 1.dp,
-        color = if (enabled) {
-          MaterialTheme.colorScheme.primary
-        } else {
-          MaterialTheme.colorScheme.outlineVariant
-        },
-      ),
-      modifier = modifier,
-      content = content,
-    )
-  }
-
-  ButtonStyle.Tertiary -> {
-    TextButton(
-      onClick = onClick,
-      enabled = enabled,
-      shape = MaterialTheme.shapes.small,
-      colors = ButtonDefaults.textButtonColors(
-        contentColor = MaterialTheme.colorScheme.primary,
-        disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        color = MaterialTheme.colorScheme.outlineVariant,
       ),
       modifier = modifier,
       content = content,

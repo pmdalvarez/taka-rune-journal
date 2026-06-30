@@ -178,7 +178,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.createSingleRuneReading() },
-        style = ButtonStyle.Secondary,
+        style = ButtonStyle.Tertiary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New Single Rune Reading")
@@ -186,7 +186,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.createPpfRuneReading() },
-        style = ButtonStyle.Secondary,
+        style = ButtonStyle.Tertiary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New PPF Reading")
