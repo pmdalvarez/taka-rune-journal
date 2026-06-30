@@ -8,7 +8,7 @@
     <string name="button_save">Save</string>
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
-    <string name="button_add_notes">Add notes</string>
+    <string name="button_add_notes">Add Notes</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -25,21 +25,21 @@
     <string name="timeline_greeting">Hello %1$s</string>
     <string name="timeline_welcome_greeting">Welcome to Taka</string>
     <string name="timeline_welcome_prompt">Take is your personal space for rune readings and reflection.\n\nWhat should Taka call you?</string>
-    <string name="timeline_textfield_label_your_name">Your name</string>
+    <string name="timeline_textfield_label_your_name">Your Name</string>
     <string name="timeline_feedback_name_given">Hello %1$s, nice to meet you.</string>
     <string name="timeline_item_title_untitled">Untitled</string>
     <string name="timeline_item_title_no_question">Open Inquiry</string>
     <string name="timeline_item_type_journal_entry">Journal Entry</string>
-    <string name="timeline_button_new_reading">New reading</string>
-    <string name="timeline_button_new_journal_entry">New entry</string>
-    <string name="delete_dialog_title_journal_entry">Delete journal entry</string>
-    <string name="delete_dialog_title_rune_reading">Delete rune reading</string>
+    <string name="timeline_button_new_reading">New Reading</string>
+    <string name="timeline_button_new_journal_entry">New Entry</string>
+    <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>
+    <string name="delete_dialog_title_rune_reading">Delete Rune Reading</string>
     <string name="timeline_delete_dialog_body">Permanently delete this entry?</string>
     <string name="timeline_delete_dialog_error">Entry could not be deleted. Please try again.</string>
     <string name="timeline_delete_dialog_success">Entry deleted</string>
-    <string name="timeline_section_title">Your timeline</string>
+    <string name="timeline_section_title">Your Timeline</string>
 
-    <string name="new_journal_entry_title">New journal entry</string>
+    <string name="new_journal_entry_title">New Journal Entry</string>
     <string name="new_journal_entry_textfield_label_title">Title</string>
     <string name="new_journal_entry_textfield_label_notes">Notes</string>
 
@@ -56,7 +56,7 @@
     <string name="rune_reading_tab_future_rune">Future</string>
     <string name="rune_reading_tab_summary">Summary</string>
     <string name="rune_reading_tab_notes">Notes</string>
-    <string name="rune_reading_notes_title">Your reflections</string>
+    <string name="rune_reading_notes_title">Your Reflections</string>
     <string name="rune_reading_notes_add_prompt">Add your own thoughts, questions, or anything you want to remember about this reading.</string>
     <string name="rune_reading_notes_texfield_label">Write your notes here</string>
     <string name="rune_reading_notes_save_error">Your notes could not be saved. Please try again.</string>
