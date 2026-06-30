@@ -33,7 +33,7 @@ private val takaLightColorScheme = lightColorScheme(
 
   // Secondary surfaces
   surfaceVariant = Cloud,
-  onSurfaceVariant = Graphite,
+  onSurfaceVariant = Flint,
 
   // Material 3 surface hierarchy
   // Use these for cards, timeline rows, menus, containers, etc.

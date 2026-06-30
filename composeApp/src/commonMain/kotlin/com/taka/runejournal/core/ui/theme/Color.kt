@@ -17,6 +17,7 @@ val Stone = Color(0xFFD9D9D9)
 // Mid grays
 val Smoke = Color(0xFF9B9B9B)
 val Slate = Color(0xFF6F6F6F)
+val Flint = Color(0xFF565656)
 val Graphite = Color(0xFF444444)
 
 // Dark grays / black
