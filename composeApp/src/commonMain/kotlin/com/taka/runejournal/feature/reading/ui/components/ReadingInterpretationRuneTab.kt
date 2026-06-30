@@ -72,7 +72,6 @@ fun ReadingInterpretationRuneTab(
       modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
       text = fullInterpretation,
       style = MaterialTheme.typography.bodyMedium,
-      textAlign = TextAlign.Center,
     )
   }
 }
