@@ -19,6 +19,7 @@ import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.feature.reading.ui.origin
 import com.taka.runejournal.feature.reading.ui.toDotSeparatedKeywords
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -34,6 +35,7 @@ fun ReadingInterpretationRuneTab(
   keywords: StringResource,
   supplementalKeywords: StringResource?
 ) {
+  val fullInterpretation = stringResource(drawnRune.rune.origin())
   TakaCard(
     modifier = Modifier
       .fillMaxHeight()
@@ -63,6 +65,12 @@ fun ReadingInterpretationRuneTab(
     Text(
       modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
       text = stringResource(keywords).toDotSeparatedKeywords(),
+      style = MaterialTheme.typography.bodyMedium,
+      textAlign = TextAlign.Center,
+    )
+    Text(
+      modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
+      text = fullInterpretation,
       style = MaterialTheme.typography.bodyMedium,
       textAlign = TextAlign.Center,
     )
