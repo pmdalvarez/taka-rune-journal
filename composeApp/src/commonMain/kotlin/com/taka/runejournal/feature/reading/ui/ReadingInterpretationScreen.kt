@@ -96,13 +96,14 @@ fun ReadingInterpretationScreen(
           indicator = {
               TabRowDefaults.SecondaryIndicator(
                 modifier =  Modifier.tabIndicatorOffset(pagerState.currentPage, matchContentSize = false),
+                color = MaterialTheme.colorScheme.primary,
               )
           }
         ) {
           uiState.tabs.forEachIndexed { index, tab ->
             Tab(
               selected = pagerState.currentPage == index,
-              selectedContentColor = MaterialTheme.colorScheme.onBackground,
+              selectedContentColor = MaterialTheme.colorScheme.primary,
               unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
               onClick = {
                 coroutineScope.launch {
