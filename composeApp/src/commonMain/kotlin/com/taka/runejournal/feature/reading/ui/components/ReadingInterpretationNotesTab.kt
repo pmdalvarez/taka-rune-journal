@@ -19,8 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.ButtonStyle
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
+import com.taka.runejournal.core.ui.components.TakaTextAction
 import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 import org.jetbrains.compose.resources.stringResource
@@ -78,13 +80,11 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       text = stringResource(Res.string.rune_reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
-    TakaButton(
-      style = ButtonStyle.Tertiary,
+    TakaTextAction(
+      text = stringResource(Res.string.button_edit),
       onClick = onEditClicked,
-      contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align right
-    ) {
-      Text(stringResource(Res.string.button_edit))
-    }
+    )
+
   }
   Text(
     modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
@@ -106,15 +106,12 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     style = MaterialTheme.typography.bodyMedium,
     color = MaterialTheme.colorScheme.onSurfaceVariant,
   )
-  TakaButton(
+  TakaTextAction(
     modifier = Modifier
-      .padding(top = TakaSpaceSm),
-    style = ButtonStyle.Tertiary,
+      .padding(top = TakaContentSpacing),
+    text = stringResource(Res.string.button_add_notes),
     onClick = onEditClicked,
-    contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align left
-  ) {
-    Text(stringResource(Res.string.button_add_notes))
-  }
+  )
 }
 
 @Composable fun NotesTabEditMode(
@@ -132,25 +129,21 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       text = stringResource(Res.string.rune_reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
-    Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceXs)) {
-      TakaButton(
-        style = ButtonStyle.Tertiary,
+    Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceMd)) {
+      TakaTextAction(
+        text = stringResource(Res.string.button_cancel),
         onClick = onCancelClicked,
-      ) {
-        Text(stringResource(Res.string.button_cancel))
-      }
-      TakaButton(
-        style = ButtonStyle.Tertiary,
+      )
+      TakaTextAction(
+        text = stringResource(Res.string.button_save),
         onClick = onSaveClicked,
-        contentPadding = PaddingValues(horizontal = 0.dp, vertical = TakaSpaceXs) // To fully align right
-      ) {
-        Text(stringResource(Res.string.button_save))
-      }
+      )
     }
   }
   TakaTextField(
     value = value,
     onValueChange = onValueChange,
+    minLines = 5,
     label = stringResource(Res.string.rune_reading_notes_texfield_label),
   )
 }

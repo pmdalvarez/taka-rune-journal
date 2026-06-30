@@ -21,7 +21,6 @@ fun TakaButton(
   modifier: Modifier = Modifier,
   style: ButtonStyle = ButtonStyle.Primary,
   enabled: Boolean = true,
-  contentPadding: PaddingValues? = null,
   content: @Composable RowScope.() -> Unit
 ) = when (style) {
   ButtonStyle.Primary -> {
@@ -34,7 +33,6 @@ fun TakaButton(
         contentColor = MaterialTheme.colorScheme.onPrimary
       ),
       modifier = modifier,
-      contentPadding = contentPadding ?: ButtonDefaults.ContentPadding,
       content = content
     )
   }
@@ -57,7 +55,6 @@ fun TakaButton(
         },
       ),
       modifier = modifier,
-      contentPadding = contentPadding ?: ButtonDefaults.ContentPadding,
       content = content,
     )
   }
@@ -70,10 +67,6 @@ fun TakaButton(
       colors = ButtonDefaults.textButtonColors(
         contentColor = MaterialTheme.colorScheme.primary,
         disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-      ),
-      contentPadding = contentPadding ?: PaddingValues(
-        horizontal = TakaSpaceXs,
-        vertical = TakaSpaceXs,
       ),
       modifier = modifier,
       content = content,
