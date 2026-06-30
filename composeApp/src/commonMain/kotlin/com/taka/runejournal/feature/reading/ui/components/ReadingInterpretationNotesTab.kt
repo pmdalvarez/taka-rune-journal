@@ -1,7 +1,6 @@
 package com.taka.runejournal.feature.reading.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,16 +14,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.taka.runejournal.core.ui.components.ButtonStyle
-import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaTextAction
 import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
-import com.taka.runejournal.core.ui.theme.TakaSpaceMd
-import com.taka.runejournal.core.ui.theme.TakaSpaceSm
-import com.taka.runejournal.core.ui.theme.TakaSpaceXs
+import com.taka.runejournal.core.ui.theme.TakaSpaceLg
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_add_notes
@@ -129,7 +123,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       text = stringResource(Res.string.rune_reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
-    Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceMd)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceLg)) {
       TakaTextAction(
         text = stringResource(Res.string.button_cancel),
         onClick = onCancelClicked,
@@ -141,6 +135,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     }
   }
   TakaTextField(
+    modifier = Modifier.padding(top = TakaContentSpacing),
     value = value,
     onValueChange = onValueChange,
     minLines = 5,
