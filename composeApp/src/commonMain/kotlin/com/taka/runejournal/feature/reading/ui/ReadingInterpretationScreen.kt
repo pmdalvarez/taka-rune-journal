@@ -128,7 +128,10 @@ fun ReadingInterpretationScreen(
               tab.keywords,
               tab.supplementalKeywords
             )
-            is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(tab.notes)
+            is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
+              tab.notes,
+              { viewModel.saveNotes() }
+            )
           }
         }
       }
