@@ -58,7 +58,6 @@ fun ReadingInterpretationScreen(
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
       when (event) {
-        is UiEvent.NavigateBack -> onBackClick()
         is UiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
         else -> {} // No other events expected
       }
@@ -130,7 +129,7 @@ fun ReadingInterpretationScreen(
             )
             is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
               tab.notes,
-              { viewModel.saveNotes() }
+              onSaveClicked = viewModel::saveNotes
             )
           }
         }

@@ -8,28 +8,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taka.runejournal.core.ui.components.ButtonStyle
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
+import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceXs
-import com.taka.runejournal.core.ui.theme.TakeButtonSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_cancel
 import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_save
+import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_texfield_label
 import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_title
 
 @Composable
 fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Unit) {
   var isEditing by rememberSaveable { mutableStateOf(false) }
+  var notesInput by rememberSaveable(notes) { mutableStateOf(notes.orEmpty()) }
 
   TakaCard(
     modifier = Modifier
@@ -37,9 +39,17 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
   ) {
     if (isEditing) {
       NotesTabEditMode(
-        notes = notes,
-        onCancelClicked = { isEditing = false },
-        onSaveClicked = onSaveClicked
+        value = notesInput,
+        onValueChange = { notesInput = it },
+        onCancelClicked = {
+          notesInput = notes ?: ""
+          isEditing = false
+        },
+        onSaveClicked = {
+          onSaveClicked(notesInput)
+          notesInput = notes ?: ""
+          isEditing = false
+        }
       )
     } else {
       NotesTabViewMode(
@@ -77,11 +87,11 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
 }
 
 @Composable fun NotesTabEditMode(
-  notes: String?,
+  value: String,
+  onValueChange: (String) -> Unit,
   onCancelClicked: () -> Unit,
-  onSaveClicked: (String) -> Unit,
+  onSaveClicked: () -> Unit,
 ) {
-  var notesInput by rememberSaveable(notes) { mutableStateOf(notes.orEmpty()) }
 
   Row(
     modifier = Modifier.fillMaxWidth(),
@@ -102,16 +112,16 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
       }
       TakaButton(
         style = ButtonStyle.Tertiary,
-        onClick = { onSaveClicked(notesInput) },
+        onClick = onSaveClicked,
       ) {
         Text(stringResource(Res.string.button_save))
       }
     }
   }
 
-  Text(
-    modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
-    text = notes ?: "No notes yet",
-    style = MaterialTheme.typography.bodyMedium
+  TakaTextField(
+    value = value,
+    onValueChange = onValueChange,
+    label = stringResource(Res.string.rune_reading_notes_texfield_label),
   )
 }

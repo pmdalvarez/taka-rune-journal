@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.rune_reading_load_error
+import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_save_error
 import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_future_rune
 import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_notes
 import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_past_rune
@@ -109,8 +110,28 @@ class ReadingInterpretationViewModel(
     }
   }
 
-  fun saveNotes() {
-
+  fun saveNotes(notes: String) {
+    viewModelScope.launch {
+      val isSaved = timelineRepository.updateTimelineItem(
+        id = id,
+        notes = notes,
+        title = null
+      )
+      if (isSaved) {
+        _uiState.update {
+          it.copy(
+            tabs = it.tabs.map { tab ->
+              if (tab is ReadingInterpretationTab.Notes)
+                tab.copy(notes = notes)
+              else
+                tab
+            }
+          )
+        }
+      } else {
+        _uiEvent.emit(UiEvent.ShowError(Res.string.rune_reading_notes_save_error))
+      }
+    }
   }
 
 }
