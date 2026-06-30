@@ -6,22 +6,22 @@ import androidx.compose.runtime.Composable
 
 private val takaLightColorScheme = lightColorScheme(
   // Main actions / filled buttons
-  primary = Charcoal,
+  primary = TakaSlate,
   onPrimary = White,
-  primaryContainer = Ash,
-  onPrimaryContainer = Ink,
+  primaryContainer = TakaSlateSoft,
+  onPrimaryContainer = TakaSlateDark,
 
-  // Secondary actions
-  secondary = Graphite,
+  // Supporting actions / secondary emphasis
+  secondary = TakaSlate,
   onSecondary = White,
-  secondaryContainer = Cloud,
-  onSecondaryContainer = Ink,
+  secondaryContainer = TakaSlateSoftVariant,
+  onSecondaryContainer = TakaSlateDark,
 
-  // Tertiary actions
-  tertiary = Slate,
+  // Quiet/local actions
+  tertiary = TakaSlate,
   onTertiary = White,
-  tertiaryContainer = Ash,
-  onTertiaryContainer = Ink,
+  tertiaryContainer = TakaSlateSoftVariant,
+  onTertiaryContainer = TakaSlateDark,
 
   // Main app background
   background = Mist,
@@ -42,7 +42,6 @@ private val takaLightColorScheme = lightColorScheme(
   surfaceContainer = Cloud,
   surfaceContainerHigh = Ash,
   surfaceContainerHighest = Silver,
-
   surfaceDim = Ash,
   surfaceBright = White,
 
@@ -53,7 +52,7 @@ private val takaLightColorScheme = lightColorScheme(
   // Inverse surfaces
   inverseSurface = Ink,
   inverseOnSurface = White,
-  inversePrimary = White,
+  inversePrimary = TakaSlateSoft,
 
   // Error
   error = Crimson,

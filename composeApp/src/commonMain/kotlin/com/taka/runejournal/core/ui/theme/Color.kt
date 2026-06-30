@@ -25,6 +25,12 @@ val Coal = Color(0xFF1F1F1F)
 val Ink = Color(0xFF111111)
 val Black = Color(0xFF000000)
 
+// Muted slate action palette
+val TakaSlate = Color(0xFF4F5D64)
+val TakaSlateDark = Color(0xFF28343A)
+val TakaSlateSoft = Color(0xFFDDE4E7)
+val TakaSlateSoftVariant = Color(0xFFEAF0F2)
+
 // Error
 val Crimson = Color(0xFFB42318)
 val Blush = Color(0xFFFFE4E0)

@@ -1,9 +1,11 @@
 package com.taka.runejournal.core.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 enum class ButtonStyle {
   Primary,
@@ -35,30 +37,38 @@ fun TakaButton(
     }
 
     ButtonStyle.Secondary -> {
-      FilledTonalButton(
-        onClick = onClick,
-        enabled = enabled,
-        shape = MaterialTheme.shapes.small,
-        colors = ButtonDefaults.filledTonalButtonColors(
-          containerColor = MaterialTheme.colorScheme.secondaryContainer,
-          contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        ),
-        modifier = modifier,
-        content = content
-      )
-    }
-
-    ButtonStyle.Tertiary -> {
       OutlinedButton(
         onClick = onClick,
         enabled = enabled,
         shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.outlinedButtonColors(
-          contentColor = MaterialTheme.colorScheme.primary
+          contentColor = MaterialTheme.colorScheme.primary,
+          disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
-        border = ButtonDefaults.outlinedButtonBorder(enabled),
+        border = BorderStroke(
+          width = 1.dp,
+          color = if (enabled) {
+            MaterialTheme.colorScheme.primary
+          } else {
+            MaterialTheme.colorScheme.outlineVariant
+          },
+        ),
         modifier = modifier,
-        content = content
+        content = content,
+      )
+    }
+
+    ButtonStyle.Tertiary -> {
+      TextButton(
+        onClick = onClick,
+        enabled = enabled,
+        shape = MaterialTheme.shapes.small,
+        colors = ButtonDefaults.textButtonColors(
+          contentColor = MaterialTheme.colorScheme.primary,
+          disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+        ),
+        modifier = modifier,
+        content = content,
       )
     }
   }

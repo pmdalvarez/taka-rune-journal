@@ -55,6 +55,7 @@
     <string name="rune_reading_tab_future_rune">Future</string>
     <string name="rune_reading_tab_summary">Summary</string>
     <string name="rune_reading_tab_notes">Notes</string>
+    <string name="rune_reading_notes_title">Your Reflections</string>
 
     <string name="rune_reading_summary_general">You are also encouraged to read more about the rune in the about section and come up with your interpretations. Feel free to write notes</string>
 

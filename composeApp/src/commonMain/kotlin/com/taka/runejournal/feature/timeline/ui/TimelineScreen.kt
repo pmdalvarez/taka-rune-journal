@@ -162,7 +162,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
-        style = ButtonStyle.Tertiary,
+        style = ButtonStyle.Secondary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("Change name to Paolo + random number")
@@ -170,7 +170,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.setDisplayName("") },
-        style = ButtonStyle.Tertiary,
+        style = ButtonStyle.Secondary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("Change name to empty")
@@ -178,7 +178,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.createSingleRuneReading() },
-        style = ButtonStyle.Tertiary,
+        style = ButtonStyle.Secondary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New Single Rune Reading")
@@ -186,7 +186,7 @@ private fun TestArea(viewModel: TimelineViewModel) {
 
     TakaButton(
         onClick = { viewModel.createPpfRuneReading() },
-        style = ButtonStyle.Tertiary,
+        style = ButtonStyle.Secondary,
         modifier = Modifier.padding(top = TakaContentSpacing)
     ) {
         Text("New PPF Reading")
