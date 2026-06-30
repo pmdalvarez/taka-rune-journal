@@ -48,6 +48,59 @@ import taka_rune_journal.composeapp.generated.resources.interpretation_uruz_reve
 import taka_rune_journal.composeapp.generated.resources.interpretation_uruz_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_wunjo_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_wunjo_upright
+import taka_rune_journal.composeapp.generated.resources.origin_algiz
+import taka_rune_journal.composeapp.generated.resources.origin_ansuz
+import taka_rune_journal.composeapp.generated.resources.origin_berkano
+import taka_rune_journal.composeapp.generated.resources.origin_dagaz
+import taka_rune_journal.composeapp.generated.resources.origin_ehwaz
+import taka_rune_journal.composeapp.generated.resources.origin_eihwaz
+import taka_rune_journal.composeapp.generated.resources.origin_fehu
+import taka_rune_journal.composeapp.generated.resources.origin_gebo
+import taka_rune_journal.composeapp.generated.resources.origin_hagalaz
+import taka_rune_journal.composeapp.generated.resources.origin_ingwaz
+import taka_rune_journal.composeapp.generated.resources.origin_isa
+import taka_rune_journal.composeapp.generated.resources.origin_jera
+import taka_rune_journal.composeapp.generated.resources.origin_kenaz
+import taka_rune_journal.composeapp.generated.resources.origin_laguz
+import taka_rune_journal.composeapp.generated.resources.origin_mannaz
+import taka_rune_journal.composeapp.generated.resources.origin_nauthiz
+import taka_rune_journal.composeapp.generated.resources.origin_othala
+import taka_rune_journal.composeapp.generated.resources.origin_perthro
+import taka_rune_journal.composeapp.generated.resources.origin_raidho
+import taka_rune_journal.composeapp.generated.resources.origin_sowilo
+import taka_rune_journal.composeapp.generated.resources.origin_thurisaz
+import taka_rune_journal.composeapp.generated.resources.origin_tiwaz
+import taka_rune_journal.composeapp.generated.resources.origin_uruz
+import taka_rune_journal.composeapp.generated.resources.origin_wunjo
+
+fun Rune.origin(): StringResource =
+  when (this) {
+    Rune.FEHU -> Res.string.origin_fehu
+    Rune.URUZ -> Res.string.origin_uruz
+    Rune.THURISAZ -> Res.string.origin_thurisaz
+    Rune.ANSUZ -> Res.string.origin_ansuz
+    Rune.RAIDHO -> Res.string.origin_raidho
+    Rune.KENAZ -> Res.string.origin_kenaz
+    Rune.GEBO -> Res.string.origin_gebo
+    Rune.WUNJO -> Res.string.origin_wunjo
+    Rune.HAGALAZ -> Res.string.origin_hagalaz
+    Rune.NAUTHIZ -> Res.string.origin_nauthiz
+    Rune.ISA -> Res.string.origin_isa
+    Rune.JERA -> Res.string.origin_jera
+    Rune.EIHWAZ -> Res.string.origin_eihwaz
+    Rune.PERTHRO -> Res.string.origin_perthro
+    Rune.ALGIZ -> Res.string.origin_algiz
+    Rune.SOWILO -> Res.string.origin_sowilo
+    Rune.TIWAZ -> Res.string.origin_tiwaz
+    Rune.BERKANO -> Res.string.origin_berkano
+    Rune.EHWAZ -> Res.string.origin_ehwaz
+    Rune.MANNAZ -> Res.string.origin_mannaz
+    Rune.LAGUZ -> Res.string.origin_laguz
+    Rune.INGWAZ -> Res.string.origin_ingwaz
+    Rune.DAGAZ -> Res.string.origin_dagaz
+    Rune.OTHALA -> Res.string.origin_othala
+  }
+
 
 // General interpretations MUST exist and hence hard coded to ensure they exist
 fun DrawnRune.generalInterpretation(): StringResource =

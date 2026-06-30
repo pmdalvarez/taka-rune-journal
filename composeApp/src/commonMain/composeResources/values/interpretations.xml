@@ -1,4 +1,29 @@
 <resources>
+    <string name="origin_fehu">Fehu comes from the word for 'cattle,' once seen as the main form of wealth and property.</string>
+    <string name="origin_uruz"></string>
+    <string name="origin_thurisaz"></string>
+    <string name="origin_ansuz"></string>
+    <string name="origin_raidho"></string>
+    <string name="origin_kenaz"></string>
+    <string name="origin_gebo"></string>
+    <string name="origin_wunjo"></string>
+    <string name="origin_hagalaz"></string>
+    <string name="origin_nauthiz"></string>
+    <string name="origin_isa"></string>
+    <string name="origin_jera"></string>
+    <string name="origin_eihwaz"></string>
+    <string name="origin_perthro"></string>
+    <string name="origin_algiz"></string>
+    <string name="origin_sowilo"></string>
+    <string name="origin_tiwaz"></string>
+    <string name="origin_berkano"></string>
+    <string name="origin_ehwaz"></string>
+    <string name="origin_mannaz"></string>
+    <string name="origin_laguz"></string>
+    <string name="origin_ingwaz"></string>
+    <string name="origin_dagaz"></string>
+    <string name="origin_othala"></string>
+
     <string name="interpretation_fehu_upright">Fehu stands for cattle</string>
     <string name="interpretation_uruz_upright"></string>
     <string name="interpretation_thurisaz_upright"></string>
