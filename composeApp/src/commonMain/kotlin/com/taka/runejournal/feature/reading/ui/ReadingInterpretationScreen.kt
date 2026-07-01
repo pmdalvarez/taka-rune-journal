@@ -121,14 +121,15 @@ fun ReadingInterpretationScreen(
           val tab = uiState.tabs[page]
           when (tab) {
             is ReadingInterpretationTab.Rune -> ReadingInterpretationRuneTab(
-              tab.drawnRune,
-              tab.interpretation,
-              tab.supplementalInterpretation,
-              tab.keywords,
-              tab.supplementalKeywords
+              drawnRune = tab.drawnRune,
+              interpretation = tab.interpretation,
+              supplementalInterpretation = tab.supplementalInterpretation,
+              keywords = tab.keywords,
+              supplementalKeywords = tab.supplementalKeywords,
+              positionDescription = tab.positionDescription
             )
             is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
-              tab.notes,
+              notes = tab.notes,
               onSaveClicked = viewModel::saveNotes
             )
           }

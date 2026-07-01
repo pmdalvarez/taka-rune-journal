@@ -109,7 +109,8 @@ class ReadingInterpretationViewModel(
       interpretation = drawnRune.generalInterpretation(),
       supplementalInterpretation = drawnRune.supplementalInterpretation(category),
       keywords = drawnRune.generalKeywords(),
-      supplementalKeywords = drawnRune.supplementalKeywords(category)
+      supplementalKeywords = drawnRune.supplementalKeywords(category),
+      positionDescription = positionDescription
     )
   }
 
