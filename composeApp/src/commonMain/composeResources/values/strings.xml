@@ -48,9 +48,9 @@
     <string name="journal_entry_save_error">Your changes could not be saved. Please try again.</string>
     <string name="journal_entry_save_error_blank_notes">Please enter some notes.</string>
 
-    <string name="reading_position_past_description">This rune represents something from the past that may still be influencing the question.</string>
-    <string name="reading_position_present_description">This rune represents what is most active or important in the present situation.</string>
-    <string name="reading_position_future_description">This rune points to a possible direction, lesson, or outcome to keep in mind.</string>
+    <string name="reading_position_past_description">What shaped this situation and still echoes now.</string>
+    <string name="reading_position_present_description">What is most active or important right now.</string>
+    <string name="reading_position_future_description">A possible direction, lesson, or outcome ahead.</string>
 
     <string name="rune_reading_topbar_title">Reading</string>
     <string name="rune_reading_load_error">Rune Reading not found</string>

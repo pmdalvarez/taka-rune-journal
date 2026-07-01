@@ -19,6 +19,7 @@ import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.feature.reading.ui.origin
 import com.taka.runejournal.feature.reading.ui.toDotSeparatedKeywords
 import org.jetbrains.compose.resources.StringResource
@@ -40,7 +41,6 @@ fun ReadingInterpretationRuneTab(
     (stringResource(supplementalKeywords) +", " + stringResource(keywords)).toDotSeparatedKeywords()
   } ?: stringResource(keywords).toDotSeparatedKeywords()
   val fullInterpretation = listOfNotNull(
-    positionDescription?.let { stringResource(it) },
     stringResource(drawnRune.rune.origin()),
     stringResource(interpretation),
     supplementalInterpretation?.let { stringResource(it) }
@@ -55,12 +55,15 @@ fun ReadingInterpretationRuneTab(
     } else {
       drawnRune.rune.displayName
     }
-    Text(
-      modifier = Modifier.fillMaxWidth(),
-      text = drawnRuneName,
-      style = MaterialTheme.typography.headlineSmall,
-      textAlign = TextAlign.Center,
-    )
+    positionDescription?.let {
+      Text(
+        modifier = Modifier.fillMaxWidth(),
+        text = stringResource(it),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
+      )
+    }
     val imageModifer = Modifier
       .size(width = 96.dp, height = 144.dp)
       .padding(top = TakaContentSpacing)
@@ -71,6 +74,14 @@ fun ReadingInterpretationRuneTab(
       contentDescription =drawnRuneName,
       contentScale = ContentScale.Fit,
       modifier = imageModifer
+    )
+    Text(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = TakaSpaceSm),
+      text = drawnRuneName,
+      style = MaterialTheme.typography.titleMedium,
+      textAlign = TextAlign.Center,
     )
     Text(
       modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
