@@ -17,6 +17,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.reading_position_future_description
+import taka_rune_journal.composeapp.generated.resources.reading_position_past_description
+import taka_rune_journal.composeapp.generated.resources.reading_position_present_description
 import taka_rune_journal.composeapp.generated.resources.rune_reading_load_error
 import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_save_error
 import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_future_rune
@@ -64,9 +67,24 @@ class ReadingInterpretationViewModel(
             category = timelineItem.category,
             question = timelineItem.question,
             tabs = listOf(
-              getRuneTab(timelineItem.pastRune, Res.string.rune_reading_tab_past_rune, timelineItem.category),
-              getRuneTab(timelineItem.presentRune, Res.string.rune_reading_tab_present_rune, timelineItem.category),
-              getRuneTab(timelineItem.futureRune, Res.string.rune_reading_tab_future_rune, timelineItem.category),
+              getRuneTab(
+                timelineItem.pastRune,
+                Res.string.rune_reading_tab_past_rune,
+                timelineItem.category,
+                Res.string.reading_position_past_description
+              ),
+              getRuneTab(
+                timelineItem.presentRune,
+                Res.string.rune_reading_tab_present_rune,
+                timelineItem.category,
+                Res.string.reading_position_present_description
+              ),
+              getRuneTab(
+                timelineItem.futureRune,
+                Res.string.rune_reading_tab_future_rune,
+                timelineItem.category,
+                Res.string.reading_position_future_description
+              ),
               ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
             )
           )
@@ -79,7 +97,12 @@ class ReadingInterpretationViewModel(
     }
   }
 
-  private fun getRuneTab(drawnRune: DrawnRune, tabName: StringResource, category: ReadingCategory): ReadingInterpretationTab.Rune {
+  private fun getRuneTab(
+    drawnRune: DrawnRune,
+    tabName: StringResource,
+    category: ReadingCategory,
+    positionDescription: StringResource? = null
+  ): ReadingInterpretationTab.Rune {
     return ReadingInterpretationTab.Rune(
       label = tabName,
       drawnRune = drawnRune,
