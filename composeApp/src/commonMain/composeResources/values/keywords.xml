@@ -1,5 +1,5 @@
 <resources>
-    <string name="keywords_fehu_upright">wealth, abundance, opportunity, resources</string>
+    <string name="keywords_fehu_upright">wealth, opportunity, resources</string>
     <string name="keywords_uruz_upright">strength, vitality, courage, endurance</string>
     <string name="keywords_thurisaz_upright">protection, strength, conflict, breakthrough</string>
     <string name="keywords_ansuz_upright">communication, wisdom, inspiration, truth</string>
@@ -42,8 +42,16 @@
     <string name="keywords_laguz_reversed">blocked, overwhelm, fear, illusion</string>
     <string name="keywords_othala_reversed">disconnection, family conflict, instability, identity crisis</string>
 
-    <string name="keywords_fehu_upright_relationships"></string>
-    <string name="keywords_fehu_reversed_relationships"></string>
+    <string name="keywords_fehu_upright_relationships">generosity, reciprocity</string>
+    <string name="keywords_uruz_upright_relationships">authenticity, emotional resilience</string>
 
+    <string name="keywords_fehu_upright_purpose">value creation, meaningful contribution</string>
+    <string name="keywords_uruz_upright_purpose">inner drive, sustained effort</string>
+
+    <string name="keywords_fehu_upright_security">stewardship, financial stability</string>
+    <string name="keywords_uruz_upright_security">personal resilience, grounded stability</string>
+
+    <string name="keywords_fehu_upright_self">self-worth, inner strength</string>
+    <string name="keywords_uruz_upright_self">self-trust, primal energy</string>
 
 </resources>

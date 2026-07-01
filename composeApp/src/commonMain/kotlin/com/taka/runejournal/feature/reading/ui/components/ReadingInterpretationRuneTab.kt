@@ -36,6 +36,9 @@ fun ReadingInterpretationRuneTab(
   supplementalKeywords: StringResource?,
   positionDescription: StringResource?,
 ) {
+  val keywords = supplementalKeywords?.let {
+    (stringResource(supplementalKeywords) +", " + stringResource(keywords)).toDotSeparatedKeywords()
+  } ?: stringResource(keywords).toDotSeparatedKeywords()
   val fullInterpretation = listOfNotNull(
     positionDescription?.let { stringResource(it) },
     stringResource(drawnRune.rune.origin()),
@@ -71,7 +74,7 @@ fun ReadingInterpretationRuneTab(
     )
     Text(
       modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
-      text = stringResource(keywords).toDotSeparatedKeywords(),
+      text = keywords,
       style = MaterialTheme.typography.bodyMedium,
       textAlign = TextAlign.Center,
     )
