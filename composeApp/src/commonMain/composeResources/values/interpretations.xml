@@ -67,8 +67,13 @@
     <string name="interpretation_laguz_reversed">When drawn reversed, Laguz may suggest emotional blockage, overwhelm, or a loss of connection to your intuition and inner flow. It can invite reflection on where you may be avoiding your feelings, numbing yourself to discomfort, or struggling to trust the natural movement of your emotional and spiritual life.</string>
     <string name="interpretation_othala_reversed">When drawn reversed, Othala may suggest disconnection from your roots, family tension, or a sense of not belonging. It can invite reflection on where you feel alienated from your heritage, your home, or your sense of identity, and what may need to be released or reclaimed in order to feel grounded again.</string>
 
-    <string name="interpretation_fehu_upright_security">Since fehu represents wealth this means somethng good for your security</string>
-    <string name="interpretation_fehu_reversed_security">Since fehu represents wealth and this is reversed this means be mindful of your security</string>
+    <string name="interpretation_fehu_upright_relationships">In relationships, Fehu may suggest generosity, shared investment, and the importance of giving without turning affection into transaction. It can invite you to notice whether care, time, and support are flowing in both directions.</string>
+
+    <string name="interpretation_fehu_upright_purpose">In matters of purpose, Fehu can point to the energy, skills, and opportunities that are available to you now. It may ask how you can use your resources in service of work that feels meaningful, rather than only productive or profitable.</string>
+
+    <string name="interpretation_fehu_upright_security">In questions of security, Fehu often reflects money, stability, home, and the resources that help you feel supported. It may invite careful stewardship: appreciating what you have, strengthening what is fragile, and avoiding waste.</string>
+
+    <string name="interpretation_fehu_upright_self">For the self, Fehu can point to inner resources such as confidence, energy, attention, and self-worth. It may invite you to notice where you feel abundant, where you feel depleted, and how you define value beyond external success.</string>
 
 
 </resources>
