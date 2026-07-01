@@ -43,12 +43,12 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
         value = notesInput,
         onValueChange = { notesInput = it },
         onCancelClicked = {
-          notesInput = notes ?: ""
+          notesInput = notes.orEmpty()
           isEditing = false
         },
         onSaveClicked = {
           onSaveClicked(notesInput)
-          notesInput = notes ?: ""
+          notesInput = notes.orEmpty()
           isEditing = false
         }
       )

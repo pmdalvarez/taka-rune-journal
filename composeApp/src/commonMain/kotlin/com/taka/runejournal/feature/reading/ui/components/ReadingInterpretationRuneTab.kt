@@ -57,7 +57,9 @@ fun ReadingInterpretationRuneTab(
     }
     positionDescription?.let {
       Text(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(bottom = TakaContentSpacing),
         text = stringResource(it),
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -66,7 +68,6 @@ fun ReadingInterpretationRuneTab(
     }
     val imageModifer = Modifier
       .size(width = 96.dp, height = 144.dp)
-      .padding(top = TakaContentSpacing)
       .align(Alignment.CenterHorizontally)
       .then(if (drawnRune.orientation == RuneOrientation.REVERSED) Modifier.rotate(180f) else Modifier)
     Image(
