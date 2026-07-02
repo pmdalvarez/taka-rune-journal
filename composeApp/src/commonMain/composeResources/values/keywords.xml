@@ -14,7 +14,7 @@
     <string name="keywords_eihwaz_upright">endurance, resilience, stability</string>
     <string name="keywords_perthro_upright">mystery, fate, chance, possibility</string>
     <string name="keywords_algiz_upright">protection, awareness, boundaries</string>
-    <string name="keywords_sowilo_upright">success, health, energy, guidance</string>
+    <string name="keywords_sowilo_upright">clarity, vitality, guidance</string>
     <string name="keywords_tiwaz_upright">justice, honor, courage, leadership</string>
     <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
     <string name="keywords_ehwaz_upright">partnership, trust, movement, harmony</string>
@@ -52,6 +52,9 @@
     <string name="keywords_eihwaz_upright_relationships">groundedness</string>
     <string name="keywords_perthro_upright_relationships">openness</string>
     <string name="keywords_algiz_upright_relationships">safety</string>
+    <string name="keywords_sowilo_upright_relationships">authenticity</string>
+    <string name="keywords_tiwaz_upright_relationships">integrity</string>
+    <string name="keywords_berkano_upright_relationships">patience</string>
 
     <string name="keywords_fehu_upright_purpose">value</string>
     <string name="keywords_uruz_upright_purpose">drive</string>
@@ -62,6 +65,8 @@
     <string name="keywords_jera_upright_purpose">patience</string>
     <string name="keywords_eihwaz_upright_purpose">commitment</string>
     <string name="keywords_perthro_upright_purpose">fate</string>
+    <string name="keywords_sowilo_upright_purpose">energy</string>
+    <string name="keywords_tiwaz_upright_purpose">integrity</string>
 
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
     <string name="keywords_uruz_upright_security">resilience</string>
@@ -71,7 +76,8 @@
     <string name="keywords_isa_upright_security">pause</string>
     <string name="keywords_eihwaz_upright_security">protection</string>
     <string name="keywords_algiz_upright_purpose">calling</string>
-    
+    <string name="keywords_berkano_upright_purpose">patience</string>
+
     <string name="keywords_fehu_upright_self">self-worth</string>
     <string name="keywords_uruz_upright_self">self-trust</string>
     <string name="keywords_thurisaz_upright_self">assertion</string>
@@ -87,5 +93,8 @@
     <string name="keywords_eihwaz_upright_self">groundedness</string>
     <string name="keywords_perthro_upright_self">curiosity</string>
     <string name="keywords_algiz_upright_self">intuition</string>
-    J
+    <string name="keywords_sowilo_upright_self">optimism</string>
+    <string name="keywords_tiwaz_upright_self">values</string>
+    <string name="keywords_berkano_upright_self">self-care</string>
+    Justification:
 </resources>
