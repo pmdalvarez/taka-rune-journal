@@ -17,7 +17,7 @@
     <string name="keywords_sowilo_upright">clarity, vitality, guidance</string>
     <string name="keywords_tiwaz_upright">justice, honor, courage, leadership</string>
     <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
-    <string name="keywords_ehwaz_upright">partnership, trust, movement, harmony</string>
+    <string name="keywords_ehwaz_upright">partnership, trust, harmony</string>
     <string name="keywords_mannaz_upright">self, community, intelligence, relationships</string>
     <string name="keywords_laguz_upright">flow, intuition, healing, dreams</string>
     <string name="keywords_ingwaz_upright">fertility, growth, potential, completion</string>
@@ -67,6 +67,9 @@
     <string name="keywords_perthro_upright_purpose">fate</string>
     <string name="keywords_sowilo_upright_purpose">energy</string>
     <string name="keywords_tiwaz_upright_purpose">integrity</string>
+    <string name="keywords_ehwaz_upright_purpose">collaboration</string>
+    <string name="keywords_algiz_upright_purpose">calling</string>
+    <string name="keywords_berkano_upright_purpose">patience</string>
 
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
     <string name="keywords_uruz_upright_security">resilience</string>
@@ -75,8 +78,7 @@
     <string name="keywords_nauthiz_upright_security">scarcity</string>
     <string name="keywords_isa_upright_security">pause</string>
     <string name="keywords_eihwaz_upright_security">protection</string>
-    <string name="keywords_algiz_upright_purpose">calling</string>
-    <string name="keywords_berkano_upright_purpose">patience</string>
+    <string name="keywords_ehwaz_upright_security">support</string>
 
     <string name="keywords_fehu_upright_self">self-worth</string>
     <string name="keywords_uruz_upright_self">self-trust</string>
@@ -96,5 +98,5 @@
     <string name="keywords_sowilo_upright_self">optimism</string>
     <string name="keywords_tiwaz_upright_self">values</string>
     <string name="keywords_berkano_upright_self">self-care</string>
-    Justification:
+    <string name="keywords_ehwaz_upright_self">integration</string>
 </resources>
