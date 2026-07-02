@@ -11,7 +11,8 @@
     <string name="keywords_nauthiz_upright">need, hardship, resilience</string>
     <string name="keywords_isa_upright">stillness, patience, clarity</string>
     <string name="keywords_jera_upright">harvest, cycles, fertility</string>
-    <string name="keywords_eihwaz_upright">protection, strength, transformation, resilience</string>
+    protection, strength, transformation, resilience
+    <string name="keywords_eihwaz_upright">endurnace, resilience, stability</string>
     <string name="keywords_perthro_upright">mystery, fate, chance, possibility</string>
     <string name="keywords_algiz_upright">protection, intuition, awareness, connection</string>
     <string name="keywords_sowilo_upright">success, health, energy, guidance</string>
@@ -49,6 +50,7 @@
     <string name="keywords_nauthiz_upright_relationships">codependency</string>
     <string name="keywords_isa_upright_relationships">withdrawal</string>
     <string name="keywords_jera_upright_relationships">nurturing</string>
+    <string name="keywords_eihwaz_upright_relationships">groundedness</string>
 
     <string name="keywords_fehu_upright_purpose">value</string>
     <string name="keywords_uruz_upright_purpose">drive</string>
@@ -57,6 +59,7 @@
     <string name="keywords_kenaz_upright_purpose">insight</string>
     <string name="keywords_wunjo_upright_purpose">fulfillment</string>
     <string name="keywords_jera_upright_purpose">patience</string>
+    <string name="keywords_eihwaz_upright_purpose">commitment</string>
 
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
     <string name="keywords_uruz_upright_security">resilience</string>
@@ -64,6 +67,7 @@
     <string name="keywords_hagalaz_upright_security">instability</string>
     <string name="keywords_nauthiz_upright_security">scarcity</string>
     <string name="keywords_isa_upright_security">pause</string>
+    <string name="keywords_eihwaz_upright_security">protection</string>
 
     <string name="keywords_fehu_upright_self">self-worth</string>
     <string name="keywords_uruz_upright_self">self-trust</string>
@@ -77,5 +81,6 @@
     <string name="keywords_nauthiz_upright_self">inner critic</string>
     <string name="keywords_isa_upright_self">reflection</string>
     <string name="keywords_jera_upright_self">growth</string>
-    
+    <string name="keywords_eihwaz_upright_self">groundedness</string>
+
 </resources>
