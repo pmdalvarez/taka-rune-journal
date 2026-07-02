@@ -5,9 +5,9 @@
     <string name="keywords_ansuz_upright">communication, wisdom, inspiration</string>
     <string name="keywords_raidho_upright">journey, rhythm, direction</string>
     <string name="keywords_kenaz_upright">clarity, creativity, skill</string>
-    <string name="keywords_gebo_upright">gift, partnership, balance, generosity</string>
-    <string name="keywords_wunjo_upright">joy, harmony, success, fellowship</string>
-    <string name="keywords_hagalaz_upright">disruption, chaos, challenge, transformation</string>
+    <string name="keywords_gebo_upright">partnership, balance</string>
+    <string name="keywords_wunjo_upright">joy, harmony, success</string>
+    <string name="keywords_hagalaz_upright">disruption, challenge, transformation</string>
     <string name="keywords_nauthiz_upright">need, hardship, endurance, resilience</string>
     <string name="keywords_isa_upright">stillness, patience, focus, clarity</string>
     <string name="keywords_jera_upright">harvest, reward, cycles, fertility</string>
@@ -48,16 +48,19 @@
     <string name="keywords_ansuz_upright_relationships">honesty</string>
     <string name="keywords_raidho_upright_relationships">alignment</string>
     <string name="keywords_kenaz_upright_relationships">honesty</string>
+    <string name="keywords_hagalaz_upright_relationships">external pressure</string>
 
     <string name="keywords_fehu_upright_purpose">value</string>
     <string name="keywords_uruz_upright_purpose">drive</string>
     <string name="keywords_thurisaz_upright_purpose">resistance</string>
     <string name="keywords_ansuz_upright_purpose">guidance</string>
     <string name="keywords_kenaz_upright_purpose">insight</string>
+    <string name="keywords_wunjo_upright_purpose">fulfillment</string>
 
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
     <string name="keywords_uruz_upright_security">resilience</string>
     <string name="keywords_thurisaz_upright_security">boundaries</string>
+    <string name="keywords_hagalaz_upright_security">instability</string>
 
     <string name="keywords_fehu_upright_self">self-worth</string>
     <string name="keywords_uruz_upright_self">self-trust</string>
@@ -65,5 +68,8 @@
     <string name="keywords_ansuz_upright_self">self-truth</string>
     <string name="keywords_raidho_upright_self">alignment, sustainable pace</string>
     <string name="keywords_kenaz_upright_self">self-expression</string>
+    <string name="keywords_gebo_upright_self">self-giving</string>
+    <string name="keywords_wunjo_upright_self">contentment</string>
+    <string name="keywords_hagalaz_upright_self">emotional upheaval</string>
 
 </resources>
