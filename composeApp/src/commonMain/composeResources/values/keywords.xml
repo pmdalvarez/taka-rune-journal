@@ -25,23 +25,33 @@
     <string name="keywords_thurisaz_upright_security">boundaries</string>
     <string name="keywords_thurisaz_upright_self">assertion</string>
     <string name="keywords_thurisaz_reversed">danger, weakness, betrayal, defeat</string>
+    <string name="keywords_thurisaz_reversed_relationships">vulnerability</string>
+    <string name="keywords_thurisaz_reversed_purpose">resistance</string>
+    <string name="keywords_thurisaz_reversed_security">destabilisation</string>
+    <string name="keywords_thurisaz_reversed_self">vulnerability</string>
 
     <string name="keywords_ansuz_upright">communication, wisdom, inspiration</string>
     <string name="keywords_ansuz_upright_relationships">honesty</string>
     <string name="keywords_ansuz_upright_purpose">guidance</string>
     <string name="keywords_ansuz_upright_self">self-truth</string>
-    <string name="keywords_ansuz_reversed">miscommunication, deception, confusion, blocked</string>
+    <string name="keywords_ansuz_reversed">miscommunication, deception, confusion, blockage</string>
+    <string name="keywords_ansuz_reversed_relationships">dishonesty</string>
+    <string name="keywords_ansuz_reversed_self">self-deception</string>
 
     <string name="keywords_raidho_upright">journey, rhythm, direction</string>
     <string name="keywords_raidho_upright_relationships">alignment</string>
     <string name="keywords_raidho_upright_self">alignment, sustainable pace</string>
     <string name="keywords_raidho_reversed">delay, obstacles, stagnation, disruption</string>
+    <string name="keywords_raidho_reversed_relationships">misalignment</string>
+    <string name="keywords_raidho_reversed_self">resistance</string>
 
     <string name="keywords_kenaz_upright">clarity, creativity, skill</string>
     <string name="keywords_kenaz_upright_relationships">honesty</string>
     <string name="keywords_kenaz_upright_purpose">insight</string>
     <string name="keywords_kenaz_upright_self">self-expression</string>
     <string name="keywords_kenaz_reversed">ignorance, creative block, misunderstanding, confusion</string>
+    <string name="keywords_kenaz_reversed_relationships">miscommunication</string>
+    <string name="keywords_kenaz_reversed_self">self-deception</string>
 
     <string name="keywords_gebo_upright">partnership, balance</string>
     <string name="keywords_gebo_upright_self">self-giving</string>
@@ -50,6 +60,8 @@
     <string name="keywords_wunjo_upright_purpose">fulfillment</string>
     <string name="keywords_wunjo_upright_self">contentment</string>
     <string name="keywords_wunjo_reversed">sorrow, disharmony, isolation, disappointment</string>
+    <string name="keywords_wunjo_reversed_purpose">dissatisfaction</string>
+    <string name="keywords_wunjo_reversed_self">suppression</string>
 
     <string name="keywords_hagalaz_upright">disruption, challenge, transformation</string>
     <string name="keywords_hagalaz_upright_security">instability</string>
@@ -80,13 +92,18 @@
     <string name="keywords_perthro_upright_relationships">openness</string>
     <string name="keywords_perthro_upright_purpose">fate</string>
     <string name="keywords_perthro_upright_self">curiosity</string>
-    <string name="keywords_perthro_reversed">bad luck, addiction, deception, stagnation</string>
+    <string name="keywords_perthro_reversed">misfortune, addiction, deception, stagnation</string>
+    <string name="keywords_perthro_reversed_relationships">fixation</string>
+    <string name="keywords_perthro_reversed_purpose">fixation</string>
+    <string name="keywords_perthro_reversed_self">fixation</string>
 
     <string name="keywords_algiz_upright">protection, awareness, boundaries</string>
     <string name="keywords_algiz_upright_relationships">safety</string>
     <string name="keywords_algiz_upright_purpose">calling</string>
     <string name="keywords_algiz_upright_self">intuition</string>
     <string name="keywords_algiz_reversed">vulnerability, danger, disconnection, warning</string>
+    <string name="keywords_algiz_reversed_relationships">overextension</string>
+    <string name="keywords_algiz_reversed_purpose">overextension</string>
 
     <string name="keywords_sowilo_upright">clarity, vitality, guidance</string>
     <string name="keywords_sowilo_upright_relationships">authenticity</string>
@@ -98,6 +115,10 @@
     <string name="keywords_tiwaz_upright_purpose">integrity</string>
     <string name="keywords_tiwaz_upright_self">values</string>
     <string name="keywords_tiwaz_reversed">injustice, dishonor, cowardice, defeat</string>
+    <string name="keywords_tiwaz_reversed_relationships">self-betrayal</string>
+    <string name="keywords_tiwaz_reversed_purpose">self-betrayal</string>
+    <string name="keywords_tiwaz_reversed_security">complicity</string>
+    <string name="keywords_tiwaz_reversed_self">self-betrayal</string>
 
     <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
     <string name="keywords_berkano_upright_relationships">patience</string>
@@ -119,7 +140,10 @@
 
     <string name="keywords_laguz_upright">flow, intuition, healing, dreams</string>
     <string name="keywords_laguz_upright_relationships">empathy</string>
-    <string name="keywords_laguz_reversed">blocked, overwhelm, fear, illusion</string>
+    <string name="keywords_laguz_reversed">blockage, overwhelm, fear, illusion</string>
+    <string name="keywords_laguz_reversed_relationships">disengagement</string>
+    <string name="keywords_laguz_reversed_purpose">apathy</string>
+    <string name="keywords_laguz_reversed_self">numbness</string>
 
     <string name="keywords_ingwaz_upright">fertility, growth, potential, completion</string>
     <string name="keywords_ingwaz_upright_security">foundation</string>
