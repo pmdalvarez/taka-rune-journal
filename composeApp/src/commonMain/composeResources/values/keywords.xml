@@ -18,7 +18,7 @@
     <string name="keywords_tiwaz_upright">justice, honor, courage, leadership</string>
     <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
     <string name="keywords_ehwaz_upright">partnership, trust, harmony</string>
-    <string name="keywords_mannaz_upright">self, community, intelligence, relationships</string>
+    <string name="keywords_mannaz_upright">community, relationships</string>
     <string name="keywords_laguz_upright">flow, intuition, healing, dreams</string>
     <string name="keywords_ingwaz_upright">fertility, growth, potential, completion</string>
     <string name="keywords_dagaz_upright">breakthrough, transformation, clarity, awakening</string>
@@ -55,6 +55,8 @@
     <string name="keywords_sowilo_upright_relationships">authenticity</string>
     <string name="keywords_tiwaz_upright_relationships">integrity</string>
     <string name="keywords_berkano_upright_relationships">patience</string>
+    <string name="keywords_laguz_upright_relationships">empathy</string>
+    <string name="keywords_dagaz_upright_relationships">reconciliation, reset</string>
 
     <string name="keywords_fehu_upright_purpose">value</string>
     <string name="keywords_uruz_upright_purpose">drive</string>
@@ -70,6 +72,8 @@
     <string name="keywords_ehwaz_upright_purpose">collaboration</string>
     <string name="keywords_algiz_upright_purpose">calling</string>
     <string name="keywords_berkano_upright_purpose">patience</string>
+    <string name="keywords_mannaz_upright_purpose">contribution</string>
+    <string name="keywords_dagaz_upright_purpose">calling</string>
 
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
     <string name="keywords_uruz_upright_security">resilience</string>
@@ -79,6 +83,8 @@
     <string name="keywords_isa_upright_security">pause</string>
     <string name="keywords_eihwaz_upright_security">protection</string>
     <string name="keywords_ehwaz_upright_security">support</string>
+    <string name="keywords_mannaz_upright_security">belonging</string>
+    <string name="keywords_ingwaz_upright_security">foundation</string>
 
     <string name="keywords_fehu_upright_self">self-worth</string>
     <string name="keywords_uruz_upright_self">self-trust</string>
@@ -99,4 +105,16 @@
     <string name="keywords_tiwaz_upright_self">values</string>
     <string name="keywords_berkano_upright_self">self-care</string>
     <string name="keywords_ehwaz_upright_self">integration</string>
+    <string name="keywords_mannaz_upright_self">self-awareness</string>
+    <string name="keywords_dagaz_upright_self">reinvention</string>
+    <string name="keywords_othala_upright_self">identity</string>
+
+    <string name="keywords_fehu_reversed_relationships">transactional</string>
+    <string name="keywords_uruz_reversed_relationships">detachment</string>
+
+    <string name="keywords_uruz_reversed_purpose">apathy</string>
+
+    <string name="keywords_fehu_reversed_security">frugality</string>
+    <string name="keywords_fehu_reversed_self">worth</string>
+    <string name="keywords_uruz_reversed_self">disconnection</string>
 </resources>

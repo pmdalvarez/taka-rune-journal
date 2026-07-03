@@ -18,7 +18,7 @@
     <string name="origin_tiwaz">Tiwaz is named after the god Tyr and represents justice, honor, courage, and the willingness to make sacrifices for what is right.</string>
     <string name="origin_berkano">Berkano comes from the word for 'birch tree' or 'birth,' symbolizing growth, nurturing, fertility, and new beginnings.</string>
     <string name="origin_ehwaz">Ehwaz means 'horse' and represents partnership, trust, movement, and the harmonious cooperation between two forces.</string>
-    <string name="origin_mannaz">Mannaz takes its name from the word for 'man' or 'human,' representing the self, community, intelligence, and human relationships.</string>
+    <string name="origin_mannaz">Mannaz takes its name from the word for 'man' or 'human,' representing the self, community, and human relationships</string>
     <string name="origin_laguz">Laguz takes its name from the word for 'water' or 'lake,' representing flow, intuition, emotions, and the unconscious depths of the mind.</string>
     <string name="origin_ingwaz">Ingwaz is named after the god Ing and symbolizes fertility, inner growth, potential, and the quiet gestation of new life.</string>
     <string name="origin_dagaz">Dagaz means 'day' or 'dawn' and represents breakthrough, transformation, clarity, and the shift from darkness into light.</string>
@@ -124,7 +124,6 @@
     <string name="interpretation_mannaz_upright_security">In questions of security, Mannaz often reflects the role of community, connection, and social belonging in feeling supported. It may invite you to notice whether you are allowing yourself to receive support from others, or whether isolation is weakening your sense of stability.</string>
     <string name="interpretation_laguz_upright_security">In questions of security, Laguz often reflects your emotional relationship with safety and stability. It may invite you to notice whether you are trusting your inner sense of what creates real security, or whether fear and control are blocking a more natural sense of flow and trust.</string>
     <string name="interpretation_ingwaz_upright_security">In questions of security, Ingwaz often reflects the quiet, long-term building of stability that happens out of sight. It may invite you to trust the slow work of creating foundations, even when progress is not yet visible or measurable.</string>
-    <string name="interpretation_dagaz_upright_security">In questions of security, Dagaz often reflects a positive shift or breakthrough regarding stability and resources. It may invite you to recognize where things are beginning to improve and to move forward with renewed clarity and optimism.</string>
     <string name="interpretation_othala_upright_security">In questions of security, Othala often reflects the stability that comes from roots, home, and a sense of belonging. It may invite you to consider what kind of foundation you are building — not just materially, but also in terms of identity, values, and connection to place or community.</string>
 
     <string name="interpretation_fehu_upright_self">For the self, Fehu can point to inner resources such as confidence, energy, attention, and self-worth. It may invite you to notice where you feel abundant, where you feel depleted, and how you define value beyond external success.</string>
