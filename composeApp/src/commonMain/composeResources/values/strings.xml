@@ -9,6 +9,7 @@
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_add_notes">Add Notes</string>
+    <string name="button_draw_runes">Runes</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -52,24 +53,29 @@
     <string name="reading_position_present_description">What is most active or important right now</string>
     <string name="reading_position_future_description">A possible direction, lesson, or outcome ahead</string>
 
-    <string name="rune_reading_topbar_title">Reading</string>
-    <string name="rune_reading_load_error">Rune Reading not found</string>
-    <string name="rune_reading_tab_single_rune">Rune</string>
-    <string name="rune_reading_tab_past_rune">Past</string>
-    <string name="rune_reading_tab_present_rune">Present</string>
-    <string name="rune_reading_tab_future_rune">Future</string>
-    <string name="rune_reading_tab_summary">Summary</string>
-    <string name="rune_reading_tab_notes">Notes</string>
-    <string name="rune_reading_notes_title">Your Reflections</string>
-    <string name="rune_reading_notes_add_prompt">Add your own thoughts, questions, or anything you want to remember about this reading.</string>
-    <string name="rune_reading_notes_texfield_label">Write your notes here</string>
-    <string name="rune_reading_notes_save_error">Your notes could not be saved. Please try again.</string>
+    <string name="reading_interpretation_topbar_title">Reading</string>
+    <string name="reading_load_error">Rune Reading not found</string>
+    <string name="reading_tab_single_rune">Rune</string>
+    <string name="reading_tab_past_rune">Past</string>
+    <string name="reading_tab_present_rune">Present</string>
+    <string name="reading_tab_future_rune">Future</string>
+    <string name="reading_tab_summary">Summary</string>
+    <string name="reading_tab_notes">Notes</string>
+    <string name="reading_notes_title">Your Reflections</string>
+    <string name="reading_notes_add_prompt">Add your own thoughts, questions, or anything you want to remember about this reading.</string>
+    <string name="reading_notes_texfield_label">Write your notes here</string>
+    <string name="reading_notes_save_error">Your notes could not be saved. Please try again.</string>
 
-    <string name="rune_reading_single_rune_spread_name">Single Rune</string>
-    <string name="rune_reading_single_rune_spread_description">One rune for clear, focused guidance.</string>
-    <string name="rune_reading_ppf_spread_name">Past Present Future</string>
-    <string name="rune_reading_ppf_spread_description">See how a situation has unfolded over time.</string>
-    <string name="rune_reading_summary_general">You are also encouraged to read more about the rune in the about section and come up with your interpretations. Feel free to write notes</string>
+
+    <string name="reading_start_topbar_title">New Reading</string>
+    <string name="reading_question_title">Your Question</string>
+    <string name="reading_question_dscription">Hold a question in mind, or write it down to give your reading more focus.</string>
+    <string name="reading_choose_spread">Choose A Spread</string>
+    <string name="reading_single_rune_spread_name">Single Rune</string>
+    <string name="reading_single_rune_spread_description">A simple reading for one clear focus.</string>
+    <string name="reading_ppf_spread_name">Past, Present, Future</string>
+    <string name="reading_ppf_spread_description">A three-rune reading for what shaped this, what is active now, and what may unfold.</string>
+    <string name="reading_choose_topic">Choose A Focus</string>
 
 
 </resources>

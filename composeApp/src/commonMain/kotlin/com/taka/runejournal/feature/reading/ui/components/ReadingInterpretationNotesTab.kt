@@ -25,9 +25,9 @@ import taka_rune_journal.composeapp.generated.resources.button_add_notes
 import taka_rune_journal.composeapp.generated.resources.button_cancel
 import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_save
-import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_add_prompt
-import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_texfield_label
-import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_title
+import taka_rune_journal.composeapp.generated.resources.reading_notes_add_prompt
+import taka_rune_journal.composeapp.generated.resources.reading_notes_texfield_label
+import taka_rune_journal.composeapp.generated.resources.reading_notes_title
 
 @Composable
 fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Unit) {
@@ -71,7 +71,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Text(
-      text = stringResource(Res.string.rune_reading_notes_title),
+      text = stringResource(Res.string.reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
     TakaTextAction(
@@ -89,14 +89,14 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
 
 @Composable fun NotesTabViewModeEmptyNotes(onEditClicked: () -> Unit) {
   Text(
-    text = stringResource(Res.string.rune_reading_notes_title),
+    text = stringResource(Res.string.reading_notes_title),
     style = MaterialTheme.typography.titleMedium,
   )
   Text(
     modifier = Modifier
       .fillMaxWidth()
       .padding(top = TakaContentSpacing),
-    text = stringResource(Res.string.rune_reading_notes_add_prompt),
+    text = stringResource(Res.string.reading_notes_add_prompt),
     style = MaterialTheme.typography.bodyMedium,
     color = MaterialTheme.colorScheme.onSurfaceVariant,
   )
@@ -120,7 +120,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Text(
-      text = stringResource(Res.string.rune_reading_notes_title),
+      text = stringResource(Res.string.reading_notes_title),
       style = MaterialTheme.typography.titleMedium,
     )
     Row(horizontalArrangement = Arrangement.spacedBy(TakaSpaceLg)) {
@@ -139,6 +139,6 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     value = value,
     onValueChange = onValueChange,
     minLines = 5,
-    label = stringResource(Res.string.rune_reading_notes_texfield_label),
+    label = stringResource(Res.string.reading_notes_texfield_label),
   )
 }

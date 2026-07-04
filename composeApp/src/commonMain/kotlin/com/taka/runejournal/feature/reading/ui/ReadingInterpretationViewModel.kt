@@ -20,13 +20,13 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.reading_position_future_description
 import taka_rune_journal.composeapp.generated.resources.reading_position_past_description
 import taka_rune_journal.composeapp.generated.resources.reading_position_present_description
-import taka_rune_journal.composeapp.generated.resources.rune_reading_load_error
-import taka_rune_journal.composeapp.generated.resources.rune_reading_notes_save_error
-import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_future_rune
-import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_notes
-import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_past_rune
-import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_present_rune
-import taka_rune_journal.composeapp.generated.resources.rune_reading_tab_single_rune
+import taka_rune_journal.composeapp.generated.resources.reading_load_error
+import taka_rune_journal.composeapp.generated.resources.reading_notes_save_error
+import taka_rune_journal.composeapp.generated.resources.reading_tab_future_rune
+import taka_rune_journal.composeapp.generated.resources.reading_tab_notes
+import taka_rune_journal.composeapp.generated.resources.reading_tab_past_rune
+import taka_rune_journal.composeapp.generated.resources.reading_tab_present_rune
+import taka_rune_journal.composeapp.generated.resources.reading_tab_single_rune
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
 class ReadingInterpretationViewModel(
@@ -55,8 +55,8 @@ class ReadingInterpretationViewModel(
             topic = timelineItem.topic,
             question = timelineItem.question,
             tabs = listOf(
-              getRuneTab(timelineItem.drawnRune, Res.string.rune_reading_tab_single_rune, timelineItem.topic),
-              ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
+              getRuneTab(timelineItem.drawnRune, Res.string.reading_tab_single_rune, timelineItem.topic),
+              ReadingInterpretationTab.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
@@ -69,28 +69,28 @@ class ReadingInterpretationViewModel(
             tabs = listOf(
               getRuneTab(
                 timelineItem.pastRune,
-                Res.string.rune_reading_tab_past_rune,
+                Res.string.reading_tab_past_rune,
                 timelineItem.topic,
                 Res.string.reading_position_past_description
               ),
               getRuneTab(
                 timelineItem.presentRune,
-                Res.string.rune_reading_tab_present_rune,
+                Res.string.reading_tab_present_rune,
                 timelineItem.topic,
                 Res.string.reading_position_present_description
               ),
               getRuneTab(
                 timelineItem.futureRune,
-                Res.string.rune_reading_tab_future_rune,
+                Res.string.reading_tab_future_rune,
                 timelineItem.topic,
                 Res.string.reading_position_future_description
               ),
-              ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
+              ReadingInterpretationTab.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
         else -> {
-          _uiEvent.emit(UiEvent.ShowError(Res.string.rune_reading_load_error))
+          _uiEvent.emit(UiEvent.ShowError(Res.string.reading_load_error))
           return@launch
         }
       }
@@ -153,7 +153,7 @@ class ReadingInterpretationViewModel(
           )
         }
       } else {
-        _uiEvent.emit(UiEvent.ShowError(Res.string.rune_reading_notes_save_error))
+        _uiEvent.emit(UiEvent.ShowError(Res.string.reading_notes_save_error))
       }
     }
   }
