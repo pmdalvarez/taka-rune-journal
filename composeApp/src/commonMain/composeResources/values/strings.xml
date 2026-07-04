@@ -76,7 +76,7 @@
     <string name="reading_single_rune_spread_description">A simple reading for one clear focus.</string>
     <string name="reading_ppf_spread_name">Past, Present, Future</string>
     <string name="reading_ppf_spread_description">See how a situation has unfolded over time.</string>
-    <string name="reading_choose_topic">Choose a Focus</string>
+    <string name="reading_choose_topic">Choose a Topic</string>
 
 
 </resources>
