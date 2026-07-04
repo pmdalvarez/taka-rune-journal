@@ -14,7 +14,7 @@ sealed class ReadingInterpretationTab {
     val supplementalInterpretation: StringResource?,
     val keywords: StringResource,
     val supplementalKeywords: StringResource?,
-    val positionDescription: StringResource?
+    val tabDescription: StringResource?
   ) : ReadingInterpretationTab()
 
 // TODO Implement this in the future

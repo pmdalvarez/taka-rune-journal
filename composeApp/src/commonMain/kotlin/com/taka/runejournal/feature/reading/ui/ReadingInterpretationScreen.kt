@@ -126,7 +126,7 @@ fun ReadingInterpretationScreen(
               supplementalInterpretation = tab.supplementalInterpretation,
               keywords = tab.keywords,
               supplementalKeywords = tab.supplementalKeywords,
-              positionDescription = tab.positionDescription
+              tabDescription = tab.tabDescription
             )
             is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
               notes = tab.notes,

@@ -101,7 +101,7 @@ class ReadingInterpretationViewModel(
     drawnRune: DrawnRune,
     tabName: StringResource,
     category: ReadingCategory,
-    positionDescription: StringResource? = null
+    tabDescription: StringResource? = null
   ): ReadingInterpretationTab.Rune {
     return ReadingInterpretationTab.Rune(
       label = tabName,
@@ -110,7 +110,7 @@ class ReadingInterpretationViewModel(
       supplementalInterpretation = drawnRune.supplementalInterpretation(category),
       keywords = drawnRune.generalKeywords(),
       supplementalKeywords = drawnRune.supplementalKeywords(category),
-      positionDescription = positionDescription
+      tabDescription = tabDescription
     )
   }
 

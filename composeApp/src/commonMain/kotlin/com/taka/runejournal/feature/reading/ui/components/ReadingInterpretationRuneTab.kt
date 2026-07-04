@@ -35,7 +35,7 @@ fun ReadingInterpretationRuneTab(
   supplementalInterpretation: StringResource?,
   keywords: StringResource,
   supplementalKeywords: StringResource?,
-  positionDescription: StringResource?,
+  tabDescription: StringResource?,
 ) {
   val keywords = supplementalKeywords?.let {
     (stringResource(supplementalKeywords) +", " + stringResource(keywords)).toDotSeparatedKeywords()
@@ -55,7 +55,7 @@ fun ReadingInterpretationRuneTab(
     } else {
       drawnRune.rune.displayName
     }
-    positionDescription?.let {
+    tabDescription?.let {
       Text(
         modifier = Modifier
           .fillMaxWidth()

@@ -1,5 +1,6 @@
 package com.taka.runejournal.core.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -35,6 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -42,11 +44,19 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.ui.components.ButtonStyle
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.theme.TakaTheme
+import org.jetbrains.compose.resources.painterResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
+import taka_rune_journal.composeapp.generated.resources.rune_empty
+import kotlin.collections.chunked
+import kotlin.collections.forEach
 
 @Preview(
   showBackground = true,
@@ -134,6 +144,9 @@ fun DesignPlayground(
 
       SectionTitle("Raw color role reference")
       ColorRoleReference()
+
+      SectionTitle("Assets")
+      RunePreview()
     }
   }
 }
@@ -645,5 +658,78 @@ private fun SectionTitle(text: String) {
     HorizontalDivider(
       color = MaterialTheme.colorScheme.outlineVariant,
     )
+  }
+}
+
+@Composable
+private fun RunePreview() {
+  Column(
+    modifier = Modifier
+      .background(Color.White)
+      .padding(16.dp),
+    verticalArrangement = Arrangement.spacedBy(12.dp)
+  ) {
+    Row(
+      horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        Image(
+          painter = painterResource(Res.drawable.rune_empty),
+          contentDescription = "empty",
+          modifier = Modifier.size(width = 48.dp, height = 72.dp)
+        )
+
+        Text(
+          text = "empty",
+          modifier = Modifier.padding(top = 4.dp),
+          color = Color.Black,
+          fontSize = 10.sp
+        )
+      }
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+      ) {
+        Image(
+          painter = painterResource(Res.drawable.ic_topbar_icon),
+          contentDescription = "empty",
+          modifier = Modifier.size(width = 48.dp, height = 72.dp)
+        )
+
+        Text(
+          text = "app icon",
+          modifier = Modifier.padding(top = 4.dp),
+          color = Color.Black,
+          fontSize = 10.sp
+        )
+      }
+    }
+    Rune.entries
+      .chunked(4)
+      .forEach { rowRunes ->
+        Row(
+          horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+          rowRunes.forEach { runeId ->
+            Column(
+              horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+              Image(
+                painter = painterResource(runeId.drawable()),
+                contentDescription = runeId.key,
+                modifier = Modifier.size(width = 48.dp, height = 72.dp)
+              )
+
+              Text(
+                text = runeId.key,
+                modifier = Modifier.padding(top = 4.dp),
+                color = Color.Black,
+                fontSize = 10.sp
+              )
+            }
+          }
+        }
+      }
   }
 }
