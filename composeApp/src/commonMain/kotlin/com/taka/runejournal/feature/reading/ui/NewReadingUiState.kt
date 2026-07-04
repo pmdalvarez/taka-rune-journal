@@ -16,6 +16,7 @@ sealed interface SpreadResult {
     val future: DrawnRune,
   ) : SpreadResult
 }
+
 data class NewReadingUiState (
   val question: String = "",
   val topic: ReadingTopic = ReadingTopic.GENERAL,
