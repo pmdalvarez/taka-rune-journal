@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ReadingDrawScreen(
-  viewModel: ReadingViewModel,
+fun NewReadingDrawScreen(
+  viewModel: NewReadingViewModel,
   onBackClick: () -> Unit,
   onReadingSaved: (id: Long) -> Unit,
   modifier: Modifier = Modifier

@@ -2,7 +2,7 @@ package com.taka.runejournal.core.navigation
 
 import androidx.navigation3.runtime.NavKey
 import androidx.savedstate.serialization.SavedStateConfiguration
-import com.taka.runejournal.feature.reading.navigation.ReadingRoute
+import com.taka.runejournal.feature.reading.navigation.NewReadingRoute
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -12,7 +12,7 @@ val appNavSavedStateConfiguration = SavedStateConfiguration {
   serializersModule = SerializersModule {
     polymorphic(NavKey::class) {
       subclassesOfSealed<AppRoute>()
-      subclassesOfSealed<ReadingRoute>()
+      subclassesOfSealed<NewReadingRoute>()
     }
   }
 }

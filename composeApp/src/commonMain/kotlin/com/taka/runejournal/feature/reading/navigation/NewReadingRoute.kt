@@ -4,10 +4,10 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface ReadingRoute : NavKey
+sealed interface NewReadingRoute : NavKey
 
 @Serializable
-data object ReadingStartRoute : ReadingRoute
+data object NewReadingStartRoute : NewReadingRoute
 
 @Serializable
-data object ReadingDrawRoute : ReadingRoute
+data object NewReadingDrawRoute : NewReadingRoute

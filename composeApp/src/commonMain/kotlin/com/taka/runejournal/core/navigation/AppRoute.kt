@@ -23,7 +23,7 @@ data class ReadingInterpretationRoute(
 data object NewJournalEntryRoute : AppRoute
 
 @Serializable
-data object ReadingFlowRoute : AppRoute
+data object NewReadingFlowRoute : AppRoute
 
 @Serializable
 data object SettingsRoute : AppRoute

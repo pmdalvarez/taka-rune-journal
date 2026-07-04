@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 
-class ReadingViewModel(
+class NewReadingViewModel(
   private val settingsRepository: SettingsRepository,
   private val timelineRepository: TimelineRepository
 ) : ViewModel() {

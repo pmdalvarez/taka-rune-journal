@@ -9,7 +9,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.taka.runejournal.core.ui.DesignPlaygroundScreen
 import com.taka.runejournal.feature.more.ui.AboutScreen
-import com.taka.runejournal.feature.reading.navigation.ReadingFlowNavDisplay
+import com.taka.runejournal.feature.reading.navigation.NewReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationScreen
@@ -64,7 +64,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                         )
                     },
                     onNewReadingClick = {
-                        backStack.add(ReadingFlowRoute)
+                        backStack.add(NewReadingFlowRoute)
                     },
                     onNewJournalEntryClick = {
                         backStack.add(NewJournalEntryRoute)
@@ -119,14 +119,14 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                 )
             }
 
-            entry<ReadingFlowRoute> {
-                ReadingFlowNavDisplay(
+            entry<NewReadingFlowRoute> {
+                NewReadingFlowNavDisplay(
                     onExitReadingFlow = {
                         backStack.removeLastOrNull()
                     },
                     onReadingSaved = { id ->
                         backStack.removeLastOrNull()
-                        JournalEntryDetailRoute(id = id)
+                        ReadingInterpretationRoute(id = id)
                     },
                     modifier = modifier
                 )

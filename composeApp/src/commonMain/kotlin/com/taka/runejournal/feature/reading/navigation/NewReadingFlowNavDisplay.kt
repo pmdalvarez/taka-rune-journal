@@ -8,20 +8,20 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.taka.runejournal.core.navigation.appNavSavedStateConfiguration
-import com.taka.runejournal.feature.reading.ui.ReadingDrawScreen
-import com.taka.runejournal.feature.reading.ui.ReadingStartScreen
-import com.taka.runejournal.feature.reading.ui.ReadingViewModel
+import com.taka.runejournal.feature.reading.ui.NewReadingDrawScreen
+import com.taka.runejournal.feature.reading.ui.NewReadingStartScreen
+import com.taka.runejournal.feature.reading.ui.NewReadingViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ReadingFlowNavDisplay(
+fun NewReadingFlowNavDisplay(
   onExitReadingFlow: () -> Unit,
   onReadingSaved: (id: Long) -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val readingBackStack = rememberNavBackStack(appNavSavedStateConfiguration, ReadingStartRoute)
+  val readingBackStack = rememberNavBackStack(appNavSavedStateConfiguration, NewReadingStartRoute)
 
-  val viewModel = koinViewModel<ReadingViewModel>()
+  val viewModel = koinViewModel<NewReadingViewModel>()
 
   NavDisplay(
     backStack = readingBackStack,
@@ -37,21 +37,21 @@ fun ReadingFlowNavDisplay(
       rememberViewModelStoreNavEntryDecorator(),
     ),
     entryProvider = entryProvider {
-      entry<ReadingStartRoute> {
-        ReadingStartScreen(
+      entry<NewReadingStartRoute> {
+        NewReadingStartScreen(
           viewModel = viewModel,
           onBackClick = {
             onExitReadingFlow()
           },
           onContinueClick = {
-            readingBackStack.add(ReadingDrawRoute)
+            readingBackStack.add(NewReadingDrawRoute)
           },
           modifier = modifier
         )
       }
 
-      entry<ReadingDrawRoute> {
-        ReadingDrawScreen(
+      entry<NewReadingDrawRoute> {
+        NewReadingDrawScreen(
           viewModel = viewModel,
           onBackClick = {
             readingBackStack.removeLastOrNull()
