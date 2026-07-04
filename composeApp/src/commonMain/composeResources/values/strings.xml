@@ -9,7 +9,7 @@
     <string name="button_delete">Delete</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_add_notes">Add Notes</string>
-    <string name="button_draw_runes">Runes</string>
+    <string name="button_draw_runes">Draw Runes</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -71,12 +71,12 @@
     <string name="reading_question_title">Your Question</string>
     <string name="reading_question_description">Hold a question in mind, or write it down to give your reading more focus.</string>
     <string name="reading_question_textfield_label">Write your question here</string>
-    <string name="reading_choose_spread">Choose A Spread</string>
+    <string name="reading_choose_spread">Choose a Spread</string>
     <string name="reading_single_rune_spread_name">Single Rune</string>
     <string name="reading_single_rune_spread_description">A simple reading for one clear focus.</string>
     <string name="reading_ppf_spread_name">Past, Present, Future</string>
-    <string name="reading_ppf_spread_description">A three-rune reading for what shaped this, what is active now, and what may unfold.</string>
-    <string name="reading_choose_topic">Choose A Focus</string>
+    <string name="reading_ppf_spread_description">See how a situation has unfolded over time.</string>
+    <string name="reading_choose_topic">Choose a Focus</string>
 
 
 </resources>

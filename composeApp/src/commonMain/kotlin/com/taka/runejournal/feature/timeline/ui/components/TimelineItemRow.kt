@@ -18,7 +18,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
-import com.taka.runejournal.core.ui.theme.TakaCardPadding
 import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel

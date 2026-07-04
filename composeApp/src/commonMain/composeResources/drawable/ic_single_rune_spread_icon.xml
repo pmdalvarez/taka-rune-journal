@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Upright single rune card -->
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M7,2
+                          H17
+                          Q17.82,2 18.41,2.59
+                          Q19,3.18 19,4
+                          V20
+                          Q19,20.82 18.41,21.41
+                          Q17.82,22 17,22
+                          H7
+                          Q6.18,22 5.59,21.41
+                          Q5,20.82 5,20
+                          V4
+                          Q5,3.18 5.59,2.59
+                          Q6.18,2 7,2
+                          Z
+
+                          M7,20
+                          H17
+                          V4
+                          H7
+                          V20
+                          Z" />
+
+    <!-- Taka symbol, scaled down 10% but still centered -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,7.95 L12,16.05
+                          M12,12 L9.75,9.75
+                          M12,12 L14.25,9.75
+                          M12,12 L9.75,14.25
+                          M12,12 L14.25,14.25" />
+
+</vector>

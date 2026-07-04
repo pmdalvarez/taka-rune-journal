@@ -1,13 +1,28 @@
 package com.taka.runejournal.core.domain.model
 
-enum class RuneSpread(
-  val key: String, // Changing key values can break existing references in db or string files
-) {
-  SINGLE_RUNE("single") ,
-  PAST_PRESENT_FUTURE("ppf");
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_ppf_rune_spread_icon
+import taka_rune_journal.composeapp.generated.resources.ic_single_rune_spread_icon
+import taka_rune_journal.composeapp.generated.resources.reading_ppf_spread_description
+import taka_rune_journal.composeapp.generated.resources.reading_ppf_spread_name
+import taka_rune_journal.composeapp.generated.resources.reading_single_rune_spread_description
+import taka_rune_journal.composeapp.generated.resources.reading_single_rune_spread_name
 
-  companion object {
-    fun fromKey(key: String): RuneOrientation? =
-      RuneOrientation.entries.firstOrNull { it.key == key }
-  }
+enum class RuneSpread(
+  val icon: DrawableResource,
+  val title: StringResource,
+  val description: StringResource
+  ) {
+  SINGLE_RUNE(
+    Res.drawable.ic_single_rune_spread_icon,
+    Res.string.reading_single_rune_spread_name,
+    Res.string.reading_single_rune_spread_description
+  ),
+  PAST_PRESENT_FUTURE(
+    Res.drawable.ic_ppf_rune_spread_icon,
+    Res.string.reading_ppf_spread_name,
+    Res.string.reading_ppf_spread_description
+  );
 }
