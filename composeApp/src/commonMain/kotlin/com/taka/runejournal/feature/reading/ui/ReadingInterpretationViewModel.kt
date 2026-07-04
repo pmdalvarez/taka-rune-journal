@@ -55,7 +55,7 @@ class ReadingInterpretationViewModel(
             topic = timelineItem.topic,
             question = timelineItem.question,
             tabs = listOf(
-              getRuneTab(timelineItem.rune, Res.string.rune_reading_tab_single_rune, timelineItem.topic),
+              getRuneTab(timelineItem.drawnRune, Res.string.rune_reading_tab_single_rune, timelineItem.topic),
               ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
             )
           )

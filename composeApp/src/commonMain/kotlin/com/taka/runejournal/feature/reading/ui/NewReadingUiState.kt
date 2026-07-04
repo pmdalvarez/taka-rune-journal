@@ -7,13 +7,13 @@ import com.taka.runejournal.core.domain.model.RuneSpread
 sealed interface SpreadResult {
 
   data class SingleRune(
-    val rune: DrawnRune,
+    val drawnRune: DrawnRune,
   ) : SpreadResult
 
   data class PastPresentFuture(
-    val past: DrawnRune,
-    val present: DrawnRune,
-    val future: DrawnRune,
+    val pastRune: DrawnRune,
+    val presentRune: DrawnRune,
+    val futureRune: DrawnRune,
   ) : SpreadResult
 }
 

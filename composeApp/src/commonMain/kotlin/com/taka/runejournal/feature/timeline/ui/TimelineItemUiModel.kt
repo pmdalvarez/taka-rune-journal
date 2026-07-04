@@ -33,7 +33,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     title = question,
     icon = Res.drawable.ic_rune_reading_icon,
     typeRes = topic.readingType(),
-    drawnRunes = listOf(rune),
+    drawnRunes = listOf(drawnRune),
   )
 
   is TimelineItem.PpfRuneReading -> TimelineItemUiModel(

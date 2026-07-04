@@ -28,7 +28,7 @@ fun TimelineItemWithDetails.toTimelineItem() = when {
     notes = timelineItem.notes,
     question = singleRuneReading.question,
     topic = ReadingTopic.fromKey(singleRuneReading.category) ?: error("Unknown topic: $ppfRuneReading.category"),
-    rune = singleRuneReading.rune.toDomain()
+    drawnRune = singleRuneReading.rune.toDomain()
   )
   ppfRuneReading != null -> TimelineItem.PpfRuneReading(
     id = timelineItem.id,

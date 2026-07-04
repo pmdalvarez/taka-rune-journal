@@ -22,7 +22,7 @@ sealed class TimelineItem {
     override val notes: String?,
     val question: String?,
     val topic: ReadingTopic,
-    val rune: DrawnRune,
+    val drawnRune: DrawnRune,
   ) : TimelineItem()
 
   data class PpfRuneReading(
