@@ -65,6 +65,10 @@
     <string name="rune_reading_notes_texfield_label">Write your notes here</string>
     <string name="rune_reading_notes_save_error">Your notes could not be saved. Please try again.</string>
 
+    <string name="rune_reading_single_rune_spread_name">Single Rune</string>
+    <string name="rune_reading_single_rune_spread_description">One rune for clear, focused guidance.</string>
+    <string name="rune_reading_ppf_spread_name">Past Present Future</string>
+    <string name="rune_reading_ppf_spread_description">See how a situation has unfolded over time.</string>
     <string name="rune_reading_summary_general">You are also encouraged to read more about the rune in the about section and come up with your interpretations. Feel free to write notes</string>
 
 
