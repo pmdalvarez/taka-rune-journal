@@ -39,7 +39,7 @@ fun NewReadingStartScreen(
     viewModel.uiEvent.collect { event ->
       when (event) {
         is UiEvent.ShowError -> { snackbarHostState.showErrorSnackbar(message = getString(event.messageRes)) }
-
+        is UiEvent.NavigateForward -> onContinueClick()
         else -> {} // No other events expected
       }
     }
