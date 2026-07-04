@@ -18,8 +18,8 @@ sealed interface SpreadResult {
 }
 
 data class NewReadingUiState (
-  val question: String = "",
-  val topic: ReadingTopic = ReadingTopic.GENERAL,
   val spread: RuneSpread = RuneSpread.SINGLE_RUNE,
+  val question: String? = null,
+  val topic: ReadingTopic = ReadingTopic.GENERAL,
   val result: SpreadResult? = null
 )

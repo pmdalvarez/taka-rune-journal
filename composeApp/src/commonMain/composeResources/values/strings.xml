@@ -69,7 +69,8 @@
 
     <string name="reading_start_topbar_title">New Reading</string>
     <string name="reading_question_title">Your Question</string>
-    <string name="reading_question_dscription">Hold a question in mind, or write it down to give your reading more focus.</string>
+    <string name="reading_question_description">Hold a question in mind, or write it down to give your reading more focus.</string>
+    <string name="reading_question_textfield_label">Write your question here</string>
     <string name="reading_choose_spread">Choose A Spread</string>
     <string name="reading_single_rune_spread_name">Single Rune</string>
     <string name="reading_single_rune_spread_description">A simple reading for one clear focus.</string>
