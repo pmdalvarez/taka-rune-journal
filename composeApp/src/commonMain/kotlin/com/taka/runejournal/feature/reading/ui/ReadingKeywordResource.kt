@@ -1,7 +1,7 @@
 package com.taka.runejournal.feature.reading.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import org.jetbrains.compose.resources.StringResource
@@ -111,17 +111,17 @@ private fun reversedInterpretation(rune: Rune): StringResource = when (rune) {
 }
 
 // fetches supplemental keywords to the general interpretation (for certain rune/orientation/category combinations) if found
-fun DrawnRune.supplementalKeywords(readingCategory: ReadingCategory): StringResource? {
-  if (readingCategory == ReadingCategory.GENERAL) return null
+fun DrawnRune.supplementalKeywords(readingTopic: ReadingTopic): StringResource? {
+  if (readingTopic == ReadingTopic.GENERAL) return null
 
   // Hagalaz and Nauthiz supplemental keywords is the same for both upright and reversed,
   // since we already mentioned in the general interpretation that they visually look different reversed but still considered to have the same meaning.
   // Below is a temporary workaround since @string/other_key currently not supported in KMP.
   // Will be replaced by string references in future
   val key = when {
-    orientation == RuneOrientation.REVERSED && rune == Rune.HAGALAZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingCategory.key}"
-    orientation == RuneOrientation.REVERSED && rune == Rune.NAUTHIZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingCategory.key}"
-    else -> "keywords_${rune.key}_${orientation.key}_${readingCategory.key}"
+    orientation == RuneOrientation.REVERSED && rune == Rune.HAGALAZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
+    orientation == RuneOrientation.REVERSED && rune == Rune.NAUTHIZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
+    else -> "keywords_${rune.key}_${orientation.key}_${readingTopic.key}"
   }
   return Res.allStringResources[key]
 }

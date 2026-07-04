@@ -3,7 +3,7 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
@@ -52,10 +52,10 @@ class ReadingInterpretationViewModel(
           _uiState.value = ReadingInterpretationUiState(
             id = timelineItem.id,
             createdAt = timelineItem.createdAt.format(),
-            category = timelineItem.category,
+            topic = timelineItem.topic,
             question = timelineItem.question,
             tabs = listOf(
-              getRuneTab(timelineItem.rune, Res.string.rune_reading_tab_single_rune, timelineItem.category),
+              getRuneTab(timelineItem.rune, Res.string.rune_reading_tab_single_rune, timelineItem.topic),
               ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
             )
           )
@@ -64,25 +64,25 @@ class ReadingInterpretationViewModel(
           _uiState.value = ReadingInterpretationUiState(
             id = timelineItem.id,
             createdAt = timelineItem.createdAt.format(),
-            category = timelineItem.category,
+            topic = timelineItem.topic,
             question = timelineItem.question,
             tabs = listOf(
               getRuneTab(
                 timelineItem.pastRune,
                 Res.string.rune_reading_tab_past_rune,
-                timelineItem.category,
+                timelineItem.topic,
                 Res.string.reading_position_past_description
               ),
               getRuneTab(
                 timelineItem.presentRune,
                 Res.string.rune_reading_tab_present_rune,
-                timelineItem.category,
+                timelineItem.topic,
                 Res.string.reading_position_present_description
               ),
               getRuneTab(
                 timelineItem.futureRune,
                 Res.string.rune_reading_tab_future_rune,
-                timelineItem.category,
+                timelineItem.topic,
                 Res.string.reading_position_future_description
               ),
               ReadingInterpretationTab.Notes(Res.string.rune_reading_tab_notes, timelineItem.notes)
@@ -100,16 +100,16 @@ class ReadingInterpretationViewModel(
   private fun getRuneTab(
     drawnRune: DrawnRune,
     tabName: StringResource,
-    category: ReadingCategory,
+    topic: ReadingTopic,
     tabDescription: StringResource? = null
   ): ReadingInterpretationTab.Rune {
     return ReadingInterpretationTab.Rune(
       label = tabName,
       drawnRune = drawnRune,
       interpretation = drawnRune.generalInterpretation(),
-      supplementalInterpretation = drawnRune.supplementalInterpretation(category),
+      supplementalInterpretation = drawnRune.supplementalInterpretation(topic),
       keywords = drawnRune.generalKeywords(),
-      supplementalKeywords = drawnRune.supplementalKeywords(category),
+      supplementalKeywords = drawnRune.supplementalKeywords(topic),
       tabDescription = tabDescription
     )
   }

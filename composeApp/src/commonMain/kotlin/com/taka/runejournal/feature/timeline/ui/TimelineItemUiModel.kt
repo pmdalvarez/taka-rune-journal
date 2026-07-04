@@ -32,7 +32,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     formattedDate = createdAt.format(),
     title = question,
     icon = Res.drawable.ic_rune_reading_icon,
-    typeRes = category.readingType(),
+    typeRes = topic.readingType(),
     drawnRunes = listOf(rune),
   )
 
@@ -42,7 +42,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     formattedDate = createdAt.format(),
     icon = Res.drawable.ic_rune_reading_icon,
     title = question,
-    typeRes = category.readingType(),
+    typeRes = topic.readingType(),
     drawnRunes = listOf(pastRune, presentRune, futureRune),
   )
 

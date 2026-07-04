@@ -1,6 +1,6 @@
 package com.taka.runejournal.core.domain.model
 
-enum class ReadingCategory(
+enum class ReadingTopic(
   val key: String,
 ) {
   GENERAL("general"),
@@ -10,8 +10,8 @@ enum class ReadingCategory(
   SELF("self");
 
   companion object {
-    fun fromKey(key: String): ReadingCategory? =
-      ReadingCategory.entries.firstOrNull { it.key == key }
+    fun fromKey(key: String): ReadingTopic? =
+      ReadingTopic.entries.firstOrNull { it.key == key }
   }
 }
 /************************************************************

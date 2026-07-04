@@ -69,7 +69,7 @@ fun ReadingInterpretationScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
           TakaTopBar(
-            title = stringResource(uiState.category.readingType()),
+            title = stringResource(uiState.topic.readingType()),
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
             action = TakaTopBarAction.RuneInterpretationActions(

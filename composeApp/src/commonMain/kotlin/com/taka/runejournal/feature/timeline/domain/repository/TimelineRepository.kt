@@ -2,7 +2,7 @@ package com.taka.runejournal.feature.timeline.domain.repository
 
 import androidx.paging.PagingData
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlinx.coroutines.flow.Flow
 
@@ -14,11 +14,11 @@ interface TimelineRepository {
 
   suspend fun createJournalEntry(notes: String, title: String?)
 
-  suspend fun createSingleRuneReading(question: String?, category: ReadingCategory, rune: DrawnRune, notes: String?)
+  suspend fun createSingleRuneReading(question: String?, category: ReadingTopic, rune: DrawnRune, notes: String?)
 
   suspend fun createPpfRuneReading(
     question: String?,
-    category: ReadingCategory,
+    category: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
     futureRune: DrawnRune,

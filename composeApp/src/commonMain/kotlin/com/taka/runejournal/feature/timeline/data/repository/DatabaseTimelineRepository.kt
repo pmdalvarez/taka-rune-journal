@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.feature.timeline.data.local.TimelineItemDao
 import com.taka.runejournal.feature.timeline.data.local.TimelineItemEntity
 import com.taka.runejournal.feature.timeline.data.local.toEmbedded
@@ -38,7 +38,7 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
 
   override suspend fun createSingleRuneReading(
     question: String?,
-    category: ReadingCategory,
+    category: ReadingTopic,
     rune: DrawnRune,
     notes: String?
   ) {
@@ -49,7 +49,7 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
 
   override suspend fun createPpfRuneReading(
     question: String?,
-    category: ReadingCategory,
+    category: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
     futureRune: DrawnRune,

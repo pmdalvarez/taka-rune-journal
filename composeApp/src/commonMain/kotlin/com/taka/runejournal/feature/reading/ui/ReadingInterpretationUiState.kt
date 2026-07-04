@@ -1,7 +1,7 @@
 package com.taka.runejournal.feature.reading.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import org.jetbrains.compose.resources.StringResource
 
 sealed class ReadingInterpretationTab {
@@ -32,7 +32,7 @@ sealed class ReadingInterpretationTab {
 data class ReadingInterpretationUiState(
   val id: Long = 0L,
   val createdAt: String = "",
-  val category: ReadingCategory = ReadingCategory.GENERAL,
+  val topic: ReadingTopic = ReadingTopic.GENERAL,
   val question: String? = null,
   val tabs: List<ReadingInterpretationTab> = emptyList(),
   val showDeleteDialog: Boolean = false

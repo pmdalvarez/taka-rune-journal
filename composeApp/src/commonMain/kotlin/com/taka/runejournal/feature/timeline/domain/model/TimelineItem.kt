@@ -1,7 +1,7 @@
 package com.taka.runejournal.feature.timeline.domain.model
 
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import kotlin.time.Instant
 
 sealed class TimelineItem {
@@ -21,7 +21,7 @@ sealed class TimelineItem {
     override val createdAt: Instant,
     override val notes: String?,
     val question: String?,
-    val category: ReadingCategory,
+    val topic: ReadingTopic,
     val rune: DrawnRune,
   ) : TimelineItem()
 
@@ -30,7 +30,7 @@ sealed class TimelineItem {
     override val createdAt: Instant,
     override val notes: String?,
     val question: String?,
-    val category: ReadingCategory,
+    val topic: ReadingTopic,
     val pastRune: DrawnRune,
     val presentRune: DrawnRune,
     val futureRune: DrawnRune,

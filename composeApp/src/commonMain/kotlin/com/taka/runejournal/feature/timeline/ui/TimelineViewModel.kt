@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingCategory
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.UiEvent
@@ -93,7 +93,7 @@ class TimelineViewModel(
     viewModelScope.launch {
       timelineRepository.createSingleRuneReading(
         question = listOf("What should I do to live a better life?","Why do I feel like this?","").random(),
-        category = ReadingCategory.entries.random(),
+        category = ReadingTopic.entries.random(),
         rune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
         notes = "This reading was not so clear to me."
       )
@@ -106,7 +106,7 @@ class TimelineViewModel(
     viewModelScope.launch {
       timelineRepository.createPpfRuneReading(
         question = listOf(null, "What should I do next year?","Where should i live next year?","").random(),
-        category = ReadingCategory.entries.random(),
+        category = ReadingTopic.entries.random(),
         pastRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
         presentRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
         futureRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
