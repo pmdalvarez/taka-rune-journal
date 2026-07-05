@@ -4,6 +4,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_topic_general_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topic_relationships_icon
 import taka_rune_journal.composeapp.generated.resources.reading_topic_general_description
 import taka_rune_journal.composeapp.generated.resources.reading_topic_general_name
 import taka_rune_journal.composeapp.generated.resources.reading_topic_purpose_description
@@ -29,13 +30,13 @@ enum class ReadingTopic(
   ),
   RELATIONSHIPS(
     key = "relationships",
-    icon = Res.drawable.ic_topic_general_icon,
+    icon = Res.drawable.ic_topic_relationships_icon,
     title = Res.string.reading_topic_relationships_name,
     description = Res.string.reading_topic_relationships_description
     ),
   PURPOSE(
     key = "purpose",
-    icon = Res.drawable.ic_topic_general_icon,
+    icon = Res.drawable.ic_topic_relationships_icon,
     title = Res.string.reading_topic_purpose_name,
     description = Res.string.reading_topic_purpose_description
     ),

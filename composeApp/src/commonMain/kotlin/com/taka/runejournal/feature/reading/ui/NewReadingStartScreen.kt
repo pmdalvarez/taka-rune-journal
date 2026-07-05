@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +19,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,6 +26,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.RuneSpread
@@ -41,8 +42,6 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaCardHorizontalSpacing
-import com.taka.runejournal.core.ui.theme.TakaCardPadding
-import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
@@ -69,6 +68,7 @@ fun NewReadingStartScreen(
   var spreadInput by rememberSaveable { mutableStateOf<RuneSpread?>(null) }
   var topicInput by rememberSaveable { mutableStateOf(ReadingTopic.GENERAL) }
   var questionInput by rememberSaveable { mutableStateOf("") }
+  val screenWidth = getScreenWidth()
 
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
@@ -124,7 +124,7 @@ fun NewReadingStartScreen(
             Text(
               modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = TakaCardPadding),
+                .padding(top = TakaContentSpacing),
               text = stringResource(spread.title),
               style = MaterialTheme.typography.titleSmall,
               color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -132,7 +132,7 @@ fun NewReadingStartScreen(
             Text(
               modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = TakaCardPadding),
+                .padding(top = TakaSpaceSm),
               text = stringResource(spread.description),
               style = MaterialTheme.typography.labelMedium,
               color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -158,7 +158,7 @@ fun NewReadingStartScreen(
             onClick = { topicInput = topic },
             isSelected = topic == topicInput,
             modifier = Modifier
-              .width(220.dp), // TODO base this on 60% of screen width
+              .width(screenWidth * 0.6f),
           ) {
             Icon(
               painter = painterResource(topic.icon),
@@ -171,7 +171,7 @@ fun NewReadingStartScreen(
             Text(
               modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = TakaCardPadding),
+                .padding(top = TakaContentSpacing),
               text = stringResource(topic.title),
               style = MaterialTheme.typography.titleSmall,
               color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -179,7 +179,7 @@ fun NewReadingStartScreen(
             Text(
               modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = TakaCardPadding),
+                .padding(top = TakaSpaceSm),
               text = stringResource(topic.description),
               style = MaterialTheme.typography.labelMedium,
               color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -227,4 +227,11 @@ fun NewReadingStartScreen(
     }
   }
 
+}
+
+@Composable
+fun getScreenWidth(): Dp {
+  return with(LocalDensity.current) {
+    LocalWindowInfo.current.containerSize.width.toDp()
+  }
 }
