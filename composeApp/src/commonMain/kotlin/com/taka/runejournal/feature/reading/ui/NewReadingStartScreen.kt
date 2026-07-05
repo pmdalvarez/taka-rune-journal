@@ -1,5 +1,7 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -9,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -35,7 +40,9 @@ import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.theme.TakaCardHorizontalSpacing
 import com.taka.runejournal.core.ui.theme.TakaCardPadding
+import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
@@ -84,7 +91,8 @@ fun NewReadingStartScreen(
     }
   ) { contentModifier ->
     Column(
-      modifier = contentModifier.fillMaxSize(),
+      modifier = contentModifier.fillMaxSize()
+      .verticalScroll(rememberScrollState()),
     ) {
       Text(
         text = stringResource(Res.string.reading_choose_spread),
@@ -94,15 +102,15 @@ fun NewReadingStartScreen(
         modifier = Modifier
           .padding(top = TakaContentSpacing)
           .fillMaxWidth()
-          .height(IntrinsicSize.Max) ,
+          .height(IntrinsicSize.Max),
         verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.spacedBy(TakaCardHorizontalSpacing)
       ) {
         RuneSpread.entries.forEach { spread ->
           TakaSelectableCard(
             onClick = { spreadInput = spread },
             isSelected = spread == spreadInput,
             modifier = Modifier
-              .padding(start = TakaSpaceSm, end = TakaSpaceSm)
               .weight(1f),
             ) {
             Icon(
@@ -137,7 +145,48 @@ fun NewReadingStartScreen(
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(top = TakaSectionSpacing)
       )
-      // Choose Topic
+      Row(
+        modifier = Modifier
+          .padding(top = TakaContentSpacing)
+          .fillMaxWidth()
+          .height(IntrinsicSize.Max)
+          .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(TakaCardHorizontalSpacing)
+      ) {
+        ReadingTopic.entries.forEach { topic ->
+          TakaSelectableCard(
+            onClick = { topicInput = topic },
+            isSelected = topic == topicInput,
+            modifier = Modifier
+              .width(220.dp), // TODO base this on 60% of screen width
+          ) {
+            Icon(
+              painter = painterResource(topic.icon),
+              contentDescription = stringResource(topic.title),
+              modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(72.dp),
+              tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Text(
+              modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = TakaCardPadding),
+              text = stringResource(topic.title),
+              style = MaterialTheme.typography.titleSmall,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Text(
+              modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = TakaCardPadding),
+              text = stringResource(topic.description),
+              style = MaterialTheme.typography.labelMedium,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+          }
+        }
+      }
       Text(
         text = stringResource(Res.string.reading_question_description),
         style = MaterialTheme.typography.bodyMedium,

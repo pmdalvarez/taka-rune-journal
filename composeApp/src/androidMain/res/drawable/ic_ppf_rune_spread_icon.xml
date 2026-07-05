@@ -4,73 +4,30 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
 
-    <group
-        android:pivotX="12"
-        android:pivotY="12"
-        android:scaleX="-1">
+    <!-- Left interlocking loop -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2.25"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M10.1,7
+                          C7.1,7 4.8,9.3 4.8,12
+                          C4.8,14.9 7.1,17 9.9,17
+                          C11.4,17 12.6,15.9 12.6,14.5
+                          C12.6,13.2 11.8,12.2 10.5,12.2" />
 
-        <!-- Mirrored playing-cards base -->
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M4,18.83
-                              L3.18,18.43
-                              Q2.4,18.1 2.13,17.31
-                              Q1.86,16.52 2.2,15.75
-                              L4,11.85
-                              V18.83
-                              Z
-
-                              M8,21
-                              Q7.18,21 6.59,20.4
-                              Q6,19.8 6,18.98
-                              V13
-                              L8.68,20.35
-                              Q8.75,20.52 8.81,20.69
-                              Q8.87,20.86 8.98,21
-                              H8
-                              Z
-
-                              M13.15,20.87
-                              Q12.38,21.15 11.6,20.8
-                              Q10.83,20.45 10.55,19.68
-                              L6.13,7.45
-                              Q5.85,6.68 6.2,5.91
-                              Q6.55,5.14 7.33,4.88
-                              L14.85,2.13
-                              Q15.63,1.85 16.39,2.2
-                              Q17.15,2.55 17.43,3.33
-                              L21.88,15.56
-                              Q22.16,16.34 21.81,17.1
-                              Q21.46,17.86 20.68,18.14
-                              L13.15,20.87
-                              Z
-
-                              M12.45,19
-                              L20,16.25
-                              L15.53,4
-                              L8,6.75
-                              L12.45,19
-                              Z" />
-
-        <!-- Rotated Taka symbol aligned to the card angle -->
-        <group
-            android:pivotX="14"
-            android:pivotY="11.5"
-            android:rotation="-20">
-
-            <path
-                android:fillColor="#00000000"
-                android:strokeColor="#FF000000"
-                android:strokeWidth="1"
-                android:strokeLineCap="round"
-                android:strokeLineJoin="round"
-                android:pathData="M14,8.9 L14,14.1
-                                  M14,11.5 L12.5,10
-                                  M14,11.5 L15.5,10
-                                  M14,11.5 L12.5,13
-                                  M14,11.5 L15.5,13" />
-        </group>
-
-    </group>
+    <!-- Right interlocking loop -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2.25"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M13.9,7
+                          C16.9,7 19.2,9.3 19.2,12
+                          C19.2,14.9 16.9,17 14.1,17
+                          C12.6,17 11.4,15.9 11.4,14.5
+                          C11.4,13.2 12.2,12.2 13.5,12.2" />
 
 </vector>

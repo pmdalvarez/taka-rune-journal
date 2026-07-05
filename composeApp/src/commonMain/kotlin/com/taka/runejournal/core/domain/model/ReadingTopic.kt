@@ -1,13 +1,56 @@
 package com.taka.runejournal.core.domain.model
 
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_topic_general_icon
+import taka_rune_journal.composeapp.generated.resources.reading_topic_general_description
+import taka_rune_journal.composeapp.generated.resources.reading_topic_general_name
+import taka_rune_journal.composeapp.generated.resources.reading_topic_purpose_description
+import taka_rune_journal.composeapp.generated.resources.reading_topic_purpose_name
+import taka_rune_journal.composeapp.generated.resources.reading_topic_relationships_description
+import taka_rune_journal.composeapp.generated.resources.reading_topic_relationships_name
+import taka_rune_journal.composeapp.generated.resources.reading_topic_security_description
+import taka_rune_journal.composeapp.generated.resources.reading_topic_security_name
+import taka_rune_journal.composeapp.generated.resources.reading_topic_self_description
+import taka_rune_journal.composeapp.generated.resources.reading_topic_self_name
+
 enum class ReadingTopic(
   val key: String,
+  val icon: DrawableResource,
+  val title: StringResource,
+  val description: StringResource
 ) {
-  GENERAL("general"),
-  RELATIONSHIPS("relationships"),
-  PURPOSE("purpose"),
-  SECURITY("security"),
-  SELF("self");
+  GENERAL(
+    key = "general",
+    icon = Res.drawable.ic_topic_general_icon,
+    title = Res.string.reading_topic_general_name,
+    description = Res.string.reading_topic_general_description
+  ),
+  RELATIONSHIPS(
+    key = "relationships",
+    icon = Res.drawable.ic_topic_general_icon,
+    title = Res.string.reading_topic_relationships_name,
+    description = Res.string.reading_topic_relationships_description
+    ),
+  PURPOSE(
+    key = "purpose",
+    icon = Res.drawable.ic_topic_general_icon,
+    title = Res.string.reading_topic_purpose_name,
+    description = Res.string.reading_topic_purpose_description
+    ),
+  SECURITY(
+    key = "security",
+    icon = Res.drawable.ic_topic_general_icon,
+    title = Res.string.reading_topic_security_name,
+    description = Res.string.reading_topic_security_description
+  ),
+  SELF(
+    key = "self",
+    icon = Res.drawable.ic_topic_general_icon,
+    title = Res.string.reading_topic_self_name,
+    description = Res.string.reading_topic_self_description
+  );
 
   companion object {
     fun fromKey(key: String): ReadingTopic? =
