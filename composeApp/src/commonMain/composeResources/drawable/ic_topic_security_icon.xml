@@ -37,4 +37,17 @@
         android:strokeLineJoin="round"
         android:pathData="M180,800 L780,800" />
 
+    <!-- Small shield inside -->
+    <group
+        android:pivotX="480"
+        android:pivotY="520"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateY="20">
+
+        <path
+            android:fillColor="#FF000000"
+            android:pathData="M480,720Q549,703 594.5,640.5Q640,578 640,502L640,400L480,320L320,400L320,502Q320,578 365.5,640.5Q411,703 480,720Z" />
+    </group>
+
 </vector>
