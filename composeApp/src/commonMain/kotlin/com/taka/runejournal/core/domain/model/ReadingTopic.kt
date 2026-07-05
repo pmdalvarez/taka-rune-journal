@@ -4,7 +4,10 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_topic_general_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topic_purpose_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topic_relationships_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topic_security_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topic_self_icon
 import taka_rune_journal.composeapp.generated.resources.reading_topic_general_description
 import taka_rune_journal.composeapp.generated.resources.reading_topic_general_name
 import taka_rune_journal.composeapp.generated.resources.reading_topic_purpose_description
@@ -36,19 +39,19 @@ enum class ReadingTopic(
     ),
   PURPOSE(
     key = "purpose",
-    icon = Res.drawable.ic_topic_relationships_icon,
+    icon = Res.drawable.ic_topic_purpose_icon,
     title = Res.string.reading_topic_purpose_name,
     description = Res.string.reading_topic_purpose_description
     ),
   SECURITY(
     key = "security",
-    icon = Res.drawable.ic_topic_general_icon,
+    icon = Res.drawable.ic_topic_security_icon,
     title = Res.string.reading_topic_security_name,
     description = Res.string.reading_topic_security_description
   ),
   SELF(
     key = "self",
-    icon = Res.drawable.ic_topic_general_icon,
+    icon = Res.drawable.ic_topic_self_icon,
     title = Res.string.reading_topic_self_name,
     description = Res.string.reading_topic_self_description
   );
