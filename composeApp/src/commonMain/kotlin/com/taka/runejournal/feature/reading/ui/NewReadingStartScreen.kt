@@ -58,7 +58,6 @@ fun NewReadingStartScreen(
   onContinueClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
   var spreadInput by rememberSaveable { mutableStateOf<RuneSpread?>(null) }
   var topicInput by rememberSaveable { mutableStateOf(ReadingTopic.GENERAL) }
@@ -98,9 +97,9 @@ fun NewReadingStartScreen(
           .height(IntrinsicSize.Max) ,
         verticalAlignment = Alignment.Top,
       ) {
-        RuneSpread.values().forEach { spread ->
+        RuneSpread.entries.forEach { spread ->
           TakaSelectableCard(
-            onClick = {},
+            onClick = { spreadInput = spread },
             isSelected = spread == spreadInput,
             modifier = Modifier
               .padding(start = TakaSpaceSm, end = TakaSpaceSm)
