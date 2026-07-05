@@ -45,6 +45,7 @@ import com.taka.runejournal.core.ui.theme.TakaCardHorizontalSpacing
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
+import getScreenWidth
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -225,13 +226,5 @@ fun NewReadingStartScreen(
         Text(stringResource(Res.string.button_draw_runes))
       }
     }
-  }
-
-}
-
-@Composable
-fun getScreenWidth(): Dp {
-  return with(LocalDensity.current) {
-    LocalWindowInfo.current.containerSize.width.toDp()
   }
 }
