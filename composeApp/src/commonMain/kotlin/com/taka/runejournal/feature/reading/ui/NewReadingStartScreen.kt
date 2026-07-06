@@ -67,7 +67,7 @@ fun NewReadingStartScreen(
 ) {
   val snackbarHostState = remember { SnackbarHostState() }
   var spreadInput by rememberSaveable { mutableStateOf<RuneSpread?>(null) }
-  var topicInput by rememberSaveable { mutableStateOf(ReadingTopic.GENERAL) }
+  var topicInput by rememberSaveable { mutableStateOf<ReadingTopic?>(null) }
   var questionInput by rememberSaveable { mutableStateOf("") }
   val screenWidth = getScreenWidth()
 
@@ -189,11 +189,6 @@ fun NewReadingStartScreen(
         }
       }
       Text(
-        text = stringResource(Res.string.reading_question_description),
-        style = MaterialTheme.typography.bodyMedium,
-        modifier = Modifier.padding(top = TakaContentSpacing)
-      )
-      Text(
         text = stringResource(Res.string.reading_question_title),
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(top = TakaSectionSpacing)
@@ -214,11 +209,11 @@ fun NewReadingStartScreen(
         onClick = {
           viewModel.updateSelections(
             spread = spreadInput!!,
-            topic = topicInput,
+            topic = topicInput!!,
             question = questionInput
           )
         },
-        enabled = spreadInput != null,
+        enabled = spreadInput != null && topicInput != null,
         modifier = Modifier
           .padding(top = TakaContentSpacing)
           .align(Alignment.CenterHorizontally)

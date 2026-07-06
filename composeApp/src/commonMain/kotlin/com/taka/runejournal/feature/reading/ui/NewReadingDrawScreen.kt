@@ -27,7 +27,7 @@ fun NewReadingDrawScreen(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     Text(
-      text = "Rune drawing screen spread="+uiState.spread.name+" topic="+uiState.topic.name+" question="+uiState.question,
+      text = "Rune drawing screen spread="+uiState.spread?.name+" topic="+uiState.topic?.name+" question="+uiState.question,
       style = MaterialTheme.typography.headlineMedium
     )
   }
