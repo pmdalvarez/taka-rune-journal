@@ -96,10 +96,11 @@
 
     <string name="origin_isa">Isa means “ice”, symbolizing stillness, preservation, and the slowing of movement or change.</string>
     <string name="interpretation_isa_upright">Isa can mark a pause where movement slows enough for clarity to form. It may invite you to slow down, focus, and find peace in stillness.</string>
-    <string name="interpretation_isa_upright_relationships">In relationships, Isa may point to a period of emotional stillness, distance, or withdrawal. It can invite you to notice whether this pause is necessary for clarity, or whether fear or avoidance is creating unnecessary separation between you and others.</string>
-    <string name="interpretation_isa_upright_security">In questions of security, Isa often reflects a time of waiting, stagnation, or slowed movement regarding stability and resources. It may invite you to accept the current pause rather than force progress, and to use this period to gain clarity about what true security means to you.</string>
-    <string name="interpretation_isa_upright_self">For the self, Isa can point to the need for inner stillness and quiet reflection. It may invite you to step back from constant doing and thinking, and to find clarity and peace by allowing yourself to simply be with what is present.</string>
-
+    <string name="interpretation_isa_upright_relationships">In relationships, Isa is an invitation to pause before reacting impulsively or forcing a resolution. It asks you to let emotions settle before making a decision.</string>
+    <string name="interpretation_isa_upright_purpose">For purpose, Isa can signal a pause in forward movement. It can invite you to preserve your energy and clarify your direction before continuing.</string>
+    <string name="interpretation_isa_upright_security">For security, Isa may point to a need for preservation rather than expansion. It can ask whether slowing down would help you protect your resources before making changes.</string>
+    <string name="interpretation_isa_upright_self">For the self, Isa may point to the need for inner stillness. It can invite you to return to yourself and be present with what is here now.</string>
+    
     <string name="origin_jera">Jera means “year” or “harvest”, symbolizing natural cycles, right timing, and patient effort.</string>
     <string name="interpretation_jera_upright">Jera often points to results that cannot be rushed, only tended. It may ask you to notice what your steady efforts are growing, and whether you are working with the timing of the cycle rather than against it.</string>
     <string name="interpretation_jera_upright_relationships">In relationships, Jera may point to the natural cycles of connection and the importance of patience and consistent care over time. It can invite you to notice what you have been investing in your relationships and what may be slowly coming to fruition as a result.</string>
