@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
@@ -60,7 +59,7 @@ import kotlin.collections.forEach
 
 @Preview(
   showBackground = true,
-  heightDp = 200000,           // ← Force the preview to be tall
+  heightDp = 2000000,           // ← Force the preview to be tall
   widthDp = 500
 )
 @Composable
@@ -661,6 +660,7 @@ private fun SectionTitle(text: String) {
   }
 }
 
+@Preview
 @Composable
 private fun RunePreview() {
   Column(
