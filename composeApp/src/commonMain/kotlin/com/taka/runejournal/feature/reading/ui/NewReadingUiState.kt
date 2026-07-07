@@ -1,8 +1,11 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.ui.geometry.Size
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneSpread
+import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 
 sealed interface SpreadResult {
 
@@ -21,5 +24,7 @@ data class NewReadingUiState (
   val spread: RuneSpread? = null,
   val question: String? = null,
   val topic: ReadingTopic? = null,
+  val canvasSize: Size = Size.Zero,
+  val runeVisualStates: Map<Rune, RuneVisualState> = emptyMap(),
   val result: SpreadResult? = null
 )

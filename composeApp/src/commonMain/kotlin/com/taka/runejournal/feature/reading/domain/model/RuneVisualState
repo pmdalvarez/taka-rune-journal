@@ -1,7 +1,0 @@
-package com.taka.runejournal.feature.domain.model
-
-data class RuneVisualState(
-    val position: Offset,
-    val depth: Float,
-    val angle: Float
-)

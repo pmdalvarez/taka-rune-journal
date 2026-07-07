@@ -1,11 +1,14 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.ReadingTopic
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
+import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +18,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.String
+import kotlin.random.Random
 
 class NewReadingViewModel(
   private val settingsRepository: SettingsRepository,
@@ -41,6 +45,21 @@ class NewReadingViewModel(
     }
     viewModelScope.launch {
       _uiEvent.emit(UiEvent.NavigateForward)
+    }
+  }
+
+  // To do randomize based on screen size
+  fun randomizeRuneVisualStates() {
+    _uiState.update {
+      it.copy(
+        runeVisualStates = Rune.entries.associateWith {
+          RuneVisualState(
+            position = Offset(Random.nextFloat() * 100f, Random.nextFloat() * 100f),
+            depth = Random.nextFloat() ,
+            angle = Random.nextFloat() * 360
+          )
+        }
+      )
     }
   }
 }
