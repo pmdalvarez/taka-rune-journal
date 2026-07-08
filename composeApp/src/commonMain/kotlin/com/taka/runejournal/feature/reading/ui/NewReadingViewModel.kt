@@ -49,12 +49,15 @@ class NewReadingViewModel(
   }
 
   // To do randomize based on screen size
-  fun randomizeRuneVisualStates() {
+  fun randomizeRuneVisualStates(width: Float, height: Float) {
     _uiState.update {
       it.copy(
         runeVisualStates = Rune.entries.associateWith {
           RuneVisualState(
-            position = Offset(Random.nextFloat() * 100f, Random.nextFloat() * 100f),
+            position = Offset(
+              x = Random.nextFloat() * 100f * width,
+              y = Random.nextFloat() * 100f * height
+            ),
             depth = Random.nextFloat() ,
             angle = Random.nextFloat() * 360
           )
