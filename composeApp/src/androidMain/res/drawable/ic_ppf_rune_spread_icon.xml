@@ -1,53 +1,10 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960">
+    android:width="48dp"
+    android:height="72dp"
+    android:viewportWidth="48"
+    android:viewportHeight="72">
 
-    <!-- House outline -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#FF000000"
-        android:strokeWidth="80"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M180,800
-                          V430
-                          L480,200
-                          L780,430
-                          V800" />
-
-    <!-- Roof outer edges -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#FF000000"
-        android:strokeWidth="80"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M100,490
-                          L480,200
-                          L860,490" />
-
-    <!-- Floor/base -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#FF000000"
-        android:strokeWidth="80"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M180,800 L780,800" />
-
-    <!-- Small shield inside -->
-    <group
-        android:pivotX="480"
-        android:pivotY="520"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
-        android:translateY="20">
-
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M480,720Q549,703 594.5,640.5Q640,578 640,502L640,400L480,320L320,400L320,502Q320,578 365.5,640.5Q411,703 480,720Z" />
-    </group>
-
+        android:fillColor="#333333"
+        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
 </vector>
