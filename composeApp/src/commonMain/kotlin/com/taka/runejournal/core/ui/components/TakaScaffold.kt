@@ -3,15 +3,18 @@ package com.taka.runejournal.core.ui.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 
 
 @Composable
 fun TakaScaffold(
   modifier: Modifier = Modifier,
+  containerColor: Color = MaterialTheme.colorScheme.background,
   snackbarHost: @Composable () -> Unit = {},
   contentPadding: PaddingValues = PaddingValues(
     start = TakaScreenPadding,
@@ -23,6 +26,7 @@ fun TakaScaffold(
 ) {
   Scaffold(
     modifier = modifier.fillMaxSize(),
+    containerColor = containerColor,
     snackbarHost = snackbarHost,
     topBar = topBar,
   ) { innerPadding ->

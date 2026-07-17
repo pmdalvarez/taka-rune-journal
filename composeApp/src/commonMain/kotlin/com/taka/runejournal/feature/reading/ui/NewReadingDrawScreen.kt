@@ -3,7 +3,6 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
@@ -62,7 +62,7 @@ fun NewReadingDrawScreen(
   }
 
   Box(
-    modifier = modifier.fillMaxSize()
+    modifier = Modifier.fillMaxSize()
       .background(
         brush = ShaderBrush(
           ImageShader(
@@ -80,7 +80,8 @@ fun NewReadingDrawScreen(
 //    )
 
     TakaScaffold(
-      modifier = Modifier.matchParentSize(),
+      modifier = modifier,
+      containerColor = Color.Transparent,
       snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
       // transparent background
       topBar = {
@@ -97,12 +98,6 @@ fun NewReadingDrawScreen(
       )
     }
   }
-  BoxWithConstraints(
-    modifier = Modifier.fillMaxSize()
-  ) {
-
-  }
-
 }
 
 @Composable
