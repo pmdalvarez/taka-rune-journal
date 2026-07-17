@@ -4,7 +4,272 @@
     android:viewportWidth="48"
     android:viewportHeight="72">
 
+    <!-- Base stone -->
     <path
-        android:fillColor="#333333"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#5B5B5B"
+        android:pathData="M6,3 H42 Q45,3 45,6 V66 Q45,69 42,69 H6 Q3,69 3,66 V6 Q3,3 6,3 Z" />
+
+    <!-- Soft blended border -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeWidth="0.9"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6,3 H42 Q45,3 45,6 V66 Q45,69 42,69 H6 Q3,69 3,66 V6 Q3,3 6,3 Z" />
+
+    <!-- Tapered edge cracks -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.68"
+        android:strokeWidth="1.25"
+        android:strokeLineCap="round"
+        android:pathData="M10.5,3.7 L11.1,5.2" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.52"
+        android:strokeWidth="0.85"
+        android:strokeLineCap="round"
+        android:pathData="M11.1,5.2 L11.6,6.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.38"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:pathData="M11.6,6.5 L12,8.1" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.62"
+        android:strokeWidth="1.15"
+        android:strokeLineCap="round"
+        android:pathData="M44.1,18.5 L42.4,19.6" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.48"
+        android:strokeWidth="0.75"
+        android:strokeLineCap="round"
+        android:pathData="M42.4,19.6 L40.9,20.4" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.34"
+        android:strokeWidth="0.45"
+        android:strokeLineCap="round"
+        android:pathData="M40.9,20.4 L39.8,21.0" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.64"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M38.2,68.2 L37.0,66.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.46"
+        android:strokeWidth="0.75"
+        android:strokeLineCap="round"
+        android:pathData="M37.0,66.5 L36.1,65.2" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.30"
+        android:strokeWidth="0.42"
+        android:strokeLineCap="round"
+        android:pathData="M36.1,65.2 L35.5,64.3" />
+
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.58"
+        android:strokeWidth="1.05"
+        android:strokeLineCap="round"
+        android:pathData="M3.8,49.5 L5.4,50.2" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.42"
+        android:strokeWidth="0.7"
+        android:strokeLineCap="round"
+        android:pathData="M5.4,50.2 L6.8,50.7" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#505050"
+        android:strokeAlpha="0.28"
+        android:strokeWidth="0.42"
+        android:strokeLineCap="round"
+        android:pathData="M6.8,50.7 L8.1,51.1" />
+
+    <!-- Sharp interior stone marks -->
+    <!-- Upper-left light scratch -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#8A8A8A"
+        android:strokeAlpha="0.42"
+        android:strokeWidth="1.05"
+        android:strokeLineCap="round"
+        android:pathData="M13.2,13.7 L14.8,14.9" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#8A8A8A"
+        android:strokeAlpha="0.30"
+        android:strokeWidth="0.65"
+        android:strokeLineCap="round"
+        android:pathData="M14.8,14.9 L16.3,16.0" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#8A8A8A"
+        android:strokeAlpha="0.20"
+        android:strokeWidth="0.38"
+        android:strokeLineCap="round"
+        android:pathData="M16.3,16.0 L17.5,16.8" />
+
+    <!-- Upper-right dark scratch -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#383838"
+        android:strokeAlpha="0.44"
+        android:strokeWidth="1.0"
+        android:strokeLineCap="round"
+        android:pathData="M34.6,20.4 L32.8,21.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#383838"
+        android:strokeAlpha="0.32"
+        android:strokeWidth="0.62"
+        android:strokeLineCap="round"
+        android:pathData="M32.8,21.5 L31.0,22.3" />
+
+    <!-- Small sharp light chip -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.08"
+        android:pathData="M24.5,10.6
+                          L28.2,11.4
+                          L27.0,13.2
+                          L23.8,12.5 Z" />
+
+    <!-- Small dark chip -->
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.10"
+        android:pathData="M35.5,30.5
+                          L39.0,31.8
+                          L37.4,34.2
+                          L34.2,33.0 Z" />
+
+    <!-- Mid-left darker tapered mark -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#3F3F3F"
+        android:strokeAlpha="0.46"
+        android:strokeWidth="1.1"
+        android:strokeLineCap="round"
+        android:pathData="M15.4,33.2 L17.3,34.3" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#3F3F3F"
+        android:strokeAlpha="0.32"
+        android:strokeWidth="0.7"
+        android:strokeLineCap="round"
+        android:pathData="M17.3,34.3 L18.8,35.2" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#3F3F3F"
+        android:strokeAlpha="0.22"
+        android:strokeWidth="0.4"
+        android:strokeLineCap="round"
+        android:pathData="M18.8,35.2 L20.1,35.9" />
+
+    <!-- Central angular shallow chip -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.06"
+        android:pathData="M25.8,38.0
+                          L30.4,36.8
+                          L32.0,39.2
+                          L28.4,41.1
+                          L25.1,40.0 Z" />
+
+    <!-- Central dark narrow crack -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#303030"
+        android:strokeAlpha="0.36"
+        android:strokeWidth="0.95"
+        android:strokeLineCap="round"
+        android:pathData="M28.8,43.8 L27.2,45.1" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#303030"
+        android:strokeAlpha="0.26"
+        android:strokeWidth="0.58"
+        android:strokeLineCap="round"
+        android:pathData="M27.2,45.1 L25.9,46.1" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#303030"
+        android:strokeAlpha="0.18"
+        android:strokeWidth="0.36"
+        android:strokeLineCap="round"
+        android:pathData="M25.9,46.1 L24.8,46.8" />
+
+    <!-- Lower-left light scratch -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#858585"
+        android:strokeAlpha="0.38"
+        android:strokeWidth="0.95"
+        android:strokeLineCap="round"
+        android:pathData="M12.8,55.9 L14.6,55.0" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#858585"
+        android:strokeAlpha="0.28"
+        android:strokeWidth="0.6"
+        android:strokeLineCap="round"
+        android:pathData="M14.6,55.0 L16.0,54.3" />
+
+    <!-- Lower-right darker broader chip -->
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.08"
+        android:pathData="M30.7,55.5
+                          L35.8,53.8
+                          L38.1,56.3
+                          L35.0,58.8
+                          L31.5,58.0 Z" />
+
+    <!-- Lower-right light angular fleck -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.07"
+        android:pathData="M24.0,60.5
+                          L26.4,59.4
+                          L28.0,60.7
+                          L25.8,62.2 Z" />
+
+    <!-- Tiny irregular specks -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.09"
+        android:pathData="M21.8,18.7 L23.0,18.4 L23.5,19.4 L22.5,20.0 Z" />
+
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.09"
+        android:pathData="M16.5,44.8 L18.0,44.2 L18.7,45.4 L17.2,46.1 Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.06"
+        android:pathData="M37.0,14.8 L38.5,15.2 L37.8,16.5 Z" />
+
 </vector>
