@@ -7,4 +7,5 @@ import androidx.compose.ui.geometry.Offset
 @Composable
 expect fun ShakeDetectorEffect(
   onShakeImpulse: (direction: Offset, strength: Float) -> Unit,
+  onShakingChanged: (isShaking: Boolean) -> Unit
 )

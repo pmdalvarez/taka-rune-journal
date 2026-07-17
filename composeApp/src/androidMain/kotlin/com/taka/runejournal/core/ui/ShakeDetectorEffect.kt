@@ -16,28 +16,45 @@ import kotlin.math.sqrt
 @Composable
 actual fun ShakeDetectorEffect(
   onShakeImpulse: (direction: Offset, strength: Float) -> Unit,
+  onShakingChanged: (isShaking: Boolean) -> Unit
+
 ) {
   val context = LocalContext.current
   val currentOnShakeImpulse = rememberUpdatedState(onShakeImpulse)
+  val currentOnShakeChanged = rememberUpdatedState(onShakingChanged)
 
   DisposableEffect(Unit) {
     val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     val accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
 
     var lastShakeTimeMillis = 0L
+    var isShaking = false
 
     val shakeThreshold = 4.0f
     val shakeCooldownMillis = 120L
+
+    val stoppedShakeThreshold = 2.0f
+    val stoppedShakeCooldownMillis = 2000L
 
     val listener = object : SensorEventListener {
       override fun onSensorChanged(event: SensorEvent) {
         val accelerationX = event.values[0]
         val accelerationY = event.values[1]
         val shakeStrength =  sqrt(accelerationX * accelerationX + accelerationY * accelerationY)
-
-        if (shakeStrength <= shakeThreshold) return  // we only react to shake that exceeds this shakeThreshold (m/s²)
-
         val now = System.currentTimeMillis()
+
+        if (
+          isShaking &&
+          shakeStrength < stoppedShakeThreshold &&
+          now - lastShakeTimeMillis > stoppedShakeCooldownMillis
+        ) {
+          // threshold to set isShaking back to false is stricter. Less strength and more time since last shake
+          isShaking = false
+          currentOnShakeChanged.value(false)
+        }
+
+        if (shakeStrength < shakeThreshold) return  // we only react to shake that exceeds this shakeThreshold (m/s²)
+
         if (now - lastShakeTimeMillis < shakeCooldownMillis) return
         lastShakeTimeMillis = now
 
@@ -47,6 +64,10 @@ actual fun ShakeDetectorEffect(
             y = accelerationY / shakeStrength,
           )
 
+        if (!isShaking) {
+          isShaking = true
+          currentOnShakeChanged.value(true)
+        }
         currentOnShakeImpulse.value(
           direction,
           shakeStrength,

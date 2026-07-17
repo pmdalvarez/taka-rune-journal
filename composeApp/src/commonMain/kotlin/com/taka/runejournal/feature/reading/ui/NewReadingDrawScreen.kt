@@ -56,7 +56,7 @@ fun NewReadingDrawScreen(
   val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
   var isShaking by remember { mutableStateOf(false) }
-  var canvasSize by remember { mutableStateOf(Size.Zero) }
+//  var canvasSize by remember { mutableStateOf(Size.Zero) }
   val clothBackground = when (uiState.drawPhase) {
     DrawPhase.SHAKE -> imageResource(Res.drawable.cloth_background_zoomed)
     else -> imageResource(Res.drawable.cloth_background)
@@ -66,6 +66,10 @@ fun NewReadingDrawScreen(
     onShakeImpulse = { direction, strength ->
 println("XXXXXXXXX onShakeImpulse direction: $direction, strength: $strength")
       isShaking = true
+    },
+    onShakingChanged = {
+  println("XXXXXXXXX onShakingChanged isShaking = $it")
+      isShaking = it
     }
   )
   LaunchedEffect(Unit) {
