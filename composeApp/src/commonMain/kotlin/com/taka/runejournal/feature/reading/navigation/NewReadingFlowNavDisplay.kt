@@ -16,7 +16,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun NewReadingFlowNavDisplay(
   onExitReadingFlow: () -> Unit,
-  onReadingSaved: (id: Long) -> Unit,
+  onNavigateToReadingInterpretation: (id: Long) -> Unit,
   modifier: Modifier = Modifier
 ) {
   val readingBackStack = rememberNavBackStack(appNavSavedStateConfiguration, NewReadingStartRoute)
@@ -56,7 +56,7 @@ fun NewReadingFlowNavDisplay(
           onBackClick = {
             readingBackStack.removeLastOrNull()
           },
-          onReadingSaved = onReadingSaved,
+          onNavigateToReadingInterpretation = onNavigateToReadingInterpretation,
           modifier = modifier
         )
       }
