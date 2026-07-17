@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
 import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
+import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -61,7 +62,12 @@ fun NewReadingDrawScreen(
     else -> imageResource(Res.drawable.cloth_background)
   }
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
-
+  ShakeDetectorEffect(
+    onShakeImpulse = { direction, strength ->
+println("XXXXXXXXX onShakeImpulse direction: $direction, strength: $strength")
+      isShaking = true
+    }
+  )
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
       when (event) {
@@ -93,9 +99,11 @@ fun NewReadingDrawScreen(
       )
     }
 
-    OverlayContent(
-      uiState = uiState
-    )
+    if (!isShaking) {
+      OverlayContent(
+        uiState = uiState
+      )
+    }
 
   }
 

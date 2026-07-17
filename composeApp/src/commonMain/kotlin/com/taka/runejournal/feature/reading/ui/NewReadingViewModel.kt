@@ -1,14 +1,11 @@
 package com.taka.runejournal.feature.reading.ui
 
-import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
-import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +14,6 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.String
 
 class NewReadingViewModel(
   private val settingsRepository: SettingsRepository,
