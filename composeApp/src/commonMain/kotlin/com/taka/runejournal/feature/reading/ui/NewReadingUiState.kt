@@ -3,9 +3,7 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.compose.ui.geometry.Size
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneSpread
-import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 
 sealed interface SpreadResult {
 
@@ -20,11 +18,17 @@ sealed interface SpreadResult {
   ) : SpreadResult
 }
 
+enum class DrawPhase {
+  SHAKE, // user shaking to mix runes
+  CHOOSE, // user is choosing runes
+  REVEAL, // runes being revealed
+}
+
 data class NewReadingUiState (
   val spread: RuneSpread? = null,
   val question: String? = null,
   val topic: ReadingTopic? = null,
   val canvasSize: Size = Size.Zero,
-  val runeVisualStates: Map<Rune, RuneVisualState> = emptyMap(),
+  val drawPhase: DrawPhase = DrawPhase.SHAKE,
   val result: SpreadResult? = null
 )
