@@ -25,7 +25,7 @@ fun TakaOverlayCard(
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Card(
-    modifier = modifier.fillMaxWidth(),
+    modifier = modifier,
     shape = shape,
     colors = CardDefaults.cardColors(
       containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.72f),
@@ -37,7 +37,7 @@ fun TakaOverlayCard(
     )
   ) {
     Column(
-      modifier = Modifier.fillMaxWidth().padding(TakaCardPadding),
+      modifier = Modifier.padding(TakaCardPadding),
       verticalArrangement = verticalArrangement,
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
