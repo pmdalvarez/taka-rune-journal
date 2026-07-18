@@ -34,7 +34,7 @@ actual fun ShakeDetectorEffect(
     val shakeCooldownMillis = 120L
 
     val stoppedShakeThreshold = 2.0f
-    val stoppedShakeCooldownMillis = 2000L
+    val stoppedShakeCooldownMillis = 1500L
 
     val listener = object : SensorEventListener {
       override fun onSensorChanged(event: SensorEvent) {
