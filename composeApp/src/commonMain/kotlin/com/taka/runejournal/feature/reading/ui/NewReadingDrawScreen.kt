@@ -1,13 +1,12 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -27,11 +26,17 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
-import com.taka.runejournal.core.domain.model.Rune
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
-import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaOverlayCard
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -42,14 +47,15 @@ import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
 import taka_rune_journal.composeapp.generated.resources.reading_draw_shake_prompt
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_greeting
-import kotlin.random.Random
+import taka_rune_journal.composeapp.generated.resources.rune_empty
+import kotlin.math.roundToInt
 
 @Composable
 fun NewReadingDrawScreen(
@@ -66,6 +72,9 @@ fun NewReadingDrawScreen(
     DrawPhase.SHAKE -> imageResource(Res.drawable.cloth_background_zoomed)
     else -> imageResource(Res.drawable.cloth_background)
   }
+  val runePainter = painterResource(Res.drawable.rune_empty)
+  var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f)) }
+
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
@@ -98,13 +107,20 @@ fun NewReadingDrawScreen(
         )
       )
   ) {
+    val density = LocalDensity.current
     // ✅ Runs once on first composition
     LaunchedEffect(Unit) {
-      val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(
-        maxWidth.value,
-        maxHeight.value
-      )
+      val canvasWidthPx = with(density) { maxWidth.toPx() }
+      val canvasHeightPx = with(density) { maxHeight.toPx() }
+      runeCanvasState = RuneCanvasState(canvasWidthPx, canvasHeightPx)
     }
+
+    RuneCanvas(
+      modifier = Modifier.matchParentSize(),
+      runePainter = runePainter,
+      runeCanvasState = runeCanvasState,
+      isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE
+    )
 
     if (!isShaking) {
       OverlayContent(
@@ -159,38 +175,62 @@ private fun OverlayContent(uiState: NewReadingUiState, modifier: Modifier = Modi
 
 @Composable
 private fun RuneCanvas(
-  clothTexture: ImageBitmap,
   modifier: Modifier = Modifier,
+  runePainter: Painter,
+  runeCanvasState: RuneCanvasState,
+  isZoomedIn: Boolean,
 ) {
-//  Canvas(
-//    modifier = modifier,
-//  ) {
-//    drawRect(
-//      brush = ShaderBrush(
-//        ImageShader(
-//          image = clothTexture,
-//          tileModeX = TileMode.Repeated,
-//          tileModeY = TileMode.Repeated,
-//        )
-//      ),
-//      size = size,
-//    )
-//    // draw runes here
-//  }
+  Canvas(
+    modifier = modifier,
+  ) {
+    val zoom = if (isZoomedIn) 2f else 1f
+
+    scale(
+      scale = zoom,
+      pivot = center,
+    ) {
+      runeCanvasState.runeVisualStates
+        .entries
+        .sortedBy { it.value.depth }
+        .forEach { (_, visualState) ->
+          drawRune(
+            painter = runePainter,
+            visualState = visualState,
+            runeWidth = runeCanvasState.runeWidth,
+            runeHeight = runeCanvasState.runeHeight,
+          )
+        }
+    }
+  }
 }
 
+private fun DrawScope.drawRune(
+  painter: Painter,
+  visualState: RuneVisualState,
+  runeWidth: Float,
+  runeHeight: Float,
+) {
+  val topLeft = Offset(
+    x = visualState.center.x - runeWidth / 2,
+    y = visualState.center.y - runeHeight / 2,
+  )
 
-// To do randomize based on screen size
-fun randomizeRuneVisualStates(width: Float, height: Float)
-  = Rune.entries.associateWith {
-    RuneVisualState(
-      position = Offset(
-        x = Random.nextFloat() * 100f * width,
-        y = Random.nextFloat() * 100f * height
-      ),
-      depth = Random.nextFloat() ,
-      angle = Random.nextFloat() * 360
-    )
+  rotate(
+    degrees = visualState.angle,
+    pivot = visualState.center,
+  ) {
+    translate(
+      left = topLeft.x,
+      top = topLeft.y,
+    ) {
+      with(painter) {
+        draw(
+          size = Size(
+            width = runeWidth,
+            height = runeHeight,
+          )
+        )
+      }
+    }
   }
-
-
+}
