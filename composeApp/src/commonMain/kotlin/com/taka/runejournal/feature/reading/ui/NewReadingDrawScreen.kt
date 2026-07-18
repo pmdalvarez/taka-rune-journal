@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.ImageShader
@@ -29,8 +28,6 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.graphics.drawscope.translate
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
@@ -47,7 +44,6 @@ import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.cloth_background
@@ -72,7 +68,7 @@ fun NewReadingDrawScreen(
     DrawPhase.SHAKE -> imageResource(Res.drawable.cloth_background_zoomed)
     else -> imageResource(Res.drawable.cloth_background)
   }
-  val runePainter = painterResource(Res.drawable.rune_empty)
+  val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f)) }
 
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
@@ -117,7 +113,7 @@ fun NewReadingDrawScreen(
 
     RuneCanvas(
       modifier = Modifier.matchParentSize(),
-      runePainter = runePainter,
+      emptyRuneImage = emptyRuneImage,
       runeCanvasState = runeCanvasState,
       isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE
     )
@@ -176,7 +172,7 @@ private fun OverlayContent(uiState: NewReadingUiState, modifier: Modifier = Modi
 @Composable
 private fun RuneCanvas(
   modifier: Modifier = Modifier,
-  runePainter: Painter,
+  emptyRuneImage: ImageBitmap,
   runeCanvasState: RuneCanvasState,
   isZoomedIn: Boolean,
 ) {
@@ -194,7 +190,7 @@ private fun RuneCanvas(
         .sortedBy { it.value.depth }
         .forEach { (_, visualState) ->
           drawRune(
-            painter = runePainter,
+            emptyRuneImage = emptyRuneImage,
             visualState = visualState,
             runeWidth = runeCanvasState.runeWidth,
             runeHeight = runeCanvasState.runeHeight,
@@ -205,7 +201,7 @@ private fun RuneCanvas(
 }
 
 private fun DrawScope.drawRune(
-  painter: Painter,
+  emptyRuneImage: ImageBitmap,
   visualState: RuneVisualState,
   runeWidth: Float,
   runeHeight: Float,
@@ -219,18 +215,16 @@ private fun DrawScope.drawRune(
     degrees = visualState.angle,
     pivot = visualState.center,
   ) {
-    translate(
-      left = topLeft.x,
-      top = topLeft.y,
-    ) {
-      with(painter) {
-        draw(
-          size = Size(
-            width = runeWidth,
-            height = runeHeight,
-          )
-        )
-      }
-    }
+    drawImage(
+      image = emptyRuneImage,
+      dstOffset = IntOffset(
+        x = topLeft.x.roundToInt(),
+        y = topLeft.y.roundToInt(),
+      ),
+      dstSize = IntSize(
+        width = runeWidth.roundToInt(),
+        height = runeHeight.roundToInt(),
+      ),
+    )
   }
 }
