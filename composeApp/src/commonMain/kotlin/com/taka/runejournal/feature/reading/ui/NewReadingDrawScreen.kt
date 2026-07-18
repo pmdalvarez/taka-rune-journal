@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -30,6 +31,8 @@ import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.components.TakaCard
+import com.taka.runejournal.core.ui.components.TakaOverlayCard
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
@@ -43,7 +46,9 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
+import taka_rune_journal.composeapp.generated.resources.reading_draw_shake_prompt
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
+import taka_rune_journal.composeapp.generated.resources.timeline_welcome_greeting
 import kotlin.random.Random
 
 @Composable
@@ -64,11 +69,9 @@ fun NewReadingDrawScreen(
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
-println("XXXXXXXXX onShakeImpulse direction: $direction, strength: $strength")
       isShaking = true
     },
     onShakingChanged = {
-  println("XXXXXXXXX onShakingChanged isShaking = $it")
       isShaking = it
     }
   )
@@ -142,18 +145,15 @@ private fun OverlayContent(uiState: NewReadingUiState, modifier: Modifier = Modi
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    Box(
+    TakaOverlayCard(
       modifier = Modifier
-        .background(
-          color = MaterialTheme.colorScheme.surface.copy(alpha = 0.72f),
-          shape = MaterialTheme.shapes.small,
-        )
-        .padding(horizontal = TakaScreenPadding, vertical = TakaScreenPadding),
+        .padding(horizontal = TakaScreenPadding, vertical = TakaScreenPadding)
     ) {
-      Text("SHAKE THE PHONE TO MIX THE RUNES")
+      Text(
+        text = stringResource(Res.string.reading_draw_shake_prompt),
+        style = MaterialTheme.typography.titleMedium
+      )
     }
-
-
   }
 }
 
