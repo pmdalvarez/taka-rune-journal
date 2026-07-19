@@ -73,12 +73,14 @@ fun NewReadingDrawScreen(
   }
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f)) }
+  val runeHapticFeedback = rememberRuneHapticFeedback()
 
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
 println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
+      runeHapticFeedback.playStoneClink(strength)
     },
     onShakingChanged = {
       isShaking = it

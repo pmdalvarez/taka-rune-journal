@@ -30,7 +30,7 @@ actual fun ShakeDetectorEffect(
     var lastShakeTimeMillis = 0L
     var isShaking = false
 
-    val shakeThreshold = 4.0f
+    val shakeThreshold = 6.0f
     val shakeCooldownMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS
 
     val stoppedShakeThreshold = 2.0f
