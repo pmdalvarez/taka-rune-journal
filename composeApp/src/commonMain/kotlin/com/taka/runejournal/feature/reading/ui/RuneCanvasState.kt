@@ -2,7 +2,7 @@ package com.taka.runejournal.feature.reading.ui
 
 import androidx.compose.ui.geometry.Offset
 import com.taka.runejournal.core.domain.model.Rune
-import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
+import com.taka.runejournal.feature.reading.ui.RuneVisualState
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -13,7 +13,8 @@ data class RuneCanvasState(
   private val canvasHeight: Float,
   val runeWidth: Float = canvasWidth * RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO,
   val runeHeight: Float = runeWidth * RUNE_HEIGHT_TO_WIDTH_RATIO,
-  val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(canvasWidth, canvasHeight, runeWidth, runeHeight)
+  val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(canvasWidth, canvasHeight, runeWidth, runeHeight),
+  val draggedRuneState: DraggedRuneState? = null,
 )
 {
   private val shakeStrengthMultiplier: Float =

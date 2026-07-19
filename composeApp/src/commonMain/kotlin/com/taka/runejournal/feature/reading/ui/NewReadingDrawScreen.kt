@@ -45,7 +45,6 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
-import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.stringResource
@@ -123,7 +122,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         modifier = Modifier.matchParentSize(),
         emptyRuneImage = emptyRuneImage,
         runeCanvasState = runeCanvasState,
-        isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE
+        isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE && isShaking
       )
     }
 
@@ -204,12 +203,18 @@ private fun RuneCanvas(
         angle = animatedAngle,
       )
     }
+  val zoom by animateFloatAsState(
+    targetValue = if (isZoomedIn) 1.5f else 1f,
+    animationSpec = tween(
+      durationMillis = 200,
+      easing = LinearOutSlowInEasing,
+    ),
+    label = "Rune Canvas Zoom",
+  )
 
   Canvas(
     modifier = modifier,
   ) {
-    val zoom = 1f//if (isZoomedIn) 2f else 1f
-
     scale(
       scale = zoom,
       pivot = center,
