@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +34,8 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.input.pointer.PointerInputScope
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
@@ -67,17 +71,19 @@ fun NewReadingDrawScreen(
   val snackbarHostState = remember { SnackbarHostState() }
   var isShaking by remember { mutableStateOf(false) }
   val clothBackground = when (uiState.drawPhase) {
-    DrawPhase.SHAKE -> imageResource(Res.drawable.cloth_background_zoomed)
+    DrawPhase.CHOOSE -> imageResource(Res.drawable.cloth_background_zoomed)
     else -> imageResource(Res.drawable.cloth_background)
   }
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f)) }
+  val isDragging = runeCanvasState.draggedRuneState != null
   val runeHapticFeedback = rememberRuneHapticFeedback()
 
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
 println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
+      if (isDragging) return@ShakeDetectorEffect
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
       runeHapticFeedback.playStoneClink(strength)
     },
@@ -94,7 +100,6 @@ println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
       }
     }
   }
-
 
   BoxWithConstraints(
     modifier = Modifier.fillMaxSize()
@@ -122,11 +127,22 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         modifier = Modifier.matchParentSize(),
         emptyRuneImage = emptyRuneImage,
         runeCanvasState = runeCanvasState,
-        isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE && isShaking
+        isZoomedIn = isShaking,
+        isDragEnabled = !isShaking,
+        onRuneDragStart = { touchPosition ->
+          runeCanvasState = runeCanvasState.startDraggingRune(touchPosition)
+        },
+        onRuneDrag = { position ->
+          runeCanvasState = runeCanvasState.dragRuneToPosition(position)
+        },
+        onRuneDragStop = {
+  println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
+          runeCanvasState = runeCanvasState.stopDraggingRune()
+        },
       )
     }
 
-    if (!isShaking) {
+    if (!isShaking && !isDragging) {
       OverlayContent(
         uiState = uiState
       )
@@ -134,20 +150,23 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
 
   }
 
-  TakaScaffold(
-    modifier = modifier,
-    containerColor = Color.Transparent,
-    snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
-    topBar = {
-      if (!isShaking) { // only show top bar when not shaking phone
-        TakaTopBar(
-          title = stringResource(Res.string.reading_draw_topbar_title),
-          navigationIcon = TakaTopBarNavigationIcon.Back,
-          onNavigationClick = onBackClick,
-        )
-      }
-    },
-  ) { contentPadding ->
+  if (uiState.drawPhase != DrawPhase.CHOOSE) {
+    TakaScaffold(
+      modifier = modifier,
+      containerColor = Color.Transparent,
+      snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
+      topBar = {
+        if (!isShaking) { // only show top bar when not shaking phone
+          TakaTopBar(
+            title = stringResource(Res.string.reading_draw_topbar_title),
+            navigationIcon = TakaTopBarNavigationIcon.Back,
+            onNavigationClick = onBackClick,
+          )
+        }
+      },
+    ) { contentPadding ->
+      // nothing here yet - maybe in reveal phase there is a button go to reading and runes are shown
+    }
   }
 }
 
@@ -177,6 +196,10 @@ private fun RuneCanvas(
   emptyRuneImage: ImageBitmap,
   runeCanvasState: RuneCanvasState,
   isZoomedIn: Boolean,
+  isDragEnabled: Boolean,
+  onRuneDragStart: (touchPosition: Offset) -> Unit,
+  onRuneDrag: (position: Offset) -> Unit,
+  onRuneDragStop: () -> Unit
 ) {
   val animatedRuneVisualStates = runeCanvasState.runeVisualStates
     .mapValues { (rune, visualState) ->
@@ -212,8 +235,26 @@ private fun RuneCanvas(
     label = "Rune Canvas Zoom",
   )
 
+  val currentOnRuneDragStart by rememberUpdatedState(onRuneDragStart)
+  val currentOnRuneDrag by rememberUpdatedState(onRuneDrag)
+  val currentOnRuneDragStop by rememberUpdatedState(onRuneDragStop)
+println("XXXXXXXXXXXXXXXXXXXXXXXX isDragEnabled=$isDragEnabled")
   Canvas(
-    modifier = modifier,
+    modifier = modifier.pointerInput(isDragEnabled) {
+      if (!isDragEnabled) return@pointerInput
+println("XXXXXXXXXXXXXXXXXXXXXXXX defining detectRuneDragGestures")
+      detectRuneDragGestures(
+        onRuneDragStart = { touchPosition ->
+          currentOnRuneDragStart(touchPosition)
+        },
+        onRuneDrag = { position ->
+          currentOnRuneDrag(position)
+        },
+        onRuneDragStop = {
+          currentOnRuneDragStop()
+        },
+      )
+    }
   ) {
     scale(
       scale = zoom,
@@ -232,6 +273,28 @@ private fun RuneCanvas(
         }
     }
   }
+}
+
+private suspend fun PointerInputScope.detectRuneDragGestures(
+  onRuneDragStart: (touchPosition: Offset) -> Unit,
+  onRuneDrag: (position: Offset) -> Unit,
+  onRuneDragStop: () -> Unit,
+) {
+  detectDragGestures(
+    onDragStart = { touchPosition ->
+      onRuneDragStart(touchPosition)
+    },
+    onDrag = { change, _ ->
+      change.consume()
+      onRuneDrag(change.position)
+    },
+    onDragEnd = {
+      onRuneDragStop()
+    },
+    onDragCancel = {
+      onRuneDragStop()
+    },
+  )
 }
 
 private fun DrawScope.drawRune(

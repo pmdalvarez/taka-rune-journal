@@ -19,7 +19,6 @@ sealed interface SpreadResult {
 }
 
 enum class DrawPhase {
-  SHAKE, // user shaking to mix runes
   CHOOSE, // user is choosing runes
   REVEAL, // runes being revealed
 }
@@ -29,6 +28,6 @@ data class NewReadingUiState (
   val question: String? = null,
   val topic: ReadingTopic? = null,
   val canvasSize: Size = Size.Zero,
-  val drawPhase: DrawPhase = DrawPhase.SHAKE,
+  val drawPhase: DrawPhase = DrawPhase.CHOOSE,
   val result: SpreadResult? = null
 )

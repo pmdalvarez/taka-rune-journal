@@ -2,8 +2,8 @@ package com.taka.runejournal.feature.reading.ui
 
 import androidx.compose.ui.geometry.Offset
 import com.taka.runejournal.core.domain.model.Rune
-import com.taka.runejournal.feature.reading.ui.RuneVisualState
 import kotlin.math.PI
+import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -98,24 +98,87 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
     return bouncedValue.coerceIn(min, max)
   }
 
-  private fun Offset.rotatedByDegrees(degrees: Float): Offset {
-    val radians = degrees * PI.toFloat() / 180f
-    val cos = cos(radians)
-    val sin = sin(radians)
-
-    return Offset(
-      x = x * cos - y * sin,
-      y = x * sin + y * cos,
-    )
-  }
-
-  private fun Float.normalizedDegrees(): Float =
-    ((this % 360f) + 360f) % 360f
-
   private fun calculateAngleChange(strength: Float): Float {
     val rotationFactor = Random.nextDouble(-1.0, 1.0).toFloat()
     return rotationFactor * strength * angleMovementMultiplier
   }
+
+  fun startDraggingRune(touchPosition: Offset): RuneCanvasState {
+println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune touchPosition: $touchPosition")
+    val touchedRuneEntry = findTouchedRune(touchPosition) ?: return this
+    val (rune, visualState) = touchedRuneEntry
+    val fingerFromCenter = touchPosition - visualState.center
+
+    return copy(
+      draggedRuneState = DraggedRuneState(
+        rune = rune,
+        anchorFromCenter = fingerFromCenter.rotatedByDegrees(-visualState.angle),
+        initialFingerAngle = fingerFromCenter.angleDegrees(),
+        initialRuneAngle = visualState.angle,
+      ),
+      runeVisualStates = runeVisualStates + (
+          rune to visualState.copy(
+            depth = 1f,
+          )
+        ),
+    )
+  }
+
+  private fun findTouchedRune(touchPosition: Offset): Map.Entry<Rune, RuneVisualState>? =
+    runeVisualStates
+      .entries
+      .sortedByDescending { it.value.depth }
+      .find { (_, visualState) ->
+        touchPosition.isInsideRune(visualState, runeWidth, runeHeight)
+      }
+
+  fun dragRuneToPosition(position: Offset): RuneCanvasState {
+println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
+    val dragState = draggedRuneState ?: return this
+    val visualState = runeVisualStates[dragState.rune] ?: return this
+
+    val fingerFromCenter = position - visualState.center
+    val currentFingerAngle = fingerFromCenter.angleDegrees()
+
+    val angleChange = currentFingerAngle - dragState.initialFingerAngle
+
+    val newAngle = (dragState.initialRuneAngle + angleChange).normalizedDegrees()
+
+    val rotatedAnchorFromCenter =
+      dragState.anchorFromCenter.rotatedByDegrees(newAngle)
+
+    val newCenter = position - rotatedAnchorFromCenter
+
+    return copy(
+      runeVisualStates = runeVisualStates + (
+          dragState.rune to visualState.copy(
+            center = clampRuneInsideCanvas(newCenter),
+            angle = newAngle,
+            depth = 1f,
+          )
+          ),
+    )
+  }
+
+  fun stopDraggingRune(): RuneCanvasState =
+    copy(
+      draggedRuneState = null,
+    )
+
+  private fun clampRuneInsideCanvas(
+    center: Offset,
+  ): Offset {
+    val minX = runeWidth / 2f
+    val maxX = canvasWidth - runeWidth / 2f
+    val minY = runeHeight / 2f
+    val maxY = canvasHeight - runeHeight / 2f
+
+    return Offset(
+      x = center.x.coerceIn(minX, maxX),
+      y = center.y.coerceIn(minY, maxY),
+    )
+  }
+
 
   companion object {
     const val IMPULSE_INTERVAL_MILLIS = 120L
@@ -154,3 +217,30 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
   }
 }
 
+
+private fun Offset.rotatedByDegrees(degrees: Float): Offset {
+  val radians = degrees * PI.toFloat() / 180f
+  val cos = cos(radians)
+  val sin = sin(radians)
+
+  return Offset(
+    x = x * cos - y * sin,
+    y = x * sin + y * cos,
+  )
+}
+
+private fun Float.normalizedDegrees(): Float =
+  ((this % 360f) + 360f) % 360f
+
+private fun Offset.angleDegrees(): Float =
+  atan2(y, x) * 180f / PI.toFloat()
+
+private fun Offset.isInsideRune(visualState: RuneVisualState, runeWidth: Float, runeHeight: Float): Boolean {
+  val touchFromCenter = this - visualState.center
+
+  val unrotatedTouchFromCenter =
+    touchFromCenter.rotatedByDegrees(-visualState.angle)
+
+  return unrotatedTouchFromCenter.x in -runeWidth / 2f..runeWidth / 2f &&
+      unrotatedTouchFromCenter.y in -runeHeight / 2f..runeHeight / 2f
+}
