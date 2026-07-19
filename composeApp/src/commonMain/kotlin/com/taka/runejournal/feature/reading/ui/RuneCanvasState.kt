@@ -25,7 +25,11 @@ data class RuneCanvasState(
     val movementDistance = strength * shakeStrengthMultiplier
     val updatedRuneVisualStates = runeVisualStates.mapValues { (_, visualState) ->
       val runeMovementMultiplier = Random.nextDouble(0.8, 1.0).toFloat()
-      val movement = direction * movementDistance * runeMovementMultiplier
+      val trayEffectDirection = Offset(
+        x = -direction.x + Random.nextDouble(-DIRECTION_VARIATION, DIRECTION_VARIATION).toFloat(),
+        y = -direction.y + Random.nextDouble(-DIRECTION_VARIATION, DIRECTION_VARIATION).toFloat(),
+      ).normalized()
+      val movement = trayEffectDirection * movementDistance * runeMovementMultiplier
       visualState.copy(
         center = bounceRuneInsideCanvas(visualState.center + movement),
         angle = (visualState.angle + calculateAngleChange(strength)).normalizedDegrees(),
@@ -80,6 +84,16 @@ data class RuneCanvasState(
     return bouncedValue.coerceIn(min, max)
   }
 
+  private fun Offset.normalized(): Offset {
+    val distance = getDistance()
+
+    return if (distance == 0f) {
+      Offset.Zero
+    } else {
+      this / distance
+    }
+  }
+
   private fun Float.normalizedDegrees(): Float =
     ((this % 360f) + 360f) % 360f
 
@@ -95,6 +109,7 @@ data class RuneCanvasState(
     private const val STRONG_SHAKE_CANVAS_WIDTH_RATIO = 0.3f // This is the % of the canvas width the rune should move from a strong shake
     private const val STRONG_SHAKE_ANGLE_DEGREES = 45f // This is the angle change that should come from as a strong shake
     private const val BOUNCE_STRENGTH_MULTIPLIER = 0.3f // if rune bounces of edge is moves back but at the strength of this multiplier
+    private const val DIRECTION_VARIATION = 0.35
 
     private fun randomizeRuneVisualStates(
       width: Float,

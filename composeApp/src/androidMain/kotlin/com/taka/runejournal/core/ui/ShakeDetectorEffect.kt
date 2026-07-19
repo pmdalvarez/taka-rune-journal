@@ -61,7 +61,7 @@ actual fun ShakeDetectorEffect(
         val direction =
           Offset(
             x = accelerationX / shakeStrength,
-            y = accelerationY / shakeStrength,
+            y = -accelerationY / shakeStrength,
           )
 
         if (!isShaking) {

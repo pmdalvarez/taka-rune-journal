@@ -172,7 +172,7 @@ private fun RuneCanvas(
   Canvas(
     modifier = modifier,
   ) {
-    val zoom = if (isZoomedIn) 2f else 1f
+    val zoom = 1f//if (isZoomedIn) 2f else 1f
 
     scale(
       scale = zoom,
