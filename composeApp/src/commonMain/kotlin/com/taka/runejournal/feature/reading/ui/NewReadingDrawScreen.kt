@@ -63,7 +63,6 @@ fun NewReadingDrawScreen(
   val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
   var isShaking by remember { mutableStateOf(false) }
-//  var canvasSize by remember { mutableStateOf(Size.Zero) }
   val clothBackground = when (uiState.drawPhase) {
     DrawPhase.SHAKE -> imageResource(Res.drawable.cloth_background_zoomed)
     else -> imageResource(Res.drawable.cloth_background)
@@ -74,7 +73,7 @@ fun NewReadingDrawScreen(
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
-      isShaking = true
+      runeCanvasState.applyShakeImpulse(direction, strength)
     },
     onShakingChanged = {
       isShaking = it
@@ -125,12 +124,6 @@ fun NewReadingDrawScreen(
     }
 
   }
-
-
-//    RuneCanvas(
-//      modifier = Modifier.matchParentSize(),
-//      clothTexture = clothTexture,
-//    )
 
   TakaScaffold(
     modifier = modifier,
