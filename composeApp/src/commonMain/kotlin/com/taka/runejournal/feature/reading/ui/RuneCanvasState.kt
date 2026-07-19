@@ -5,59 +5,35 @@ import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
 import kotlin.random.Random
 
-class RuneCanvasState(
+data class RuneCanvasState(
   private val canvasWidth: Float,
   private val canvasHeight: Float,
+  val runeWidth: Float = canvasWidth * RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO,
+  val runeHeight: Float = runeWidth / RUNE_HEIGHT_TO_WIDTH_RATIO,
+  val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(canvasWidth, canvasHeight, runeWidth, runeHeight)
 )
 {
-  val runeWidth: Float
-  val runeHeight: Float
-  val runeVisualStates: Map<Rune, RuneVisualState>
   private val shakeStrengthMultiplier: Float =
     canvasWidth * STRONG_SHAKE_CANVAS_WIDTH_RATIO / STRONG_SHAKE_STRENGTH
   private val angleMovementMultiplier: Float =
     STRONG_SHAKE_ANGLE_DEGREES / STRONG_SHAKE_STRENGTH
 
-  init {
-    runeWidth = canvasWidth * RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO
-    runeHeight = runeWidth / RUNE_HEIGHT_TO_WIDTH_RATIO
-    runeVisualStates = randomizeRuneVisualStates(canvasWidth, canvasHeight)
-  }
-
-  private fun randomizeRuneVisualStates(
-    width: Float,
-    height: Float,
-  ): Map<Rune, RuneVisualState> {
-    // Paddings ensure rune is fully inside of canvas regardless of angle
-    val horizontalPadding = runeWidth
-    val verticalPadding = runeHeight
-    return Rune.entries.associateWith {
-      RuneVisualState(
-        center = Offset(
-          x = horizontalPadding + (Random.nextFloat() * (width - 2 * horizontalPadding)),
-          y = verticalPadding + (Random.nextFloat() * (height - 2 * verticalPadding)),
-        ),
-        depth = Random.nextFloat(),
-        angle = Random.nextFloat() * 360f,
-      )
-    }
-  }
-
   fun applyShakeImpulse(
     direction: Offset,
     strength: Float,
-  ): Map<Rune, RuneVisualState> {
+  ): RuneCanvasState {
     val movementDistance = strength * shakeStrengthMultiplier
-
-    return runeVisualStates.mapValues { (_, visualState) ->
+    val updatedRuneVisualStates = runeVisualStates.mapValues { (_, visualState) ->
       val runeMovementMultiplier = Random.nextDouble(0.8, 1.0).toFloat()
       val movement = direction * movementDistance * runeMovementMultiplier
-
       visualState.copy(
         center = bounceRuneInsideCanvas(visualState.center + movement),
         angle = (visualState.angle + calculateAngleChange(strength)).normalizedDegrees(),
       )
     }
+    return copy(
+      runeVisualStates = updatedRuneVisualStates
+    )
   }
 
   private fun bounceRuneInsideCanvas(
@@ -119,6 +95,28 @@ class RuneCanvasState(
     private const val STRONG_SHAKE_CANVAS_WIDTH_RATIO = 0.3f // This is the % of the canvas width the rune should move from a strong shake
     private const val STRONG_SHAKE_ANGLE_DEGREES = 45f // This is the angle change that should come from as a strong shake
     private const val BOUNCE_STRENGTH_MULTIPLIER = 0.3f // if rune bounces of edge is moves back but at the strength of this multiplier
+
+    private fun randomizeRuneVisualStates(
+      width: Float,
+      height: Float,
+      runeWidth: Float,
+      runeHeight: Float,
+    ): Map<Rune, RuneVisualState> {
+      // Paddings ensure rune is fully inside of canvas regardless of angle
+      val horizontalPadding = runeWidth
+      val verticalPadding = runeHeight
+      return Rune.entries.associateWith {
+        RuneVisualState(
+          center = Offset(
+            x = horizontalPadding + (Random.nextFloat() * (width - 2 * horizontalPadding)),
+            y = verticalPadding + (Random.nextFloat() * (height - 2 * verticalPadding)),
+          ),
+          depth = Random.nextFloat(),
+          angle = Random.nextFloat() * 360f,
+        )
+      }
+    }
+
   }
 }
 

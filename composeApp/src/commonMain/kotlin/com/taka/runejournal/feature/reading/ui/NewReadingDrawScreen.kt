@@ -73,7 +73,7 @@ fun NewReadingDrawScreen(
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
-      runeCanvasState.applyShakeImpulse(direction, strength)
+      runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
     },
     onShakingChanged = {
       isShaking = it
