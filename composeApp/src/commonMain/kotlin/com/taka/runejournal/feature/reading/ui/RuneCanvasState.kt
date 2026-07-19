@@ -132,6 +132,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
       runeWidth: Float,
       runeHeight: Float,
     ): Map<Rune, RuneVisualState> {
+      // Below ensures we don't begin with (0,0) positions for all runes which affects initial animation
       if (width == 0f || height == 0f) return emptyMap()
 
       // Paddings ensure rune is fully inside of canvas regardless of angle
