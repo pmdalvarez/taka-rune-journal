@@ -116,12 +116,14 @@ println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
 println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $canvasHeightPx, runeWidth: ${runeCanvasState.runeWidth}, runeHeight: ${runeCanvasState.runeHeight}")
     }
 
-    RuneCanvas(
-      modifier = Modifier.matchParentSize(),
-      emptyRuneImage = emptyRuneImage,
-      runeCanvasState = runeCanvasState,
-      isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE
-    )
+    if (runeCanvasState.runeVisualStates.isNotEmpty()) {
+      RuneCanvas(
+        modifier = Modifier.matchParentSize(),
+        emptyRuneImage = emptyRuneImage,
+        runeCanvasState = runeCanvasState,
+        isZoomedIn = uiState.drawPhase == DrawPhase.SHAKE
+      )
+    }
 
     if (!isShaking) {
       OverlayContent(

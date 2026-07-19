@@ -132,6 +132,8 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
       runeWidth: Float,
       runeHeight: Float,
     ): Map<Rune, RuneVisualState> {
+      if (width == 0f || height == 0f) return emptyMap()
+
       // Paddings ensure rune is fully inside of canvas regardless of angle
       val horizontalPadding = runeWidth
       val verticalPadding = runeHeight
