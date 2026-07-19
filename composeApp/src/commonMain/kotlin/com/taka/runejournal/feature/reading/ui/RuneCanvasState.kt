@@ -3,6 +3,9 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.compose.ui.geometry.Offset
 import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.feature.reading.domain.model.RuneVisualState
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 import kotlin.random.Random
 
 data class RuneCanvasState(
@@ -26,9 +29,14 @@ data class RuneCanvasState(
     val updatedRuneVisualStates = runeVisualStates.mapValues { (_, visualState) ->
       val runeMovementMultiplier = Random.nextDouble(0.8, 1.0).toFloat()
       val trayEffectDirection = Offset(
-        x = -direction.x + Random.nextDouble(-DIRECTION_VARIATION, DIRECTION_VARIATION).toFloat(),
-        y = -direction.y + Random.nextDouble(-DIRECTION_VARIATION, DIRECTION_VARIATION).toFloat(),
-      ).normalized()
+        x = -direction.x,
+        y = -direction.y,
+      ).rotatedByDegrees(
+        degrees = Random.nextDouble(
+          -MAX_DIRECTION_VARIATION_DEGREES.toDouble(),
+          MAX_DIRECTION_VARIATION_DEGREES.toDouble(),
+        ).toFloat(),
+      )
       val movement = trayEffectDirection * movementDistance * runeMovementMultiplier
       visualState.copy(
         center = bounceRuneInsideCanvas(visualState.center + movement),
@@ -84,14 +92,15 @@ data class RuneCanvasState(
     return bouncedValue.coerceIn(min, max)
   }
 
-  private fun Offset.normalized(): Offset {
-    val distance = getDistance()
+  private fun Offset.rotatedByDegrees(degrees: Float): Offset {
+    val radians = degrees * PI.toFloat() / 180f
+    val cos = cos(radians)
+    val sin = sin(radians)
 
-    return if (distance == 0f) {
-      Offset.Zero
-    } else {
-      this / distance
-    }
+    return Offset(
+      x = x * cos - y * sin,
+      y = x * sin + y * cos,
+    )
   }
 
   private fun Float.normalizedDegrees(): Float =
@@ -109,7 +118,7 @@ data class RuneCanvasState(
     private const val STRONG_SHAKE_CANVAS_WIDTH_RATIO = 0.05f // This is the % of the canvas width the rune should move from a strong shake
     private const val STRONG_SHAKE_ANGLE_DEGREES = 5f // This is the max angle change that should come from as a strong shake
     private const val BOUNCE_STRENGTH_MULTIPLIER = 0.9f // if rune bounces of edge is moves back but at the strength of this multiplier
-    private const val DIRECTION_VARIATION = 0.5
+    private const val MAX_DIRECTION_VARIATION_DEGREES = 10f // max angle change of direction when shaking rune
 
     private fun randomizeRuneVisualStates(
       width: Float,

@@ -30,7 +30,7 @@ actual fun ShakeDetectorEffect(
     var isShaking = false
 
     val shakeThreshold = 4.0f
-    val shakeCooldownMillis = 30L
+    val shakeCooldownMillis = 20L
 
     val stoppedShakeThreshold = 2.0f
     val stoppedShakeCooldownMillis = 1500L
