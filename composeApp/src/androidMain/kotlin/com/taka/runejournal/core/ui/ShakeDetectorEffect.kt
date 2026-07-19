@@ -11,6 +11,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
+import com.taka.runejournal.feature.reading.ui.RuneCanvasState
 import kotlin.math.sqrt
 
 @Composable
@@ -30,7 +31,7 @@ actual fun ShakeDetectorEffect(
     var isShaking = false
 
     val shakeThreshold = 4.0f
-    val shakeCooldownMillis = 20L
+    val shakeCooldownMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS
 
     val stoppedShakeThreshold = 2.0f
     val stoppedShakeCooldownMillis = 1500L

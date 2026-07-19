@@ -1,5 +1,9 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateOffsetAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -73,6 +77,7 @@ fun NewReadingDrawScreen(
   ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
+println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
     },
     onShakingChanged = {
@@ -108,6 +113,7 @@ fun NewReadingDrawScreen(
       val canvasWidthPx = with(density) { maxWidth.toPx() }
       val canvasHeightPx = with(density) { maxHeight.toPx() }
       runeCanvasState = RuneCanvasState(canvasWidthPx, canvasHeightPx)
+println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $canvasHeightPx, runeWidth: ${runeCanvasState.runeWidth}, runeHeight: ${runeCanvasState.runeHeight}")
     }
 
     RuneCanvas(
@@ -169,6 +175,32 @@ private fun RuneCanvas(
   runeCanvasState: RuneCanvasState,
   isZoomedIn: Boolean,
 ) {
+  val animatedRuneVisualStates = runeCanvasState.runeVisualStates
+    .mapValues { (rune, visualState) ->
+      val animatedCenter by animateOffsetAsState(
+        targetValue = visualState.center,
+        animationSpec = tween(
+          durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
+          easing = LinearOutSlowInEasing,
+        ),
+        label = "Rune ${rune.name} Center",
+      )
+
+      val animatedAngle by animateFloatAsState(
+        targetValue = visualState.angle,
+        animationSpec = tween(
+          durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
+          easing = LinearOutSlowInEasing,
+        ),
+        label = "Rune ${rune.name} Angle",
+      )
+
+      visualState.copy(
+        center = animatedCenter,
+        angle = animatedAngle,
+      )
+    }
+
   Canvas(
     modifier = modifier,
   ) {
@@ -178,7 +210,7 @@ private fun RuneCanvas(
       scale = zoom,
       pivot = center,
     ) {
-      runeCanvasState.runeVisualStates
+      animatedRuneVisualStates
         .entries
         .sortedBy { it.value.depth }
         .forEach { (_, visualState) ->

@@ -12,7 +12,7 @@ data class RuneCanvasState(
   private val canvasWidth: Float,
   private val canvasHeight: Float,
   val runeWidth: Float = canvasWidth * RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO,
-  val runeHeight: Float = runeWidth / RUNE_HEIGHT_TO_WIDTH_RATIO,
+  val runeHeight: Float = runeWidth * RUNE_HEIGHT_TO_WIDTH_RATIO,
   val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(canvasWidth, canvasHeight, runeWidth, runeHeight)
 )
 {
@@ -26,6 +26,9 @@ data class RuneCanvasState(
     strength: Float,
   ): RuneCanvasState {
     val movementDistance = strength * shakeStrengthMultiplier
+
+println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $strength, shakeStrengthMultiplier: $shakeStrengthMultiplier")
+
     val updatedRuneVisualStates = runeVisualStates.mapValues { (_, visualState) ->
       val runeMovementMultiplier = Random.nextDouble(0.8, 1.0).toFloat()
       val trayEffectDirection = Offset(
@@ -78,11 +81,13 @@ data class RuneCanvasState(
     val bouncedValue = when {
       value < min -> {
         val overflow = min - value
+        println("XXXXXXXXXXXXXXXXXXXXXX bounced val: $value, new val: ${min + overflow * BOUNCE_STRENGTH_MULTIPLIER}")
         min + overflow * BOUNCE_STRENGTH_MULTIPLIER
       }
 
       value > max -> {
         val overflow = value - max
+        println("XXXXXXXXXXXXXXXXXXXXXX bounced val: $value, new val: ${max - overflow * BOUNCE_STRENGTH_MULTIPLIER}")
         max - overflow * BOUNCE_STRENGTH_MULTIPLIER
       }
 
@@ -112,13 +117,14 @@ data class RuneCanvasState(
   }
 
   companion object {
+    const val IMPULSE_INTERVAL_MILLIS = 120L
     private const val RUNE_HEIGHT_TO_WIDTH_RATIO = 1.5f
     private const val RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO = 0.25f
     private const val STRONG_SHAKE_STRENGTH = 12f // This is the shake strength we define as a strong shake
-    private const val STRONG_SHAKE_CANVAS_WIDTH_RATIO = 0.05f // This is the % of the canvas width the rune should move from a strong shake
-    private const val STRONG_SHAKE_ANGLE_DEGREES = 5f // This is the max angle change that should come from as a strong shake
-    private const val BOUNCE_STRENGTH_MULTIPLIER = 0.9f // if rune bounces of edge is moves back but at the strength of this multiplier
-    private const val MAX_DIRECTION_VARIATION_DEGREES = 10f // max angle change of direction when shaking rune
+    private const val STRONG_SHAKE_CANVAS_WIDTH_RATIO = 0.2f // This is the % of the canvas width the rune should move from a strong shake
+    private const val STRONG_SHAKE_ANGLE_DEGREES = 10f // This is the max angle change that should come from as a strong shake
+    private const val MAX_DIRECTION_VARIATION_DEGREES = 20f // max angle change of direction when shaking rune
+    private const val BOUNCE_STRENGTH_MULTIPLIER = 1f // if rune bounces of edge is moves back but at the strength of this multiplier
 
     private fun randomizeRuneVisualStates(
       width: Float,
