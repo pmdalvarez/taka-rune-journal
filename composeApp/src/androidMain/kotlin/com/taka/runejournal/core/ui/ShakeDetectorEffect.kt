@@ -17,7 +17,6 @@ import kotlin.math.sqrt
 actual fun ShakeDetectorEffect(
   onShakeImpulse: (direction: Offset, strength: Float) -> Unit,
   onShakingChanged: (isShaking: Boolean) -> Unit
-
 ) {
   val context = LocalContext.current
   val currentOnShakeImpulse = rememberUpdatedState(onShakeImpulse)
@@ -31,7 +30,7 @@ actual fun ShakeDetectorEffect(
     var isShaking = false
 
     val shakeThreshold = 4.0f
-    val shakeCooldownMillis = 120L
+    val shakeCooldownMillis = 30L
 
     val stoppedShakeThreshold = 2.0f
     val stoppedShakeCooldownMillis = 1500L
