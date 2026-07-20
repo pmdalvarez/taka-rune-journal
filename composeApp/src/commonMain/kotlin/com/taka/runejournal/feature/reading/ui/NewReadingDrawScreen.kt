@@ -12,8 +12,9 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -39,6 +40,7 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
@@ -50,7 +52,7 @@ import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
-import com.taka.runejournal.core.ui.theme.TakaScreenPadding
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
@@ -58,7 +60,9 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
-import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions
+import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_drag
+import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_shake
+import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_tap
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
 import kotlin.math.roundToInt
@@ -148,7 +152,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
 
     // Instructional overlay appears at the beginning and then fades away forever. Or disappears immediately upon shake or drag
     LaunchedEffect(Unit) {
-      delay(2000) // Wait 2 seconds
+      delay(5000) // Wait few seconds
       showInstructionalOverLay = false // Trigger fade out
     }
     if (!isShaking && !isDragging) {
@@ -168,13 +172,11 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
       containerColor = Color.Transparent,
       snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
       topBar = {
-        if (!isShaking) { // only show top bar when not shaking phone
-          TakaTopBar(
-            title = stringResource(Res.string.reading_draw_topbar_title),
-            navigationIcon = TakaTopBarNavigationIcon.Back,
-            onNavigationClick = onBackClick,
-          )
-        }
+        TakaTopBar(
+          title = stringResource(Res.string.reading_draw_topbar_title),
+          navigationIcon = TakaTopBarNavigationIcon.Back,
+          onNavigationClick = onBackClick,
+        )
       },
     ) { contentPadding ->
       // nothing here yet - maybe in reveal phase there is a button go to reading and runes are shown
@@ -182,20 +184,27 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
   }
 }
 
+@Preview
 @Composable
 private fun IntructionalOverlay() {
   Column(
-    modifier = Modifier
-      .fillMaxSize(),
+    modifier = Modifier.fillMaxSize(),
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    TakaOverlayCard(
-      modifier = Modifier
-        .padding(horizontal = TakaScreenPadding, vertical = TakaScreenPadding)
-    ) {
+    TakaOverlayCard{
       Text(
-        text = stringResource(Res.string.reading_draw_instructions),
+        text = stringResource(Res.string.reading_draw_instructions_shake),
+        style = MaterialTheme.typography.titleMedium
+      )
+      Spacer(modifier = Modifier.height(TakaContentSpacing))
+      Text(
+        text = stringResource(Res.string.reading_draw_instructions_drag),
+        style = MaterialTheme.typography.titleMedium
+      )
+      Spacer(modifier = Modifier.height(TakaContentSpacing))
+      Text(
+        text = stringResource(Res.string.reading_draw_instructions_tap),
         style = MaterialTheme.typography.titleMedium
       )
     }
