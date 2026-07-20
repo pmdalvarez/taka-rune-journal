@@ -1,9 +1,11 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -49,13 +51,14 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
-import taka_rune_journal.composeapp.generated.resources.reading_draw_shake_prompt
+import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
 import kotlin.math.roundToInt
@@ -69,6 +72,7 @@ fun NewReadingDrawScreen(
 ) {
   val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
+  var showInstructionalOverLay by remember { mutableStateOf(true) }
   var isShaking by remember { mutableStateOf(false) }
   val clothBackground = when (uiState.drawPhase) {
     DrawPhase.CHOOSE -> imageResource(Res.drawable.cloth_background_zoomed)
@@ -142,10 +146,18 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
       )
     }
 
+    // Instructional overlay appears at the beginning and then fades away forever. Or disappears immediately upon shake or drag
+    LaunchedEffect(Unit) {
+      delay(2000) // Wait 2 seconds
+      showInstructionalOverLay = false // Trigger fade out
+    }
     if (!isShaking && !isDragging) {
-      OverlayContent(
-        uiState = uiState
-      )
+      AnimatedVisibility(
+        visible = showInstructionalOverLay,
+        exit = fadeOut(tween(1000)) // 1-second fade
+      ) {
+        IntructionalOverlay()
+      }
     }
 
   }
@@ -171,9 +183,9 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
 }
 
 @Composable
-private fun OverlayContent(uiState: NewReadingUiState, modifier: Modifier = Modifier) {
+private fun IntructionalOverlay() {
   Column(
-    modifier = modifier
+    modifier = Modifier
       .fillMaxSize(),
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
@@ -183,7 +195,7 @@ private fun OverlayContent(uiState: NewReadingUiState, modifier: Modifier = Modi
         .padding(horizontal = TakaScreenPadding, vertical = TakaScreenPadding)
     ) {
       Text(
-        text = stringResource(Res.string.reading_draw_shake_prompt),
+        text = stringResource(Res.string.reading_draw_instructions),
         style = MaterialTheme.typography.titleMedium
       )
     }
