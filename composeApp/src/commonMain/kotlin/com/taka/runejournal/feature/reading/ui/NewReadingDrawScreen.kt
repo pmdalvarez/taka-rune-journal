@@ -242,9 +242,12 @@ private fun RuneCanvas(
         label = "Rune ${rune.name} Angle",
       )
 
+      val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
+
+      // When dragging don't animate because animation not good at 345 -> 5 deg transition. Also not needed, already smooth without it
       visualState.copy(
-        center = animatedCenter,
-        angle = animatedAngle,
+        center = if (isDraggedRune) visualState.center else animatedCenter,
+        angle = if (isDraggedRune) visualState.angle else animatedAngle,
       )
     }
   val zoom by animateFloatAsState(
