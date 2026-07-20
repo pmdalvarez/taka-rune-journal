@@ -78,9 +78,10 @@
     <string name="reading_choose_topic">Choose a Topic</string>
 
     <string name="reading_draw_topbar_title">Draw Runes</string>
-    <string name="reading_draw_instructions_shake">Shake to mix the runes</string>
-    <string name="reading_draw_instructions_drag">Drag to move or rotate</string>
-    <string name="reading_draw_instructions_tap">Tap to select or deselect</string>
+    <string name="reading_draw_instructions_title">Focus on Your Question</string>
+    <string name="reading_draw_instructions_shake">Shake to mix the runes.</string>
+    <string name="reading_draw_instructions_drag">Drag to move or rotate.</string>
+    <string name="reading_draw_instructions_tap">Tap to select or deselect.</string>
 
 
 </resources>

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -43,6 +44,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
@@ -52,7 +54,7 @@ import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
-import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
@@ -63,6 +65,7 @@ import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_drag
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_shake
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_tap
+import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
 import kotlin.math.roundToInt
@@ -119,7 +122,8 @@ println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
             tileModeY = TileMode.Repeated,
           )
         )
-      )
+      ),
+      contentAlignment = Alignment.Center
   ) {
     val density = LocalDensity.current
     // ✅ Runs once on first composition
@@ -160,7 +164,8 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         visible = showInstructionalOverLay,
         exit = fadeOut(tween(1000)) // 1-second fade
       ) {
-        IntructionalOverlay()
+        val maxOverlayWidth = (maxWidth.value * 0.7).dp
+        IntructionalOverlay(modifier = Modifier.widthIn(max = maxOverlayWidth))
       }
     }
 
@@ -186,26 +191,33 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
 
 @Preview
 @Composable
-private fun IntructionalOverlay() {
+private fun IntructionalOverlay(modifier:Modifier = Modifier.widthIn(max = 500.dp)) {
   Column(
-    modifier = Modifier.fillMaxSize(),
+    modifier = modifier.fillMaxSize(),
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    TakaOverlayCard{
+    TakaOverlayCard(modifier = modifier) {
       Text(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = stringResource(Res.string.reading_draw_instructions_title),
+        style = MaterialTheme.typography.titleMedium
+      )
+      Spacer(modifier = Modifier.height(TakaSectionSpacing))
+      Text(
+        modifier = Modifier.align(Alignment.Start),
         text = stringResource(Res.string.reading_draw_instructions_shake),
-        style = MaterialTheme.typography.titleMedium
+        style = MaterialTheme.typography.bodyLarge
       )
-      Spacer(modifier = Modifier.height(TakaContentSpacing))
       Text(
+        modifier = Modifier.align(Alignment.Start),
         text = stringResource(Res.string.reading_draw_instructions_drag),
-        style = MaterialTheme.typography.titleMedium
+        style = MaterialTheme.typography.bodyLarge
       )
-      Spacer(modifier = Modifier.height(TakaContentSpacing))
       Text(
+        modifier = Modifier.align(Alignment.Start),
         text = stringResource(Res.string.reading_draw_instructions_tap),
-        style = MaterialTheme.typography.titleMedium
+        style = MaterialTheme.typography.bodyLarge
       )
     }
   }
