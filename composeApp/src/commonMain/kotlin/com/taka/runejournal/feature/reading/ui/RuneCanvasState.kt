@@ -149,14 +149,16 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
 
     val newCenter = position - rotatedAnchorFromCenter
 
+    val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
+
     return copy(
       runeVisualStates = runeVisualStates + (
           dragState.rune to visualState.copy(
             center = clampRuneInsideCanvas(newCenter),
             angle = newAngle,
-            depth = 1f,
+            depth = nextTopDepth,
           )
-          ),
+        ),
     )
   }
 
