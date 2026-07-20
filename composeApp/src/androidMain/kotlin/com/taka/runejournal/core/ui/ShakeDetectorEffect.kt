@@ -34,7 +34,7 @@ actual fun ShakeDetectorEffect(
     val shakeCooldownMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS
 
     val stoppedShakeThreshold = 2.0f
-    val stoppedShakeCooldownMillis = 1500L
+    val stoppedShakeCooldownMillis = shakeCooldownMillis * 3
 
     val listener = object : SensorEventListener {
       override fun onSensorChanged(event: SensorEvent) {
