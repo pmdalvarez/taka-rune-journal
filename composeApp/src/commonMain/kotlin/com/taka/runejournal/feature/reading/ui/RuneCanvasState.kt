@@ -32,7 +32,9 @@ data class RuneCanvasState(
 
 println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $strength, shakeStrengthMultiplier: $shakeStrengthMultiplier")
 
-    val updatedRuneVisualStates = runeVisualStates.mapValues { (_, visualState) ->
+    val updatedRuneVisualStates = runeVisualStates.mapValues { (rune, visualState) ->
+      if (isSelected(rune)) return@mapValues visualState
+
       val runeMovementMultiplier = Random.nextDouble(0.5, 1.0).toFloat()
       val trayEffectDirection = Offset(
         x = direction.x,
