@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -38,7 +39,6 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,6 +68,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
+import taka_rune_journal.composeapp.generated.resources.rune_empty_glowing
 import kotlin.math.roundToInt
 
 @Composable
@@ -86,7 +87,8 @@ fun NewReadingDrawScreen(
     else -> imageResource(Res.drawable.cloth_background)
   }
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
-  var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f)) }
+  val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
+  var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f, 1)) }
   val isDragging = runeCanvasState.draggedRuneState != null
   val runeHapticFeedback = rememberRuneHapticFeedback()
 
@@ -130,19 +132,20 @@ println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
     LaunchedEffect(Unit) {
       val canvasWidthPx = with(density) { maxWidth.toPx() }
       val canvasHeightPx = with(density) { maxHeight.toPx() }
-      runeCanvasState = RuneCanvasState(canvasWidthPx, canvasHeightPx)
-println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $canvasHeightPx, runeWidth: ${runeCanvasState.runeWidth}, runeHeight: ${runeCanvasState.runeHeight}")
+      runeCanvasState = RuneCanvasState(canvasWidthPx, canvasHeightPx, uiState.spread?.runeCount ?: 1)
+println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $canvasHeightPx, runeWidth: ${runeCanvasState.runeWidth}, runeHeight: ${runeCanvasState.runeHeight} requiredRuneCount:${uiState.spread?.runeCount ?: 1}")
     }
 
     if (runeCanvasState.runeVisualStates.isNotEmpty()) {
       RuneCanvas(
         modifier = Modifier.matchParentSize(),
-        emptyRuneImage = emptyRuneImage,
+        runeImage = emptyRuneImage,
+        runeImageSelected = emptyRuneImageGlowing,
         runeCanvasState = runeCanvasState,
         isZoomedIn = isShaking,
-        isDragEnabled = !isShaking,
-        onRuneDragStart = { touchPosition ->
-          runeCanvasState = runeCanvasState.startDraggingRune(touchPosition)
+        isGestureEnabled = !isShaking,
+        onRuneDragStart = { position ->
+          runeCanvasState = runeCanvasState.startDraggingRune(position)
         },
         onRuneDrag = { position ->
           runeCanvasState = runeCanvasState.dragRuneToPosition(position)
@@ -150,6 +153,9 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         onRuneDragStop = {
   println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
           runeCanvasState = runeCanvasState.stopDraggingRune()
+        },
+        onRuneTap = { position ->
+          runeCanvasState = runeCanvasState.toggleRuneSelectionAtPosition(position)
         },
       )
     }
@@ -226,13 +232,15 @@ private fun IntructionalOverlay(modifier:Modifier = Modifier.widthIn(max = 500.d
 @Composable
 private fun RuneCanvas(
   modifier: Modifier = Modifier,
-  emptyRuneImage: ImageBitmap,
+  runeImage: ImageBitmap,
+  runeImageSelected: ImageBitmap,
   runeCanvasState: RuneCanvasState,
   isZoomedIn: Boolean,
-  isDragEnabled: Boolean,
+  isGestureEnabled: Boolean,
   onRuneDragStart: (touchPosition: Offset) -> Unit,
   onRuneDrag: (position: Offset) -> Unit,
-  onRuneDragStop: () -> Unit
+  onRuneDragStop: () -> Unit,
+  onRuneTap: (position: Offset) -> Unit,
 ) {
   val animatedRuneVisualStates = runeCanvasState.runeVisualStates
     .mapValues { (rune, visualState) ->
@@ -274,21 +282,36 @@ private fun RuneCanvas(
   val currentOnRuneDragStart by rememberUpdatedState(onRuneDragStart)
   val currentOnRuneDrag by rememberUpdatedState(onRuneDrag)
   val currentOnRuneDragStop by rememberUpdatedState(onRuneDragStop)
-println("XXXXXXXXXXXXXXXXXXXXXXXX isDragEnabled=$isDragEnabled")
+  val currentOnRuneTap by rememberUpdatedState(onRuneTap)
   Canvas(
-    modifier = modifier.pointerInput(isDragEnabled) {
-      if (!isDragEnabled) return@pointerInput
-println("XXXXXXXXXXXXXXXXXXXXXXXX defining detectRuneDragGestures")
-      detectRuneDragGestures(
-        onRuneDragStart = { touchPosition ->
-          currentOnRuneDragStart(touchPosition)
+    modifier = modifier.pointerInput(isGestureEnabled) {
+      if (!isGestureEnabled) return@pointerInput
+      detectDragGestures(
+        onDragStart = { position ->
+println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStart")
+          currentOnRuneDragStart(position)
         },
-        onRuneDrag = { position ->
-          currentOnRuneDrag(position)
+        onDrag = { change, _ ->
+println("XXXXXXXXXXXXXXXXXXXXXX onRuneDrag")
+          change.consume()
+          currentOnRuneDrag(change.position)
         },
-        onRuneDragStop = {
+        onDragEnd = {
+println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
           currentOnRuneDragStop()
         },
+        onDragCancel = {
+println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
+          currentOnRuneDragStop()
+        }
+      )
+    }.pointerInput(isGestureEnabled) {
+      if (!isGestureEnabled) return@pointerInput
+      detectTapGestures(
+        onTap = { position ->
+          currentOnRuneTap(position)
+println("XXXXXXXXXXXXXXXXXXXXXX Tap at: $position")
+        }
       )
     }
   ) {
@@ -299,9 +322,10 @@ println("XXXXXXXXXXXXXXXXXXXXXXXX defining detectRuneDragGestures")
       animatedRuneVisualStates
         .entries
         .sortedBy { it.value.depth }
-        .forEach { (_, visualState) ->
+        .forEach { (rune, visualState) ->
+          val isSelected = runeCanvasState.isSelected(rune)
           drawRune(
-            emptyRuneImage = emptyRuneImage,
+            runeImage = if (isSelected) runeImageSelected else runeImage ,
             visualState = visualState,
             runeWidth = runeCanvasState.runeWidth,
             runeHeight = runeCanvasState.runeHeight,
@@ -311,30 +335,8 @@ println("XXXXXXXXXXXXXXXXXXXXXXXX defining detectRuneDragGestures")
   }
 }
 
-private suspend fun PointerInputScope.detectRuneDragGestures(
-  onRuneDragStart: (touchPosition: Offset) -> Unit,
-  onRuneDrag: (position: Offset) -> Unit,
-  onRuneDragStop: () -> Unit,
-) {
-  detectDragGestures(
-    onDragStart = { touchPosition ->
-      onRuneDragStart(touchPosition)
-    },
-    onDrag = { change, _ ->
-      change.consume()
-      onRuneDrag(change.position)
-    },
-    onDragEnd = {
-      onRuneDragStop()
-    },
-    onDragCancel = {
-      onRuneDragStop()
-    },
-  )
-}
-
 private fun DrawScope.drawRune(
-  emptyRuneImage: ImageBitmap,
+  runeImage: ImageBitmap,
   visualState: RuneVisualState,
   runeWidth: Float,
   runeHeight: Float,
@@ -349,7 +351,7 @@ private fun DrawScope.drawRune(
     pivot = visualState.center,
   ) {
     drawImage(
-      image = emptyRuneImage,
+      image = runeImage,
       dstOffset = IntOffset(
         x = topLeft.x.roundToInt(),
         y = topLeft.y.roundToInt(),

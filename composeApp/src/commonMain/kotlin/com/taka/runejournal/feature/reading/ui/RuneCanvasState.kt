@@ -11,10 +11,12 @@ import kotlin.random.Random
 data class RuneCanvasState(
   private val canvasWidth: Float,
   private val canvasHeight: Float,
+  private val requiredRuneCount: Int,
   val runeWidth: Float = canvasWidth * RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO,
   val runeHeight: Float = runeWidth * RUNE_HEIGHT_TO_WIDTH_RATIO,
   val runeVisualStates: Map<Rune, RuneVisualState> = randomizeRuneVisualStates(canvasWidth, canvasHeight, runeWidth, runeHeight),
   val draggedRuneState: DraggedRuneState? = null,
+  val selectedRunes: List<Rune> = emptyList(),
 )
 {
   private val shakeStrengthMultiplier: Float =
@@ -103,11 +105,10 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
     return rotationFactor * strength * angleMovementMultiplier
   }
 
-  fun startDraggingRune(touchPosition: Offset): RuneCanvasState {
-println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune touchPosition: $touchPosition")
-    val touchedRuneEntry = findTouchedRune(touchPosition) ?: return this
-    val (rune, visualState) = touchedRuneEntry
-    val fingerFromCenter = touchPosition - visualState.center
+  fun startDraggingRune(position: Offset): RuneCanvasState {
+println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
+    val (rune, visualState) = findTouchedRune(position) ?: return this
+    val fingerFromCenter = position - visualState.center
 
     return copy(
       draggedRuneState = DraggedRuneState(
@@ -124,12 +125,12 @@ println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune touchPosition: $touchPosition"
     )
   }
 
-  private fun findTouchedRune(touchPosition: Offset): Map.Entry<Rune, RuneVisualState>? =
+  private fun findTouchedRune(position: Offset): Map.Entry<Rune, RuneVisualState>? =
     runeVisualStates
       .entries
       .sortedByDescending { it.value.depth }
       .find { (_, visualState) ->
-        touchPosition.isInsideRune(visualState, runeWidth, runeHeight)
+        position.isInsideRune(visualState, runeWidth, runeHeight)
       }
 
   fun dragRuneToPosition(position: Offset): RuneCanvasState {
@@ -181,6 +182,24 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
     )
   }
 
+  fun toggleRuneSelectionAtPosition(position: Offset): RuneCanvasState {
+    val (rune, _) = findTouchedRune(position) ?: return this
+    when {
+      selectedRunes.contains(rune) -> {
+        return copy(
+          selectedRunes = selectedRunes - rune,
+        )
+      }
+      selectedRunes.size >= requiredRuneCount -> {
+        return copy(
+          selectedRunes = selectedRunes + rune,
+        )
+      }
+      else -> return this
+    }
+  }
+
+  fun isSelected(rune: Rune): Boolean = selectedRunes.contains(rune)
 
   companion object {
     const val IMPULSE_INTERVAL_MILLIS = 120L
