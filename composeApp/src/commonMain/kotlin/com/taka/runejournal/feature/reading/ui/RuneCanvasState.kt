@@ -107,7 +107,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
 
   fun startDraggingRune(position: Offset): RuneCanvasState {
 println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
-    val (rune, visualState) = findTouchedRune(position) ?: return this
+    val (rune, visualState) = findTouchedRune(position, false) ?: return this
     val fingerFromCenter = position - visualState.center
 
     return copy(
@@ -125,12 +125,16 @@ println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
     )
   }
 
-  private fun findTouchedRune(position: Offset): Map.Entry<Rune, RuneVisualState>? =
+  private fun findTouchedRune(position: Offset, includeSelectedRunes: Boolean = true): Map.Entry<Rune, RuneVisualState>? =
     runeVisualStates
       .entries
       .sortedByDescending { it.value.depth }
-      .find { (_, visualState) ->
-        position.isInsideRune(visualState, runeWidth, runeHeight)
+      .find { (rune, visualState) ->
+        if (!includeSelectedRunes && selectedRunes.contains(rune)) {
+          false
+        } else  {
+          position.isInsideRune(visualState, runeWidth, runeHeight)
+        }
       }
 
   fun dragRuneToPosition(position: Offset): RuneCanvasState {
