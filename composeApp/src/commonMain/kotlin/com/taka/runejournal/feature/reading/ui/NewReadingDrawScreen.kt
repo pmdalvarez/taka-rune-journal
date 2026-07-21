@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -54,7 +56,9 @@ import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
@@ -66,6 +70,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_shake
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_tap
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
+import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
 import taka_rune_journal.composeapp.generated.resources.rune_empty_glowing
@@ -175,6 +180,18 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
       }
     }
 
+    uiState.spread?.runeCount?.let { runeCount ->
+      if (runeCanvasState.selectedRunes.size > 0 && runeCount > 1) {
+        SelectedRuneCountOverlay(
+          selectedRuneCount = runeCanvasState.selectedRunes.size,
+          requiredRuneCount = runeCount,
+          modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .navigationBarsPadding()
+            .padding(bottom = TakaScreenPadding)
+        )
+      }
+    }
   }
 
   if (uiState.drawPhase != DrawPhase.CHOOSE) {
@@ -329,8 +346,8 @@ private fun RuneCanvas(
         .entries
         .sortedBy { it.value.depth }
         .forEach { (rune, visualState) ->
-println("XXXXXXXXXXXXXXXXXXXXXX drawing rune: $rune visualState: $visualState alpha: ${visualState.alpha}")
             if (visualState.alpha != 0f) { // skip drawing this if invisible
+println("XXXXXXXXXXXXXXXXXXXXXX drawing UNSELECTED rune: $rune visualState: $visualState alpha: ${visualState.alpha}")
               drawRune(
                 runeImage = runeImage,
                 center = visualState.center,
@@ -353,6 +370,26 @@ println("XXXXXXXXXXXXXXXXXXXXXX drawing rune: $rune visualState: $visualState al
         }
     }
   }
+}
+
+@Preview
+@Composable
+private fun SelectedRuneCountOverlay(
+  selectedRuneCount: Int = 1,
+  requiredRuneCount: Int = 3,
+  modifier: Modifier = Modifier,
+) {
+  Text(
+    modifier = modifier
+      .background(
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+        shape = MaterialTheme.shapes.small,
+      )
+      .padding(horizontal = TakaSpaceSm, vertical = TakaSpaceSm),
+    text = stringResource(Res.string.reading_draw_selected_rune_count, selectedRuneCount, requiredRuneCount),
+    style = MaterialTheme.typography.labelMedium,
+    color = MaterialTheme.colorScheme.onSurface,
+  )
 }
 
 private fun DrawScope.drawRune(

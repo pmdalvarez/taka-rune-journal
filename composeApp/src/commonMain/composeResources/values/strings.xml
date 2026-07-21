@@ -82,6 +82,7 @@
     <string name="reading_draw_instructions_shake">Shake to mix the runes.</string>
     <string name="reading_draw_instructions_drag">Drag to move or rotate.</string>
     <string name="reading_draw_instructions_tap">Tap to select or deselect.</string>
+    <string name="reading_draw_selected_rune_count">%1$s of %2$s Selected</string>
 
 
 </resources>
