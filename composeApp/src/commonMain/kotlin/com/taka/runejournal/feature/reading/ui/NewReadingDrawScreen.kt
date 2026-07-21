@@ -263,11 +263,22 @@ private fun RuneCanvas(
       )
 
       val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
+      val isSelected = runeCanvasState.isSelected(rune)
+
+      val animatedAlpha by animateFloatAsState(
+          targetValue = if (isSelected) 0f else 1f,
+          animationSpec = tween(
+            durationMillis = 450,
+            easing = LinearOutSlowInEasing,
+          ),
+          label = "Rune ${rune.name} fade out animation",
+        )
 
       // When dragging don't animate because animation not good at 345 -> 5 deg transition. Also not needed, already smooth without it
       visualState.copy(
         center = if (isDraggedRune) visualState.center else animatedCenter,
         angle = if (isDraggedRune) visualState.angle else animatedAngle,
+        alpha = animatedAlpha,
       )
     }
   val zoom by animateFloatAsState(
@@ -288,20 +299,16 @@ private fun RuneCanvas(
       if (!isGestureEnabled) return@pointerInput
       detectDragGestures(
         onDragStart = { position ->
-println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStart")
           currentOnRuneDragStart(position)
         },
         onDrag = { change, _ ->
-println("XXXXXXXXXXXXXXXXXXXXXX onRuneDrag")
           change.consume()
           currentOnRuneDrag(change.position)
         },
         onDragEnd = {
-println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
           currentOnRuneDragStop()
         },
         onDragCancel = {
-println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
           currentOnRuneDragStop()
         }
       )
@@ -310,7 +317,6 @@ println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
       detectTapGestures(
         onTap = { position ->
           currentOnRuneTap(position)
-println("XXXXXXXXXXXXXXXXXXXXXX Tap at: $position")
         }
       )
     }
@@ -323,13 +329,27 @@ println("XXXXXXXXXXXXXXXXXXXXXX Tap at: $position")
         .entries
         .sortedBy { it.value.depth }
         .forEach { (rune, visualState) ->
-          val isSelected = runeCanvasState.isSelected(rune)
-          drawRune(
-            runeImage = if (isSelected) runeImageSelected else runeImage ,
-            visualState = visualState,
-            runeWidth = runeCanvasState.runeWidth,
-            runeHeight = runeCanvasState.runeHeight,
-          )
+println("XXXXXXXXXXXXXXXXXXXXXX drawing rune: $rune visualState: $visualState alpha: ${visualState.alpha}")
+            if (visualState.alpha != 0f) { // skip drawing this if invisible
+              drawRune(
+                runeImage = runeImage,
+                center = visualState.center,
+                angle = visualState.angle,
+                alpha = visualState.alpha,
+                runeWidth = runeCanvasState.runeWidth,
+                runeHeight = runeCanvasState.runeHeight
+              )
+            }
+            if (visualState.alpha != 1f) { // skip drawing this if invisible
+                drawRune(
+                  runeImage = runeImageSelected,
+                  center = visualState.center,
+                  angle = visualState.angle,
+                  alpha = 1 - visualState.alpha,
+                  runeWidth = runeCanvasState.runeWidth,
+                  runeHeight = runeCanvasState.runeHeight
+                )
+            }
         }
     }
   }
@@ -337,21 +357,24 @@ println("XXXXXXXXXXXXXXXXXXXXXX Tap at: $position")
 
 private fun DrawScope.drawRune(
   runeImage: ImageBitmap,
-  visualState: RuneVisualState,
+  center: Offset, // Center point of the rune within the canvas, in pixels.
+  angle: Float, //  Rotation angle in degrees.
+  alpha: Float = 1f, // For crossFading if rune is being selected or selected, represents alpha of unselected image
   runeWidth: Float,
   runeHeight: Float,
 ) {
   val topLeft = Offset(
-    x = visualState.center.x - runeWidth / 2,
-    y = visualState.center.y - runeHeight / 2,
+    x = center.x - runeWidth / 2,
+    y = center.y - runeHeight / 2,
   )
 
   rotate(
-    degrees = visualState.angle,
-    pivot = visualState.center,
+    degrees = angle,
+    pivot = center,
   ) {
     drawImage(
       image = runeImage,
+      alpha = alpha,
       dstOffset = IntOffset(
         x = topLeft.x.roundToInt(),
         y = topLeft.y.roundToInt(),
