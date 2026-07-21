@@ -111,6 +111,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
 println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
     val (rune, visualState) = findTouchedRune(position, false) ?: return this
     val fingerFromCenter = position - visualState.center
+    val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
 
     return copy(
       draggedRuneState = DraggedRuneState(
@@ -121,7 +122,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
       ),
       runeVisualStates = runeVisualStates + (
           rune to visualState.copy(
-            depth = 1f,
+            depth = nextTopDepth,
           )
         ),
     )
@@ -156,14 +157,12 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
 
     val newCenter = position - rotatedAnchorFromCenter
 
-    val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
 
     return copy(
       runeVisualStates = runeVisualStates + (
           dragState.rune to visualState.copy(
             center = clampRuneInsideCanvas(newCenter),
-            angle = newAngle,
-            depth = nextTopDepth,
+            angle = newAngle
           )
         ),
     )
@@ -190,7 +189,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
 
   fun toggleRuneSelectionAtPosition(position: Offset): RuneCanvasState {
 println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition position: $position")
-    val (rune, _) = findTouchedRune(position) ?: return this
+    val (rune, visualState) = findTouchedRune(position) ?: return this
     when {
       selectedRunes.contains(rune) -> {
 println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition deselecting rune : $rune")
@@ -200,8 +199,14 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition deselecting 
       }
       selectedRunes.size < requiredRuneCount -> {
 println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition selecting rune : $rune")
+        val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
         return copy(
           selectedRunes = selectedRunes + rune,
+          runeVisualStates = runeVisualStates + (
+            rune to visualState.copy(
+              depth = nextTopDepth,
+            )
+          ),
         )
       }
       else -> return this
