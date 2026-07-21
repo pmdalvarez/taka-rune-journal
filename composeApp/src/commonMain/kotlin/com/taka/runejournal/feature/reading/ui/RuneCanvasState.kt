@@ -183,14 +183,17 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
   }
 
   fun toggleRuneSelectionAtPosition(position: Offset): RuneCanvasState {
+println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition position: $position")
     val (rune, _) = findTouchedRune(position) ?: return this
     when {
       selectedRunes.contains(rune) -> {
+println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition deselecting rune : $rune")
         return copy(
           selectedRunes = selectedRunes - rune,
         )
       }
-      selectedRunes.size >= requiredRuneCount -> {
+      selectedRunes.size < requiredRuneCount -> {
+println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition selecting rune : $rune")
         return copy(
           selectedRunes = selectedRunes + rune,
         )
