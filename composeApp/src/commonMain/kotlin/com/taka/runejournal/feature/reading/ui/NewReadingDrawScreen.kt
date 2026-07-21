@@ -50,12 +50,14 @@ import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaOverlayCard
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
@@ -64,6 +66,8 @@ import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_draw_runes
+import taka_rune_journal.composeapp.generated.resources.button_reveal_runes
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_drag
@@ -156,7 +160,6 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
           runeCanvasState = runeCanvasState.dragRuneToPosition(position)
         },
         onRuneDragStop = {
-  println("XXXXXXXXXXXXXXXXXXXXXX onRuneDragStop")
           runeCanvasState = runeCanvasState.stopDraggingRune()
         },
         onRuneTap = { position ->
@@ -181,15 +184,31 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
     }
 
     uiState.spread?.runeCount?.let { runeCount ->
-      if (runeCanvasState.selectedRunes.size > 0 && runeCount > 1) {
-        SelectedRuneCountOverlay(
-          selectedRuneCount = runeCanvasState.selectedRunes.size,
-          requiredRuneCount = runeCount,
-          modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .navigationBarsPadding()
-            .padding(bottom = TakaScreenPadding)
-        )
+      when {
+        runeCanvasState.selectedRunes.size == runeCount -> {
+          TakaButton(
+            onClick = {
+              // TODO call viewmodel to change phase and trigger animations
+            },
+            modifier = Modifier
+              .padding(top = TakaContentSpacing)
+              .align(Alignment.BottomCenter)
+              .navigationBarsPadding()
+              .padding(bottom = TakaScreenPadding)
+          ) {
+            Text(stringResource(Res.string.button_reveal_runes))
+          }
+        }
+        runeCanvasState.selectedRunes.size > 0 && runeCount > 1 -> {
+          SelectedRuneCountOverlay(
+            selectedRuneCount = runeCanvasState.selectedRunes.size,
+            requiredRuneCount = runeCount,
+            modifier = Modifier
+              .align(Alignment.BottomCenter)
+              .navigationBarsPadding()
+              .padding(bottom = TakaScreenPadding)
+          )
+        }
       }
     }
   }
@@ -345,9 +364,8 @@ private fun RuneCanvas(
       animatedRuneVisualStates
         .entries
         .sortedBy { it.value.depth }
-        .forEach { (rune, visualState) ->
+        .forEach { (_, visualState) ->
             if (visualState.alpha != 0f) { // skip drawing this if invisible
-println("XXXXXXXXXXXXXXXXXXXXXX drawing UNSELECTED rune: $rune visualState: $visualState alpha: ${visualState.alpha}")
               drawRune(
                 runeImage = runeImage,
                 center = visualState.center,
@@ -357,12 +375,13 @@ println("XXXXXXXXXXXXXXXXXXXXXX drawing UNSELECTED rune: $rune visualState: $vis
                 runeHeight = runeCanvasState.runeHeight
               )
             }
-            if (visualState.alpha != 1f) { // skip drawing this if invisible
+            val alphaSelectedRune = 1 - visualState.alpha
+            if (alphaSelectedRune != 0f) { // skip drawing this if invisible
                 drawRune(
                   runeImage = runeImageSelected,
                   center = visualState.center,
                   angle = visualState.angle,
-                  alpha = 1 - visualState.alpha,
+                  alpha = alphaSelectedRune,
                   runeWidth = runeCanvasState.runeWidth,
                   runeHeight = runeCanvasState.runeHeight
                 )

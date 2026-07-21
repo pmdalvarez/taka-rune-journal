@@ -10,6 +10,7 @@
     <string name="button_cancel">Cancel</string>
     <string name="button_add_notes">Add Notes</string>
     <string name="button_draw_runes">Draw Runes</string>
+    <string name="button_reveal_runes">Reveal Runes</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 

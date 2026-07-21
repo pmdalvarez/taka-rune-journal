@@ -4,8 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,7 +26,7 @@ fun TakaOverlayCard(
     modifier = modifier,
     shape = shape,
     colors = CardDefaults.cardColors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.72f),
+      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.86f),
       contentColor = MaterialTheme.colorScheme.onSurface
     ),
     border = BorderStroke(
