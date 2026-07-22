@@ -75,6 +75,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_shake
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_tap
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
+import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
@@ -185,7 +186,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
     }
 
     uiState.spread?.runeCount?.let { runeCount ->
-      if (runeCanvasState.selectedRunes.size > 0 && runeCount > 1) {
+      if (runeCanvasState.selectedRunes.size > 0) {
         SelectedRuneCountOverlay(
           selectedRuneCount = runeCanvasState.selectedRunes.size,
           requiredRuneCount = runeCount,
@@ -384,8 +385,13 @@ private fun SelectedRuneCountOverlay(
   modifier: Modifier = Modifier,
 ) {
   TakaOverlayCard(modifier = modifier) {
+    val selectedCountString = if (selectedRuneCount == requiredRuneCount) {
+      stringResource(Res.string.reading_draw_selected_all_runes)
+    } else {
+      stringResource(Res.string.reading_draw_selected_rune_count, selectedRuneCount, requiredRuneCount)
+    }
     Text(
-      text = stringResource(Res.string.reading_draw_selected_rune_count, selectedRuneCount, requiredRuneCount),
+      text = selectedCountString,
       style = MaterialTheme.typography.labelMedium
     )
     if (selectedRuneCount == requiredRuneCount) {

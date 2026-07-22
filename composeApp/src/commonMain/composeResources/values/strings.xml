@@ -84,6 +84,7 @@
     <string name="reading_draw_instructions_drag">Drag to move or rotate.</string>
     <string name="reading_draw_instructions_tap">Tap to select or deselect.</string>
     <string name="reading_draw_selected_rune_count">%1$s of %2$s Selected</string>
+    <string name="reading_draw_selected_all_runes">All Runes Selected</string>
 
 
 </resources>
