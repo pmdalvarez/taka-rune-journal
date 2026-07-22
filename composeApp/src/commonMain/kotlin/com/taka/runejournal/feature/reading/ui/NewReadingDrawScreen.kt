@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -61,13 +60,11 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
-import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.button_draw_runes
 import taka_rune_journal.composeapp.generated.resources.button_reveal_runes
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
@@ -93,10 +90,11 @@ fun NewReadingDrawScreen(
   val snackbarHostState = remember { SnackbarHostState() }
   var showInstructionalOverLay by remember { mutableStateOf(true) }
   var isShaking by remember { mutableStateOf(false) }
-  val clothBackground = when (uiState.drawPhase) {
-    DrawPhase.CHOOSE -> imageResource(Res.drawable.cloth_background_zoomed)
-    else -> imageResource(Res.drawable.cloth_background)
-  }
+  val clothBackground = if (isShaking) {
+      imageResource(Res.drawable.cloth_background_zoomed)
+    } else {
+      imageResource(Res.drawable.cloth_background)
+    }
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f, 1)) }
