@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.theme.TakaCardPadding
 
 @Composable
@@ -26,12 +25,8 @@ fun TakaOverlayCard(
     modifier = modifier,
     shape = shape,
     colors = CardDefaults.cardColors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.86f),
+      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.72f),
       contentColor = MaterialTheme.colorScheme.onSurface
-    ),
-    border = BorderStroke(
-      width =  2.dp,
-      color = MaterialTheme.colorScheme.onSurface
     )
   ) {
     Column(

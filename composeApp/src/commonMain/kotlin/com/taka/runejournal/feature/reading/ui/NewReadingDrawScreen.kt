@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -184,31 +185,15 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
     }
 
     uiState.spread?.runeCount?.let { runeCount ->
-      when {
-        runeCanvasState.selectedRunes.size == runeCount -> {
-          TakaButton(
-            onClick = {
-              // TODO call viewmodel to change phase and trigger animations
-            },
-            modifier = Modifier
-              .padding(top = TakaContentSpacing)
-              .align(Alignment.BottomCenter)
-              .navigationBarsPadding()
-              .padding(bottom = TakaScreenPadding)
-          ) {
-            Text(stringResource(Res.string.button_reveal_runes))
-          }
-        }
-        runeCanvasState.selectedRunes.size > 0 && runeCount > 1 -> {
-          SelectedRuneCountOverlay(
-            selectedRuneCount = runeCanvasState.selectedRunes.size,
-            requiredRuneCount = runeCount,
-            modifier = Modifier
-              .align(Alignment.BottomCenter)
-              .navigationBarsPadding()
-              .padding(bottom = TakaScreenPadding)
-          )
-        }
+      if (runeCanvasState.selectedRunes.size > 0 && runeCount > 1) {
+        SelectedRuneCountOverlay(
+          selectedRuneCount = runeCanvasState.selectedRunes.size,
+          requiredRuneCount = runeCount,
+          modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .navigationBarsPadding()
+            .padding(bottom = TakaScreenPadding)
+        )
       }
     }
   }
@@ -398,17 +383,24 @@ private fun SelectedRuneCountOverlay(
   requiredRuneCount: Int = 3,
   modifier: Modifier = Modifier,
 ) {
-  Text(
-    modifier = modifier
-      .background(
-        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
-        shape = MaterialTheme.shapes.small,
-      )
-      .padding(horizontal = TakaSpaceSm, vertical = TakaSpaceSm),
-    text = stringResource(Res.string.reading_draw_selected_rune_count, selectedRuneCount, requiredRuneCount),
-    style = MaterialTheme.typography.labelMedium,
-    color = MaterialTheme.colorScheme.onSurface,
-  )
+  TakaOverlayCard(modifier = modifier) {
+    Text(
+      text = stringResource(Res.string.reading_draw_selected_rune_count, selectedRuneCount, requiredRuneCount),
+      style = MaterialTheme.typography.labelMedium
+    )
+    if (selectedRuneCount == requiredRuneCount) {
+      TakaButton(
+        onClick = {
+          // TODO call viewmodel to change phase and trigger animations
+        },
+        modifier = Modifier
+          .padding(top = TakaContentSpacing)
+          .navigationBarsPadding()
+      ) {
+        Text(stringResource(Res.string.button_reveal_runes))
+      }
+    }
+  }
 }
 
 private fun DrawScope.drawRune(
