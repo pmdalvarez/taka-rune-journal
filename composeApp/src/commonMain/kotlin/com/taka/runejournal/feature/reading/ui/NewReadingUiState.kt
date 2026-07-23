@@ -18,16 +18,10 @@ sealed interface SpreadResult {
   ) : SpreadResult
 }
 
-enum class DrawPhase {
-  CHOOSE, // user is choosing runes
-  REVEAL, // runes being revealed
-}
-
 data class NewReadingUiState (
   val spread: RuneSpread? = null,
   val question: String? = null,
   val topic: ReadingTopic? = null,
   val canvasSize: Size = Size.Zero,
-  val drawPhase: DrawPhase = DrawPhase.CHOOSE,
   val result: SpreadResult? = null
 )

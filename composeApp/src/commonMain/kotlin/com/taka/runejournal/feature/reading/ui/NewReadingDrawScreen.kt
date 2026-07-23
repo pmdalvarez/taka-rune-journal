@@ -89,8 +89,8 @@ fun NewReadingDrawScreen(
   val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
   var showInstructionalOverLay by remember { mutableStateOf(true) }
-  var isShaking by remember { mutableStateOf(false) }
-  val clothBackground = if (isShaking) {
+  var drawState by remember { mutableStateOf<DrawState>(DrawState.Choose.Idle) }
+  val clothBackground = if (drawState == DrawState.Choose.Shaking) {
       imageResource(Res.drawable.cloth_background_zoomed)
     } else {
       imageResource(Res.drawable.cloth_background)
@@ -98,19 +98,24 @@ fun NewReadingDrawScreen(
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f, 1)) }
-  val isDragging = runeCanvasState.draggedRuneState != null
   val runeHapticFeedback = rememberRuneHapticFeedback()
 
-  ImmersiveModeEffect(enabled = isShaking) // status bar hidden (immersive mode) when shaking phone
+  ImmersiveModeEffect(enabled = drawState is DrawState.Choose) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
 println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
-      if (isDragging) return@ShakeDetectorEffect
+      if (drawState == DrawState.Choose.Dragging) return@ShakeDetectorEffect
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
       runeHapticFeedback.playStoneClink(strength)
     },
-    onShakingChanged = {
-      isShaking = it
+    onShakingChanged = { isShaking ->
+println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking")
+      if (isShaking) {
+        drawState = DrawState.Choose.Shaking
+        showInstructionalOverLay = false
+      } else {
+        drawState = DrawState.Choose.Idle
+      }
     }
   )
   LaunchedEffect(Unit) {
@@ -151,9 +156,10 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         runeImage = emptyRuneImage,
         runeImageSelected = emptyRuneImageGlowing,
         runeCanvasState = runeCanvasState,
-        isZoomedIn = isShaking,
-        isGestureEnabled = !isShaking,
+        isZoomedIn = drawState == DrawState.Choose.Shaking,
+        isGestureEnabled = !(drawState == DrawState.Choose.Shaking),
         onRuneDragStart = { position ->
+          showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.startDraggingRune(position)
         },
         onRuneDrag = { position ->
@@ -163,24 +169,23 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
           runeCanvasState = runeCanvasState.stopDraggingRune()
         },
         onRuneTap = { position ->
+          showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.toggleRuneSelectionAtPosition(position)
         },
       )
     }
 
-    // Instructional overlay appears at the beginning and then fades away forever. Or disappears immediately upon shake or drag
+    // Instructional overlay appears at the beginning and then fades away forever. Or disappears immediately upon shake, drag or tap
     LaunchedEffect(Unit) {
       delay(5000) // Wait few seconds
       showInstructionalOverLay = false // Trigger fade out
     }
-    if (!isShaking && !isDragging) {
-      AnimatedVisibility(
-        visible = showInstructionalOverLay,
-        exit = fadeOut(tween(1000)) // 1-second fade
-      ) {
-        val maxOverlayWidth = (maxWidth.value * 0.7).dp
-        IntructionalOverlay(modifier = Modifier.widthIn(max = maxOverlayWidth))
-      }
+    AnimatedVisibility(
+      visible = showInstructionalOverLay,
+      exit = fadeOut(tween(750)) // 1-second fade
+    ) {
+      val maxOverlayWidth = (maxWidth.value * 0.7).dp
+      IntructionalOverlay(modifier = Modifier.widthIn(max = maxOverlayWidth))
     }
 
     uiState.spread?.runeCount?.let { runeCount ->
@@ -197,7 +202,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
     }
   }
 
-  if (uiState.drawPhase != DrawPhase.CHOOSE) {
+  if (drawState is DrawState.Reveal) {
     TakaScaffold(
       modifier = modifier,
       containerColor = Color.Transparent,
