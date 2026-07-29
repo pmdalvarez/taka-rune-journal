@@ -157,7 +157,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
         runeImageSelected = emptyRuneImageGlowing,
         runeCanvasState = runeCanvasState,
         isZoomedIn = drawState == DrawState.Choose.Shaking,
-        isGestureEnabled = !(drawState == DrawState.Choose.Shaking),
+        isGestureEnabled = !(drawState == DrawState.Choose.Shaking) ,
         onRuneDragStart = { position ->
           showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.startDraggingRune(position)
@@ -172,6 +172,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
           showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.toggleRuneSelectionAtPosition(position)
         },
+        revealSelectedRunes = drawState == DrawState.Reveal
       )
     }
 
@@ -196,7 +197,10 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
           modifier = Modifier
             .align(Alignment.BottomCenter)
             .navigationBarsPadding()
-            .padding(bottom = TakaScreenPadding)
+            .padding(bottom = TakaScreenPadding),
+          onRevealRuneClick = {
+            drawState = DrawState.Reveal
+          }
         )
       }
     }
@@ -266,6 +270,7 @@ private fun RuneCanvas(
   onRuneDrag: (position: Offset) -> Unit,
   onRuneDragStop: () -> Unit,
   onRuneTap: (position: Offset) -> Unit,
+  revealSelectedRunes: Boolean,
 ) {
   val animatedRuneVisualStates = runeCanvasState.runeVisualStates
     .mapValues { (rune, visualState) ->
@@ -290,6 +295,8 @@ private fun RuneCanvas(
       val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
       val isSelected = runeCanvasState.isSelected(rune)
 
+      // TODO -> how does revealSelectRunes = true affect below? should we:
+      // - have an animatedAlpha SelectedRune too? because in reveal state both selected and unselected should be 0
       val animatedAlpha by animateFloatAsState(
           targetValue = if (isSelected) 0f else 1f,
           animationSpec = tween(
@@ -386,6 +393,7 @@ private fun SelectedRuneCountOverlay(
   selectedRuneCount: Int = 1,
   requiredRuneCount: Int = 3,
   modifier: Modifier = Modifier,
+  onRevealRuneClick: () -> Unit = {},
 ) {
   TakaOverlayCard(modifier = modifier) {
     val selectedCountString = if (selectedRuneCount == requiredRuneCount) {
@@ -397,17 +405,14 @@ private fun SelectedRuneCountOverlay(
       text = selectedCountString,
       style = MaterialTheme.typography.labelMedium
     )
-    if (selectedRuneCount == requiredRuneCount) {
-      TakaButton(
-        onClick = {
-          // TODO call viewmodel to change phase and trigger animations
-        },
-        modifier = Modifier
-          .padding(top = TakaContentSpacing)
-          .navigationBarsPadding()
-      ) {
-        Text(stringResource(Res.string.button_reveal_runes))
-      }
+    TakaButton(
+      onClick = onRevealRuneClick,
+      enabled = selectedRuneCount == requiredRuneCount,
+      modifier = Modifier
+        .padding(top = TakaContentSpacing)
+        .navigationBarsPadding()
+    ) {
+      Text(stringResource(Res.string.button_reveal_runes))
     }
   }
 }
