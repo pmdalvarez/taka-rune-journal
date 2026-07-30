@@ -173,7 +173,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
           showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.toggleRuneSelectionAtPosition(position)
         },
-        revealSelectedRunes = drawState == DrawState.Reveal
+        revealSelectedRunes = drawState is DrawState.Reveal
       )
     }
 
@@ -200,7 +200,7 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
             .navigationBarsPadding()
             .padding(bottom = TakaScreenPadding),
           onRevealRuneClick = {
-            drawState = DrawState.Reveal
+            drawState = DrawState.Reveal.CenteringRunes
           }
         )
       }
@@ -334,7 +334,11 @@ private fun RuneCanvas(
         }
     }
   val zoom by animateFloatAsState(
-    targetValue = if (isZoomedIn) 1.5f else 1f,
+    targetValue = when {
+      revealSelectedRunes -> 2f
+      isZoomedIn -> 1.5f
+      else -> 1f
+    },
     animationSpec = tween(
       durationMillis = 200,
       easing = LinearOutSlowInEasing,

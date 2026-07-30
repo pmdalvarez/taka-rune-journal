@@ -7,5 +7,9 @@ sealed class DrawState {
     data object Dragging : Choose()
   }
 
-  data object Reveal : DrawState()
+  sealed class Reveal : DrawState() {
+    data object CenteringRunes : Reveal()
+    data object UnveilingGlyphs : Reveal()
+    data object CompletingAnimations : Reveal()
+  }
 }
