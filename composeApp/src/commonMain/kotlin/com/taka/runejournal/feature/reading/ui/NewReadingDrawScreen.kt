@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -272,46 +273,65 @@ private fun RuneCanvas(
   onRuneTap: (position: Offset) -> Unit,
   revealSelectedRunes: Boolean,
 ) {
-  val animatedRuneVisualStates = runeCanvasState.runeVisualStates
-    .mapValues { (rune, visualState) ->
-      val animatedCenter by animateOffsetAsState(
-        targetValue = visualState.center,
-        animationSpec = tween(
-          durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
-          easing = LinearOutSlowInEasing,
-        ),
-        label = "Rune ${rune.name} Center",
-      )
+  val runeImageDrawStates = buildList {
+      runeCanvasState.runeVisualStates
+        .entries
+        .sortedBy { it.value.depth }
+        .forEach { (rune, visualState) ->
+          key(rune) {
+            val animatedCenter by animateOffsetAsState(
+              targetValue = visualState.center,
+              animationSpec = tween(
+                durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Rune ${rune.name} Center",
+            )
 
-      val animatedAngle by animateFloatAsState(
-        targetValue = visualState.angle,
-        animationSpec = tween(
-          durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
-          easing = LinearOutSlowInEasing,
-        ),
-        label = "Rune ${rune.name} Angle",
-      )
+            val animatedAngle by animateFloatAsState(
+              targetValue = visualState.angle,
+              animationSpec = tween(
+                durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Rune ${rune.name} Angle",
+            )
 
-      val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
-      val isSelected = runeCanvasState.isSelected(rune)
+            val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
+            val isSelected = runeCanvasState.isSelected(rune)
 
-      // TODO -> how does revealSelectRunes = true affect below? should we:
-      // - have an animatedAlpha SelectedRune too? because in reveal state both selected and unselected should be 0
-      val animatedAlpha by animateFloatAsState(
-          targetValue = if (isSelected) 0f else 1f,
-          animationSpec = tween(
-            durationMillis = 450,
-            easing = LinearOutSlowInEasing,
-          ),
-          label = "Rune ${rune.name} fade out animation",
-        )
+            val animatedAlphaUnselectedRune by animateFloatAsState(
+              targetValue = if (isSelected) 0f else 1f,
+              animationSpec = tween(
+                durationMillis = 450,
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Rune ${rune.name} fade out animation",
+            )
+            val animatedAlphaSelectedRune = 1 - animatedAlphaUnselectedRune
+            val drawCenter = if (isDraggedRune) visualState.center else animatedCenter
+            val drawAngle = if (isDraggedRune) visualState.angle else animatedAngle
 
-      // When dragging don't animate because animation not good at 345 -> 5 deg transition. Also not needed, already smooth without it
-      visualState.copy(
-        center = if (isDraggedRune) visualState.center else animatedCenter,
-        angle = if (isDraggedRune) visualState.angle else animatedAngle,
-        alpha = animatedAlpha,
-      )
+            add(
+              RuneImageDrawState(
+                image = runeImage,
+                center =  drawCenter,
+                angle = drawAngle,
+                alpha = animatedAlphaUnselectedRune,
+              )
+            )
+            if (!isDraggedRune) { // Dragged rune cannot be in selected state
+              add(
+                RuneImageDrawState(
+                  image = runeImageSelected,
+                  center =  drawCenter,
+                  angle = drawAngle,
+                  alpha = animatedAlphaSelectedRune,
+                )
+              )
+            }
+          }
+        }
     }
   val zoom by animateFloatAsState(
     targetValue = if (isZoomedIn) 1.5f else 1f,
@@ -357,30 +377,17 @@ private fun RuneCanvas(
       scale = zoom,
       pivot = center,
     ) {
-      animatedRuneVisualStates
-        .entries
-        .sortedBy { it.value.depth }
-        .forEach { (_, visualState) ->
-            if (visualState.alpha != 0f) { // skip drawing this if invisible
+      runeImageDrawStates
+        .forEach { runeDrawState ->
+            if (runeDrawState.alpha != 0f) { // skip drawing this if invisible
               drawRune(
-                runeImage = runeImage,
-                center = visualState.center,
-                angle = visualState.angle,
-                alpha = visualState.alpha,
+                runeImage = runeDrawState.image,
+                center = runeDrawState.center,
+                angle = runeDrawState.angle,
+                alpha = runeDrawState.alpha,
                 runeWidth = runeCanvasState.runeWidth,
                 runeHeight = runeCanvasState.runeHeight
               )
-            }
-            val alphaSelectedRune = 1 - visualState.alpha
-            if (alphaSelectedRune != 0f) { // skip drawing this if invisible
-                drawRune(
-                  runeImage = runeImageSelected,
-                  center = visualState.center,
-                  angle = visualState.angle,
-                  alpha = alphaSelectedRune,
-                  runeWidth = runeCanvasState.runeWidth,
-                  runeHeight = runeCanvasState.runeHeight
-                )
             }
         }
     }
