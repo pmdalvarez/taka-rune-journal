@@ -77,7 +77,9 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_al
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
 import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_empty
+import taka_rune_journal.composeapp.generated.resources.rune_empty_brown
 import taka_rune_journal.composeapp.generated.resources.rune_empty_glowing
+import taka_rune_journal.composeapp.generated.resources.rune_empty_half_glowing
 import kotlin.math.roundToInt
 
 @Composable
@@ -266,6 +268,8 @@ private fun RuneCanvas(
   val isGestureEnabled = !(drawState == DrawState.Choose.Shaking || drawState is DrawState.Reveal)
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
+  val emptyRuneImageHalfGlowing = imageResource(Res.drawable.rune_empty_half_glowing)
+  val emptyRuneImageBrown = imageResource(Res.drawable.rune_empty_brown)
   val runeImageDrawStates = buildList {
       runeCanvasState.runeVisualStates
         .entries
@@ -298,6 +302,7 @@ private fun RuneCanvas(
               ),
               label = "Rune ${rune.name} fade out animation",
             )
+println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DrawState=$drawState")
             val fadeOutAlpha = 1 - fadeInAlpha
             val animatedAlphaUnselectedRune = when (drawState) {
               is DrawState.Choose -> if (isSelected) fadeOutAlpha else fadeInAlpha
@@ -307,19 +312,19 @@ private fun RuneCanvas(
             }
             val animatedAlphaSelectedRune = when (drawState) {
               is DrawState.Choose -> if (isSelected) fadeInAlpha else fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> 1f
+              is DrawState.Reveal.CenteringRunes -> if (isSelected) 1f else 0f
               is DrawState.Reveal.UnveilingGlyphs -> fadeOutAlpha
               is DrawState.Reveal.CompletingAnimations -> 0f
             }
             val animatedAlphaGlyphRuneGlowing = when (drawState) {
               is DrawState.Choose -> fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> 1f
+              is DrawState.Reveal.CenteringRunes -> 0f
               is DrawState.Reveal.UnveilingGlyphs -> fadeInAlpha
               is DrawState.Reveal.CompletingAnimations -> fadeOutAlpha
             }
             val animatedAlphaGlyphRune = when (drawState) {
               is DrawState.Choose -> fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> 1f
+              is DrawState.Reveal.CenteringRunes -> 0f
               is DrawState.Reveal.UnveilingGlyphs -> 0f
               is DrawState.Reveal.CompletingAnimations -> fadeInAlpha
             }
@@ -327,13 +332,13 @@ private fun RuneCanvas(
             val drawAngle = if (isDraggedRune) visualState.angle else animatedAngle
 
             // Unselected Rune
-            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaUnselectedRune,))
+            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaUnselectedRune))
             // Selected Rune - dragged rune cannot be in selected state
             if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaSelectedRune)) }
             // Rune being unveiled - has glowing glyph
-            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRuneGlowing))
+            add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRuneGlowing))
             // Rune fully unveiled- has non-glowing glyph
-            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRune))
+            add(RuneImageDrawState(image = emptyRuneImageBrown, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRune))
           }
         }
     }
