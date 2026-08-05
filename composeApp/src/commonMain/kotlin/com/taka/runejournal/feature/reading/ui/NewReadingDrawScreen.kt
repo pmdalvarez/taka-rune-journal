@@ -129,6 +129,15 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
     }
   }
 
+  val clothBackgroundAlpha by animateFloatAsState(
+    targetValue = if (drawState is DrawState.Choose) 1f else 0f,
+    animationSpec = tween(
+      durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), // Adjust duration as needed
+      easing = LinearOutSlowInEasing,
+    ),
+    label = "Background Alpha"
+  )
+
   BoxWithConstraints(
     modifier = Modifier.fillMaxSize()
       .background(
@@ -138,7 +147,8 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
             tileModeX = TileMode.Repeated,
             tileModeY = TileMode.Repeated,
           )
-        )
+        ),
+        alpha = clothBackgroundAlpha
       ),
       contentAlignment = Alignment.Center
   ) {
