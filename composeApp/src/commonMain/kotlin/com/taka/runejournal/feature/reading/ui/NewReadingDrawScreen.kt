@@ -148,7 +148,6 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
       val canvasWidthPx = with(density) { maxWidth.toPx() }
       val canvasHeightPx = with(density) { maxHeight.toPx() }
       runeCanvasState = RuneCanvasState(canvasWidthPx, canvasHeightPx, uiState.spread?.runeCount ?: 1)
-println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $canvasHeightPx, runeWidth: ${runeCanvasState.runeWidth}, runeHeight: ${runeCanvasState.runeHeight} requiredRuneCount:${uiState.spread?.runeCount ?: 1}")
     }
 
     if (runeCanvasState.runeVisualStates.isNotEmpty()) {
@@ -186,6 +185,20 @@ println("XXXXXXXXXXXXXXXXXXXXXX canvasWidthPx: $canvasWidthPx, canvasHeightPx: $
       IntructionalOverlay(modifier = Modifier.widthIn(max = maxOverlayWidth))
     }
 
+    LaunchedEffect(drawState) {
+      // Once drawState is in Reveal, this transitions the reveal phase through the 3 different animations
+      when (drawState) {
+        is DrawState.Reveal.CenteringRunes -> {
+          delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
+          drawState = DrawState.Reveal.UnveilingGlyphs
+        }
+        is DrawState.Reveal.UnveilingGlyphs -> {
+          delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
+          drawState = DrawState.Reveal.CompletingAnimations
+        }
+        else -> {} // Do nothing
+      }
+    }
     uiState.spread?.runeCount?.let { runeCount ->
       if (runeCanvasState.selectedRunes.size > 0) {
         SelectedRuneCountOverlay(
@@ -294,51 +307,54 @@ private fun RuneCanvas(
             )
             val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
             val isSelected = runeCanvasState.isSelected(rune)
-            val fadeInAlpha by animateFloatAsState(
-              targetValue = 1f,
+            val emptyRuneProgress by animateFloatAsState(
+              targetValue = if (drawState is DrawState.Choose && !isSelected) 1f else 0f,
               animationSpec = tween(
-                durationMillis = 450,
+                durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(),
                 easing = LinearOutSlowInEasing,
               ),
-              label = "Rune ${rune.name} fade out animation",
+              label = "Selected Rune ${rune.name} fade in animation",
             )
-println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DrawState=$drawState")
-            val fadeOutAlpha = 1 - fadeInAlpha
-            val animatedAlphaUnselectedRune = when (drawState) {
-              is DrawState.Choose -> if (isSelected) fadeOutAlpha else fadeInAlpha
-              is DrawState.Reveal.CenteringRunes -> fadeOutAlpha
-              is DrawState.Reveal.UnveilingGlyphs -> 0f
-              is DrawState.Reveal.CompletingAnimations -> 0f
-            }
-            val animatedAlphaSelectedRune = when (drawState) {
-              is DrawState.Choose -> if (isSelected) fadeInAlpha else fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> if (isSelected) 1f else 0f
-              is DrawState.Reveal.UnveilingGlyphs -> fadeOutAlpha
-              is DrawState.Reveal.CompletingAnimations -> 0f
-            }
-            val animatedAlphaGlyphRuneGlowing = when (drawState) {
-              is DrawState.Choose -> fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> 0f
-              is DrawState.Reveal.UnveilingGlyphs -> fadeInAlpha
-              is DrawState.Reveal.CompletingAnimations -> fadeOutAlpha
-            }
-            val animatedAlphaGlyphRune = when (drawState) {
-              is DrawState.Choose -> fadeOutAlpha
-              is DrawState.Reveal.CenteringRunes -> 0f
-              is DrawState.Reveal.UnveilingGlyphs -> 0f
-              is DrawState.Reveal.CompletingAnimations -> fadeInAlpha
-            }
+            val glowingEmptyRuneProgress by animateFloatAsState(
+              targetValue = when (drawState) {
+                is DrawState.Choose -> 1 - emptyRuneProgress
+                is DrawState.Reveal.CenteringRunes -> if (isSelected) 1f else 0f
+                is DrawState.Reveal.UnveilingGlyphs -> 0f
+                is DrawState.Reveal.CompletingAnimations -> 0f
+              },
+              animationSpec = tween(
+                durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Selected Rune ${rune.name} fade in animation",
+            )
+            val glowingGlowingGlyphRuneProgress by animateFloatAsState(
+              targetValue = if (drawState is DrawState.Reveal.UnveilingGlyphs && isSelected) 1f else 0f,
+              animationSpec = tween(
+                durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Selected Rune ${rune.name} fade in animation",
+            )
+            val glyphRuneProgress by animateFloatAsState(
+              targetValue = if (drawState is DrawState.Reveal.CompletingAnimations && isSelected) 1f else 0f,
+              animationSpec = tween(
+                durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing,
+              ),
+              label = "Selected Rune ${rune.name} fade in animation",
+            )
             val drawCenter = if (isDraggedRune) visualState.center else animatedCenter
             val drawAngle = if (isDraggedRune) visualState.angle else animatedAngle
 
             // Unselected Rune
-            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaUnselectedRune))
+            add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = emptyRuneProgress))
             // Selected Rune - dragged rune cannot be in selected state
-            if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaSelectedRune)) }
+            if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingEmptyRuneProgress)) }
             // Rune being unveiled - has glowing glyph
-            add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRuneGlowing))
+            add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
             // Rune fully unveiled- has non-glowing glyph
-            add(RuneImageDrawState(image = emptyRuneImageBrown, center =  drawCenter, angle = drawAngle, alpha = animatedAlphaGlyphRune))
+            add(RuneImageDrawState(image = emptyRuneImageBrown, center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
           }
         }
     }

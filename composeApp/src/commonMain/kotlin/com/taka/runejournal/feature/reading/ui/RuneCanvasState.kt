@@ -216,7 +216,8 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition selecting ru
   fun isSelected(rune: Rune): Boolean = selectedRunes.contains(rune)
 
   companion object {
-    const val REVEAL_ANIMATION_MILLIS = 300L
+    const val RUNE_SELECTION_ANIMATION_MILLIS = 420L
+    const val RUNE_REVEAL_ANIMATION_MILLIS = 1000L
     const val IMPULSE_INTERVAL_MILLIS = 120L
     private const val RUNE_HEIGHT_TO_WIDTH_RATIO = 1.5f
     private const val RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO = 0.25f
