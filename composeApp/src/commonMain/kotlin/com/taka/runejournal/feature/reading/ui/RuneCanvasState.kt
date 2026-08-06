@@ -30,8 +30,6 @@ data class RuneCanvasState(
   ): RuneCanvasState {
     val movementDistance = strength * shakeStrengthMultiplier
 
-println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $strength, shakeStrengthMultiplier: $shakeStrengthMultiplier")
-
     val updatedRuneVisualStates = runeVisualStates.mapValues { (rune, visualState) ->
       if (isSelected(rune)) return@mapValues visualState
 
@@ -59,8 +57,9 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
   fun centerSelectedRunes(): RuneCanvasState {
     val updatedRuneVisualStates = runeVisualStates.mapValues { (rune, visualState) ->
       if (!selectedRunes.contains(rune)) return@mapValues visualState
+      // Runes are centered vertically, and spaced evenly apart horizontally
       val center = Offset(
-        x = visualState.center.x,
+        x = canvasWidth * (selectedRunes.indexOf(rune) + 1) / (selectedRunes.size + 1),
         y = canvasHeight / 2f,
       )
       visualState.copy(
@@ -103,13 +102,11 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
     val bouncedValue = when {
       value < min -> {
         val overflow = min - value
-        println("XXXXXXXXXXXXXXXXXXXXXX bounced val: $value, new val: ${min + overflow * BOUNCE_STRENGTH_MULTIPLIER}")
         min + overflow * BOUNCE_STRENGTH_MULTIPLIER
       }
 
       value > max -> {
         val overflow = value - max
-        println("XXXXXXXXXXXXXXXXXXXXXX bounced val: $value, new val: ${max - overflow * BOUNCE_STRENGTH_MULTIPLIER}")
         max - overflow * BOUNCE_STRENGTH_MULTIPLIER
       }
 
@@ -125,7 +122,6 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
   }
 
   fun startDraggingRune(position: Offset): RuneCanvasState {
-println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
     val (rune, visualState) = findTouchedRune(position, false) ?: return this
     val fingerFromCenter = position - visualState.center
     val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
@@ -158,7 +154,6 @@ println("XXXXXXXXXXXXXXXXXXXXXX startDraggingRune position: $position")
       }
 
   fun dragRuneToPosition(position: Offset): RuneCanvasState {
-println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
     val dragState = draggedRuneState ?: return this
     val visualState = runeVisualStates[dragState.rune] ?: return this
 
@@ -205,17 +200,14 @@ println("XXXXXXXXXXXXXXXXXXXXXX dragRuneToPosition position: $position")
   }
 
   fun toggleRuneSelectionAtPosition(position: Offset): RuneCanvasState {
-println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition position: $position")
     val (rune, visualState) = findTouchedRune(position) ?: return this
     when {
       selectedRunes.contains(rune) -> {
-println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition deselecting rune : $rune")
         return copy(
           selectedRunes = selectedRunes - rune,
         )
       }
       selectedRunes.size < requiredRuneCount -> {
-println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition selecting rune : $rune")
         val nextTopDepth = runeVisualStates.values.maxOf { it.depth } + 1f // ensures dragged rune is over all other runes
         return copy(
           selectedRunes = selectedRunes + rune,
@@ -270,7 +262,6 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXX toggleRuneSelectionAtPosition selecting ru
 
   }
 }
-
 
 private fun Offset.rotatedByDegrees(degrees: Float): Offset {
   val radians = degrees * PI.toFloat() / 180f
