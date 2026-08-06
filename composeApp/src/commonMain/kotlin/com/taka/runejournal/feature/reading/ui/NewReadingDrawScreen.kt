@@ -220,6 +220,7 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
             .padding(bottom = TakaScreenPadding),
           onRevealRuneClick = {
             drawState = DrawState.Reveal.CenteringRunes
+            runeCanvasState = runeCanvasState.centerSelectedRunes()
           }
         )
       }
@@ -302,16 +303,22 @@ private fun RuneCanvas(
             val animatedCenter by animateOffsetAsState(
               targetValue = visualState.center,
               animationSpec = tween(
-                durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
+                durationMillis = if (drawState is DrawState.Choose)
+                  RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt()
+                else
+                  RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing
               ),
               label = "Rune ${rune.name} Center",
             )
             val animatedAngle by animateFloatAsState(
               targetValue = visualState.angle,
               animationSpec = tween(
-                durationMillis = RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
+                durationMillis = if (drawState is DrawState.Choose)
+                  RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt()
+                else
+                  RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                easing = LinearOutSlowInEasing
               ),
               label = "Rune ${rune.name} Angle",
             )
@@ -319,10 +326,7 @@ private fun RuneCanvas(
             val isSelected = runeCanvasState.isSelected(rune)
             val emptyRuneProgress by animateFloatAsState(
               targetValue = if (drawState is DrawState.Choose && !isSelected) 1f else 0f,
-              animationSpec = tween(
-                durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
-              ),
+              animationSpec = tween(durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
               label = "Selected Rune ${rune.name} fade in animation",
             )
             val glowingEmptyRuneProgress by animateFloatAsState(
@@ -332,26 +336,17 @@ private fun RuneCanvas(
                 is DrawState.Reveal.UnveilingGlyphs -> 0f
                 is DrawState.Reveal.CompletingAnimations -> 0f
               },
-              animationSpec = tween(
-                durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
-              ),
+              animationSpec = tween(durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
               label = "Selected Rune ${rune.name} fade in animation",
             )
             val glowingGlowingGlyphRuneProgress by animateFloatAsState(
               targetValue = if (drawState is DrawState.Reveal.UnveilingGlyphs && isSelected) 1f else 0f,
-              animationSpec = tween(
-                durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
-              ),
+              animationSpec = tween(durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
               label = "Selected Rune ${rune.name} fade in animation",
             )
             val glyphRuneProgress by animateFloatAsState(
               targetValue = if (drawState is DrawState.Reveal.CompletingAnimations && isSelected) 1f else 0f,
-              animationSpec = tween(
-                durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
-                easing = LinearOutSlowInEasing,
-              ),
+              animationSpec = tween(durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
               label = "Selected Rune ${rune.name} fade in animation",
             )
             val drawCenter = if (isDraggedRune) visualState.center else animatedCenter

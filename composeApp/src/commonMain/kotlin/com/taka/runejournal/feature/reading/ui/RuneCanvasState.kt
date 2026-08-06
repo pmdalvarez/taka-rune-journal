@@ -56,6 +56,23 @@ println("XXXXXXXXXXXXXXXXXXXXXX movementDistance: $movementDistance, strength: $
     )
   }
 
+  fun centerSelectedRunes(): RuneCanvasState {
+    val updatedRuneVisualStates = runeVisualStates.mapValues { (rune, visualState) ->
+      if (!selectedRunes.contains(rune)) return@mapValues visualState
+      val center = Offset(
+        x = visualState.center.x,
+        y = canvasHeight / 2f,
+      )
+      visualState.copy(
+        center = center,
+        angle = visualState.angle.snapToVertical(),
+      )
+    }
+    return copy(
+      runeVisualStates = updatedRuneVisualStates
+    )
+  }
+
   private fun bounceRuneInsideCanvas(
     center: Offset,
   ): Offset {
@@ -280,4 +297,10 @@ private fun Offset.isInsideRune(visualState: RuneVisualState, runeWidth: Float, 
 
   return unrotatedTouchFromCenter.x in -runeWidth / 2f..runeWidth / 2f &&
       unrotatedTouchFromCenter.y in -runeHeight / 2f..runeHeight / 2f
+}
+
+private fun Float.snapToVertical(): Float = when {
+  this > 270f -> 360f
+  this > 90f && this <= 270f -> 180f
+  else -> 0f
 }
