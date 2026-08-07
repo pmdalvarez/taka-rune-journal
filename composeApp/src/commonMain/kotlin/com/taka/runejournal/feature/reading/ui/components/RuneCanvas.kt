@@ -119,7 +119,8 @@ fun RuneCanvas(
   }
   val zoom by animateFloatAsState(
     targetValue = when {
-      drawState is DrawState.Choose.Shaking || drawState is DrawState.Reveal -> 1.5f
+      drawState is DrawState.Choose.Shaking -> 1.5f
+      drawState is DrawState.Reveal -> 1.25f
       else -> 1f
     },
     animationSpec = tween(
