@@ -87,12 +87,13 @@ fun NewReadingDrawScreen(
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
 println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
-      if (drawState == DrawState.Choose.Dragging) return@ShakeDetectorEffect
+      if (drawState == DrawState.Choose.Dragging || drawState is DrawState.Reveal) return@ShakeDetectorEffect
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
       runeHapticFeedback.playStoneClink(strength)
     },
     onShakingChanged = { isShaking ->
 println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking")
+      if (drawState is DrawState.Reveal) return@ShakeDetectorEffect
       if (isShaking) {
         drawState = DrawState.Choose.Shaking
         showInstructionalOverLay = false
