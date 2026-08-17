@@ -150,6 +150,7 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
         runeCanvasState = runeCanvasState,
         drawState = drawState,
         onRuneDragStart = { position ->
+          drawState = DrawState.Choose.Dragging
           showInstructionalOverLay = false
           runeCanvasState = runeCanvasState.startDraggingRune(position)
         },
@@ -157,6 +158,7 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
           runeCanvasState = runeCanvasState.dragRuneToPosition(position)
         },
         onRuneDragStop = {
+          drawState = DrawState.Choose.Idle
           runeCanvasState = runeCanvasState.stopDraggingRune()
         },
         onRuneTap = { position ->

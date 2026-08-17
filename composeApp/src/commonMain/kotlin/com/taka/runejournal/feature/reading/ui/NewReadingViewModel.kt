@@ -2,10 +2,8 @@ package com.taka.runejournal.feature.reading.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
@@ -52,6 +50,7 @@ class NewReadingViewModel(
     val spread = _uiState.value.spread
     val question = _uiState.value.question
     val topic = _uiState.value.topic ?: ReadingTopic.GENERAL
+println("XXXXXXXX saveAndNavigateToReading spread: $spread, question: $question, topic: $topic, drawnRunes: $drawnRunes")
     viewModelScope.launch {
       if (spread == null || drawnRunes.size < spread.runeCount) {
         _uiEvent.emit(UiEvent.ShowError(Res.string.reading_draw_save_error))
