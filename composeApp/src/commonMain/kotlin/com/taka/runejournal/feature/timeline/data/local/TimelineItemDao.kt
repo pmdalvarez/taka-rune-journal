@@ -32,7 +32,7 @@ interface TimelineItemDao {
     question: String?,
     category: String,
     rune: DrawnRuneEmbedded,
-  ) {
+  ): Long {
     val timelineItemId = insert(timelineItemEntity)
     val singleRuneReadingEntity = SingleRuneReadingEntity(
       timelineItemId = timelineItemId,
@@ -40,7 +40,7 @@ interface TimelineItemDao {
       category = category,
       rune = rune,
     )
-    insert(singleRuneReadingEntity)
+    return insert(singleRuneReadingEntity)
   }
 
   @Transaction
@@ -51,7 +51,7 @@ interface TimelineItemDao {
     pastRune: DrawnRuneEmbedded,
     presentRune: DrawnRuneEmbedded,
     futureRune: DrawnRuneEmbedded
-  ) {
+  ): Long {
     val timelineItemId = insert(timelineItemEntity)
     val ppfRuneReadingEntity = PpfRuneReadingEntity(
       timelineItemId = timelineItemId,
@@ -61,7 +61,7 @@ interface TimelineItemDao {
       presentRune = presentRune,
       futureRune = futureRune
     )
-    insert(ppfRuneReadingEntity)
+    return insert(ppfRuneReadingEntity)
   }
 
   @Query("UPDATE timeline_items SET notes = :notes, title = :title WHERE id = :id")

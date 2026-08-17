@@ -53,6 +53,7 @@ import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_go_to_reading
 import taka_rune_journal.composeapp.generated.resources.button_reveal_runes
 import taka_rune_journal.composeapp.generated.resources.cloth_background
 import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
@@ -136,7 +137,7 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
       contentAlignment = Alignment.Center
   ) {
     val density = LocalDensity.current
-    // ✅ Runs once on first composition
+    // Runs once on first composition to set canvas size to device screen size
     LaunchedEffect(Unit) {
       val canvasWidthPx = with(density) { maxWidth.toPx() }
       val canvasHeightPx = with(density) { maxHeight.toPx() }
@@ -185,28 +186,40 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
           delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
           drawState = DrawState.Reveal.UnveilingGlyphs
         }
+
         is DrawState.Reveal.UnveilingGlyphs -> {
           delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
           drawState = DrawState.Reveal.CompletingAnimations
         }
+
         else -> {} // Do nothing
       }
     }
-    uiState.spread?.runeCount?.let { runeCount ->
-      if (runeCanvasState.selectedRunes.size > 0) {
-        SelectedRuneCountOverlay(
-          selectedRuneCount = runeCanvasState.selectedRunes.size,
-          requiredRuneCount = runeCount,
-          modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .navigationBarsPadding()
-            .padding(bottom = TakaScreenPadding),
-          onRevealRuneClick = {
-            drawState = DrawState.Reveal.CenteringRunes
-            runeCanvasState = runeCanvasState.centerSelectedRunes()
-          }
-        )
-      }
+
+    if (drawState is DrawState.Choose.Idle && runeCanvasState.selectedRunes.size > 0) {
+      SelectedRuneCountOverlay(
+        selectedRuneCount = runeCanvasState.selectedRunes.size,
+        requiredRuneCount = uiState.spread?.runeCount ?: 0,
+        modifier = Modifier
+          .align(Alignment.BottomCenter)
+          .navigationBarsPadding()
+          .padding(bottom = TakaScreenPadding),
+        onRevealRuneClick = {
+          drawState = DrawState.Reveal.CenteringRunes
+          runeCanvasState = runeCanvasState.centerSelectedRunes()
+        }
+      )
+    }
+    if (drawState is DrawState.Reveal.CompletingAnimations) {
+      RevealedRunesOverlay(
+        modifier = Modifier
+          .align(Alignment.BottomCenter)
+          .navigationBarsPadding()
+          .padding(bottom = TakaScreenPadding),
+        onGoToReadingClick = {
+          viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
+        }
+      )
     }
   }
 
@@ -223,7 +236,6 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
         )
       },
     ) { contentPadding ->
-      // nothing here yet - maybe in reveal phase there is a button go to reading and runes are shown
     }
   }
 }
@@ -288,6 +300,28 @@ private fun SelectedRuneCountOverlay(
         .navigationBarsPadding()
     ) {
       Text(stringResource(Res.string.button_reveal_runes))
+    }
+  }
+}
+
+@Preview
+@Composable
+private fun RevealedRunesOverlay(
+  modifier: Modifier = Modifier,
+  onGoToReadingClick: () -> Unit = {},
+) {
+  TakaOverlayCard(modifier = modifier) {
+    Text(
+      text = "",
+      style = MaterialTheme.typography.labelMedium
+    )
+    TakaButton(
+      onClick = onGoToReadingClick,
+      modifier = Modifier
+        .padding(top = TakaContentSpacing)
+        .navigationBarsPadding()
+    ) {
+      Text(stringResource(Res.string.button_go_to_reading))
     }
   }
 }

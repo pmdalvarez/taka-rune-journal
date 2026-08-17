@@ -4,10 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.taka.runejournal.core.domain.model.DrawnRune
-import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.core.domain.model.Rune
-import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
@@ -87,33 +83,4 @@ class TimelineViewModel(
       dismissDeleteDialog() // close dialog regardless if delete succeeded
     }
   }
-
-  // TODO: Remove
-  fun createSingleRuneReading() {
-    viewModelScope.launch {
-      timelineRepository.createSingleRuneReading(
-        question = listOf("What should I do to live a better life?","Why do I feel like this?","").random(),
-        category = ReadingTopic.entries.random(),
-        rune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
-        notes = "This reading was not so clear to me."
-      )
-      _uiEvent.emit(UiEvent.NavigateBack)
-    }
-  }
-
-  // TODO: Remove
-  fun createPpfRuneReading() {
-    viewModelScope.launch {
-      timelineRepository.createPpfRuneReading(
-        question = listOf(null, "What should I do next year?","Where should i live next year?","").random(),
-        category = ReadingTopic.entries.random(),
-        pastRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
-        presentRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
-        futureRune = DrawnRune(Rune.entries.random(), orientation = RuneOrientation.entries.random()),
-        notes = "I was very inspired by this reading."
-      )
-      _uiEvent.emit(UiEvent.NavigateBack)
-    }
-  }
-
 }

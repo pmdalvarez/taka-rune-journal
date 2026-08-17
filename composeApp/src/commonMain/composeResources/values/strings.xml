@@ -11,6 +11,7 @@
     <string name="button_add_notes">Add Notes</string>
     <string name="button_draw_runes">Draw Runes</string>
     <string name="button_reveal_runes">Reveal Runes</string>
+    <string name="button_go_to_reading">Go to Reading</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -85,6 +86,7 @@
     <string name="reading_draw_instructions_tap">Tap to select or deselect.</string>
     <string name="reading_draw_selected_rune_count">%1$s of %2$s Selected</string>
     <string name="reading_draw_selected_all_runes">All Runes Selected</string>
+    <string name="reading_draw_save_error">Your reading could not be saved. Please try again.</string>
 
 
 </resources>

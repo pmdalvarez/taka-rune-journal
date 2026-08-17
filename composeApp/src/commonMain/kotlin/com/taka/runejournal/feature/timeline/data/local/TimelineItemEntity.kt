@@ -10,7 +10,7 @@ data class TimelineItemEntity(
   @PrimaryKey(autoGenerate = true)
   val id: Long = 0,
   val createdAt: Long = Clock.System.now().toEpochMilliseconds(),
-  val notes: String?,
+  val notes: String? = null,
   val title: String? = null,
 )
 

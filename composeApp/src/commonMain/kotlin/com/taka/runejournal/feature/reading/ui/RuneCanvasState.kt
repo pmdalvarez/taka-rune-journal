@@ -1,7 +1,9 @@
 package com.taka.runejournal.feature.reading.ui
 
 import androidx.compose.ui.geometry.Offset
+import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.Rune
+import com.taka.runejournal.core.domain.model.RuneOrientation
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -224,6 +226,13 @@ data class RuneCanvasState(
 
   fun isSelected(rune: Rune): Boolean = selectedRunes.contains(rune)
 
+  fun drawnRunes(): List<DrawnRune> = selectedRunes.map { rune ->
+    DrawnRune(
+      rune = rune,
+      orientation = runeVisualStates[rune]?.angle?.runeOrientation() ?: RuneOrientation.UPRIGHT,
+    )
+  }
+
   companion object {
     const val RUNE_SELECTION_ANIMATION_MILLIS = 420L
     const val RUNE_REVEAL_ANIMATION_MILLIS = 1000L
@@ -259,7 +268,6 @@ data class RuneCanvasState(
         )
       }
     }
-
   }
 }
 
@@ -294,4 +302,9 @@ private fun Float.snapToVertical(): Float = when {
   this > 270f -> 360f
   this > 90f && this <= 270f -> 180f
   else -> 0f
+}
+
+private fun Float.runeOrientation(): RuneOrientation = when (this.snapToVertical() % 360f) {
+  0f -> RuneOrientation.UPRIGHT
+  else -> RuneOrientation.REVERSED
 }

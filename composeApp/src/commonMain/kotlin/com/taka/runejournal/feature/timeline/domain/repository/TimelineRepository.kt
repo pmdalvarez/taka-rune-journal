@@ -14,16 +14,15 @@ interface TimelineRepository {
 
   suspend fun createJournalEntry(notes: String, title: String?)
 
-  suspend fun createSingleRuneReading(question: String?, category: ReadingTopic, rune: DrawnRune, notes: String?)
+  suspend fun createSingleRuneReading(question: String?, topic: ReadingTopic, rune: DrawnRune): Long
 
   suspend fun createPpfRuneReading(
     question: String?,
-    category: ReadingTopic,
+    topic: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
-    futureRune: DrawnRune,
-    notes: String?
-  )
+    futureRune: DrawnRune
+  ): Long
 
   suspend fun updateTimelineItem(id: Long, notes: String?, title: String?): Boolean
 

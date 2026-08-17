@@ -175,21 +175,4 @@ private fun TestArea(viewModel: TimelineViewModel) {
     ) {
         Text("Change name to empty")
     }
-
-    TakaButton(
-        onClick = { viewModel.createSingleRuneReading() },
-        style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaContentSpacing)
-    ) {
-        Text("New Single Rune Reading")
-    }
-
-    TakaButton(
-        onClick = { viewModel.createPpfRuneReading() },
-        style = ButtonStyle.Tertiary,
-        modifier = Modifier.padding(top = TakaContentSpacing)
-    ) {
-        Text("New PPF Reading")
-    }
-
 }
