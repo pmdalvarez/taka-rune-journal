@@ -126,7 +126,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     },
                     onNavigateToReadingInterpretation = { id ->
                         backStack.removeLastOrNull()
-                        ReadingInterpretationRoute(id = id)
+                        backStack.add(ReadingInterpretationRoute(id = id))
                     },
                     modifier = modifier
                 )

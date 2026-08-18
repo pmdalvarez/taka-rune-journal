@@ -63,7 +63,6 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
-import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 
 @Composable
 fun NewReadingDrawScreen(
@@ -219,27 +218,29 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
           .navigationBarsPadding()
           .padding(bottom = TakaScreenPadding),
         onGoToReadingClick = {
+          println("XXXXXXXX onGoToReadingClick")
+  println("XXXXXXXX onGoToReadingClick drawnRunes: $runeCanvasState.drawnRunes")
+
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
         }
       )
     }
   }
 
-  if (drawState is DrawState.Reveal) {
-    TakaScaffold(
-      modifier = modifier,
-      containerColor = Color.Transparent,
-      snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
-      topBar = {
-        TakaTopBar(
-          title = stringResource(Res.string.reading_draw_topbar_title),
-          navigationIcon = TakaTopBarNavigationIcon.Back,
-          onNavigationClick = onBackClick,
-        )
-      },
-    ) { contentPadding ->
-    }
-  }
+//  if (drawState is DrawState.Reveal) {
+//    TakaScaffold(
+//      modifier = modifier,
+//      containerColor = Color.Transparent,
+//      snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
+//      topBar = {
+//        TakaTopBar(
+//          title = stringResource(Res.string.reading_draw_topbar_title),
+//          navigationIcon = TakaTopBarNavigationIcon.Back,
+//          onNavigationClick = onBackClick,
+//        )
+//      },
+//    ) { contentPadding ->
+//  }
 }
 
 @Preview
