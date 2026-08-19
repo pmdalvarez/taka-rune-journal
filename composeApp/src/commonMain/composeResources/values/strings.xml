@@ -86,6 +86,9 @@
     <string name="reading_draw_instructions_tap">Tap to select or deselect.</string>
     <string name="reading_draw_selected_rune_count">%1$s of %2$s Selected</string>
     <string name="reading_draw_selected_all_runes">All Runes Selected</string>
+    <string name="reading_draw_youve_drawn_rune">You've drawn %1$s</string>
+    <string name="reading_draw_youve_drawn_rune_reversed">You've drawn reversed %1$s</string>
+    <string name="reading_draw_your_runes">You've drawn the following runes</string>
     <string name="reading_draw_save_error">Your reading could not be saved. Please try again.</string>
 
 

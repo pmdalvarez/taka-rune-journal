@@ -50,7 +50,6 @@ class NewReadingViewModel(
     val spread = _uiState.value.spread
     val question = _uiState.value.question
     val topic = _uiState.value.topic ?: ReadingTopic.GENERAL
-println("XXXXXXXX saveAndNavigateToReading spread: $spread, question: $question, topic: $topic, drawnRunes: $drawnRunes")
     viewModelScope.launch {
       if (spread == null || drawnRunes.size < spread.runeCount) {
         _uiEvent.emit(UiEvent.ShowError(Res.string.reading_draw_save_error))

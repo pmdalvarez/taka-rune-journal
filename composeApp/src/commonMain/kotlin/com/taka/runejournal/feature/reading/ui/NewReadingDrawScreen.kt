@@ -34,6 +34,8 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.domain.model.DrawnRune
+import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
@@ -63,6 +65,10 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
+import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes
+import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune
+import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune_reversed
+import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 
 @Composable
 fun NewReadingDrawScreen(
@@ -217,10 +223,8 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
           .align(Alignment.BottomCenter)
           .navigationBarsPadding()
           .padding(bottom = TakaScreenPadding),
+        drawnRunes = runeCanvasState.drawnRunes(),
         onGoToReadingClick = {
-          println("XXXXXXXX onGoToReadingClick")
-  println("XXXXXXXX onGoToReadingClick drawnRunes: $runeCanvasState.drawnRunes")
-
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
         }
       )
@@ -312,12 +316,42 @@ private fun SelectedRuneCountOverlay(
 private fun RevealedRunesOverlay(
   modifier: Modifier = Modifier,
   onGoToReadingClick: () -> Unit = {},
+  drawnRunes: List<DrawnRune> = emptyList()
 ) {
   TakaOverlayCard(modifier = modifier) {
-    Text(
-      text = "",
-      style = MaterialTheme.typography.labelMedium
-    )
+    when (drawnRunes.size) {
+      1 -> {
+        val drawnRuneText = drawnRunes.first().let { drawnRune ->
+          if (drawnRune.orientation == RuneOrientation.REVERSED) {
+            stringResource(Res.string.reading_draw_youve_drawn_rune, drawnRune.rune.displayName)
+          } else {
+            stringResource(Res.string.reading_draw_youve_drawn_rune_reversed, drawnRune.rune.displayName)
+          }
+        }
+        Text(
+          text = drawnRuneText,
+          style = MaterialTheme.typography.titleMedium
+        )
+      }
+      else -> {
+        Text(
+          text = stringResource(Res.string.reading_draw_your_runes),
+          style = MaterialTheme.typography.titleMedium
+        )
+        for (drawnRune in drawnRunes) {
+          val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
+            stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName)
+          } else {
+            drawnRune.rune.displayName
+          }
+          Text(
+            text = drawnRuneName,
+            style = MaterialTheme.typography.labelMedium
+          )
+        }
+      }
+    }
+
     TakaButton(
       onClick = onGoToReadingClick,
       modifier = Modifier
