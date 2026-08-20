@@ -343,6 +343,7 @@ private fun RevealedRunesOverlay(
           text = stringResource(Res.string.reading_draw_your_runes),
           style = MaterialTheme.typography.titleMedium
         )
+        Spacer(Modifier.height(TakaContentSpacing))
         val spreadPositions = listOf(Res.string.reading_draw_your_runes_past, Res.string.reading_draw_your_runes_present, Res.string.reading_draw_your_runes_future)
         for ((i, drawnRune) in drawnRunes.withIndex()) {
           val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
