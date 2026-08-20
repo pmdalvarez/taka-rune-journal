@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
@@ -237,20 +238,20 @@ fun NewReadingDrawScreen(
           )
         },
       ) { _ ->
-        val density = LocalDensity.current
-        val revealedRuneHeightDp = with(density) {
-          (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp()
-        }
-        Box(
+        BoxWithConstraints(
           modifier = Modifier
             .fillMaxSize(),
           contentAlignment = Alignment.Center,
         ) {
+          // Calculate the vertical offset just below the revealed runes
+          val verticalOffsetDp = with(density) {
+            maxHeight / 2 + (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp() / 2
+          }
           RevealedRunesOverlay(
             modifier = Modifier
               .wrapContentSize()
-              .align(Alignment.Center)
-              .offset(y = revealedRuneHeightDp),
+              .align(Alignment.TopCenter)
+              .offset(y = verticalOffsetDp),
             onGoToReadingClick = {
               viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
             },
