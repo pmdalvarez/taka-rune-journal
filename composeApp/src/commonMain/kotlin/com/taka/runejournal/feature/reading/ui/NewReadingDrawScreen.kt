@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -220,11 +222,15 @@ fun NewReadingDrawScreen(
       )
     }
     if (drawState is DrawState.Reveal.CompletingAnimations) {
+      val density = LocalDensity.current
+      val revealedRuneHeightDp = with(density) {
+        (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp()
+      }
       RevealedRunesOverlay(
         modifier = Modifier
+          .wrapContentSize()
           .align(Alignment.Center)
-          .padding(top = runeCanvasState.runeHeight.dp *  RuneCanvasState.ZOOM_REVEAL) // space occupied by drawn rune
-          .padding(top = TakaContentSpacing),
+          .offset(y = revealedRuneHeightDp),
         onGoToReadingClick = {
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
         },
@@ -364,7 +370,6 @@ private fun RevealedRunesOverlay(
       onClick = onGoToReadingClick,
       modifier = Modifier
         .padding(top = TakaContentSpacing)
-        .navigationBarsPadding()
     ) {
       Text(stringResource(Res.string.button_go_to_reading))
     }
