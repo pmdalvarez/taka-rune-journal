@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -97,13 +96,11 @@ fun NewReadingDrawScreen(
   ImmersiveModeEffect(enabled = drawState is DrawState.Choose) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
     onShakeImpulse = { direction, strength ->
-println("XXXXXXXXXXXXXXXXXXXXXX direction: $direction, strength: $strength")
       if (drawState == DrawState.Choose.Dragging || drawState is DrawState.Reveal) return@ShakeDetectorEffect
       runeCanvasState = runeCanvasState.applyShakeImpulse(direction, strength)
       runeHapticFeedback.playStoneClink(strength)
     },
     onShakingChanged = { isShaking ->
-println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking")
       if (drawState is DrawState.Reveal) return@ShakeDetectorEffect
       if (isShaking) {
         drawState = DrawState.Choose.Shaking
@@ -225,9 +222,9 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
     if (drawState is DrawState.Reveal.CompletingAnimations) {
       RevealedRunesOverlay(
         modifier = Modifier
-          .align(Alignment.BottomCenter)
-          .navigationBarsPadding()
-          .padding(bottom = TakaScreenPadding),
+          .align(Alignment.Center)
+          .padding(top = runeCanvasState.runeHeight.dp *  RuneCanvasState.ZOOM_REVEAL) // space occupied by drawn rune
+          .padding(top = TakaContentSpacing),
         onGoToReadingClick = {
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
         },

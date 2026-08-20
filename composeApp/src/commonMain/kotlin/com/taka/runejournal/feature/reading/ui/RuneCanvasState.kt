@@ -237,6 +237,8 @@ data class RuneCanvasState(
     const val RUNE_SELECTION_ANIMATION_MILLIS = 420L
     const val RUNE_REVEAL_ANIMATION_MILLIS = 1000L
     const val IMPULSE_INTERVAL_MILLIS = 120L
+    const val ZOOM_SHAKING = 1.5f
+    const val ZOOM_REVEAL = 1.25f
     private const val RUNE_HEIGHT_TO_WIDTH_RATIO = 1.5f
     private const val RUNE_WIDTH_TO_CANVAS_WIDTH_RATIO = 0.20f
     private const val STRONG_SHAKE_STRENGTH = 15f // This is the shake strength we define as a strong shake
