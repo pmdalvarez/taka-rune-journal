@@ -109,9 +109,9 @@ fun RuneCanvas(
           // Unselected Rune
           add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = emptyRuneProgress))
           // Selected Rune - dragged rune cannot be in selected state
-          if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingEmptyRuneProgress)) }
+          if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingEmptyRuneProgress)) }
           // Rune being unveiled - has glowing glyph
-          add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
+          add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
           // Rune fully unveiled- has non-glowing glyph
           add(RuneImageDrawState(image = emptyRuneImageBrown, center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
         }

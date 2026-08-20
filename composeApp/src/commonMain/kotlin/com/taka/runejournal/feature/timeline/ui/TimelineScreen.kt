@@ -19,19 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.taka.runejournal.core.ui.UiEvent
-import com.taka.runejournal.core.ui.components.ButtonStyle
-import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.components.showInfoSnackbar
-import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
@@ -137,7 +133,6 @@ fun TimelineScreen(
                     )
                 }
             }
-            item { TestArea(viewModel) }
         }
     }
 
@@ -150,29 +145,4 @@ fun TimelineScreen(
         )
     }
 
-}
-
-@Composable
-private fun TestArea(viewModel: TimelineViewModel) {
-    HorizontalDivider(
-        modifier = Modifier.fillMaxWidth().padding(top = TakaSectionSpacing),
-        thickness = 1.dp,
-        color = MaterialTheme.colorScheme.outlineVariant
-    )
-
-    TakaButton(
-        onClick = { viewModel.setDisplayName("Paolo" + (0..100).random()) },
-        style = ButtonStyle.Secondary,
-        modifier = Modifier.padding(top = TakaContentSpacing)
-    ) {
-        Text("Change name to Paolo + random number")
-    }
-
-    TakaButton(
-        onClick = { viewModel.setDisplayName("") },
-        style = ButtonStyle.Secondary,
-        modifier = Modifier.padding(top = TakaContentSpacing)
-    ) {
-        Text("Change name to empty")
-    }
 }
