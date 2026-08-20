@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.RuneOrientation
+import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
@@ -66,6 +67,9 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes
+import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_future
+import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_past
+import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_present
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune_reversed
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
@@ -223,11 +227,12 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
           .align(Alignment.BottomCenter)
           .navigationBarsPadding()
           .padding(bottom = TakaScreenPadding),
-        drawnRunes = runeCanvasState.drawnRunes(),
         onGoToReadingClick = {
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
-        }
-      )
+        },
+        spread = uiState.spread ?: RuneSpread.SINGLE_RUNE,
+        drawnRunes = runeCanvasState.drawnRunes()
+        )
     }
   }
 
@@ -311,21 +316,21 @@ private fun SelectedRuneCountOverlay(
   }
 }
 
-@Preview
 @Composable
 private fun RevealedRunesOverlay(
   modifier: Modifier = Modifier,
   onGoToReadingClick: () -> Unit = {},
-  drawnRunes: List<DrawnRune> = emptyList()
+  spread: RuneSpread,
+  drawnRunes: List<DrawnRune>,
 ) {
   TakaOverlayCard(modifier = modifier) {
-    when (drawnRunes.size) {
-      1 -> {
+    when (spread) {
+      RuneSpread.SINGLE_RUNE -> {
         val drawnRuneText = drawnRunes.first().let { drawnRune ->
           if (drawnRune.orientation == RuneOrientation.REVERSED) {
-            stringResource(Res.string.reading_draw_youve_drawn_rune, drawnRune.rune.displayName)
-          } else {
             stringResource(Res.string.reading_draw_youve_drawn_rune_reversed, drawnRune.rune.displayName)
+          } else {
+            stringResource(Res.string.reading_draw_youve_drawn_rune, drawnRune.rune.displayName)
           }
         }
         Text(
@@ -333,20 +338,21 @@ private fun RevealedRunesOverlay(
           style = MaterialTheme.typography.titleMedium
         )
       }
-      else -> {
+      RuneSpread.PAST_PRESENT_FUTURE  -> {
         Text(
           text = stringResource(Res.string.reading_draw_your_runes),
           style = MaterialTheme.typography.titleMedium
         )
-        for (drawnRune in drawnRunes) {
+        val spreadPositions = listOf(Res.string.reading_draw_your_runes_past, Res.string.reading_draw_your_runes_present, Res.string.reading_draw_your_runes_future)
+        for ((i, drawnRune) in drawnRunes.withIndex()) {
           val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
             stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName)
           } else {
             drawnRune.rune.displayName
           }
           Text(
-            text = drawnRuneName,
-            style = MaterialTheme.typography.labelMedium
+            text = stringResource(spreadPositions[i]) + " — " + drawnRuneName,
+            style = MaterialTheme.typography.bodyMedium
           )
         }
       }
