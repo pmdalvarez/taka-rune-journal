@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
@@ -68,6 +69,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
+import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_future
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_past
@@ -221,38 +223,37 @@ fun NewReadingDrawScreen(
         }
       )
     }
+
     if (drawState is DrawState.Reveal.CompletingAnimations) {
-      val density = LocalDensity.current
-      val revealedRuneHeightDp = with(density) {
-        (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp()
-      }
-      RevealedRunesOverlay(
-        modifier = Modifier
-          .wrapContentSize()
-          .align(Alignment.Center)
-          .offset(y = revealedRuneHeightDp),
-        onGoToReadingClick = {
-          viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
+      TakaScaffold(
+        modifier = modifier,
+        containerColor = Color.Transparent,
+        snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
+        topBar = {
+          TakaTopBar(
+            title = stringResource(Res.string.reading_draw_topbar_title),
+            navigationIcon = TakaTopBarNavigationIcon.Back,
+            onNavigationClick = onBackClick,
+          )
         },
-        drawnRunes = runeCanvasState.drawnRunes()
+      ) { _ ->
+        val density = LocalDensity.current
+        val revealedRuneHeightDp = with(density) {
+          (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp()
+        }
+        RevealedRunesOverlay(
+          modifier = Modifier
+            .fillMaxSize()
+            .align(Alignment.Center)
+            .offset(y = revealedRuneHeightDp),
+          onGoToReadingClick = {
+            viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
+          },
+          drawnRunes = runeCanvasState.drawnRunes()
         )
+      }
     }
   }
-
-//  if (drawState is DrawState.Reveal) {
-//    TakaScaffold(
-//      modifier = modifier,
-//      containerColor = Color.Transparent,
-//      snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
-//      topBar = {
-//        TakaTopBar(
-//          title = stringResource(Res.string.reading_draw_topbar_title),
-//          navigationIcon = TakaTopBarNavigationIcon.Back,
-//          onNavigationClick = onBackClick,
-//        )
-//      },
-//    ) { contentPadding ->
-//  }
 }
 
 @Preview
