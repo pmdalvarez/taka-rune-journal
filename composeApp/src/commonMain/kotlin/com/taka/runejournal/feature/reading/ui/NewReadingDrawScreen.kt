@@ -231,7 +231,6 @@ println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX onShakingChanged isShaking: $isShaking
         onGoToReadingClick = {
           viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
         },
-        spread = uiState.spread ?: RuneSpread.SINGLE_RUNE,
         drawnRunes = runeCanvasState.drawnRunes()
         )
     }
@@ -321,15 +320,14 @@ private fun SelectedRuneCountOverlay(
 private fun RevealedRunesOverlay(
   modifier: Modifier = Modifier,
   onGoToReadingClick: () -> Unit = {},
-  spread: RuneSpread,
   drawnRunes: List<DrawnRune>,
 ) {
   Column(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    when (spread) {
-      RuneSpread.SINGLE_RUNE -> {
+    when (drawnRunes.size) {
+      1 -> {
         val drawnRuneText = drawnRunes.first().let { drawnRune ->
           if (drawnRune.orientation == RuneOrientation.REVERSED) {
             stringResource(Res.string.reading_draw_youve_drawn_rune_reversed, drawnRune.rune.displayName)
@@ -342,30 +340,26 @@ private fun RevealedRunesOverlay(
           style = MaterialTheme.typography.titleMedium
         )
       }
-      RuneSpread.PAST_PRESENT_FUTURE  -> {
+      else -> {
         Text(
           text = stringResource(Res.string.reading_draw_your_runes),
           style = MaterialTheme.typography.titleMedium
         )
         Spacer(Modifier.height(TakaContentSpacing))
-        val spreadPositions = listOf(Res.string.reading_draw_your_runes_past, Res.string.reading_draw_your_runes_present, Res.string.reading_draw_your_runes_future)
-        Column(
-          modifier = Modifier
-            .wrapContentWidth(),
-          horizontalAlignment = Alignment.Start
-        ) {
-          for ((i, drawnRune) in drawnRunes.withIndex()) {
-            val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
-              stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName)
+        val drawnRunesText = buildString {
+          drawnRunes.forEachIndexed { index, drawnRune ->
+            if (index > 0) append(" · ")
+            if (drawnRune.orientation == RuneOrientation.REVERSED) {
+              append(stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName))
             } else {
-              drawnRune.rune.displayName
+              append(drawnRune.rune.displayName)
             }
-            Text(
-              text = stringResource(spreadPositions[i]) + " — " + drawnRuneName,
-              style = MaterialTheme.typography.titleSmall
-            )
           }
         }
+        Text(
+          text = drawnRunesText,
+          style = MaterialTheme.typography.bodyMedium
+        )
       }
     }
 
