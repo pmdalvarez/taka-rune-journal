@@ -7,11 +7,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
@@ -241,16 +241,22 @@ fun NewReadingDrawScreen(
         val revealedRuneHeightDp = with(density) {
           (runeCanvasState.runeHeight * RuneCanvasState.ZOOM_REVEAL).toDp()
         }
-        RevealedRunesOverlay(
+        Box(
           modifier = Modifier
-            .fillMaxSize()
-            .align(Alignment.Center)
-            .offset(y = revealedRuneHeightDp),
-          onGoToReadingClick = {
-            viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
-          },
-          drawnRunes = runeCanvasState.drawnRunes()
-        )
+            .fillMaxSize(),
+          contentAlignment = Alignment.Center,
+        ) {
+          RevealedRunesOverlay(
+            modifier = Modifier
+              .wrapContentSize()
+              .align(Alignment.Center)
+              .offset(y = revealedRuneHeightDp),
+            onGoToReadingClick = {
+              viewModel.saveAndNavigateToReading(runeCanvasState.drawnRunes())
+            },
+            drawnRunes = runeCanvasState.drawnRunes()
+          )
+        }
       }
     }
   }
