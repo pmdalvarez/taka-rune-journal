@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -323,7 +324,10 @@ private fun RevealedRunesOverlay(
   spread: RuneSpread,
   drawnRunes: List<DrawnRune>,
 ) {
-  TakaOverlayCard(modifier = modifier) {
+  Column(
+    modifier = modifier,
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
     when (spread) {
       RuneSpread.SINGLE_RUNE -> {
         val drawnRuneText = drawnRunes.first().let { drawnRune ->
@@ -345,16 +349,22 @@ private fun RevealedRunesOverlay(
         )
         Spacer(Modifier.height(TakaContentSpacing))
         val spreadPositions = listOf(Res.string.reading_draw_your_runes_past, Res.string.reading_draw_your_runes_present, Res.string.reading_draw_your_runes_future)
-        for ((i, drawnRune) in drawnRunes.withIndex()) {
-          val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
-            stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName)
-          } else {
-            drawnRune.rune.displayName
+        Column(
+          modifier = Modifier
+            .wrapContentWidth(),
+          horizontalAlignment = Alignment.Start
+        ) {
+          for ((i, drawnRune) in drawnRunes.withIndex()) {
+            val drawnRuneName = if (drawnRune.orientation == RuneOrientation.REVERSED) {
+              stringResource(Res.string.rune_display_name_reversed, drawnRune.rune.displayName)
+            } else {
+              drawnRune.rune.displayName
+            }
+            Text(
+              text = stringResource(spreadPositions[i]) + " — " + drawnRuneName,
+              style = MaterialTheme.typography.titleSmall
+            )
           }
-          Text(
-            text = stringResource(spreadPositions[i]) + " — " + drawnRuneName,
-            style = MaterialTheme.typography.bodyMedium
-          )
         }
       }
     }
