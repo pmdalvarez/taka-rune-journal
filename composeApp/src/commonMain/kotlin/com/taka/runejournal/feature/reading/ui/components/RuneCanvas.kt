@@ -84,7 +84,7 @@ fun RuneCanvas(
           )
           val glowingEmptyRuneProgress by animateFloatAsState(
             targetValue = when (drawState) {
-              is DrawState.Choose -> 1 - emptyRuneProgress
+              is DrawState.Choose -> if (isSelected) 1f else 0f
               is DrawState.Reveal.CenteringRunes -> if (isSelected) 1f else 0f
               is DrawState.Reveal.UnveilingGlyphs -> 0f
               is DrawState.Reveal.CompletingAnimations -> 0f
