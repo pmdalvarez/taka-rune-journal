@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
+import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.feature.reading.ui.DrawState
 import com.taka.runejournal.feature.reading.ui.RuneCanvasState
 import com.taka.runejournal.feature.reading.ui.RuneImageDrawState
@@ -46,7 +47,6 @@ fun RuneCanvas(
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
   val emptyRuneImageHalfGlowing = imageResource(Res.drawable.rune_empty_half_glowing)
-  val emptyRuneImageBrown = imageResource(Res.drawable.rune_empty)
   val runeImageDrawStates = buildList {
     runeCanvasState.runeVisualStates
       .entries
@@ -112,7 +112,7 @@ fun RuneCanvas(
           // Rune being unveiled - has glowing glyph
           add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
           // Rune fully unveiled- has non-glowing glyph
-          add(RuneImageDrawState(image = emptyRuneImageBrown, center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
+          add(RuneImageDrawState(image = imageResource(rune.drawable()), center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
         }
       }
   }
