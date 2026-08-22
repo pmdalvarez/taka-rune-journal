@@ -26,7 +26,6 @@ import com.taka.runejournal.feature.reading.ui.RuneImageDrawState
 import org.jetbrains.compose.resources.imageResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.rune_empty
-import taka_rune_journal.composeapp.generated.resources.rune_empty_brown
 import taka_rune_journal.composeapp.generated.resources.rune_empty_glowing
 import taka_rune_journal.composeapp.generated.resources.rune_empty_half_glowing
 import kotlin.collections.component1
@@ -47,7 +46,7 @@ fun RuneCanvas(
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
   val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
   val emptyRuneImageHalfGlowing = imageResource(Res.drawable.rune_empty_half_glowing)
-  val emptyRuneImageBrown = imageResource(Res.drawable.rune_empty_brown)
+  val emptyRuneImageBrown = imageResource(Res.drawable.rune_empty)
   val runeImageDrawStates = buildList {
     runeCanvasState.runeVisualStates
       .entries
