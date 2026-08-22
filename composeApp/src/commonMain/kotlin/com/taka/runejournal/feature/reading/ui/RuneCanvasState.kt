@@ -227,9 +227,14 @@ data class RuneCanvasState(
   fun isSelected(rune: Rune): Boolean = selectedRunes.contains(rune)
 
   fun drawnRunes(): List<DrawnRune> = selectedRunes.map { rune ->
+    val orientation = if (rune.isReversible) {
+      runeVisualStates[rune]?.angle?.runeOrientation() ?: RuneOrientation.UPRIGHT
+    } else {
+      RuneOrientation.UPRIGHT
+    }
     DrawnRune(
       rune = rune,
-      orientation = runeVisualStates[rune]?.angle?.runeOrientation() ?: RuneOrientation.UPRIGHT,
+      orientation = orientation,
     )
   }
 
@@ -306,7 +311,7 @@ private fun Float.snapToVertical(): Float = when {
   else -> 0f
 }
 
-private fun Float.runeOrientation(): RuneOrientation = when (this.snapToVertical() % 360f) {
-  0f -> RuneOrientation.UPRIGHT
+private fun Float.runeOrientation(): RuneOrientation = when  {
+  (this.snapToVertical() % 360f) == 0f -> RuneOrientation.UPRIGHT
   else -> RuneOrientation.REVERSED
 }

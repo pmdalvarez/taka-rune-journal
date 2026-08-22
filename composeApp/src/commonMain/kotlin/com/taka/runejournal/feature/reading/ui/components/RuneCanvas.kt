@@ -78,7 +78,7 @@ fun RuneCanvas(
           val isDraggedRune = runeCanvasState.draggedRuneState?.rune == rune
           val isSelected = runeCanvasState.isSelected(rune)
           val emptyRuneProgress by animateFloatAsState(
-            targetValue = if (drawState is DrawState.Choose && !isSelected) 1f else 0f,
+            targetValue = if (drawState is DrawState.Choose) 1f else 0f,
             animationSpec = tween(durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
             label = "Selected Rune ${rune.name} fade in animation",
           )
