@@ -21,6 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import com.taka.runejournal.core.ui.drawable
+import com.taka.runejournal.core.ui.glowingDrawable
 import com.taka.runejournal.feature.reading.ui.DrawState
 import com.taka.runejournal.feature.reading.ui.RuneCanvasState
 import com.taka.runejournal.feature.reading.ui.RuneImageDrawState
@@ -110,7 +111,7 @@ fun RuneCanvas(
           // Selected Rune - dragged rune cannot be in selected state
           if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingEmptyRuneProgress)) }
           // Rune being unveiled - has glowing glyph
-          add(RuneImageDrawState(image = emptyRuneImageGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
+          add(RuneImageDrawState(image = imageResource(rune.glowingDrawable()), center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
           // Rune fully unveiled- has non-glowing glyph
           add(RuneImageDrawState(image = imageResource(rune.drawable()), center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
         }
