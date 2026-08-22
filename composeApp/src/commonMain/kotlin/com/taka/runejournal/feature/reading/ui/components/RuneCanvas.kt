@@ -28,7 +28,6 @@ import com.taka.runejournal.feature.reading.ui.RuneImageDrawState
 import org.jetbrains.compose.resources.imageResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.rune_empty
-import taka_rune_journal.composeapp.generated.resources.rune_empty_glowing
 import taka_rune_journal.composeapp.generated.resources.rune_empty_half_glowing
 import kotlin.collections.component1
 import kotlin.collections.component2
@@ -46,7 +45,6 @@ fun RuneCanvas(
 ) {
   val isGestureEnabled = !(drawState == DrawState.Choose.Shaking || drawState is DrawState.Reveal)
   val emptyRuneImage = imageResource(Res.drawable.rune_empty)
-  val emptyRuneImageGlowing = imageResource(Res.drawable.rune_empty_glowing)
   val emptyRuneImageHalfGlowing = imageResource(Res.drawable.rune_empty_half_glowing)
   val runeImageDrawStates = buildList {
     runeCanvasState.runeVisualStates
@@ -60,7 +58,7 @@ fun RuneCanvas(
               durationMillis = if (drawState is DrawState.Choose)
                 RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt()
               else
-                RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                RuneCanvasState.RUNE_REVEAL_CENTERING_RUNES_ANIMATION_MILLIS.toInt(),
               easing = LinearOutSlowInEasing
             ),
             label = "Rune ${rune.name} Center",
@@ -71,7 +69,7 @@ fun RuneCanvas(
               durationMillis = if (drawState is DrawState.Choose)
                 RuneCanvasState.IMPULSE_INTERVAL_MILLIS.toInt()
               else
-                RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(),
+                RuneCanvasState.RUNE_REVEAL_CENTERING_RUNES_ANIMATION_MILLIS.toInt(),
               easing = LinearOutSlowInEasing
             ),
             label = "Rune ${rune.name} Angle",
@@ -90,17 +88,29 @@ fun RuneCanvas(
               is DrawState.Reveal.UnveilingGlyphs -> 0f
               is DrawState.Reveal.CompletingAnimations -> 0f
             },
-            animationSpec = tween(durationMillis = RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
+            animationSpec = tween(
+              durationMillis =  when (drawState) {
+                is DrawState.Reveal.UnveilingGlyphs -> RuneCanvasState.RUNE_REVEAL_UNVEILING_GLYPHS_ANIMATION_MILLIS.toInt()
+                else -> RuneCanvasState.RUNE_SELECTION_ANIMATION_MILLIS.toInt()
+              },
+              easing = LinearOutSlowInEasing
+            ),
             label = "Selected Rune ${rune.name} fade in animation",
           )
-          val glowingGlowingGlyphRuneProgress by animateFloatAsState(
+          val glowingGlyphRuneProgress by animateFloatAsState(
             targetValue = if (drawState is DrawState.Reveal.UnveilingGlyphs && isSelected) 1f else 0f,
-            animationSpec = tween(durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
+            animationSpec = tween(
+              durationMillis =  when (drawState) {
+                is DrawState.Reveal.UnveilingGlyphs -> RuneCanvasState.RUNE_REVEAL_UNVEILING_GLYPHS_ANIMATION_MILLIS.toInt()
+                else -> RuneCanvasState.RUNE_REVEAL_COMPLETING_ANIMATIONS_MILLIS.toInt()
+              },
+              easing = LinearOutSlowInEasing
+            ),
             label = "Selected Rune ${rune.name} fade in animation",
           )
           val glyphRuneProgress by animateFloatAsState(
             targetValue = if (drawState is DrawState.Reveal.CompletingAnimations && isSelected) 1f else 0f,
-            animationSpec = tween(durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), easing = LinearOutSlowInEasing),
+            animationSpec = tween(durationMillis = RuneCanvasState.RUNE_REVEAL_COMPLETING_ANIMATIONS_MILLIS.toInt(), easing = LinearOutSlowInEasing),
             label = "Selected Rune ${rune.name} fade in animation",
           )
           val drawCenter = if (isDraggedRune) visualState.center else animatedCenter
@@ -111,7 +121,7 @@ fun RuneCanvas(
           // Selected Rune - dragged rune cannot be in selected state
           if (!isDraggedRune) { add(RuneImageDrawState(image = emptyRuneImageHalfGlowing, center =  drawCenter, angle = drawAngle, alpha = glowingEmptyRuneProgress)) }
           // Rune being unveiled - has glowing glyph
-          add(RuneImageDrawState(image = imageResource(rune.glowingDrawable()), center =  drawCenter, angle = drawAngle, alpha = glowingGlowingGlyphRuneProgress))
+          add(RuneImageDrawState(image = imageResource(rune.glowingDrawable()), center =  drawCenter, angle = drawAngle, alpha = glowingGlyphRuneProgress))
           // Rune fully unveiled- has non-glowing glyph
           add(RuneImageDrawState(image = imageResource(rune.drawable()), center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
         }

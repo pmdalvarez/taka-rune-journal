@@ -128,7 +128,7 @@ fun NewReadingDrawScreen(
   val clothBackgroundAlpha by animateFloatAsState(
     targetValue = if (drawState is DrawState.Choose) 1f else 0f,
     animationSpec = tween(
-      durationMillis = RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS.toInt(), // Adjust duration as needed
+      durationMillis = RuneCanvasState.RUNE_REVEAL_CENTERING_RUNES_ANIMATION_MILLIS.toInt(), // Adjust duration as needed
       easing = LinearOutSlowInEasing,
     ),
     label = "Background Alpha"
@@ -197,12 +197,12 @@ fun NewReadingDrawScreen(
       // Once drawState is in Reveal, this transitions the reveal phase through the 3 different animations
       when (drawState) {
         is DrawState.Reveal.CenteringRunes -> {
-          delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
+          delay(RuneCanvasState.RUNE_REVEAL_CENTERING_RUNES_ANIMATION_MILLIS)
           drawState = DrawState.Reveal.UnveilingGlyphs
         }
 
         is DrawState.Reveal.UnveilingGlyphs -> {
-          delay(RuneCanvasState.RUNE_REVEAL_ANIMATION_MILLIS)
+          delay(RuneCanvasState.RUNE_REVEAL_UNVEILING_GLYPHS_ANIMATION_MILLIS)
           drawState = DrawState.Reveal.CompletingAnimations
         }
 
