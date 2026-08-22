@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
@@ -40,7 +39,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.RuneOrientation
-import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
 import com.taka.runejournal.core.ui.ShakeDetectorEffect
 import com.taka.runejournal.core.ui.UiEvent
@@ -54,6 +52,7 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import com.taka.runejournal.feature.reading.ui.components.RuneCanvas
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.getString
@@ -70,13 +69,10 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_all_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_rune_count
-import taka_rune_journal.composeapp.generated.resources.reading_draw_topbar_title
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes
-import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_future
-import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_past
-import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes_present
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune_reversed
+import taka_rune_journal.composeapp.generated.resources.reading_type_general
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 
 @Composable
@@ -232,12 +228,23 @@ fun NewReadingDrawScreen(
         snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
         topBar = {
           TakaTopBar(
-            title = stringResource(Res.string.reading_draw_topbar_title),
+            title = stringResource(uiState.topic?.readingType() ?: Res.string.reading_type_general),
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
           )
         },
-      ) { _ ->
+      ) { contentModifier ->
+        if (!uiState.question.isNullOrBlank()) {
+          Box(
+            modifier = contentModifier
+              .fillMaxSize(),
+            contentAlignment = Alignment.TopCenter,
+          ) {
+            ReadingInterpretationContextHeader(
+              question = uiState.question
+            )
+          }
+        }
         BoxWithConstraints(
           modifier = Modifier
             .fillMaxSize(),

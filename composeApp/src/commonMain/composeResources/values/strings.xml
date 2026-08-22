@@ -79,7 +79,6 @@
     <string name="reading_ppf_spread_description">See how a situation has unfolded over time.</string>
     <string name="reading_choose_topic">Choose a Topic</string>
 
-    <string name="reading_draw_topbar_title">Draw Runes</string>
     <string name="reading_draw_instructions_title">Focus on Your Question</string>
     <string name="reading_draw_instructions_shake">Shake to mix the runes.</string>
     <string name="reading_draw_instructions_drag">Drag to move or rotate.</string>
@@ -89,8 +88,5 @@
     <string name="reading_draw_youve_drawn_rune">You've drawn %1$s</string>
     <string name="reading_draw_youve_drawn_rune_reversed">You've drawn reversed %1$s</string>
     <string name="reading_draw_your_runes">Your Runes</string>
-    <string name="reading_draw_your_runes_past">Past</string>
-    <string name="reading_draw_your_runes_present">Present</string>
-    <string name="reading_draw_your_runes_future">Future</string>
     <string name="reading_draw_save_error">Your reading could not be saved. Please try again.</string>
 </resources>
