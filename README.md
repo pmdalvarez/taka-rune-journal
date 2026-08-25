@@ -2,11 +2,13 @@
 
 Taka Rune Journal is a Kotlin Multiplatform / Compose Multiplatform rune reading and journaling app.
 
-It is a working prototype built as a personal product and technical learning project to deepen my hands-on experience with the modern Kotlin mobile ecosystem. The app focuses on tactile rune readings, fully offline interpretation content, local persistence, reusable Compose UI components, and a polished mobile user experience.
+It is a working prototype built as a personal product and technical learning project to deepen my hands-on experience with the modern Kotlin mobile ecosystem. The app focuses on tactile rune readings, fully offline interpretation content, local persistence, reusable Compose UI components, custom visual assets, and a polished mobile user experience.
 
 ## Overview
 
 Taka lets users create rune readings, save them, add personal notes, and revisit them through a timeline. The app combines structured reading flows with reflective journaling, using a calm visual style and a focused local-first architecture.
+
+Rune reading is a reflective practice using symbols from historical runic alphabets as prompts for interpretation and journaling. Traditionally, drawing runes can involve choosing stones from a pouch or cloth bag, creating a tactile sense of agency and ritual. Taka aims to translate that feeling into a mobile interaction through gesture, haptics, animation, and a glowing rune reveal.
 
 All rune interpretation content is available offline. The app does not rely on a network request or external generation step to produce readings; interpretations are stored as structured app resources and selected based on the rune, orientation, spread position, and chosen reading topic.
 
@@ -18,7 +20,8 @@ The project is Android-first for now, with Kotlin Multiplatform structure in pla
 * Single Rune and Past, Present, Future reading flows
 * Fully offline rune interpretation library
 * Hundreds of structured interpretation entries across runes, orientations, spread positions, and topics
-* Tactile rune drawing interaction with haptic feedback
+* Shake-to-mix rune drawing interaction with haptic feedback
+* Drag, move, and rotate runes before reveal
 * Animated rune reveal sequence where runes glow and then cool off
 * Reading interpretation screens with tabs
 * Topic-specific rune interpretation support
@@ -29,6 +32,7 @@ The project is Android-first for now, with Kotlin Multiplatform structure in pla
 * Local persistence for saved readings and journal entries
 * Shared Compose Multiplatform resources for strings and drawables
 * Reusable Compose UI components and app-level design tokens
+* Custom rune, brand, and UI assets
 * Android-first development, with KMP/iOS structure in place
 
 ## Reading System
@@ -58,6 +62,8 @@ Current reading work focuses on improving interpretation quality across topics, 
 ## User Experience
 
 The app is designed to feel calm, intentional, and tactile.
+
+The rune drawing interaction is designed to avoid feeling like a simple random button press. Users can shake the phone to mix the runes, with haptic feedback suggesting stones clinking together, then drag, move, and rotate the runes before revealing them. The reveal sequence uses haptics and animation as each rune glows and then cools off, translating some of the physical feeling of drawing rune stones from a pouch or cloth bag into a mobile interaction.
 
 Recent UX work includes:
 
@@ -111,13 +117,30 @@ Taka includes a small reusable Compose UI layer, including components such as:
 
 The visual style is intentionally minimal: soft grayscale surfaces, subtle borders, low elevation, and a muted slate / blue-gray action color.
 
+## Visual Assets
+
+The app includes custom rune and brand assets created and refined specifically for the project.
+
+Asset work included:
+
+* rune stone images for the reading experience
+* glowing rune reveal states
+* a custom Taka symbol
+* app logo / wordmark exploration
+* simple monochrome vector icons for app actions
+* transparent and theme-friendly drawable resources
+
+AI tools helped with asset generation and visual iteration, but the final direction, selection, cleanup, consistency checks, and integration into the app were reviewed manually. This was a significant part of the project because the rune drawing and reveal experience depends heavily on the assets feeling coherent, tactile, and polished.
+
 ## AI-Assisted Development
 
 I used AI tools heavily as a development accelerator while keeping architecture, product direction, code review, and final implementation decisions under my own control.
 
 I used AI as a technical sparring partner rather than as an autonomous code owner.
 
-AI helped with boilerplate, unfamiliar APIs, debugging, implementation options, content iteration, and learning velocity. It also supported the development of the offline interpretation library by helping compare meanings, generate draft variations, and surface wording options across hundreds of rune/topic/orientation combinations.
+AI helped with boilerplate, unfamiliar APIs, debugging, implementation options, asset generation, content iteration, and learning velocity. It was especially useful for interaction-heavy UI work such as the tactile rune drawing screen, where gesture handling, drawing behavior, layout details, haptic feedback, and animation timing needed careful iteration.
+
+AI also supported the development of the offline interpretation library by helping compare meanings, generate draft variations, and surface wording options across hundreds of rune/topic/orientation combinations.
 
 The app structure, UX decisions, technical judgment, final content decisions, and quality standards remained human-led.
 
