@@ -77,7 +77,7 @@ Recent UX work includes:
 * Compose Resources
 * Coroutines and Flow
 * Koin
-* Room / local persistence
+* Room for local persistence
 * MVVM-style presentation layer
 * Feature-based UI structure
 * Clean separation between UI, domain, and data concerns
@@ -115,6 +115,8 @@ The visual style is intentionally minimal: soft grayscale surfaces, subtle borde
 
 I used AI tools heavily as a development accelerator while keeping architecture, product direction, code review, and final implementation decisions under my own control.
 
+I used AI as a technical sparring partner rather than as an autonomous code owner.
+
 AI helped with boilerplate, unfamiliar APIs, debugging, implementation options, content iteration, and learning velocity. It also supported the development of the offline interpretation library by helping compare meanings, generate draft variations, and surface wording options across hundreds of rune/topic/orientation combinations.
 
 The app structure, UX decisions, technical judgment, final content decisions, and quality standards remained human-led.
@@ -123,6 +125,6 @@ The app structure, UX decisions, technical judgment, final content decisions, an
 
 Working prototype.
 
-The main application flow is usable, including reading creation, rune drawing, local persistence, timeline browsing, interpretation screens, and editable notes. The major interaction and asset work is now in place, including the haptic drawing experience and animated rune reveal.
+The main application flow is usable, including reading creation, topic selection, rune drawing, local persistence, timeline browsing, interpretation screens, and editable notes. The major interaction and asset work is now in place, including the haptic drawing experience and animated rune reveal.
 
 The main remaining time-consuming work is refining the quality of the offline rune interpretation library across topics, orientations, spreads, and keywords.
