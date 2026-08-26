@@ -74,7 +74,6 @@ Recent UX work includes:
 * Editable notes with view and edit modes
 * Empty states for notes and timeline content
 * A small reusable design system for cards, buttons, text actions, text fields, spacing, and theme colors
-* iOS-style Title Case for short UI labels, with sentence case for descriptions and body text
 
 ## Tech Stack
 

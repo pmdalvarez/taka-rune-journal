@@ -176,11 +176,7 @@ fun NewReadingDrawScreen(
       )
     }
 
-    // Instructional overlay appears at the beginning and then fades away forever. Or disappears immediately upon shake, drag or tap
-    LaunchedEffect(Unit) {
-      delay(5000) // Wait few seconds
-      showInstructionalOverLay = false // Trigger fade out
-    }
+    // Instructional overlay appears at the beginning and disappears upon shake, drag or tap
     AnimatedVisibility(
       visible = showInstructionalOverLay,
       exit = fadeOut(tween(750)) // 1-second fade
