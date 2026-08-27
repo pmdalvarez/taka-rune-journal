@@ -1,6 +1,5 @@
 package com.taka.runejournal.core.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -19,13 +18,14 @@ fun TakaOverlayCard(
   modifier: Modifier = Modifier,
   verticalArrangement: Arrangement.Vertical = Arrangement.Top,
   shape: Shape = MaterialTheme.shapes.small,
+  alpha: Float = 1f,
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Card(
     modifier = modifier,
     shape = shape,
     colors = CardDefaults.cardColors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.72f),
+      containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = alpha),
       contentColor = MaterialTheme.colorScheme.onSurface
     )
   ) {

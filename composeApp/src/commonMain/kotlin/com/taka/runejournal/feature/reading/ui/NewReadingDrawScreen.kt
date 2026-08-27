@@ -274,7 +274,7 @@ private fun InstructionalOverlay(modifier:Modifier = Modifier.widthIn(max = 500.
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    TakaOverlayCard(modifier = modifier) {
+    TakaOverlayCard(modifier = modifier, alpha = 0.82f) {
       Text(
         modifier = Modifier.align(Alignment.CenterHorizontally),
         text = stringResource(Res.string.reading_draw_instructions_title),
@@ -308,7 +308,8 @@ private fun SelectedRuneCountOverlay(
   modifier: Modifier = Modifier,
   onRevealRuneClick: () -> Unit = {},
 ) {
-  TakaOverlayCard(modifier = modifier) {
+  val alpha = (0.6f + (selectedRuneCount / requiredRuneCount.toFloat()) * 0.3f) // gradually gets less transparent as more runes selected
+  TakaOverlayCard(modifier = modifier, alpha = alpha) {
     val selectedCountString = if (selectedRuneCount == requiredRuneCount) {
       stringResource(Res.string.reading_draw_selected_all_runes)
     } else {
