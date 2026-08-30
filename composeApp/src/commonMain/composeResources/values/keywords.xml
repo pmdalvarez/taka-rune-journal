@@ -20,31 +20,35 @@
     <string name="keywords_uruz_reversed_security">overendurance</string>
     <string name="keywords_uruz_reversed_self">disconnection, self-trust</string>
 
-    <string name="keywords_thurisaz_upright">protection, strength, conflict, breakthrough</string>
-    <string name="keywords_thurisaz_upright_relationships">boundaries</string>
-    <string name="keywords_thurisaz_upright_purpose">resistance</string>
-    <string name="keywords_thurisaz_upright_security">boundaries</string>
-    <string name="keywords_thurisaz_upright_self">assertion</string>
-    <string name="keywords_thurisaz_reversed">danger, weakness, betrayal, defeat</string>
-    <string name="keywords_thurisaz_reversed_relationships">vulnerability</string>
-    <string name="keywords_thurisaz_reversed_purpose">resistance</string>
-    <string name="keywords_thurisaz_reversed_security">destabilisation</string>
-    <string name="keywords_thurisaz_reversed_self">vulnerability</string>
+    <string name="keywords_thurisaz_upright">protection, conflict, boundaries</string>
+    <string name="keywords_thurisaz_upright_relationships">assertiveness, courage</string>
+    <string name="keywords_thurisaz_upright_purpose">pressure, demands</string>
+    <string name="keywords_thurisaz_upright_security">safeguards</string>
+    <string name="keywords_thurisaz_upright_self">self-confrontation</string>
+    <string name="keywords_thurisaz_reversed">suppression, aggression, resentment</string>
+    <string name="keywords_thurisaz_reversed_relationships">avoidance</string>
+    <string name="keywords_thurisaz_reversed_purpose">spite</string>
+    <string name="keywords_thurisaz_reversed_security">danger</string>
+    <string name="keywords_thurisaz_reversed_self">self-punishment</string>
 
-    <string name="keywords_ansuz_upright">communication, wisdom, inspiration</string>
-    <string name="keywords_ansuz_upright_relationships">honesty</string>
-    <string name="keywords_ansuz_upright_purpose">guidance</string>
-    <string name="keywords_ansuz_upright_self">self-truth</string>
-    <string name="keywords_ansuz_reversed">miscommunication, deception, confusion, blockage</string>
-    <string name="keywords_ansuz_reversed_relationships">dishonesty</string>
-    <string name="keywords_ansuz_reversed_self">self-deception</string>
+    <string name="keywords_ansuz_upright">communication, wisdom, insight</string>
+    <string name="keywords_ansuz_upright_relationships">honesty, listening</string>
+    <string name="keywords_ansuz_upright_purpose">guidance, signs</string>
+    <string name="keywords_ansuz_upright_security">clarity</string>
+    <string name="keywords_ansuz_upright_self">inner voice</string>
+    <string name="keywords_ansuz_reversed">miscommunication, misinformation, confusion</string>
+    <string name="keywords_ansuz_reversed_relationships">dishonesty, weaponisation</string>
+    <string name="keywords_ansuz_reversed_purpose">validation</string>
+    <string name="keywords_ansuz_reversed_self">self-deception, shame</string>
 
     <string name="keywords_raidho_upright">journey, rhythm, direction</string>
     <string name="keywords_raidho_upright_relationships">alignment</string>
-    <string name="keywords_raidho_upright_self">alignment, sustainable pace</string>
-    <string name="keywords_raidho_reversed">delay, obstacles, stagnation, disruption</string>
-    <string name="keywords_raidho_reversed_relationships">misalignment</string>
-    <string name="keywords_raidho_reversed_self">resistance</string>
+    <string name="keywords_raidho_upright_purpose">purposefulness</string>
+    <string name="keywords_raidho_upright_self">values</string>
+    <string name="keywords_raidho_reversed">delay, disruption, misalignment</string>
+    <string name="keywords_raidho_reversed_relationships">divergence</string>
+    <string name="keywords_raidho_reversed_purpose">aimlessness</string>
+    <string name="keywords_raidho_reversed_self">autopilot</string>
 
     <string name="keywords_kenaz_upright">clarity, creativity, skill</string>
     <string name="keywords_kenaz_upright_relationships">honesty</string>
