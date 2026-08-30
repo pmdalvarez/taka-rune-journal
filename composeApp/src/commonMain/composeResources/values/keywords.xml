@@ -1,23 +1,24 @@
 <resources>
     <string name="keywords_fehu_upright">resources, value, stewardship</string>
     <string name="keywords_fehu_upright_relationships">generosity, reciprocity</string>
-    <string name="keywords_fehu_upright_purpose">meaningful value</string>
-    <string name="keywords_fehu_upright_security">stewardship, stability</string>
+    <string name="keywords_fehu_upright_purpose">meaning</string>
+    <string name="keywords_fehu_upright_security">stability</string>
     <string name="keywords_fehu_upright_self">self-worth, inner resources</string>
     <string name="keywords_fehu_reversed">scarcity, greed, materialism</string>
     <string name="keywords_fehu_reversed_relationships">transactional care</string>
     <string name="keywords_fehu_reversed_security">fear-driven choices</string>
     <string name="keywords_fehu_reversed_self">external worth</string>
 
-    <string name="keywords_uruz_upright">strength, vitality, courage, endurance</string>
-    <string name="keywords_uruz_upright_relationships">authenticity</string>
-    <string name="keywords_uruz_upright_purpose">drive</string>
-    <string name="keywords_uruz_upright_security">resilience</string>
-    <string name="keywords_uruz_upright_self">self-trust</string>
-    <string name="keywords_uruz_reversed">weakness, illness, exhaustion, stagnation</string>
-    <string name="keywords_uruz_reversed_relationships">detachment</string>
-    <string name="keywords_uruz_reversed_purpose">apathy</string>
-    <string name="keywords_uruz_reversed_self">disconnection</string>
+    <string name="keywords_uruz_upright">strength, vitality, courage, resilience</string>
+    <string name="keywords_uruz_upright_relationships">authenticity, presence</string>
+    <string name="keywords_uruz_upright_purpose">natural power</string>
+    <string name="keywords_uruz_upright_security">groundedness</string>
+    <string name="keywords_uruz_upright_self">instincts</string>
+    <string name="keywords_uruz_reversed">depletion, exhaustion, weakness</string>
+    <string name="keywords_uruz_reversed_relationships">unsupported, control</string>
+    <string name="keywords_uruz_reversed_purpose">forced progress</string>
+    <string name="keywords_uruz_reversed_security">overendurance</string>
+    <string name="keywords_uruz_reversed_self">disconnection, self-trust</string>
 
     <string name="keywords_thurisaz_upright">protection, strength, conflict, breakthrough</string>
     <string name="keywords_thurisaz_upright_relationships">boundaries</string>
