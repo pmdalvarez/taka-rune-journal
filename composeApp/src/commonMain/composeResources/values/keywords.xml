@@ -1,13 +1,13 @@
 <resources>
-    <string name="keywords_fehu_upright">wealth, opportunity, resources</string>
+    <string name="keywords_fehu_upright">resources, value, stewardship</string>
     <string name="keywords_fehu_upright_relationships">generosity, reciprocity</string>
-    <string name="keywords_fehu_upright_purpose">value</string>
+    <string name="keywords_fehu_upright_purpose">meaningful value</string>
     <string name="keywords_fehu_upright_security">stewardship, stability</string>
-    <string name="keywords_fehu_upright_self">self-worth</string>
-    <string name="keywords_fehu_reversed">loss, greed, stagnation, scarcity</string>
-    <string name="keywords_fehu_reversed_relationships">transactional</string>
-    <string name="keywords_fehu_reversed_security">frugality</string>
-    <string name="keywords_fehu_reversed_self">worth</string>
+    <string name="keywords_fehu_upright_self">self-worth, inner resources</string>
+    <string name="keywords_fehu_reversed">scarcity, greed, materialism</string>
+    <string name="keywords_fehu_reversed_relationships">transactional care</string>
+    <string name="keywords_fehu_reversed_security">fear-driven choices</string>
+    <string name="keywords_fehu_reversed_self">external worth</string>
 
     <string name="keywords_uruz_upright">strength, vitality, courage, endurance</string>
     <string name="keywords_uruz_upright_relationships">authenticity</string>
