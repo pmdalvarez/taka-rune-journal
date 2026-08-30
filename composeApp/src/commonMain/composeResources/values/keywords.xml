@@ -86,10 +86,9 @@
     <string name="keywords_isa_upright_security">preservation</string>
     <string name="keywords_isa_upright_self">presence</string>
 
-    <string name="keywords_jera_upright">harvest, cycles, fertility</string>
-    <string name="keywords_jera_upright_relationships">nurturing</string>
-    <string name="keywords_jera_upright_purpose">patience</string>
-    <string name="keywords_jera_upright_self">growth</string>
+    <string name="keywords_jera_upright">harvest, cycles, timing</string>
+    <string name="keywords_jera_upright_relationships">patterns</string>
+    <string name="keywords_jera_upright_self">recalibration</string>
 
     <string name="keywords_eihwaz_upright">endurance, resilience, stability</string>
     <string name="keywords_eihwaz_upright_relationships">groundedness</string>
