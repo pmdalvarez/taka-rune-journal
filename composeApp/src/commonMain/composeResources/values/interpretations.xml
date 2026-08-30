@@ -11,8 +11,8 @@
     <string name="interpretation_fehu_reversed_security">For security, Fehu reversed can show fear-driven choices around money or resources. Hoarding, panic, or waste can weaken the safety you are trying to protect. Build security through clear planning and careful stewardship of what you have.</string>
     <string name="interpretation_fehu_reversed_self">For the self, Fehu reversed can show self-worth being overly tied to external resources, achievements, or possessions. Root your worth more deeply within yourself, rather than in external measures of value.</string>
 
-    <string name="origin_uruz">Uruz is associated with the aurochs, a wild ox symbolizing strength, vitality, and untamed life force.</string>
-    <string name="interpretation_uruz_upright">Uruz centers on strength that comes from instinct, vitality, and grounded courage. This strength is not forced or controlled; it is rooted in resilience and the body’s deeper wisdom.</string>
+    <string name="origin_uruz">Uruz is associated with the aurochs, a wild ox symbolising strength, vitality, and untamed life force.</string>
+    <string name="interpretation_uruz_upright">Uruz centres on strength that comes from instinct, vitality, and grounded courage. This strength is not forced or controlled; it is rooted in resilience and the body’s deeper wisdom.</string>
     <string name="interpretation_uruz_upright_relationships">In relationships, Uruz highlights the courage to show up honestly and with grounded presence. Strength in a relationship is not only intensity or desire; it also shows through authenticity, steadiness, and mutual respect.</string>
     <string name="interpretation_uruz_upright_purpose">For purpose, Uruz highlights work or goals that draw on your natural strength. A direction that genuinely energises you should not depend on force or willpower alone.</string>
     <string name="interpretation_uruz_upright_security">For security, Uruz highlights the resilience that helps you stay grounded through uncertainty. Safety is shaped not only by external conditions, but also by the inner strength you can draw on.</string>
@@ -54,9 +54,9 @@
     <string name="interpretation_raidho_reversed">When reversed, Raidho often reflects delays, disruption, or misaligned direction. Do not force movement; pause to check whether the path is still aligned. Choose your next step deliberately instead of rushing back into motion.</string>
     <string name="interpretation_raidho_reversed_relationships">In relationships, Raidho reversed can show a loss of shared direction. Each person may be expecting something different from the relationship. It may also be continuing from momentum rather than genuine alignment.</string>
     <string name="interpretation_raidho_reversed_purpose">For purpose, Raidho reversed can show movement that no longer has meaning behind it. Being busy, productive, or constantly progressing does not mean the path is still right for you. Choose your next step by asking what still feels purposeful, not what simply keeps things moving.</string>
-    <string name="interpretation_raidho_reversed_self">For the self, Raidho reversed can show feeling off track or stuck in old patterns. You may be moving on autopilot, following a path that no longer fits, or repeating familiar habits that keep producing the same problems. Pause, look at where this keeps leading you, and choose one different step forward.</string>
+    <string name="interpretation_raidho_reversed_self">For the self, Raidho reversed highlights the feeling of being off track or stuck in old patterns. You may be moving on autopilot, following a path that no longer fits, or repeating familiar habits that keep producing the same problems. Pause, look at where this keeps leading you, and choose one different step forward.</string>
 
-    <string name="origin_kenaz">Kenaz is often associated with the torch, symbolizing light, knowledge, and illumination.</string>
+    <string name="origin_kenaz">Kenaz is often associated with the torch, symbolising light, knowledge, and illumination.</string>
     <string name="interpretation_kenaz_upright">With Kenaz, something is ready to come into clearer view. Insight, skill, or creativity can help you understand what was hidden and shape it into something useful.</string>
     <string name="interpretation_kenaz_upright_relationships">In relationships, Kenaz often signifies a breakthrough in understanding. This might come through honesty, curiosity, or simply seeing each other with fresh eyes — all of which can deepen the bond.</string>
     <string name="interpretation_kenaz_upright_purpose">For purpose, Kenaz points to the skills, ideas, or insights that illuminate your path. Once they come into view, put that understanding to work, both creatively and practically.</string>
@@ -66,12 +66,12 @@
     <string name="interpretation_kenaz_reversed_purpose">For purpose, Kenaz reversed can show a creative block or unclear direction. Pressure, fear of judgment, overload, or attachment to a stale idea may be blocking your creativity. Direction can become clearer when you face what no longer fits and allow your work to change.</string>
     <string name="interpretation_kenaz_reversed_self">For the self, Kenaz reversed can show self-deception or difficulty accessing your own inner truth. You may be protecting an old self-image that no longer fits, or dismissing inconvenient doubts. Fear, shame, or outside noise may be making it harder to recognise what honestly matters to you.</string>
 
-    <string name="origin_gebo">Gebo means “gift”, symbolizing exchange, generosity, and the bond between giver and receiver.</string>
+    <string name="origin_gebo">Gebo means “gift”, symbolising exchange, generosity, and the bond between giver and receiver.</string>
     <string name="interpretation_gebo_upright">Gebo points to the quality of exchange: what is freely offered, what is received, and what kind of bond is formed. Generosity can strengthen a bond when it does not become pressure, obligation, or imbalance.</string>
     <string name="interpretation_gebo_upright_purpose">For purpose, Gebo highlights the gifts you bring through your talents and effort. Look at whether what you offer is part of an exchange that feels meaningful and fair.</string>
     <string name="interpretation_gebo_upright_self">For the self, Gebo speaks to the balance between caring for others and tending to yourself. Allow yourself to receive support without feeling that you must earn it.</string>
 
-    <string name="origin_wunjo">Wunjo means “joy” or “pleasure”, symbolizing harmony, satisfaction, and shared well-being.</string>
+    <string name="origin_wunjo">Wunjo means “joy” or “pleasure”, symbolising harmony, satisfaction, and shared well-being.</string>
     <string name="interpretation_wunjo_upright">Wunjo often reflects the kind of joy that comes from harmony within yourself and with others. Recognise what genuinely fulfils you, and let satisfaction be received without guilt or constant striving.</string>
     <string name="interpretation_wunjo_upright_purpose">For purpose, Wunjo points to work that brings a sense of fulfilment. Meaningful work should offer joy, satisfaction, or genuine engagement, not only productivity.</string>
     <string name="interpretation_wunjo_upright_self">For the self, Wunjo speaks to the joy that comes from accepting yourself and allowing happiness without needing outside validation.</string>
@@ -80,7 +80,7 @@
     <string name="interpretation_wunjo_reversed_purpose">For purpose, Wunjo reversed highlights progress that no longer feels fulfilling. You may be achieving goals and meeting expectations but lacking genuine satisfaction. Ask what would genuinely fulfil you, then recalibrate your goals around that rather than achievement alone.</string>
     <string name="interpretation_wunjo_reversed_self">For the self, Wunjo reversed can show difficulty allowing yourself to feel joy. Happiness may feel undeserved, unsafe, or only acceptable after you have earned it. Let joy be something you are allowed to receive, not only something you must justify through progress or approval.</string>
 
-    <string name="origin_hagalaz">Hagalaz means “hail”, symbolizing disruption, sudden change, and forces beyond your control.</string>
+    <string name="origin_hagalaz">Hagalaz means “hail”, symbolising disruption, sudden change, and forces beyond your control.</string>
     <string name="interpretation_hagalaz_upright">Hagalaz often appears when something has been shaken loose by events you cannot fully manage. Stop forcing control, protect what can be protected, and let clarity come after the storm passes.</string>
     <string name="interpretation_hagalaz_upright_relationships">In relationships, Hagalaz signals a disruption that calls for honest reassessment. Do not force harmony too quickly; let things settle first so the relationship can be seen more clearly.</string>
     <string name="interpretation_hagalaz_upright_purpose">For purpose, Hagalaz marks a disruption that shakes loose a path or plan you were trying to hold together. Look at how this change is reshaping your sense of meaning and what feels important now.</string>
@@ -95,28 +95,28 @@
     <string name="interpretation_nauthiz_upright_self">For the self, Nauthiz highlights needs you have ignored or judged as weakness. You may have been focused on what seemed necessary while ignoring what you truly need.</string>
     <string name="interpretation_nauthiz_reversed">Although Nauthiz may look different when inverted, it is generally considered to have no separate reversed meaning. Upright or reversed, Nauthiz speaks to limitation, scarcity, and the pressure that reveals what is truly needed. Limitation can show what is essential and deepen your appreciation for what gives life real meaning.</string>
 
-    <string name="origin_isa">Isa means “ice”, symbolizing stillness, preservation, and the slowing of movement or change.</string>
+    <string name="origin_isa">Isa means “ice”, symbolising stillness, preservation, and the slowing of movement or change.</string>
     <string name="interpretation_isa_upright">Isa marks a pause where movement slows enough for clarity to form. This is an invitation to slow down, focus, and find peace in stillness.</string>
     <string name="interpretation_isa_upright_relationships">In relationships, Isa calls for restraint before reacting impulsively or forcing a resolution. Let emotions settle before making a decision.</string>
     <string name="interpretation_isa_upright_purpose">For purpose, Isa signals a pause in forward movement. Preserve your energy and clarify your direction before continuing.</string>
     <string name="interpretation_isa_upright_security">For security, Isa signals a need for preservation rather than expansion. When resources are limited or stability is fragile, protecting what you have may be wiser than taking unnecessary risks.</string>
     <string name="interpretation_isa_upright_self">For the self, Isa signals the need for inner stillness. Return to yourself and be present with what is here now.</string>
 
-    <string name="origin_jera">Jera means “year” or “harvest”, symbolizing natural cycles, right timing, and patient effort.</string>
+    <string name="origin_jera">Jera means “year” or “harvest”, symbolising natural cycles, right timing, and patient effort.</string>
     <string name="interpretation_jera_upright">Jera often points to results that cannot be rushed, only tended. Steady effort bears fruit when it works with the timing of the cycle rather than against it.</string>
     <string name="interpretation_jera_upright_relationships">In relationships, Jera reflects the harvest of repeated patterns, not only one recent moment. What has been tended over time will show, and what has been neglected will show too.</string>
     <string name="interpretation_jera_upright_purpose">For purpose, Jera reflects the season your work is in. Some seasons call for patience and tending. Others bring results that help you see whether this path is still worth cultivating.</string>
     <string name="interpretation_jera_upright_security">For security, Jera highlights the season your finances or material resources are in. Some seasons call for investment and growth; others call for harvesting what has matured before committing more.</string>
     <string name="interpretation_jera_upright_self">For the self, Jera reflects personal growth as a cycle of effort, harvest, reassessment, and recalibration. Growth depends not only on steady effort, but on seeing what that effort produces and adjusting what you continue to nurture.</string>
 
-    <string name="origin_eihwaz">Eihwaz means “yew tree”, symbolizing endurance, protection, and the deep connection between life and death.</string>
+    <string name="origin_eihwaz">Eihwaz means “yew tree”, symbolising endurance, protection, and the deep connection between life and death.</string>
     <string name="interpretation_eihwaz_upright">Eihwaz can point to the endurance needed to move through difficult transitions or uncertainty. It is about staying rooted while life changes around you.</string>
     <string name="interpretation_eihwaz_upright_relationships">In relationships, Eihwaz speaks to bonds changing form over time. Some relationships may be fading, some strengthening, and others evolving into something different. Give attention and care to the bonds that can endure through change.</string>
     <string name="interpretation_eihwaz_upright_purpose">For purpose, Eihwaz speaks to a more enduring path that comes from staying rooted in your deeper self. Look at whether the direction you are pursuing reflects your values, inner truth, and the life you are trying to grow from within.</string>
     <string name="interpretation_eihwaz_upright_security">For security, Eihwaz speaks to protection that comes from deep roots rather than rigid defence. Build the habits, supports, and reserves that keep you steady through change.</string>
     <string name="interpretation_eihwaz_upright_self">For the self, Eihwaz speaks to staying rooted in who you are at your core through change. Growth and transformation do not require you to lose yourself.</string>
 
-    <string name="origin_perthro">Perthro is often linked to a dice cup, symbolizing chance, mystery, and unknown outcomes.</string>
+    <string name="origin_perthro">Perthro is often linked to a dice cup, symbolising chance, mystery, and unknown outcomes.</string>
     <string name="interpretation_perthro_upright">Perthro often appears where the outcome is not yet visible, and control can only go so far. Stay open to what has not yet been revealed, without trying to force certainty too soon.</string>
     <string name="interpretation_perthro_upright_relationships">In relationships, Perthro speaks to uncertainty about where a bond is leading. Become more comfortable with not fully knowing the relationship’s course, and stay open instead of trying to control it.</string>
     <string name="interpretation_perthro_upright_purpose">For purpose, Perthro is a reminder that meaning is often discovered through risk, experimentation, and stepping into the unknown. Stay curious and try different paths; experimentation may be how your purpose begins to reveal itself.</string>
@@ -126,7 +126,7 @@
     <string name="interpretation_perthro_reversed_purpose">For purpose, Perthro reversed suggests that the path has not fully revealed itself yet. Do not mistake uncertainty for failure or lack of direction. Stay open to unexpected possibilities instead of forcing your purpose to fit a specific outcome.</string>
     <string name="interpretation_perthro_reversed_self">For the self, Perthro reversed suggests discomfort with parts of yourself that are still unknown. Avoid forcing a fixed answer about who you are before the full picture has emerged. Give yourself room to change and understand yourself more fully over time.</string>
 
-    <string name="origin_algiz">Algiz is often linked to the elk, symbolizing protection, defense, and alertness.</string>
+    <string name="origin_algiz">Algiz is often linked to the elk, symbolising protection, defence, and alertness.</string>
     <string name="interpretation_algiz_upright">Algiz speaks to protection without fear or withdrawal. Notice your supports, strengthen your boundaries, and stay alert to what feels safe or unsafe.</string>
     <string name="interpretation_algiz_upright_relationships">In relationships, Algiz highlights the need for boundaries that protect the bond. Healthy boundaries help preserve both your energy and the quality of the relationship.</string>
     <string name="interpretation_algiz_upright_purpose">For purpose, Algiz highlights the need to protect your energy and focus. Notice what drains you, and what is worth receiving your time, attention, and effort.</string>
@@ -137,13 +137,13 @@
     <string name="interpretation_algiz_reversed_purpose">For purpose, Algiz reversed highlights a path that exposes you to more harm than you are recognising. A goal may feel important, but that does not mean it is protecting your wellbeing. Strengthen the safeguards around your time, energy, and direction before giving more of yourself to it.</string>
     <string name="interpretation_algiz_reversed_self">For the self, Algiz reversed highlights warning signals you may be dismissing. You may be overriding discomfort, minimising unease, or talking yourself out of what your instincts are trying to show you. Rebuild self-trust by taking your protective responses seriously before they become louder.</string>
 
-    <string name="origin_sowilo">Sowilo means “sun”, symbolizing vitality, guidance, and its life-giving energy.</string>
+    <string name="origin_sowilo">Sowilo means “sun”, symbolising vitality, guidance, and its life-giving energy.</string>
     <string name="interpretation_sowilo_upright">Sowilo points to life-giving energy and the strength it restores. Move toward what renews you, rather than what burns through you.</string>
     <string name="interpretation_sowilo_upright_relationships">In relationships, Sowilo highlights bonds that feel life-giving rather than draining. Notice who brings warmth, clarity, and renewed energy into your life.</string>
     <string name="interpretation_sowilo_upright_purpose">For purpose, Sowilo highlights work or direction that energises you and makes you feel alive. Focus on that vitality more than status, wealth, or external validation.</string>
     <string name="interpretation_sowilo_upright_self">For the self, Sowilo highlights reconnecting with your natural energy and confidence. Notice what makes you feel alive, and let that part of yourself be expressed more fully.</string>
 
-    <string name="origin_tiwaz">Tiwaz is named after the god Tyr, symbolizing justice, courage, honour, and principled sacrifice.</string>
+    <string name="origin_tiwaz">Tiwaz is named after the god Tyr, symbolising justice, courage, honour, and principled sacrifice.</string>
     <string name="interpretation_tiwaz_upright">Tiwaz points to the courage to act from principle, especially when the easier path would compromise what matters. Choose fairness over convenience, and accept the cost of standing by your values.</string>
     <string name="interpretation_tiwaz_upright_relationships">In relationships, Tiwaz highlights the courage to act with integrity when avoidance would be easier. This can mean telling the truth, taking responsibility, or choosing fairness even when doing so may cost you the relationship itself.</string>
     <string name="interpretation_tiwaz_upright_purpose">For purpose, Tiwaz highlights work or direction that feels meaningful because it is rooted in integrity. A path is easier to stand behind when it reflects your deeper values, not only ambition, approval, or convenience.</string>
@@ -155,7 +155,7 @@
     <string name="interpretation_tiwaz_reversed_security">For security, Tiwaz reversed highlights an unfair arrangement you rely on for stability. You may be enduring conditions around work, money, housing, or family obligations because pushing back feels unsafe. Find small steps to reduce your dependence on the arrangement, so you can eventually challenge it from a safer position.</string>
     <string name="interpretation_tiwaz_reversed_self">For the self, Tiwaz reversed can show self-betrayal. You may be tolerating unfair treatment, trying to prove yourself where you are not respected, or staying silent when something feels wrong. Choose one act of self-respect: refuse what diminishes you, speak where you have stayed silent, or stop proving yourself to people who dismiss your worth.</string>
 
-    <string name="origin_berkano">Berkano is linked to the birch tree, symbolizing birth, growth, nurturing, and new beginnings.</string>
+    <string name="origin_berkano">Berkano is linked to the birch tree, symbolising birth, growth, nurturing, and new beginnings.</string>
     <string name="interpretation_berkano_upright">Berkano points to something new or tender that needs both care and protection. Offer patience, and trust the natural rhythm of growth and healing.</string>
     <string name="interpretation_berkano_upright_relationships">In relationships, Berkano highlights something tender that is still growing between people. Give it care, patience, and emotional safety so it has the right conditions to develop.</string>
     <string name="interpretation_berkano_upright_purpose">For purpose, Berkano highlights new possibilities that are not fully formed yet. Stay attentive to interests, ideas, or opportunities that may grow into something meaningful with the right support.</string>
@@ -167,7 +167,7 @@
     <string name="interpretation_berkano_reversed_security">For security, Berkano reversed highlights stability weakened by neglected basic needs. Rest, health, home care, money management, or daily routines may need attention before they become harder to fix.</string>
     <string name="interpretation_berkano_reversed_self">For the self, Berkano reversed highlights self-neglect or blocked inner growth. You may be pressuring yourself to heal, change, or become stronger before you have given yourself enough care. Give yourself the rest, safety, and support needed for growth before judging yourself for not changing faster.</string>
 
-    <string name="origin_ehwaz">Ehwaz means “horse”, symbolizing trust, movement, and harmonious cooperation.</string>
+    <string name="origin_ehwaz">Ehwaz means “horse”, symbolising trust, movement, and harmonious cooperation.</string>
     <string name="interpretation_ehwaz_upright">Ehwaz points to movement built through trust, cooperation, and shared effort. Progress depends on how well each side listens, adjusts, and moves with the other.</string>
     <string name="interpretation_ehwaz_upright_relationships">In relationships, Ehwaz highlights mutual trust and shared movement. A strong bond is not built by one person carrying the relationship, but by both people adjusting, responding, and moving together.</string>
     <string name="interpretation_ehwaz_upright_purpose">For purpose, Ehwaz highlights the partnerships, collaborations, or support systems that help you move forward. Progress may come through working with others rather than trying to carry everything alone.</string>
@@ -178,7 +178,7 @@
     <string name="interpretation_ehwaz_reversed_purpose">For purpose, Ehwaz reversed suggests that a collaboration, support system, or shared path may not be helping you move forward. Reassess whether the people involved are still aligned, reliable, and willing to move with you.</string>
     <string name="interpretation_ehwaz_reversed_self">For the self, Ehwaz reversed highlights a split between instinct and action. You may be pushing forward while part of you resists, or waiting for certainty while your deeper instincts already know movement is needed. Progress may require listening to both your hesitation and your desire to move.</string>
 
-    <string name="origin_mannaz">Mannaz means “human” or “humankind”, symbolizing the self, community, and our shared human nature.</string>
+    <string name="origin_mannaz">Mannaz means “human” or “humankind”, symbolising the self, community, and our shared human nature.</string>
     <string name="interpretation_mannaz_upright">Mannaz points to self-awareness, community, and the shared humanity that shapes us. Look at how you relate to yourself and others, and how individuality and belonging can exist together.</string>
     <string name="interpretation_mannaz_upright_relationships">In relationships, Mannaz highlights the shared humanity between you and others. Empathy and humility can deepen mutual understanding. Your role among others matters too; the way you show up can strengthen or weaken the community around you.</string>
     <string name="interpretation_mannaz_upright_purpose">For purpose, Mannaz highlights the role your work plays within a wider community. Meaning can deepen when your work helps meet real human needs.</string>
@@ -189,7 +189,7 @@
     <string name="interpretation_mannaz_reversed_purpose">For purpose, Mannaz reversed highlights disconnection from community or ego-driven motivation in your work. Your work may be centred more on status, recognition, or self-importance than on the people it is meant to serve. Refocus on who your work serves, not only the image it gives you.</string>
     <string name="interpretation_mannaz_reversed_self">For the self, Mannaz reversed highlights a distorted self-image. You may be seeing yourself through shame, pride, fear, or defensiveness rather than honesty. Let a fuller truth include both what you need to take responsibility for and what you no longer need to punish yourself for.</string>
 
-    <string name="origin_laguz">Laguz means “water” or “lake”, symbolizing flow, emotion, intuition, and hidden depths.</string>
+    <string name="origin_laguz">Laguz means “water” or “lake”, symbolising flow, emotion, intuition, and hidden depths.</string>
     <string name="interpretation_laguz_upright">Laguz points to emotions and intuitions moving beneath the surface. Listen to what you feel and sense, rather than forcing everything into rigid plans.</string>
     <string name="interpretation_laguz_upright_relationships">In relationships, Laguz highlights emotions moving beneath the surface. Pay attention to what is felt but not fully spoken, and let empathy guide how you respond.</string>
     <string name="interpretation_laguz_upright_purpose">For purpose, Laguz highlights intuition as a guide toward a path better aligned with your true self. Search deeper within for what resonates and what feels meaningful.</string>
@@ -201,19 +201,19 @@
     <string name="interpretation_laguz_reversed_security">For security, Laguz reversed highlights unease that is being ignored because nothing is visibly wrong yet. A situation may look stable, but your instincts may be warning you that something needs closer attention. Investigate the feeling, and look for what may need attention beneath the surface.</string>
     <string name="interpretation_laguz_reversed_self">For the self, Laguz reversed highlights being flooded by emotions that are hard to understand all at once. When too many feelings rise at once, it can become harder to know what you truly need. Slow down and separate what is fear, grief, desire, or intuition before acting.</string>
 
-    <string name="origin_ingwaz">Ingwaz is named after the god Ing, symbolizing fertility, potential, and quiet growth.</string>
+    <string name="origin_ingwaz">Ingwaz is named after the god Ing, symbolising fertility, potential, and quiet growth.</string>
     <string name="interpretation_ingwaz_upright">Ingwaz marks potential that is still forming beneath the surface. Honour quiet growth, and trust that not everything needs to be visible before it becomes real.</string>
     <string name="interpretation_ingwaz_upright_relationships">In relationships, Ingwaz highlights a deeper bond forming quietly beneath the surface. Let it develop naturally, and allow what is growing between you to emerge in its own time.</string>
     <string name="interpretation_ingwaz_upright_purpose">For purpose, Ingwaz highlights a period of creative or personal incubation. Stay close to the process and make quiet, steady progress so your potential can strengthen before it is ready to emerge.</string>
     <string name="interpretation_ingwaz_upright_self">For the self, Ingwaz highlights private growth that is not yet visible to others. Give your inner potential time to strengthen, so it can emerge from a place of readiness rather than pressure.</string>
 
-    <string name="origin_dagaz">Dagaz means “day” or “dawn”, symbolizing clarity, awakening, and the shift from darkness into light.</string>
+    <string name="origin_dagaz">Dagaz means “day” or “dawn”, symbolising clarity, awakening, and the shift from darkness into light.</string>
     <string name="interpretation_dagaz_upright">Dagaz marks a threshold where something is becoming clearer after a period of uncertainty. Welcome the shift, and see what is now possible in a new light.</string>
     <string name="interpretation_dagaz_upright_relationships">In relationships, Dagaz highlights a breakthrough in understanding or a shift in dynamics after a period of confusion or tension. Let this new clarity change how you show up, what you expect, or what you choose next.</string>
     <string name="interpretation_dagaz_upright_purpose">For purpose, Dagaz highlights a breakthrough after a period of uncertainty. This may come as new clarity about your direction, progress where things once felt stuck, or an opportunity that opens a new path. Let the breakthrough guide your next step, and be willing to leave behind an old direction that no longer fits.</string>
     <string name="interpretation_dagaz_upright_self">For the self, Dagaz highlights a personal breakthrough, inner transformation, or the arrival of greater self-understanding. Embrace this new version of yourself, and leave behind what no longer fits who you are becoming.</string>
 
-    <string name="origin_othala">Othala means “ancestral property” or “heritage”, symbolizing home, roots, belonging, and inheritance.</string>
+    <string name="origin_othala">Othala means “ancestral property” or “heritage”, symbolising home, roots, belonging, and inheritance.</string>
     <string name="interpretation_othala_upright">Othala points to the roots that shape your sense of home and belonging. Honour what has been passed down, while choosing what kind of inheritance you want to carry forward.</string>
     <string name="interpretation_othala_upright_relationships">In relationships, Othala highlights what you have inherited from family or culture, and how it shapes the way you relate to others today. Use that awareness to break patterns that cause harm, and to strengthen the ones that help love, trust, and belonging endure.</string>
     <string name="interpretation_othala_upright_purpose">For purpose, Othala highlights the legacy your work is helping to build. Consider whether your path is rooted in values you want to carry forward and contributes to something that can outlast you.</string>
