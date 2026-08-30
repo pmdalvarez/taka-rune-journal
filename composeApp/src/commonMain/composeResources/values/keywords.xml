@@ -62,12 +62,13 @@
     <string name="keywords_gebo_upright_purpose">contribution</string>
     <string name="keywords_gebo_upright_self">self-care</string>
 
-    <string name="keywords_wunjo_upright">joy, harmony, success</string>
-    <string name="keywords_wunjo_upright_purpose">fulfillment</string>
-    <string name="keywords_wunjo_upright_self">contentment</string>
-    <string name="keywords_wunjo_reversed">sorrow, disharmony, isolation, disappointment</string>
+    <string name="keywords_wunjo_upright">joy, harmony, satisfaction</string>
+    <string name="keywords_wunjo_upright_purpose">fulfilment</string>
+    <string name="keywords_wunjo_upright_self">self-acceptance</string>
+    <string name="keywords_wunjo_reversed">blocked joy, disharmony, disappointment</string>
+    <string name="keywords_wunjo_reversed_relationships">unmet needs</string>
     <string name="keywords_wunjo_reversed_purpose">dissatisfaction</string>
-    <string name="keywords_wunjo_reversed_self">suppression</string>
+    <string name="keywords_wunjo_reversed_self">conditional happiness</string>
 
     <string name="keywords_hagalaz_upright">disruption, challenge, transformation</string>
     <string name="keywords_hagalaz_upright_security">instability</string>
