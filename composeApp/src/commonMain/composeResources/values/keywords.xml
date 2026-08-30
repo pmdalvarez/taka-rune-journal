@@ -58,8 +58,9 @@
     <string name="keywords_kenaz_reversed_purpose">creative block</string>
     <string name="keywords_kenaz_reversed_self">self-deception</string>
 
-    <string name="keywords_gebo_upright">partnership, balance</string>
-    <string name="keywords_gebo_upright_self">self-giving</string>
+    <string name="keywords_gebo_upright">exchange, generosity, balance</string>
+    <string name="keywords_gebo_upright_purpose">contribution</string>
+    <string name="keywords_gebo_upright_self">self-care</string>
 
     <string name="keywords_wunjo_upright">joy, harmony, success</string>
     <string name="keywords_wunjo_upright_purpose">fulfillment</string>
