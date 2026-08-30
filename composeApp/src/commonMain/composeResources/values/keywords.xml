@@ -70,14 +70,15 @@
     <string name="keywords_wunjo_reversed_purpose">dissatisfaction</string>
     <string name="keywords_wunjo_reversed_self">conditional happiness</string>
 
-    <string name="keywords_hagalaz_upright">disruption, challenge, transformation</string>
+    <string name="keywords_hagalaz_upright">disruption, upheaval, exposure</string>
+    <string name="keywords_hagalaz_upright_relationships">reassessment</string>
+    <string name="keywords_hagalaz_upright_purpose">derailment</string>
     <string name="keywords_hagalaz_upright_security">instability</string>
-    <string name="keywords_hagalaz_upright_self">turmoil</string>
+    <string name="keywords_hagalaz_upright_self">disorientation</string>
 
-    <string name="keywords_nauthiz_upright">need, hardship, resilience</string>
-    <string name="keywords_nauthiz_upright_relationships">codependency</string>
-    <string name="keywords_nauthiz_upright_security">scarcity</string>
-    <string name="keywords_nauthiz_upright_self">inner critic</string>
+    <string name="keywords_nauthiz_upright">need, limitation, scarcity</string>
+    <string name="keywords_nauthiz_upright_purpose">obligation</string>
+    <string name="keywords_nauthiz_upright_self">neglect</string>
 
     <string name="keywords_isa_upright">stillness, patience, clarity</string>
     <string name="keywords_isa_upright_relationships">withdrawal</string>
