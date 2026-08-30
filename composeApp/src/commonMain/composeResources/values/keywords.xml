@@ -50,12 +50,12 @@
     <string name="keywords_raidho_reversed_purpose">aimlessness</string>
     <string name="keywords_raidho_reversed_self">autopilot</string>
 
-    <string name="keywords_kenaz_upright">clarity, creativity, skill</string>
-    <string name="keywords_kenaz_upright_relationships">honesty</string>
-    <string name="keywords_kenaz_upright_purpose">insight</string>
-    <string name="keywords_kenaz_upright_self">self-expression</string>
-    <string name="keywords_kenaz_reversed">ignorance, creative block, misunderstanding, confusion</string>
-    <string name="keywords_kenaz_reversed_relationships">miscommunication</string>
+    <string name="keywords_kenaz_upright">clarity, insight, skill</string>
+    <string name="keywords_kenaz_upright_purpose">creativity</string>
+    <string name="keywords_kenaz_upright_self">self-understanding</string>
+    <string name="keywords_kenaz_reversed">confusion, misunderstanding, blockage</string>
+    <string name="keywords_kenaz_reversed_relationships">avoidance</string>
+    <string name="keywords_kenaz_reversed_purpose">creative block</string>
     <string name="keywords_kenaz_reversed_self">self-deception</string>
 
     <string name="keywords_gebo_upright">partnership, balance</string>
