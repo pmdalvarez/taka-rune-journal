@@ -94,14 +94,14 @@
     <string name="keywords_eihwaz_upright_relationships">evolution</string>
     <string name="keywords_eihwaz_upright_security">protection</string>
 
-    <string name="keywords_perthro_upright">mystery, fate, chance, possibility</string>
+    <string name="keywords_perthro_upright">mystery, chance, uncertainty</string>
     <string name="keywords_perthro_upright_relationships">openness</string>
-    <string name="keywords_perthro_upright_purpose">fate</string>
-    <string name="keywords_perthro_upright_self">curiosity</string>
-    <string name="keywords_perthro_reversed">misfortune, addiction, deception, stagnation</string>
-    <string name="keywords_perthro_reversed_relationships">fixation</string>
-    <string name="keywords_perthro_reversed_purpose">fixation</string>
-    <string name="keywords_perthro_reversed_self">fixation</string>
+    <string name="keywords_perthro_upright_purpose">risk, experimentation</string>
+    <string name="keywords_perthro_upright_self">self-discovery</string>
+    <string name="keywords_perthro_reversed">uncertainty, control, unease</string>
+    <string name="keywords_perthro_reversed_relationships">missing context</string>
+    <string name="keywords_perthro_reversed_purpose">possibility</string>
+    <string name="keywords_perthro_reversed_self">self-acceptance</string>
 
     <string name="keywords_algiz_upright">protection, awareness, boundaries</string>
     <string name="keywords_algiz_upright_relationships">safety</string>
