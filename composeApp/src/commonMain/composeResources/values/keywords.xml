@@ -180,6 +180,13 @@
     <string name="keywords_dagaz_upright_self">transformation</string>
 
     <string name="keywords_othala_upright">heritage, home, roots, belonging</string>
+    <string name="keywords_othala_upright_relationships">patterns</string>
+    <string name="keywords_othala_upright_purpose">legacy</string>
+    <string name="keywords_othala_upright_security">foundation</string>
     <string name="keywords_othala_upright_self">identity</string>
-    <string name="keywords_othala_reversed">disconnection, family conflict, instability, identity crisis</string>
+    <string name="keywords_othala_reversed">burdens, exclusion, rigidity</string>
+    <string name="keywords_othala_reversed_relationships">familiarity</string>
+    <string name="keywords_othala_reversed_purpose">expectations</string>
+    <string name="keywords_othala_reversed_security">dependence</string>
+    <string name="keywords_othala_reversed_self">inherited identity</string>
 </resources>
