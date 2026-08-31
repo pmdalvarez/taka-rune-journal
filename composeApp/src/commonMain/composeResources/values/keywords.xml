@@ -118,14 +118,15 @@
     <string name="keywords_sowilo_upright_purpose">energy</string>
     <string name="keywords_sowilo_upright_self">life force</string>
 
-    <string name="keywords_tiwaz_upright">justice, honor, courage, leadership</string>
+    <string name="keywords_tiwaz_upright">justice, honour, courage</string>
     <string name="keywords_tiwaz_upright_relationships">integrity</string>
     <string name="keywords_tiwaz_upright_purpose">integrity</string>
-    <string name="keywords_tiwaz_upright_self">values</string>
-    <string name="keywords_tiwaz_reversed">injustice, dishonor, cowardice, defeat</string>
-    <string name="keywords_tiwaz_reversed_relationships">self-betrayal</string>
+    <string name="keywords_tiwaz_upright_security">integrity</string>
+    <string name="keywords_tiwaz_upright_self">alignment</string>
+    <string name="keywords_tiwaz_reversed">injustice, dishonour, unfairness</string>
+    <string name="keywords_tiwaz_reversed_relationships">imbalance</string>
     <string name="keywords_tiwaz_reversed_purpose">self-betrayal</string>
-    <string name="keywords_tiwaz_reversed_security">complicity</string>
+    <string name="keywords_tiwaz_reversed_security">dependence</string>
     <string name="keywords_tiwaz_reversed_self">self-betrayal</string>
 
     <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
