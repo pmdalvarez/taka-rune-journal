@@ -90,11 +90,9 @@
     <string name="keywords_jera_upright_relationships">patterns</string>
     <string name="keywords_jera_upright_self">recalibration</string>
 
-    <string name="keywords_eihwaz_upright">endurance, resilience, stability</string>
-    <string name="keywords_eihwaz_upright_relationships">groundedness</string>
-    <string name="keywords_eihwaz_upright_purpose">commitment</string>
+    <string name="keywords_eihwaz_upright">endurance, transition, rootedness</string>
+    <string name="keywords_eihwaz_upright_relationships">evolution</string>
     <string name="keywords_eihwaz_upright_security">protection</string>
-    <string name="keywords_eihwaz_upright_self">groundedness</string>
 
     <string name="keywords_perthro_upright">mystery, fate, chance, possibility</string>
     <string name="keywords_perthro_upright_relationships">openness</string>
