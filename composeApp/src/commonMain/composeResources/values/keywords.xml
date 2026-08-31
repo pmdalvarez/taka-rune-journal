@@ -129,11 +129,15 @@
     <string name="keywords_tiwaz_reversed_security">dependence</string>
     <string name="keywords_tiwaz_reversed_self">self-betrayal</string>
 
-    <string name="keywords_berkano_upright">birth, growth, nurturing, healing</string>
+    <string name="keywords_berkano_upright">growth, care, healing</string>
     <string name="keywords_berkano_upright_relationships">patience</string>
-    <string name="keywords_berkano_upright_purpose">patience</string>
-    <string name="keywords_berkano_upright_self">self-care</string>
-    <string name="keywords_berkano_reversed">stagnation, neglect, infertility, resistance</string>
+    <string name="keywords_berkano_upright_purpose">possibility</string>
+    <string name="keywords_berkano_upright_security">stabilising</string>
+    <string name="keywords_berkano_upright_self">self-nurture</string>
+    <string name="keywords_berkano_reversed">blocked growth, neglect, fragility</string>
+    <string name="keywords_berkano_reversed_purpose">impatience</string>
+    <string name="keywords_berkano_reversed_security">unmet needs</string>
+    <string name="keywords_berkano_reversed_self">pressure</string>
 
     <string name="keywords_ehwaz_upright">partnership, trust, harmony</string>
     <string name="keywords_ehwaz_upright_purpose">collaboration</string>
