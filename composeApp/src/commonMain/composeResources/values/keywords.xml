@@ -149,11 +149,15 @@
     <string name="keywords_ehwaz_reversed_purpose">misalignment</string>
     <string name="keywords_ehwaz_reversed_self">resistance</string>
 
-    <string name="keywords_mannaz_upright">community, relationships</string>
+    <string name="keywords_mannaz_upright">community, humanity, self-awareness</string>
+    <string name="keywords_mannaz_upright_relationships">empathy, humility</string>
     <string name="keywords_mannaz_upright_purpose">contribution</string>
     <string name="keywords_mannaz_upright_security">belonging</string>
-    <string name="keywords_mannaz_upright_self">self-awareness</string>
-    <string name="keywords_mannaz_reversed">isolation, selfishness, alienation, ego</string>
+    <string name="keywords_mannaz_upright_self">reflection</string>
+    <string name="keywords_mannaz_reversed">isolation, alienation, ego</string>
+    <string name="keywords_mannaz_reversed_relationships">projection</string>
+    <string name="keywords_mannaz_reversed_purpose">disconnection</string>
+    <string name="keywords_mannaz_reversed_self">distortion</string>
 
     <string name="keywords_laguz_upright">flow, intuition, healing, dreams</string>
     <string name="keywords_laguz_upright_relationships">empathy</string>
