@@ -159,12 +159,15 @@
     <string name="keywords_mannaz_reversed_purpose">disconnection</string>
     <string name="keywords_mannaz_reversed_self">distortion</string>
 
-    <string name="keywords_laguz_upright">flow, intuition, healing, dreams</string>
+    <string name="keywords_laguz_upright">flow, emotion, intuition</string>
     <string name="keywords_laguz_upright_relationships">empathy</string>
-    <string name="keywords_laguz_reversed">blockage, overwhelm, fear, illusion</string>
-    <string name="keywords_laguz_reversed_relationships">disengagement</string>
-    <string name="keywords_laguz_reversed_purpose">apathy</string>
-    <string name="keywords_laguz_reversed_self">numbness</string>
+    <string name="keywords_laguz_upright_purpose">resonance</string>
+    <string name="keywords_laguz_upright_security">emotional safety</string>
+    <string name="keywords_laguz_reversed">blockage, disconnection</string>
+    <string name="keywords_laguz_reversed_relationships">unspoken feelings</string>
+    <string name="keywords_laguz_reversed_purpose">misalignment</string>
+    <string name="keywords_laguz_reversed_security">unease</string>
+    <string name="keywords_laguz_reversed_self">overwhelm</string>
 
     <string name="keywords_ingwaz_upright">fertility, growth, potential, completion</string>
     <string name="keywords_ingwaz_upright_security">foundation</string>
