@@ -169,8 +169,10 @@
     <string name="keywords_laguz_reversed_security">unease</string>
     <string name="keywords_laguz_reversed_self">overwhelm</string>
 
-    <string name="keywords_ingwaz_upright">fertility, growth, potential, completion</string>
-    <string name="keywords_ingwaz_upright_security">foundation</string>
+    <string name="keywords_ingwaz_upright">potential, incubation, emergence</string>
+    <string name="keywords_ingwaz_upright_relationships">quiet growth</string>
+    <string name="keywords_ingwaz_upright_purpose">steady progress</string>
+    <string name="keywords_ingwaz_upright_self">private growth</string>
 
     <string name="keywords_dagaz_upright">breakthrough, transformation, clarity, awakening</string>
     <string name="keywords_dagaz_upright_relationships">reconciliation, reset</string>
