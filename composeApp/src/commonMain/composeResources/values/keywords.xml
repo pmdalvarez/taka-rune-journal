@@ -139,11 +139,15 @@
     <string name="keywords_berkano_reversed_security">unmet needs</string>
     <string name="keywords_berkano_reversed_self">pressure</string>
 
-    <string name="keywords_ehwaz_upright">partnership, trust, harmony</string>
+    <string name="keywords_ehwaz_upright">partnership, trust, cooperation</string>
+    <string name="keywords_ehwaz_upright_relationships">mutuality</string>
     <string name="keywords_ehwaz_upright_purpose">collaboration</string>
     <string name="keywords_ehwaz_upright_security">support</string>
     <string name="keywords_ehwaz_upright_self">integration</string>
-    <string name="keywords_ehwaz_reversed">disharmony, distrust, betrayal, stagnation</string>
+    <string name="keywords_ehwaz_reversed">mistrust, disharmony, stagnation</string>
+    <string name="keywords_ehwaz_reversed_relationships">imbalance</string>
+    <string name="keywords_ehwaz_reversed_purpose">misalignment</string>
+    <string name="keywords_ehwaz_reversed_self">resistance</string>
 
     <string name="keywords_mannaz_upright">community, relationships</string>
     <string name="keywords_mannaz_upright_purpose">contribution</string>
