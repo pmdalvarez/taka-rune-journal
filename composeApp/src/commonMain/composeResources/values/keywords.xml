@@ -103,13 +103,15 @@
     <string name="keywords_perthro_reversed_purpose">possibility</string>
     <string name="keywords_perthro_reversed_self">self-acceptance</string>
 
-    <string name="keywords_algiz_upright">protection, awareness, boundaries</string>
+    <string name="keywords_algiz_upright">protection, alertness, boundaries</string>
     <string name="keywords_algiz_upright_relationships">safety</string>
-    <string name="keywords_algiz_upright_purpose">calling</string>
+    <string name="keywords_algiz_upright_purpose">focus</string>
+    <string name="keywords_algiz_upright_security">warnings</string>
     <string name="keywords_algiz_upright_self">intuition</string>
-    <string name="keywords_algiz_reversed">vulnerability, danger, disconnection, warning</string>
-    <string name="keywords_algiz_reversed_relationships">overextension</string>
-    <string name="keywords_algiz_reversed_purpose">overextension</string>
+    <string name="keywords_algiz_reversed">vulnerability, false security, disconnection</string>
+    <string name="keywords_algiz_reversed_relationships">attachment</string>
+    <string name="keywords_algiz_reversed_purpose">exposure</string>
+    <string name="keywords_algiz_reversed_self">dismissal</string>
 
     <string name="keywords_sowilo_upright">clarity, vitality, guidance</string>
     <string name="keywords_sowilo_upright_relationships">authenticity</string>
