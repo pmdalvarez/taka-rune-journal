@@ -38,7 +38,7 @@ fun ReadingInterpretationRuneTab(
   tabDescription: StringResource?,
 ) {
   val keywords = supplementalKeywords?.let {
-    (stringResource(supplementalKeywords) +", " + stringResource(keywords)).toDotSeparatedKeywords()
+    (stringResource(keywords) + ", " + stringResource(supplementalKeywords)).toDotSeparatedKeywords()
   } ?: stringResource(keywords).toDotSeparatedKeywords()
   val fullInterpretation = listOfNotNull(
     stringResource(drawnRune.rune.origin()),
