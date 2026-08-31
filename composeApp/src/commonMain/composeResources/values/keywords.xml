@@ -174,10 +174,10 @@
     <string name="keywords_ingwaz_upright_purpose">steady progress</string>
     <string name="keywords_ingwaz_upright_self">private growth</string>
 
-    <string name="keywords_dagaz_upright">breakthrough, transformation, clarity, awakening</string>
+    <string name="keywords_dagaz_upright">breakthrough, clarity, awakening</string>
     <string name="keywords_dagaz_upright_relationships">reconciliation, reset</string>
     <string name="keywords_dagaz_upright_purpose">calling</string>
-    <string name="keywords_dagaz_upright_self">reinvention</string>
+    <string name="keywords_dagaz_upright_self">transformation</string>
 
     <string name="keywords_othala_upright">heritage, home, roots, belonging</string>
     <string name="keywords_othala_upright_self">identity</string>
