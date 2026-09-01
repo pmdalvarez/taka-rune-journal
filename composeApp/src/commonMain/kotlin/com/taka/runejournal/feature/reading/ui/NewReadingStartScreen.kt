@@ -209,7 +209,6 @@ fun NewReadingStartScreen(
             topic = topicInput!!,
             question = questionInput
           )
-println("XXXXXXXXXXXXXX onClick viewModel.updateSelections")
         },
         enabled = spreadInput != null && topicInput != null,
         modifier = Modifier

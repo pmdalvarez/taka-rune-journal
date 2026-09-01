@@ -28,6 +28,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -54,6 +57,24 @@ fun SettingsScreen(
 ) {
   val uiState by viewModel.uiState.collectAsState()
   val snackbarHostState = remember { SnackbarHostState() }
+  var nameInput by rememberSaveable { mutableStateOf(uiState.displayName) }
+
+  LaunchedEffect(uiState.displayName) {
+    nameInput = uiState.displayName
+  }
+
+  fun onSaveName() {
+    if (nameInput != uiState.displayName) {
+      viewModel.setDisplayName(nameInput)
+    }
+  }
+
+  fun onNavigateBackWithSave() {
+    onSaveName()
+    onBackClick()
+  }
+
+  NavigationBackHandler(state = rememberNavigationEventState(NavigationEventInfo.None), onBackCompleted = ::onNavigateBackWithSave)
 
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
@@ -71,14 +92,15 @@ fun SettingsScreen(
       TakaTopBar(
         title = stringResource(Res.string.settings_title),
         navigationIcon = TakaTopBarNavigationIcon.Back,
-        onNavigationClick = onBackClick,
+        onNavigationClick = ::onNavigateBackWithSave
       )
     },
   ) { contentModifier ->
     SettingsContent(
-      displayName = uiState.displayName,
+      displayName = nameInput,
       reversedRunesEnabled = uiState.reversedRunesEnabled,
-      onDisplayNameChange = viewModel::setDisplayName,
+      onDisplayNameChange = { nameInput = it },
+      onSaveName = ::onSaveName,
       onReversedRunesEnabledChange = viewModel::setReversedRunesEnabled,
       modifier = contentModifier
     )
@@ -91,21 +113,11 @@ private fun SettingsContent(
   displayName: String = "",
   reversedRunesEnabled: Boolean = true,
   onDisplayNameChange: (String) -> Unit = {},
+  onSaveName: () -> Unit = {},
   onReversedRunesEnabledChange: (Boolean) -> Unit = {},
   modifier: Modifier = Modifier,
 ) {
   val focusManager = LocalFocusManager.current
-  var nameInput by rememberSaveable { mutableStateOf(displayName) }
-
-  LaunchedEffect(displayName) {
-    nameInput = displayName
-  }
-
-  fun onSaveName() {
-    if (nameInput != displayName) {
-      onDisplayNameChange(nameInput)
-    }
-  }
 
   Column(
     modifier = modifier.pointerInput(Unit) {
@@ -118,8 +130,8 @@ private fun SettingsContent(
     verticalArrangement = Arrangement.spacedBy(TakaSectionSpacing),
   ) {
     TakaTextField(
-      value = nameInput,
-      onValueChange = { nameInput = it },
+      value = displayName,
+      onValueChange = onDisplayNameChange,
       modifier = Modifier
         .onFocusChanged { focusState ->
           if (!focusState.isFocused) {
