@@ -101,23 +101,26 @@ fun TimelineScreen(
             }
             item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
 
-            item {
-                HorizontalDivider(
-                    color = MaterialTheme.colorScheme.outlineVariant,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = TakaSectionSpacing),
-                )
-            }
-            item {
-                Text(
-                    text = stringResource(Res.string.timeline_section_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = TakaSectionSpacing),
-                )
+            if (pagingItems.itemCount > 0) {
+                item {
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.outlineVariant,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = TakaSectionSpacing),
+                    )
+                }
+                
+                item {
+                    Text(
+                        text = stringResource(Res.string.timeline_section_title),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = TakaSectionSpacing),
+                    )
+                }
             }
 
             items(
