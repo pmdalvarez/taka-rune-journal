@@ -6,7 +6,6 @@ import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.UiEvent
-import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +18,6 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.reading_draw_save_error
 
 class NewReadingViewModel(
-  private val settingsRepository: SettingsRepository,
   private val timelineRepository: TimelineRepository
 ) : ViewModel() {
 

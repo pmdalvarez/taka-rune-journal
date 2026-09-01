@@ -64,7 +64,6 @@ val appModule = module {
 
   viewModel {
     NewReadingViewModel(
-      settingsRepository = get(),
       timelineRepository = get()
     )
   }
