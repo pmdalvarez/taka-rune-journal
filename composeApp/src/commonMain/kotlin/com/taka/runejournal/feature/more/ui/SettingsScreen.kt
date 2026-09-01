@@ -28,6 +28,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigationevent.NavigationEventInfo
 import androidx.navigationevent.compose.NavigationBackHandler
 import androidx.navigationevent.compose.rememberNavigationEventState
@@ -55,7 +56,7 @@ fun SettingsScreen(
   onBackClick: () -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val uiState by viewModel.uiState.collectAsState()
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
   val snackbarHostState = remember { SnackbarHostState() }
   var nameInput by rememberSaveable { mutableStateOf(uiState.displayName) }
 

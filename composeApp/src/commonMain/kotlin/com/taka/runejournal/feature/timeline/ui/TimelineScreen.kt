@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.taka.runejournal.core.ui.UiEvent
@@ -49,7 +50,7 @@ fun TimelineScreen(
     onNewJournalEntryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
     val snackbarHostState = remember { SnackbarHostState() }
     val focusManager = LocalFocusManager.current

@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -29,7 +30,7 @@ fun NewJournalEntryScreen(
   onBackClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val uiState by viewModel.uiState.collectAsState()
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
   var titleInput by rememberSaveable { mutableStateOf("") }
   var notesInput by rememberSaveable { mutableStateOf("") }
   val snackbarHostState = remember { SnackbarHostState() }

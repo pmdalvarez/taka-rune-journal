@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.ImmersiveModeEffect
@@ -82,7 +83,7 @@ fun NewReadingDrawScreen(
   onNavigateToReadingInterpretation: (id: Long) -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val uiState by viewModel.uiState.collectAsState()
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
   val snackbarHostState = remember { SnackbarHostState() }
   var showInstructionalOverLay by remember { mutableStateOf(true) }
   var drawState by remember { mutableStateOf<DrawState>(DrawState.Choose.Idle) }

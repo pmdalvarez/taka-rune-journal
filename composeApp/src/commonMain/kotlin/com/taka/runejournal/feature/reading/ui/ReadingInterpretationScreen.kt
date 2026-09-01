@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -43,7 +44,7 @@ fun ReadingInterpretationScreen(
   onBackClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
-  val uiState by viewModel.uiState.collectAsState()
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
   val snackbarHostState = remember { SnackbarHostState() }
   val pagerState = rememberPagerState (
     pageCount = { uiState.tabs.size },
