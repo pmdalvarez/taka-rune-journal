@@ -18,7 +18,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_your_name">Your Name</string>
     <string name="settings_reversible_runes_title">Use reversed runes in readings</string>
-    <string name="settings_show_reversed_runes_description">Allow runes to appear upside down, adding alternative meanings.</string>
+    <string name="settings_reversible_runes_description">Allow runes to appear upside down, adding alternative meanings.</string>
     <string name="settings_save_error">Settings could not be saved. Please try again.</string>
     <string name="settings_save_error_blank_name">Please enter a name</string>
     <string name="about_title">About</string>
