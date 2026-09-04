@@ -14,6 +14,7 @@ val TakaSpaceXxl = 32.dp
 val TakaSpaceXxxl = 40.dp
 
 // Common app-level spacing
+val TakaIconButtonSize = 20.dp
 val TakaScreenPadding = TakaSpaceXl
 val TakaSectionSpacing = TakaSpaceXl
 val TakaContentSpacing = TakaSpaceLg

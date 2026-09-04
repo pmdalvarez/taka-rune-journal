@@ -12,7 +12,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -33,6 +32,7 @@ import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
+import com.taka.runejournal.feature.timeline.ui.components.WelcomeSection
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -80,28 +80,29 @@ fun TimelineScreen(
             )
         }
     ) { contentModifier ->
-        LazyColumn(
-            modifier = contentModifier.pointerInput(Unit) {
-                detectTapGestures(
-                    onTap = {
-                        focusManager.clearFocus()
-                    },
-                )
-            },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            item {
-                GreetingSection(
-                    uiState.displayName,
-                    uiState.dailyPrompt,
-                    viewModel::initializeDailyPrompt,
-                    viewModel::setDisplayName
-                )
-            }
-            item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
-
-            if (pagingItems.itemCount > 0) {
+        if (pagingItems.itemCount == 0) {
+            WelcomeSection(onNewReadingClick, contentModifier)
+        } else {
+            LazyColumn(
+                modifier = contentModifier.pointerInput(Unit) {
+                    detectTapGestures(
+                        onTap = {
+                            focusManager.clearFocus()
+                        },
+                    )
+                },
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+            ) {
+                item {
+                    GreetingSection(
+                        uiState.displayName,
+                        uiState.dailyPrompt,
+                        viewModel::initializeDailyPrompt,
+                        viewModel::setDisplayName
+                    )
+                }
+                item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
                 item {
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.outlineVariant,
@@ -110,7 +111,6 @@ fun TimelineScreen(
                             .padding(top = TakaSectionSpacing),
                     )
                 }
-                
                 item {
                     Text(
                         text = stringResource(Res.string.timeline_section_title),
@@ -121,20 +121,19 @@ fun TimelineScreen(
                             .padding(top = TakaSectionSpacing),
                     )
                 }
-            }
-
-            items(
-                count = pagingItems.itemCount,
-                key = pagingItems.itemKey { it.id }
-            ) { index ->
-                val item = pagingItems[index]
-                item?.let {
-                    TimelineItemRow(
-                        item = it,
-                        onJournalEntryClick = onJournalEntryClick,
-                        onRuneReadingClick = onRuneReadingClick,
-                        onDeleteClick = viewModel::openDeleteDialog
-                    )
+                items(
+                    count = pagingItems.itemCount,
+                    key = pagingItems.itemKey { it.id }
+                ) { index ->
+                    val item = pagingItems[index]
+                    item?.let {
+                        TimelineItemRow(
+                            item = it,
+                            onJournalEntryClick = onJournalEntryClick,
+                            onRuneReadingClick = onRuneReadingClick,
+                            onDeleteClick = viewModel::openDeleteDialog
+                        )
+                    }
                 }
             }
         }
