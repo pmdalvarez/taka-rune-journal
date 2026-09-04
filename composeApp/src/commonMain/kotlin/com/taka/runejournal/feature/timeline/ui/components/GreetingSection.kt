@@ -21,12 +21,10 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.timeline_feedback_name_given
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 import taka_rune_journal.composeapp.generated.resources.timeline_textfield_label_your_name
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_greeting
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_prompt
+import taka_rune_journal.composeapp.generated.resources.timeline_welcome_back
 
 @Composable
 fun GreetingSection(
@@ -35,64 +33,42 @@ fun GreetingSection(
   onInitializeDailyPrompt: (List<String>) -> Unit,
   onDisplayNameEntered: (String) -> Unit
 ) {
-
-  // Show Welcome if there is no display name (i.e. first time user opens app)
-  // OR if display name but was only just saved (to stay in welcome screen)
-  var displayNameEntered by rememberSaveable { mutableStateOf(false) }
-  val showWelcome = displayName.isNullOrEmpty() || displayNameEntered
-
-  if (showWelcome) {
-    // If no name given, show welcome greeting + prompt asking for name
-    Text(
-      text = stringResource(Res.string.timeline_welcome_greeting),
-      style = MaterialTheme.typography.headlineMedium
+  // If logic ensures that after user enters a name, the text field changed to a greeting
+  if (displayName.isNullOrEmpty()) {
+    DisplayNameTextField(
+      onSaveName = {
+        if (it.isNotBlank()) {
+          onDisplayNameEntered(it)
+        }
+      },
+      modifier = Modifier.padding(top = TakaContentSpacing)
     )
+  }
+  // If name is set, show greeting using their name with daily prompt
+
+  if (dailyPrompt == null) {
+    // initialise dailyPrompt only if it hasn't been set yet
+    val prompts = stringArrayResource(Res.array.timeline_prompts)
+    LaunchedEffect(Unit) {
+      onInitializeDailyPrompt(prompts)
+    }
+  }
+
+  val greeting = if (displayName.isNullOrEmpty()) {
+    stringResource(Res.string.timeline_welcome_back)
+  } else {
+    stringResource(Res.string.timeline_greeting, displayName)
+  }
+  Text(
+    text = greeting,
+    style = MaterialTheme.typography.headlineMedium
+  )
+  dailyPrompt?.let {
     Text(
-      text = stringResource(Res.string.timeline_welcome_prompt),
+      text = it,
       modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )
-    // If logic ensures that after user enters a name, the text field changed to a greeting
-    if (displayName.isNullOrEmpty()) {
-      DisplayNameTextField(
-        onSaveName = {
-          if (it.isNotBlank()) {
-            onDisplayNameEntered(it)
-            displayNameEntered = true
-          }
-        },
-        modifier = Modifier.padding(top = TakaContentSpacing)
-      )
-    } else {
-      Text(
-        text = stringResource(Res.string.timeline_feedback_name_given, displayName),
-        modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
-        style = MaterialTheme.typography.bodyLarge
-      )
-    }
-
-  } else {
-    // If name is set, show greeting using their name with daily prompt
-
-    if (dailyPrompt == null) {
-      // initialise dailyPrompt only if it hasn't been set yet
-      val prompts = stringArrayResource(Res.array.timeline_prompts)
-      LaunchedEffect(Unit) {
-        onInitializeDailyPrompt(prompts)
-      }
-    }
-
-    Text(
-      text = stringResource(Res.string.timeline_greeting, displayName),
-      style = MaterialTheme.typography.headlineMedium
-    )
-    dailyPrompt?.let {
-      Text(
-        text = it,
-        modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
-        style = MaterialTheme.typography.bodyLarge
-      )
-    }
   }
 }
 

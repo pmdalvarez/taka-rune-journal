@@ -23,7 +23,7 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_greeting
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_prompt
+import taka_rune_journal.composeapp.generated.resources.taka_description
 
 @Composable
 fun WelcomeSection(
@@ -40,7 +40,7 @@ fun WelcomeSection(
       style = MaterialTheme.typography.headlineMedium
     )
     Text(
-      text = stringResource(Res.string.timeline_welcome_prompt),
+      text = stringResource(Res.string.taka_description),
       modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )

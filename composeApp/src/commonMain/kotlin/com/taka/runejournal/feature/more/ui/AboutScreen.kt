@@ -12,7 +12,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.about_description
+import taka_rune_journal.composeapp.generated.resources.taka_description
 import taka_rune_journal.composeapp.generated.resources.about_title
 
 @Composable
@@ -35,7 +35,7 @@ fun AboutScreen(
       verticalArrangement = Arrangement.spacedBy(TakaSectionSpacing),
     ) {
       Text(
-        text = stringResource(Res.string.about_description),
+        text = stringResource(Res.string.taka_description),
         style =  MaterialTheme.typography.bodyLarge,
       )
     }
