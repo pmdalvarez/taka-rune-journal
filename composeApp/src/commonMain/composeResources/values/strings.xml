@@ -26,11 +26,11 @@
     <string name="design_system_title">Design System</string>
 
     <string name="timeline_greeting_morning">Good Morning</string>
-    <string name="timeline_greeting_afternoon">Good Evening</string>
-    <string name="timeline_greeting_evening">Good Afternoon</string>
-    <string name="timeline_greeting_with_name_morning">Good Morning %1$s</string>
-    <string name="timeline_greeting_with_name_afternoon">Good Evening %1$s</string>
-    <string name="timeline_greeting_with_name_evening">Good Afternoon %1$s</string>
+    <string name="timeline_greeting_afternoon">Good Afternoon</string>
+    <string name="timeline_greeting_evening">Good Evening</string>
+    <string name="timeline_greeting_with_name_morning">Good Morning, %1$s</string>
+    <string name="timeline_greeting_with_name_afternoon">Good Afternoon, %1$s</string>
+    <string name="timeline_greeting_with_name_evening">Good Evening, %1$s</string>
 
     <string name="timeline_greeting_with_name">Hello %1$s</string>
     <string name="timeline_greeting">Hello</string>

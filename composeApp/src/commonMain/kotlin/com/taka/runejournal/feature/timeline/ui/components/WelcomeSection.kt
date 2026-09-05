@@ -41,7 +41,7 @@ fun WelcomeSection(
     )
     Text(
       text = stringResource(Res.string.taka_description),
-      modifier = Modifier.padding(top = TakaContentSpacing).fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth(),
       style = MaterialTheme.typography.bodyLarge
     )
     TakaButton(

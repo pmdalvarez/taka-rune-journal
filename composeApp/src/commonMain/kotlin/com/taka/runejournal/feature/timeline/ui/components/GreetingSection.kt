@@ -16,11 +16,9 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.timeline_greeting
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_afternoon
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_evening
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_morning
-import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name_afternoon
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name_evening
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_name_morning
@@ -45,8 +43,6 @@ fun GreetingSection(
 //      modifier = Modifier.padding(top = TakaContentSpacing)
 //    )
 //  }
-  // If name is set, show greeting using their name with daily prompt
-
   if (dailyPrompt == null) {
     // initialise dailyPrompt only if it hasn't been set yet
     val prompts = stringArrayResource(Res.array.timeline_prompts)
@@ -102,11 +98,13 @@ fun GreetingSection(
 
 @Composable
 private fun currentTimeGreeting(
-  name: String? = null,
-  time: LocalTime = Clock.System.now()
-    .toLocalDateTime(TimeZone.currentSystemDefault())
-    .time
-): String = when (time.hour) {
+  name: String? = null
+): String = when (
+  Clock.System.now()
+  .toLocalDateTime(TimeZone.currentSystemDefault())
+  .time
+  .hour
+) {
     in 5..11 -> name?.let {
       stringResource(Res.string.timeline_greeting_with_name_morning, name)
     } ?: stringResource(Res.string.timeline_greeting_morning)
