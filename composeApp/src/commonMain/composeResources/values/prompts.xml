@@ -1,8 +1,10 @@
 <resources>
     <string-array name="timeline_prompts">
-        <item>What energy do you need today?</item>
-        <item>What should you focus on right now?</item>
-        <item>What is blocking your path?</item>
-        <item>What do you need to release?</item>
+        <item>What needs your attention right now?</item>
+        <item>What do you want to focus on right now?</item>
+        <item>What would you like to reflect on today?</item>
+        <item>What's on your mind?</item>
+        <item>What's been weighing on you?</item>
+        <item>Where are you at right now?</item>
     </string-array>
 </resources>

@@ -24,10 +24,19 @@
     <string name="about_title">About</string>
     <string name="taka_description">Taka is your personal space for rune readings and reflection.\n\nRunes are symbols for looking at a question or theme more closely. Drawing runes typically means reaching into a cloth bag of rune stones and choosing the ones you feel drawn to.\n\nIn Taka, you draw a set of digital runes and use the interpretation as a starting point for exploring your situation.\n\nThe readings are meant to help you notice patterns, clarify what you feel, understand what needs attention, and ask better questions.</string>
     <string name="design_system_title">Design System</string>
-    <string name="timeline_greeting">Hello %1$s</string>
-    <string name="timeline_welcome_back">Welcome Back</string>
+
+    <string name="timeline_greeting_morning">Good Morning</string>
+    <string name="timeline_greeting_afternoon">Good Evening</string>
+    <string name="timeline_greeting_evening">Good Afternoon</string>
+    <string name="timeline_greeting_with_name_morning">Good Morning %1$s</string>
+    <string name="timeline_greeting_with_name_afternoon">Good Evening %1$s</string>
+    <string name="timeline_greeting_with_name_evening">Good Afternoon %1$s</string>
+
+    <string name="timeline_greeting_with_name">Hello %1$s</string>
+    <string name="timeline_greeting">Hello</string>
     <string name="timeline_welcome_greeting">Welcome to Taka</string>
-    <string name="timeline_textfield_label_your_name">Your Name</string>
+    <string name="timeline_what_is_your_name">What should Taka call you?</string>
+    <string name="timeline_action_buttons_prompt">Reflect with a rune reading, or save your own thoughts.</string>
     <string name="timeline_item_title_untitled">Untitled</string>
     <string name="timeline_item_title_no_question">Open Inquiry</string>
     <string name="timeline_item_type_journal_entry">Journal Entry</string>
