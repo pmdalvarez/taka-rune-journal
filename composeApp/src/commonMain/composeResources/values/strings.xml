@@ -25,11 +25,11 @@
     <string name="taka_description">Taka is your personal space for rune readings and reflection.\n\nRunes are symbols for looking at a question or theme more closely. Drawing runes typically means reaching into a cloth bag of rune stones and choosing the ones you feel drawn to.\n\nIn Taka, you draw a set of digital runes and use the interpretation as a starting point for exploring your situation.\n\nThe readings are meant to help you notice patterns, clarify what you feel, understand what needs attention, and ask better questions.</string>
     <string name="design_system_title">Design System</string>
 
-
-
-    <string name="timeline_welcome_greeting">Welcome to Taka</string>
+    <string name="timeline_welcome_slide_intro_title">Welcome to Taka</string>
     <string name="timeline_welcome_slide_intro">Taka is your personal space for rune readings and reflection.\n\nWhat should Taka call you?</string>
+    <string name="timeline_welcome_slide_runes_title">Drawing Runes</string>
     <string name="timeline_welcome_slide_runes">Runes are symbols for looking at a question or theme more closely.\n\nIn Taka, you draw digital runes inspired by the tradition of choosing rune stones from a bag, then use their interpretation as a starting point for reflection.</string>
+    <string name="timeline_welcome_slide_readings_title">Reading Runes</string>
     <string name="timeline_welcome_slide_readings">The readings are meant to help you notice patterns, clarify what you feel, understand what needs attention, and ask better questions.</string>
 
     <string name="timeline_greeting_morning">Good Morning</string>

@@ -45,7 +45,6 @@ fun ReadingInterpretationRuneTab(
     stringResource(interpretation),
     supplementalInterpretation?.let { stringResource(it) }
   ).joinToString("\n\n")
-
   TakaCard(
     modifier = Modifier
       .fillMaxHeight()
