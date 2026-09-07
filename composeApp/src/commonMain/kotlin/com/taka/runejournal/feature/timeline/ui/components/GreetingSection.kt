@@ -66,35 +66,6 @@ fun GreetingSection(
   }
 }
 
-//@Composable
-//fun DisplayNameTextField(
-//    onSaveName: (String) -> Unit,
-//    modifier: Modifier = Modifier,
-//) {
-//  val focusManager = LocalFocusManager.current
-//  var nameInput by rememberSaveable { mutableStateOf("") }
-//
-//  TakaTextField(
-//      value = nameInput,
-//      onValueChange = { nameInput = it },
-//      label = stringResource(Res.string.timeline_textfield_label_your_name),
-//      singleLine = true,
-//      keyboardOptions = KeyboardOptions(
-//          imeAction = ImeAction.Done,
-//      ),
-//      keyboardActions = KeyboardActions(
-//          onDone = {
-//            focusManager.clearFocus() // trigger the onFocusChanged lambda
-//          },
-//      ),
-//      modifier = modifier
-//        .onFocusChanged() { focusState ->
-//          if (!focusState.isFocused) {
-//            onSaveName(nameInput)
-//          }
-//      }
-//  )
-//}
 
 @Composable
 private fun currentTimeGreeting(

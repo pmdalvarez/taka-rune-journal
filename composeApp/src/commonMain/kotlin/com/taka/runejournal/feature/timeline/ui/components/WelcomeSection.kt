@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -22,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
-import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
@@ -32,6 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.book_with_taka_symbol
+import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro_title
@@ -67,12 +69,13 @@ fun WelcomeSection(
         }
       }
     }
+    // TODO - figure out where the spacing between card and indicator is coming from, because it isn't visible in preview
     TakaPagerIndicator(
       pageCount = pagerState.pageCount,
       currentPage = pagerState.currentPage,
       modifier = Modifier
         .fillMaxWidth()
-        .padding(top = TakaSpaceSm, bottom=TakaContentSpacing),
+        .padding(bottom=TakaContentSpacing),
     )
   }
 }
@@ -93,9 +96,10 @@ fun IntroSlide() {
     Image(
       painter = painterResource(Res.drawable.book_with_taka_symbol),
       contentDescription = "test",
-      contentScale = ContentScale.Fit,
+      contentScale = ContentScale.FillHeight,
       modifier = Modifier
-        .size(width = 192.dp, height = 288.dp)
+        .height(288.dp)
+        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
         .padding(TakaSectionSpacing),
@@ -124,11 +128,12 @@ fun RunesSlide() {
       style = MaterialTheme.typography.headlineMedium
     )
     Image(
-      painter = painterResource(Res.drawable.book_with_taka_symbol),
+      painter = painterResource(Res.drawable.cloth_bag_with_runes),
       contentDescription = "test",
-      contentScale = ContentScale.Fit,
+      contentScale = ContentScale.FillHeight,
       modifier = Modifier
-        .size(width = 192.dp, height = 288.dp)
+        .height(288.dp)
+        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
         .padding(TakaSectionSpacing),
@@ -158,11 +163,12 @@ fun ReadingsSlide(
       style = MaterialTheme.typography.headlineMedium
     )
     Image(
-      painter = painterResource(Res.drawable.book_with_taka_symbol),
+      painter = painterResource(Res.drawable.cloth_bag_with_runes),
       contentDescription = "test",
-      contentScale = ContentScale.Fit,
+      contentScale = ContentScale.FillHeight,
       modifier = Modifier
-        .size(width = 192.dp, height = 288.dp)
+        .height(288.dp)
+        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
         .padding(TakaSectionSpacing),
@@ -195,3 +201,33 @@ fun ReadingsSlide(
     }
   }
 }
+
+//@Composable
+//fun DisplayNameTextField(
+//    onSaveName: (String) -> Unit,
+//    modifier: Modifier = Modifier,
+//) {
+//  val focusManager = LocalFocusManager.current
+//  var nameInput by rememberSaveable { mutableStateOf("") }
+//
+//  TakaTextField(
+//      value = nameInput,
+//      onValueChange = { nameInput = it },
+//      label = stringResource(Res.string.timeline_textfield_label_your_name),
+//      singleLine = true,
+//      keyboardOptions = KeyboardOptions(
+//          imeAction = ImeAction.Done,
+//      ),
+//      keyboardActions = KeyboardActions(
+//          onDone = {
+//            focusManager.clearFocus() // trigger the onFocusChanged lambda
+//          },
+//      ),
+//      modifier = modifier
+//        .onFocusChanged() { focusState ->
+//          if (!focusState.isFocused) {
+//            onSaveName(nameInput)
+//          }
+//      }
+//  )
+//}
