@@ -18,7 +18,7 @@ import kotlin.time.Clock
 @Preview
 fun App() {
     // TODO - remove for production version
-    if (Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date > LocalDate(2026, 9, 31)) {
+    if (Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date >= LocalDate(2026, 10, 1)) {
         Text("This test version has expired.")
         return
     }
