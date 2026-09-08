@@ -45,6 +45,8 @@ import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
+import taka_rune_journal.composeapp.generated.resources.ic_splash_icon
+import taka_rune_journal.composeapp.generated.resources.ic_taka_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
@@ -104,7 +106,7 @@ fun TakaTopBar(
             contentAlignment = Alignment.CenterStart,
           ) {
             Image(
-              painter = painterResource(Res.drawable.ic_topbar_icon),
+              painter = painterResource(Res.drawable.ic_taka_icon),
               contentDescription = stringResource(Res.string.app_name),
               modifier = Modifier
                 .height(48.dp)
