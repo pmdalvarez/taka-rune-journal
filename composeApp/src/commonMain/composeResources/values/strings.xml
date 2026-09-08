@@ -12,6 +12,7 @@
     <string name="button_draw_runes">Draw Runes</string>
     <string name="button_reveal_runes">Reveal Runes</string>
     <string name="button_go_to_reading">Go to Reading</string>
+    <string name="button_continue">Continue</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -31,6 +32,7 @@
     <string name="timeline_welcome_slide_runes">Runes are symbols for looking at a question or theme more closely.\n\nIn Taka, you draw digital runes inspired by the tradition of choosing rune stones from a bag, then use their interpretation as a starting point for reflection.</string>
     <string name="timeline_welcome_slide_readings_title">Reading Runes</string>
     <string name="timeline_welcome_slide_readings">The readings are meant to help you notice patterns, clarify what you feel, understand what needs attention, and ask better questions.</string>
+    <string name="timeline_button_new_first_reading">Start Your First Reading</string>
 
     <string name="timeline_greeting_morning">Good Morning</string>
     <string name="timeline_greeting_afternoon">Good Afternoon</string>
@@ -42,7 +44,6 @@
     <string name="timeline_item_title_untitled">Untitled</string>
     <string name="timeline_item_title_no_question">Open Inquiry</string>
     <string name="timeline_item_type_journal_entry">Journal Entry</string>
-    <string name="timeline_button_new_first_reading">Start Your First Reading</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>

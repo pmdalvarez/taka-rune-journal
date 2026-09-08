@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,11 +41,14 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.book_with_taka_symbol
+import taka_rune_journal.composeapp.generated.resources.button_continue
 import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
 import taka_rune_journal.composeapp.generated.resources.open_book
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
@@ -67,6 +70,13 @@ fun WelcomeSection(
   val pagerState = rememberPagerState (
     pageCount = { 3 },
   )
+  val coroutineScope = rememberCoroutineScope()
+  val onContinueClick: () -> Unit = {
+    coroutineScope.launch {
+      pagerState.animateScrollToPage(pagerState.currentPage + 1)
+    }
+  }
+
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -81,8 +91,8 @@ fun WelcomeSection(
         state = pagerState,
       ) { page ->
         when (page) {
-          0 -> IntroSlide(onDisplayNameEntered)
-          1 -> RunesSlide()
+          0 -> IntroSlide(onDisplayNameEntered, onContinueClick)
+          1 -> RunesSlide(onContinueClick)
           2 -> ReadingsSlide(onNewReadingClick)
         }
       }
@@ -99,7 +109,10 @@ fun WelcomeSection(
 }
 
 @Composable
-fun IntroSlide(onDisplayNameEntered: (String) -> Unit = {}) {
+fun IntroSlide(
+  onDisplayNameEntered: (String) -> Unit = {},
+  onContinueClick: () -> Unit = {}
+) {
   Column(
     modifier = Modifier
       .fillMaxSize()
@@ -135,11 +148,21 @@ fun IntroSlide(onDisplayNameEntered: (String) -> Unit = {}) {
       onSaveName = onDisplayNameEntered,
       modifier = Modifier
       .padding(top = TakaContentSpacing))
+    TakaButton(
+      modifier = Modifier
+        .align(Alignment.CenterHorizontally)
+        .padding(top = TakaContentSpacing),
+      onClick = onContinueClick
+    ) {
+      Text(stringResource(Res.string.button_continue))
+    }
   }
 }
 
 @Composable
-fun RunesSlide() {
+fun RunesSlide(
+  onContinueClick: () -> Unit = {}
+) {
   Column(
     modifier = Modifier.fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -169,6 +192,14 @@ fun RunesSlide() {
       text = stringResource(Res.string.timeline_welcome_slide_runes),
       style = MaterialTheme.typography.bodyMedium,
     )
+    TakaButton(
+      modifier = Modifier
+        .align(Alignment.CenterHorizontally)
+        .padding(top = TakaContentSpacing),
+      onClick = onContinueClick
+    ) {
+      Text(stringResource(Res.string.button_continue))
+    }
   }
 }
 @Composable
