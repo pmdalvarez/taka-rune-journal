@@ -59,6 +59,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_r
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes_title
+import taka_rune_journal.composeapp.generated.resources.timeline_your_name_prompt
 
 @Preview
 @Composable
@@ -141,7 +142,7 @@ fun IntroSlide(
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = TakaContentSpacing),
-      text = stringResource(Res.string.timeline_welcome_slide_intro),
+      text = stringResource(Res.string.timeline_welcome_slide_intro) + "\n\n" + stringResource(Res.string.timeline_your_name_prompt),
       style = MaterialTheme.typography.bodyMedium,
     )
     DisplayNameTextField(
