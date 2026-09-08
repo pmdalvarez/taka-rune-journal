@@ -45,9 +45,7 @@ import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
-import taka_rune_journal.composeapp.generated.resources.ic_splash_icon
 import taka_rune_journal.composeapp.generated.resources.ic_taka_icon
-import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
