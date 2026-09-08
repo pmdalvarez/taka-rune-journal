@@ -105,7 +105,7 @@ fun TakaTopBar(
             contentAlignment = Alignment.CenterStart,
           ) {
             Image(
-              painter = painterResource(Res.drawable.ic_taka_icon),
+              painter = painterResource(Res.drawable.ic_topbar_icon),
               contentDescription = stringResource(Res.string.app_name),
               modifier = Modifier
                 .height(48.dp)
