@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -17,6 +18,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -28,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.platform.AppBuildConfig
@@ -45,7 +48,6 @@ import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
-import taka_rune_journal.composeapp.generated.resources.ic_taka_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
@@ -99,18 +101,15 @@ fun TakaTopBar(
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {
           Box(
-            modifier = Modifier
-              .height(48.dp)
-              .width(48.dp),
-            contentAlignment = Alignment.CenterStart,
+            modifier = Modifier.size(48.dp),
+            contentAlignment = Alignment.Center,
           ) {
             Image(
               painter = painterResource(Res.drawable.ic_topbar_icon),
               contentDescription = stringResource(Res.string.app_name),
-              modifier = Modifier
-                .height(48.dp)
-                .width(48.dp),
+              modifier = Modifier.size(28.dp),
               contentScale = ContentScale.Fit,
+              colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
             )
           }
         }
