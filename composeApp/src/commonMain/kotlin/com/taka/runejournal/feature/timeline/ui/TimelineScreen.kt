@@ -81,7 +81,11 @@ fun TimelineScreen(
         }
     ) { contentModifier ->
         if (pagingItems.itemCount == 0) {
-            WelcomeSection(onNewReadingClick, contentModifier)
+            WelcomeSection(
+                onDisplayNameEntered = viewModel::setDisplayName,
+                onNewReadingClick = onNewReadingClick,
+                modifier = contentModifier
+            )
         } else {
             LazyColumn(
                 modifier = contentModifier.pointerInput(Unit) {
@@ -98,8 +102,7 @@ fun TimelineScreen(
                     GreetingSection(
                         uiState.displayName,
                         uiState.dailyPrompt,
-                        viewModel::initializeDailyPrompt,
-                        viewModel::setDisplayName
+                        viewModel::initializeDailyPrompt
                     )
                 }
                 item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }

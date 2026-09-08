@@ -8,22 +8,35 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
+import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
@@ -34,6 +47,8 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.book_with_taka_symbol
 import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
+import taka_rune_journal.composeapp.generated.resources.open_book
+import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro_title
@@ -45,6 +60,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_r
 @Preview
 @Composable
 fun WelcomeSection(
+  onDisplayNameEntered: (String) -> Unit = {},
   onNewReadingClick: () -> Unit = {},
   modifier: Modifier = Modifier
 ) {
@@ -52,7 +68,9 @@ fun WelcomeSection(
     pageCount = { 3 },
   )
   Column(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier
+      .fillMaxSize()
+      .imePadding(), // ensures keyboard doesn't hide enter name field
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -63,7 +81,7 @@ fun WelcomeSection(
         state = pagerState,
       ) { page ->
         when (page) {
-          0 -> IntroSlide()
+          0 -> IntroSlide(onDisplayNameEntered)
           1 -> RunesSlide()
           2 -> ReadingsSlide(onNewReadingClick)
         }
@@ -81,9 +99,11 @@ fun WelcomeSection(
 }
 
 @Composable
-fun IntroSlide() {
+fun IntroSlide(onDisplayNameEntered: (String) -> Unit = {}) {
   Column(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier
+      .fillMaxSize()
+      .verticalScroll(rememberScrollState()), // ensures keyboard doesn't hide name field
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -111,6 +131,10 @@ fun IntroSlide() {
       text = stringResource(Res.string.timeline_welcome_slide_intro),
       style = MaterialTheme.typography.bodyMedium,
     )
+    DisplayNameTextField(
+      onSaveName = onDisplayNameEntered,
+      modifier = Modifier
+      .padding(top = TakaContentSpacing))
   }
 }
 
@@ -163,11 +187,11 @@ fun ReadingsSlide(
       style = MaterialTheme.typography.headlineMedium
     )
     Image(
-      painter = painterResource(Res.drawable.cloth_bag_with_runes),
+      painter = painterResource(Res.drawable.open_book),
       contentDescription = "test",
       contentScale = ContentScale.FillHeight,
       modifier = Modifier
-        .height(288.dp)
+        .height(260.dp)
         .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
@@ -202,32 +226,32 @@ fun ReadingsSlide(
   }
 }
 
-//@Composable
-//fun DisplayNameTextField(
-//    onSaveName: (String) -> Unit,
-//    modifier: Modifier = Modifier,
-//) {
-//  val focusManager = LocalFocusManager.current
-//  var nameInput by rememberSaveable { mutableStateOf("") }
-//
-//  TakaTextField(
-//      value = nameInput,
-//      onValueChange = { nameInput = it },
-//      label = stringResource(Res.string.timeline_textfield_label_your_name),
-//      singleLine = true,
-//      keyboardOptions = KeyboardOptions(
-//          imeAction = ImeAction.Done,
-//      ),
-//      keyboardActions = KeyboardActions(
-//          onDone = {
-//            focusManager.clearFocus() // trigger the onFocusChanged lambda
-//          },
-//      ),
-//      modifier = modifier
-//        .onFocusChanged() { focusState ->
-//          if (!focusState.isFocused) {
-//            onSaveName(nameInput)
-//          }
-//      }
-//  )
-//}
+@Composable
+fun DisplayNameTextField(
+    onSaveName: (String) -> Unit = {},
+    modifier: Modifier = Modifier,
+) {
+  val focusManager = LocalFocusManager.current
+  var nameInput by rememberSaveable { mutableStateOf("") }
+
+  TakaTextField(
+      value = nameInput,
+      onValueChange = { nameInput = it },
+      label = stringResource(Res.string.settings_your_name),
+      singleLine = true,
+      keyboardOptions = KeyboardOptions(
+        imeAction = ImeAction.Done,
+      ),
+      keyboardActions = KeyboardActions(
+          onDone = {
+            focusManager.clearFocus() // trigger the onFocusChanged lambda
+          },
+      ),
+      modifier = modifier
+        .onFocusChanged() { focusState ->
+          if (!focusState.isFocused) {
+            onSaveName(nameInput)
+          }
+      }
+  )
+}

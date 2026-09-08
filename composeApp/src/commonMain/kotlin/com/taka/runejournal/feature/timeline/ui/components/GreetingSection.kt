@@ -9,10 +9,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
-import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -30,19 +28,7 @@ fun GreetingSection(
   displayName: String?,
   dailyPrompt: String?,
   onInitializeDailyPrompt: (List<String>) -> Unit,
-  onDisplayNameEntered: (String) -> Unit
 ) {
-  // If logic ensures that after user enters a name, the text field changed to a greeting
-//  if (displayName.isNullOrEmpty()) {
-//    DisplayNameTextField(
-//      onSaveName = {
-//        if (it.isNotBlank()) {
-//          onDisplayNameEntered(it)
-//        }
-//      },
-//      modifier = Modifier.padding(top = TakaContentSpacing)
-//    )
-//  }
   if (dailyPrompt == null) {
     // initialise dailyPrompt only if it hasn't been set yet
     val prompts = stringArrayResource(Res.array.timeline_prompts)
@@ -70,19 +56,22 @@ fun GreetingSection(
 @Composable
 private fun currentTimeGreeting(
   name: String? = null
-): String = when (
-  Clock.System.now()
-  .toLocalDateTime(TimeZone.currentSystemDefault())
-  .time
-  .hour
-) {
-    in 5..11 -> name?.let {
-      stringResource(Res.string.timeline_greeting_with_name_morning, name)
-    } ?: stringResource(Res.string.timeline_greeting_morning)
-    in 12..18 -> name?.let {
-      stringResource(Res.string.timeline_greeting_with_name_afternoon, name)
-    } ?: stringResource(Res.string.timeline_greeting_afternoon)
-    else -> name?.let {
-      stringResource(Res.string.timeline_greeting_with_name_evening, name)
-    } ?: stringResource(Res.string.timeline_greeting_evening)
+): String {
+  val hour = Clock.System.now()
+    .toLocalDateTime(TimeZone.currentSystemDefault())
+    .time
+    .hour
+  return if (name.isNullOrBlank()) {
+    when (hour) {
+      in 5..11 -> stringResource(Res.string.timeline_greeting_morning)
+      in 12..18 -> stringResource(Res.string.timeline_greeting_afternoon)
+      else -> stringResource(Res.string.timeline_greeting_evening)
+    }
+  } else {
+    when (hour) {
+      in 5..11 -> stringResource(Res.string.timeline_greeting_with_name_morning, name)
+      in 12..18 -> stringResource(Res.string.timeline_greeting_with_name_afternoon, name)
+      else -> stringResource(Res.string.timeline_greeting_with_name_evening, name)
+    }
+  }
 }
