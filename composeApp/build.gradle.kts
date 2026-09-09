@@ -92,6 +92,8 @@ android {
                 isMinifyEnabled = true
                 isShrinkResources = true
 
+                signingConfig = signingConfigs.getByName("debug") // TODO: Change to production ready signing
+
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro",
