@@ -108,7 +108,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("keystore/taka-release.jks")
+            storeFile = rootProject.file("keystore/taka-release.jks")
             keyAlias = "taka-release"
 
             storePassword = signingPassword(
