@@ -10,13 +10,31 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+val isReleaseBuild = gradle.startParameter.taskNames.any {
+    it.contains("Release", ignoreCase = true)
+}
+
+fun signingPassword(
+    envName: String,
+    prompt: String,
+): String? {
+    System.getenv(envName)?.let { return it }
+
+    if (!isReleaseBuild) return null
+
+    return System.console()
+        ?.readPassword("$prompt: ")
+        ?.concatToString()
+        ?: error("$envName is not set and no interactive console is available")
+}
+
 kotlin {
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -34,6 +52,7 @@ kotlin {
             implementation(compose.uiTooling)
             implementation(libs.datastore.preferences.android)
         }
+
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -76,6 +95,7 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -86,19 +106,34 @@ android {
         buildConfig = true
     }
 
-    android {
-        buildTypes {
-            getByName("release") {
-                isMinifyEnabled = true
-                isShrinkResources = true
+    signingConfigs {
+        create("release") {
+            storeFile = file("keystore/taka-release.jks")
+            keyAlias = "taka-release"
 
-                signingConfig = signingConfigs.getByName("debug") // TODO: Change to production ready signing
+            storePassword = signingPassword(
+                envName = "TAKA_KEYSTORE_PASSWORD",
+                prompt = "Keystore password",
+            )
 
-                proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro",
-                )
-            }
+            keyPassword = signingPassword(
+                envName = "TAKA_KEY_PASSWORD",
+                prompt = "Key password",
+            )
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            signingConfig = signingConfigs.getByName("release")
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
