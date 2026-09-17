@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
@@ -10,28 +10,22 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-val isReleaseBuild = gradle.startParameter.taskNames.any {
-    it.contains("Release", ignoreCase = true)
-}
-
-fun signingPassword(
-    envName: String,
-    prompt: String,
-): String? {
-    System.getenv(envName)?.let { return it }
-
-    if (!isReleaseBuild) return null
-
-    return System.console()
-        ?.readPassword("$prompt: ")
-        ?.concatToString()
-        ?: error("$envName is not set and no interactive console is available")
-}
-
 kotlin {
-    androidTarget {
+    android {
+        namespace = "com.taka.runejournal.shared"
+
+        compileSdk {
+            version = release(
+                libs.versions.android.compileSdk.get().toInt()
+            )
+        }
+
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
+        }
+
+        androidResources {
+            enable = true
         }
     }
 
@@ -47,8 +41,6 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.core.splashscreen)
             implementation(compose.uiTooling)
             implementation(libs.datastore.preferences.android)
         }
@@ -81,65 +73,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(compose.preview)
         }
-    }
-}
-
-android {
-    namespace = "com.taka.runejournal"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        applicationId = "com.example.runejournal"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = rootProject.file("keystore/taka-release.jks")
-            keyAlias = "taka-release"
-
-            storePassword = signingPassword(
-                envName = "TAKA_KEYSTORE_PASSWORD",
-                prompt = "Keystore password",
-            )
-
-            keyPassword = signingPassword(
-                envName = "TAKA_KEY_PASSWORD",
-                prompt = "Key password",
-            )
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
-
-            signingConfig = signingConfigs.getByName("release")
-
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
