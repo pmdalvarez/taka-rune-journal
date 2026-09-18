@@ -34,7 +34,7 @@ fun JournalEntryEditor(
       value = notesValue,
       onValueChange = notesOnValueChange,
       label = stringResource(Res.string.new_journal_entry_textfield_label_notes),
-      minLines = 5,
+      minLines = 10,
     )
   }
 }
