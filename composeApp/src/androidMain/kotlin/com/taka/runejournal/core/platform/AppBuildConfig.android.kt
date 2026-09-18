@@ -1,15 +1,13 @@
 package com.taka.runejournal.core.platform
 
-import android.content.Context
-import android.content.pm.ApplicationInfo
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+actual object AppBuildConfig {
 
-actual object AppBuildConfig : KoinComponent {
+  private var debug: Boolean = false
 
-  private val context: Context by inject()
+  fun init(isDebug: Boolean) {
+    debug = isDebug
+  }
 
   actual val isDebug: Boolean
-    get() = context.applicationInfo.flags and
-        ApplicationInfo.FLAG_DEBUGGABLE != 0
+    get() = debug
 }

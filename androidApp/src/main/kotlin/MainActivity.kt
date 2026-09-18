@@ -4,14 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.taka.runejournal.core.di.initKoin
+import com.taka.runejournal.core.platform.AppBuildConfig
 import com.taka.runejournal.di.androidModule
 import org.koin.core.context.GlobalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppBuildConfig.init(BuildConfig.DEBUG)
         installSplashScreen()
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
