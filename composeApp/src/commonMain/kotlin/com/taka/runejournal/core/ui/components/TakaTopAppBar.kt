@@ -2,10 +2,8 @@ package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -46,6 +44,7 @@ import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
 import taka_rune_journal.composeapp.generated.resources.button_save
 import taka_rune_journal.composeapp.generated.resources.design_system_title
+import taka_rune_journal.composeapp.generated.resources.glossary_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
@@ -71,6 +70,7 @@ sealed class TakaTopBarAction {
     val onNewJournalEntryClick: () -> Unit,
     val onSettingsClick: () -> Unit,
     val onAboutClick: () -> Unit,
+    val onGlossaryClick: () -> Unit,
     val onDesignPlaygroundClick: () -> Unit
   ) : TakaTopBarAction()
 
@@ -188,6 +188,14 @@ fun TakaTopBar(
 
             DropdownMenuItem(
               text = { Text(stringResource(Res.string.about_title)) },
+              onClick = {
+                isMenuExpanded = false
+                action.onAboutClick()
+              },
+            )
+
+            DropdownMenuItem(
+              text = { Text(stringResource(Res.string.glossary_title)) },
               onClick = {
                 isMenuExpanded = false
                 action.onAboutClick()

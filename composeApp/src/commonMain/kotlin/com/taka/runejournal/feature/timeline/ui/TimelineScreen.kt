@@ -42,6 +42,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_section_title
 fun TimelineScreen(
     viewModel: TimelineViewModel,
     onAboutClick: () -> Unit,
+    onGlossaryClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onDesignPlaygroundClick: () -> Unit,
     onJournalEntryClick: (Long) -> Unit,
@@ -75,6 +76,7 @@ fun TimelineScreen(
                     onNewJournalEntryClick = onNewJournalEntryClick,
                     onSettingsClick = onSettingsClick,
                     onAboutClick = onAboutClick,
+                    onGlossaryClick = onGlossaryClick,
                     onDesignPlaygroundClick = onDesignPlaygroundClick
                 ),
             )

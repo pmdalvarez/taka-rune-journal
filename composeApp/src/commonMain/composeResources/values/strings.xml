@@ -22,8 +22,12 @@
     <string name="settings_reversible_runes_description">Allow runes to appear upside down, adding alternative meanings.</string>
     <string name="settings_save_error">Settings could not be saved. Please try again.</string>
     <string name="settings_save_error_blank_name">Please enter a name</string>
+
     <string name="about_title">About Taka</string>
     <string name="about_what_is_taka">What is Taka?</string>
+
+    <string name="glossary_title">Rune Glossary</string>
+
     <string name="design_system_title">Design System</string>
 
     <string name="timeline_welcome_slide_intro_title">Welcome to Taka</string>

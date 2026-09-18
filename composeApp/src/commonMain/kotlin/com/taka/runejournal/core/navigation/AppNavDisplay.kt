@@ -47,6 +47,9 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     onAboutClick = {
                         backStack.add(AboutRoute)
                     },
+                    onGlossaryClick = {
+                        backStack.add(AboutRoute) // TODO Update
+                    },
                     onSettingsClick = {
                         backStack.add(SettingsRoute)
                     },
