@@ -138,7 +138,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     modifier = Modifier.padding(top = TakaContentSpacing),
     value = value,
     onValueChange = onValueChange,
-    minLines = 5,
+    minLines = 10,
     label = stringResource(Res.string.reading_notes_texfield_label),
   )
 }
