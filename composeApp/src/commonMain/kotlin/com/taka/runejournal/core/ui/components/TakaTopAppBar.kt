@@ -198,7 +198,7 @@ fun TakaTopBar(
               text = { Text(stringResource(Res.string.glossary_title)) },
               onClick = {
                 isMenuExpanded = false
-                action.onAboutClick()
+                action.onGlossaryClick()
               },
             )
 

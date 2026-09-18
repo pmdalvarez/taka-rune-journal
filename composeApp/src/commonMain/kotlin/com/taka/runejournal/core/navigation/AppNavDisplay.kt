@@ -1,5 +1,6 @@
 package com.taka.runejournal.core.navigation
 
+import GlossaryScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -157,7 +158,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
             }
 
             entry<GlossaryRoute> {
-                AboutScreen(
+                GlossaryScreen(
                     onBackClick = {
                         backStack.removeLastOrNull()
                     },
