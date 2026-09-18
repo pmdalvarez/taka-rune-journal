@@ -1,7 +1,6 @@
 package com.taka.runejournal.feature.reading.ui
 
 import DeleteTimelineEntryDialog
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
@@ -108,7 +108,13 @@ fun ReadingInterpretationScreen(
                   pagerState.animateScrollToPage(index)
                 }
               },
-              text = { Text(stringResource(tab.label)) },
+              text = {
+                Text(
+                  text = stringResource(tab.label),
+                  maxLines = 1,
+                  overflow  = TextOverflow.Ellipsis,
+                )
+              },
             )
           }
         }
@@ -116,8 +122,7 @@ fun ReadingInterpretationScreen(
         HorizontalPager(
           state = pagerState,
           modifier = Modifier
-            .weight(1f)
-            .verticalScroll(rememberScrollState()),
+            .weight(1f),
         ) { page ->
           val tab = uiState.tabs[page]
           when (tab) {

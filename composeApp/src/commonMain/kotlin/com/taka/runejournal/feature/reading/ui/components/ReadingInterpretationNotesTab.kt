@@ -14,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.taka.runejournal.core.ui.components.FadingScrollColumn
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaTextAction
 import com.taka.runejournal.core.ui.components.TakaTextField
@@ -38,28 +39,30 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
     modifier = Modifier
       .fillMaxHeight()
   ) {
-    when {
-      isEditing -> NotesTabEditMode(
-        value = notesInput,
-        onValueChange = { notesInput = it },
-        onCancelClicked = {
-          notesInput = notes.orEmpty()
-          isEditing = false
-        },
-        onSaveClicked = {
-          onSaveClicked(notesInput)
-          notesInput = notes.orEmpty()
-          isEditing = false
-        }
-      )
-      !notes.isNullOrBlank() -> {
-        NotesTabViewMode(
-          notes = notes,
-          onEditClicked = { isEditing = true }
+    FadingScrollColumn {
+      when {
+        isEditing -> NotesTabEditMode(
+          value = notesInput,
+          onValueChange = { notesInput = it },
+          onCancelClicked = {
+            notesInput = notes.orEmpty()
+            isEditing = false
+          },
+          onSaveClicked = {
+            onSaveClicked(notesInput)
+            notesInput = notes.orEmpty()
+            isEditing = false
+          }
         )
+        !notes.isNullOrBlank() -> {
+          NotesTabViewMode(
+            notes = notes,
+            onEditClicked = { isEditing = true }
+          )
+        }
+        else ->
+          NotesTabViewModeEmptyNotes(onEditClicked = { isEditing = true })
       }
-      else ->
-        NotesTabViewModeEmptyNotes(onEditClicked = { isEditing = true })
     }
   }
 }
