@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.taka.runejournal.core.ui.components.FadingScrollColumn
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
@@ -78,13 +79,13 @@ fun WelcomeSection(
     }
   }
 
-  Column(
-    modifier = Modifier
-      .fillMaxSize()
-      .imePadding(), // ensures keyboard doesn't hide enter name field
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Top,
-  ) {
+    Column (
+      modifier = Modifier
+        .fillMaxSize()
+        .imePadding(), // ensures keyboard doesn't hide enter name field
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Top,
+    ) {
     TakaCard(
       modifier = modifier.weight(1f)
     ) {
@@ -114,10 +115,7 @@ fun IntroSlide(
   onDisplayNameEntered: (String) -> Unit = {},
   onContinueClick: () -> Unit = {}
 ) {
-  Column(
-    modifier = Modifier
-      .fillMaxSize()
-      .verticalScroll(rememberScrollState()), // ensures keyboard doesn't hide name field
+  FadingScrollColumn(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -164,8 +162,7 @@ fun IntroSlide(
 fun RunesSlide(
   onContinueClick: () -> Unit = {}
 ) {
-  Column(
-    modifier = Modifier.fillMaxSize(),
+  FadingScrollColumn(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -207,8 +204,7 @@ fun RunesSlide(
 fun ReadingsSlide(
   onNewReadingClick: () -> Unit = {}
 ) {
-  Column(
-    modifier = Modifier.fillMaxSize(),
+  FadingScrollColumn(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
