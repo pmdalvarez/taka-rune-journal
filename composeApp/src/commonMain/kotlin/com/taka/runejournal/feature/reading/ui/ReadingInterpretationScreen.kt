@@ -1,12 +1,15 @@
 package com.taka.runejournal.feature.reading.ui
 
 import DeleteTimelineEntryDialog
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.SnackbarHostState
@@ -112,7 +115,9 @@ fun ReadingInterpretationScreen(
         Spacer(modifier = Modifier.height(TakaContentSpacing))
         HorizontalPager(
           state = pagerState,
-          modifier = Modifier.weight(1f),
+          modifier = Modifier
+            .weight(1f)
+            .verticalScroll(rememberScrollState()),
         ) { page ->
           val tab = uiState.tabs[page]
           when (tab) {
