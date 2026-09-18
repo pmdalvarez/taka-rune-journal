@@ -28,9 +28,11 @@ data object NewReadingFlowRoute : AppRoute
 @Serializable
 data object SettingsRoute : AppRoute
 
-
 @Serializable
 data object AboutRoute : AppRoute
+
+@Serializable
+data object GlossaryRoute : AppRoute
 
 @Serializable
 data object DesignSystemRoute : AppRoute

@@ -48,7 +48,7 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                         backStack.add(AboutRoute)
                     },
                     onGlossaryClick = {
-                        backStack.add(AboutRoute) // TODO Update
+                        backStack.add(GlossaryRoute)
                     },
                     onSettingsClick = {
                         backStack.add(SettingsRoute)
@@ -148,6 +148,15 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
             }
 
             entry<AboutRoute> {
+                AboutScreen(
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<GlossaryRoute> {
                 AboutScreen(
                     onBackClick = {
                         backStack.removeLastOrNull()
