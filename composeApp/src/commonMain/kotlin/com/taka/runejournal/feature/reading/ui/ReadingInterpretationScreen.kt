@@ -84,7 +84,7 @@ fun ReadingInterpretationScreen(
     ) {
       if (!uiState.question.isNullOrBlank()) {
         ReadingInterpretationContextHeader(
-          question = uiState.question
+          question = uiState.question!!
         )
       }
       if (uiState.tabs.isNotEmpty()) {

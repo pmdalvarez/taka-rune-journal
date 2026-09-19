@@ -238,7 +238,7 @@ fun NewReadingDrawScreen(
             contentAlignment = Alignment.TopCenter,
           ) {
             ReadingInterpretationContextHeader(
-              question = uiState.question
+              question = uiState.question!!
             )
           }
         }
