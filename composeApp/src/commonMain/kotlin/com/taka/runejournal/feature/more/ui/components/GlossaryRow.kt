@@ -1,6 +1,5 @@
 package com.taka.runejournal.feature.more.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,13 +21,17 @@ import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
-import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.generalKeywords
+import com.taka.runejournal.core.ui.origin
+import com.taka.runejournal.core.ui.theme.TakaCardSpacing
+import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.ic_chevron_right
 
 @Preview
 @Composable
@@ -49,8 +52,7 @@ fun GlossaryRow(
         painter = painterResource(rune.drawableVector()),
         contentDescription = rune.displayName,
         modifier = Modifier
-          .padding(top = 1.dp)
-          .size(width = 48.dp, height = 72.dp),
+          .size(width = 32.dp, height = 48.dp),
         tint = MaterialTheme.colorScheme.onSurfaceVariant,
       )
       Spacer(modifier = Modifier.width(TakaSpaceMd))
@@ -71,6 +73,23 @@ fun GlossaryRow(
           color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
       }
+
+      Spacer(modifier = Modifier.width(TakaSpaceMd))
+
+      Icon(
+        painter = painterResource(Res.drawable.ic_chevron_right),
+        contentDescription = null,
+        modifier = Modifier
+          .align(Alignment.CenterVertically)
+          .size(TakaIconButtonSize),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant
+      )
     }
+    Text(
+      modifier = Modifier.padding(top = TakaCardSpacing),
+      text = stringResource(rune.origin()),
+      style = MaterialTheme.typography.bodySmall,
+      color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
   }
 }

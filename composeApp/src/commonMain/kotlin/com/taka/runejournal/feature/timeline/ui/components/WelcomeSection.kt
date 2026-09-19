@@ -42,7 +42,6 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
