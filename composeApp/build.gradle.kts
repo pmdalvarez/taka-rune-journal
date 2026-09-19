@@ -63,7 +63,6 @@ kotlin {
             implementation(libs.androidx.sqlite.bundled)
             implementation(libs.jetbrains.navigation3.ui)
             implementation(libs.jetbrains.navigation3.lifecycle.viewmodel)
-            implementation("org.jetbrains.compose.ui:ui-backhandler:<your-compose-multiplatform-version>")
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
