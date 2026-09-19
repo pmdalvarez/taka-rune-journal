@@ -91,8 +91,8 @@ private fun reversedInterpretation(rune: Rune): StringResource = when (rune) {
   Rune.KENAZ -> Res.string.keywords_kenaz_reversed
   //  Rune.GEBO not reversible
   Rune.WUNJO -> Res.string.keywords_wunjo_reversed
-  Rune.HAGALAZ -> Res.string.keywords_hagalaz_upright // reuse upright text since same meaning
-  Rune.NAUTHIZ -> Res.string.keywords_nauthiz_upright // reuse upright text since same meaning
+  //  Rune.HAGALAZ not reversible
+  //  Rune.NAUTHIZ not reversible
   //  Rune.ISA not reversible
   //  Rune.JERA not reversible
   //  Rune.EIHWAZ not reversible
@@ -113,16 +113,7 @@ private fun reversedInterpretation(rune: Rune): StringResource = when (rune) {
 // fetches supplemental keywords to the general interpretation (for certain rune/orientation/category combinations) if found
 fun DrawnRune.supplementalKeywords(readingTopic: ReadingTopic): StringResource? {
   if (readingTopic == ReadingTopic.GENERAL) return null
-
-  // Hagalaz and Nauthiz supplemental keywords is the same for both upright and reversed,
-  // since we already mentioned in the general interpretation that they visually look different reversed but still considered to have the same meaning.
-  // Below is a temporary workaround since @string/other_key currently not supported in KMP.
-  // Will be replaced by string references in future
-  val key = when {
-    orientation == RuneOrientation.REVERSED && rune == Rune.HAGALAZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
-    orientation == RuneOrientation.REVERSED && rune == Rune.NAUTHIZ-> "keywords_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
-    else -> "keywords_${rune.key}_${orientation.key}_${readingTopic.key}"
-  }
+  val key = "keywords_${rune.key}_${orientation.key}_${readingTopic.key}"
   return Res.allStringResources[key]
 }
 

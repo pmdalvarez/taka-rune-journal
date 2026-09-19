@@ -51,11 +51,13 @@ enum class Rune(
         key = "hagalaz",
         glyph = "ᚺ",
         displayName = "Hagalaz",
+        isReversible = false
     ),
     NAUTHIZ(
         key = "nauthiz",
         glyph = "ᚾ",
         displayName = "Nauthiz",
+        isReversible = false
     ),
     ISA(
         key = "isa",

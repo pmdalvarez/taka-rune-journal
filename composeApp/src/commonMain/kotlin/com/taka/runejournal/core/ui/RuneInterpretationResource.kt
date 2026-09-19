@@ -20,7 +20,6 @@ import taka_rune_journal.composeapp.generated.resources.interpretation_eihwaz_up
 import taka_rune_journal.composeapp.generated.resources.interpretation_fehu_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_fehu_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_gebo_upright
-import taka_rune_journal.composeapp.generated.resources.interpretation_hagalaz_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_hagalaz_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_ingwaz_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_isa_upright
@@ -31,7 +30,6 @@ import taka_rune_journal.composeapp.generated.resources.interpretation_laguz_rev
 import taka_rune_journal.composeapp.generated.resources.interpretation_laguz_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_mannaz_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_mannaz_upright
-import taka_rune_journal.composeapp.generated.resources.interpretation_nauthiz_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_nauthiz_upright
 import taka_rune_journal.composeapp.generated.resources.interpretation_othala_reversed
 import taka_rune_journal.composeapp.generated.resources.interpretation_othala_upright
@@ -146,8 +144,8 @@ private fun reversedInterpretation(rune: Rune): StringResource = when (rune) {
   Rune.KENAZ -> Res.string.interpretation_kenaz_reversed
   //  Rune.GEBO not reversible
   Rune.WUNJO -> Res.string.interpretation_wunjo_reversed
-  Rune.HAGALAZ -> Res.string.interpretation_hagalaz_reversed
-  Rune.NAUTHIZ -> Res.string.interpretation_nauthiz_reversed
+  //  Rune.HAGALAZ not reversible
+  //  Rune.NAUTHIZ not reversible
   //  Rune.ISA not reversible
   //  Rune.JERA not reversible
   //  Rune.EIHWAZ not reversible
@@ -168,15 +166,6 @@ private fun reversedInterpretation(rune: Rune): StringResource = when (rune) {
 // fetches contain supplemental text to the general interpretation (for certain rune/orientation/category combinations) if found
 fun DrawnRune.supplementalInterpretation(readingTopic: ReadingTopic): StringResource? {
   if (readingTopic == ReadingTopic.GENERAL) return null
-  // Hagalaz and Nauthiz supplemental interpretation is the same for both upright and reversed,
-  // since we already mentioned in the general interpretation that they visually look different reversed but still considered to have the same meaning.
-  // Below is a temporary workaround since @string/other_key currently not supported in KMP.
-  // Will be replaced by string references in future, For example:
-  // <string name="interpretation_hagalaz_reversed_relationships">@string/interpretation_hagalaz_upright_relationships</string>
-  val key = when {
-    orientation == RuneOrientation.REVERSED && rune == Rune.HAGALAZ-> "interpretation_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
-    orientation == RuneOrientation.REVERSED && rune == Rune.NAUTHIZ-> "interpretation_${rune.key}_${RuneOrientation.UPRIGHT.key}_${readingTopic.key}"
-    else -> "interpretation_${rune.key}_${orientation.key}_${readingTopic.key}"
-  }
+  val key = "interpretation_${rune.key}_${orientation.key}_${readingTopic.key}"
   return Res.allStringResources[key]
 }
