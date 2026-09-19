@@ -20,6 +20,7 @@ import taka_rune_journal.composeapp.generated.resources.glossary_title
 @Composable
 fun GlossaryScreen(
   onBackClick: () -> Unit = {},
+  onRuneClick: (Rune) -> Unit = {},
   modifier: Modifier = Modifier
 ) {
   TakaScaffold(
@@ -41,7 +42,7 @@ fun GlossaryScreen(
       for (rune in Rune.entries) {
         GlossaryRow(
           rune = rune,
-          onRuneClick = {}
+          onRuneClick = onRuneClick
         )
       }
     }

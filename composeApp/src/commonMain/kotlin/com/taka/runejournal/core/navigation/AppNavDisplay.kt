@@ -9,6 +9,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.taka.runejournal.core.ui.DesignPlaygroundScreen
+import com.taka.runejournal.feature.more.ui.RuneDetailScreen
 import com.taka.runejournal.feature.more.ui.AboutScreen
 import com.taka.runejournal.feature.reading.navigation.NewReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
@@ -159,6 +160,21 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
 
             entry<GlossaryRoute> {
                 GlossaryScreen(
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    onRuneClick = { rune ->
+                        backStack.add(
+                            RuneDetailRoute(rune)
+                        )
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<RuneDetailRoute> { route ->
+                RuneDetailScreen(
+                    rune = route.rune,
                     onBackClick = {
                         backStack.removeLastOrNull()
                     },
