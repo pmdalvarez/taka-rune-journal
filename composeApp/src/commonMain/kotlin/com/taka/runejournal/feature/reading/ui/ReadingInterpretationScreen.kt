@@ -1,15 +1,15 @@
 package com.taka.runejournal.feature.reading.ui
 
 import DeleteTimelineEntryDialog
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
@@ -21,7 +21,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
@@ -86,38 +88,15 @@ fun ReadingInterpretationScreen(
         )
       }
       if (uiState.tabs.isNotEmpty()) {
-        PrimaryTabRow(
+        AdaptiveReadingTabRow(
+          tabs = uiState.tabs,
           selectedTabIndex = pagerState.currentPage,
-          containerColor = MaterialTheme.colorScheme.background,
-          divider = {},
-          // SecondaryIndicator needed so that indicator takes up full length of tab instead of the text
-          indicator = {
-              TabRowDefaults.SecondaryIndicator(
-                modifier =  Modifier.tabIndicatorOffset(pagerState.currentPage, matchContentSize = false),
-                color = MaterialTheme.colorScheme.primary,
-              )
+          onTabSelected = { index ->
+            coroutineScope.launch {
+              pagerState.animateScrollToPage(index)
+            }
           }
-        ) {
-          uiState.tabs.forEachIndexed { index, tab ->
-            Tab(
-              selected = pagerState.currentPage == index,
-              selectedContentColor = MaterialTheme.colorScheme.primary,
-              unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-              onClick = {
-                coroutineScope.launch {
-                  pagerState.animateScrollToPage(index)
-                }
-              },
-              text = {
-                Text(
-                  text = stringResource(tab.label),
-                  maxLines = 1,
-                  overflow  = TextOverflow.Ellipsis,
-                )
-              },
-            )
-          }
-        }
+        )
         Spacer(modifier = Modifier.height(TakaContentSpacing))
         HorizontalPager(
           state = pagerState,
@@ -154,3 +133,84 @@ fun ReadingInterpretationScreen(
   }
 }
 
+@Composable
+private fun AdaptiveReadingTabRow(
+  tabs: List<ReadingInterpretationTab>,
+  selectedTabIndex: Int,
+  onTabSelected: (Int) -> Unit,
+) {
+  BoxWithConstraints {
+    val maxWidth = maxWidth
+    val textMeasurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+    val tabWidth = maxWidth / tabs.size
+
+    var useScrollableTabs = false
+
+    for (tab in tabs) {
+      val label = stringResource(tab.label)
+
+      val textWidth = with(density) {
+        textMeasurer.measure(
+          text = label,
+          style = MaterialTheme.typography.titleSmall,
+          maxLines = 1,
+        ).size.width.toDp()
+      }
+
+      if (textWidth + 32.dp > tabWidth) {
+        useScrollableTabs = true
+      }
+    }
+
+    val tabContent: @Composable () -> Unit = {
+      tabs.forEachIndexed { index, tab ->
+        Tab(
+          selected = selectedTabIndex == index,
+          selectedContentColor = MaterialTheme.colorScheme.primary,
+          unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+          onClick = { onTabSelected(index) },
+          text = {
+            Text(
+              text = stringResource(tab.label),
+              maxLines = 1,
+            )
+          },
+        )
+      }
+    }
+
+    if (useScrollableTabs) {
+      PrimaryScrollableTabRow(
+        selectedTabIndex = selectedTabIndex,
+        containerColor = MaterialTheme.colorScheme.background,
+        edgePadding = 0.dp,
+        divider = {},
+        // SecondaryIndicator needed so that indicator takes up full length of tab instead of the text
+        indicator = {
+          TabRowDefaults.SecondaryIndicator(
+            modifier =  Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = false),
+            color = MaterialTheme.colorScheme.primary,
+          )
+        }
+      ) {
+        tabContent()
+      }
+    } else {
+      PrimaryTabRow(
+        selectedTabIndex = selectedTabIndex,
+        containerColor = MaterialTheme.colorScheme.background,
+        divider = {},
+        // SecondaryIndicator needed so that indicator takes up full length of tab instead of the text
+        indicator = {
+          TabRowDefaults.SecondaryIndicator(
+            modifier =  Modifier.tabIndicatorOffset(selectedTabIndex, matchContentSize = false),
+            color = MaterialTheme.colorScheme.primary,
+          )
+        }
+      ) {
+        tabContent()
+      }
+    }
+  }
+}
