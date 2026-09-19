@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +23,7 @@ import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.drawable
+import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.generalKeywords
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
@@ -42,12 +45,14 @@ fun GlossaryRow(
       modifier = Modifier.fillMaxWidth(),
       verticalAlignment = Alignment.Top,
     ) {
-      Image(
-        painter = painterResource(rune.drawable()),
+      Icon(
+        painter = painterResource(rune.drawableVector()),
         contentDescription = rune.displayName,
-        modifier = Modifier.size(width = 72.dp, height = 108.dp)
+        modifier = Modifier
+          .padding(top = 1.dp)
+          .size(width = 48.dp, height = 72.dp),
+        tint = MaterialTheme.colorScheme.onSurfaceVariant,
       )
-
       Spacer(modifier = Modifier.width(TakaSpaceMd))
 
       Column(

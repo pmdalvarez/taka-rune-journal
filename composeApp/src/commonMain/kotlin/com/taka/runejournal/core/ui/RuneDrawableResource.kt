@@ -59,3 +59,31 @@ fun Rune.glowingDrawable(): DrawableResource =
     Rune.DAGAZ -> Res.drawable.rune_dagaz_glowing
     Rune.OTHALA -> Res.drawable.rune_othala_glowing
   }
+
+fun Rune.drawableVector(): DrawableResource =
+  when (this) {
+    Rune.FEHU -> Res.drawable.rune_fehu_vector
+    Rune.URUZ -> Res.drawable.rune_uruz_vector
+    Rune.THURISAZ -> Res.drawable.rune_thurisaz_vector
+    Rune.ANSUZ -> Res.drawable.rune_ansuz_vector
+    Rune.RAIDHO -> Res.drawable.rune_raidho_vector
+    Rune.KENAZ -> Res.drawable.rune_kenaz_vector
+    Rune.GEBO -> Res.drawable.rune_gebo_vector
+    Rune.WUNJO -> Res.drawable.rune_wunjo_vector
+    Rune.HAGALAZ -> Res.drawable.rune_hagalaz_vector
+    Rune.NAUTHIZ -> Res.drawable.rune_nauthiz_vector
+    Rune.ISA -> Res.drawable.rune_isa_vector
+    Rune.JERA -> Res.drawable.rune_jera_vector
+    Rune.EIHWAZ -> Res.drawable.rune_eihwaz_vector
+    Rune.PERTHRO -> Res.drawable.rune_perthro_vector
+    Rune.ALGIZ -> Res.drawable.rune_algiz_vector
+    Rune.SOWILO -> Res.drawable.rune_sowilo_vector
+    Rune.TIWAZ -> Res.drawable.rune_tiwaz_vector
+    Rune.BERKANO -> Res.drawable.rune_berkano_vector
+    Rune.EHWAZ -> Res.drawable.rune_ehwaz_vector
+    Rune.MANNAZ -> Res.drawable.rune_mannaz_vector
+    Rune.LAGUZ -> Res.drawable.rune_laguz_vector
+    Rune.INGWAZ -> Res.drawable.rune_ingwaz_vector
+    Rune.DAGAZ -> Res.drawable.rune_dagaz_vector
+    Rune.OTHALA -> Res.drawable.rune_othala_vector
+  }
