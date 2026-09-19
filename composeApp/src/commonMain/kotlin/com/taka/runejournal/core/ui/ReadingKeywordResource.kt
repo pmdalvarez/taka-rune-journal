@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.reading.ui
+package com.taka.runejournal.core.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic

@@ -22,7 +22,7 @@ import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.feature.reading.ui.origin
-import com.taka.runejournal.feature.reading.ui.toDotSeparatedKeywords
+import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

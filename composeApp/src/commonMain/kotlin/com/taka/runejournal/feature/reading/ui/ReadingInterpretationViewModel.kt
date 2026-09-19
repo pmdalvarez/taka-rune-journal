@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.generalKeywords
+import com.taka.runejournal.core.ui.supplementalKeywords
 import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository

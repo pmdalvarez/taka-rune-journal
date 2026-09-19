@@ -9,10 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.taka.runejournal.core.domain.model.Rune
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
+import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.feature.more.ui.GlossaryRow
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.glossary_title
@@ -37,14 +40,14 @@ fun GlossaryScreen(
       modifier = contentModifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState()),
-      verticalArrangement = Arrangement.spacedBy(TakaContentSpacing),
+      verticalArrangement = Arrangement.spacedBy(TakaCardSpacing),
     ) {
-      Text(
-        modifier = Modifier
-          .align(Alignment.Start),
-        text = stringResource(Res.string.glossary_title),
-        style = MaterialTheme.typography.titleMedium
-      )
+      for (rune in Rune.entries) {
+        GlossaryRow(
+          rune = rune,
+          onRuneClick = {}
+        )
+      }
     }
   }
 }
