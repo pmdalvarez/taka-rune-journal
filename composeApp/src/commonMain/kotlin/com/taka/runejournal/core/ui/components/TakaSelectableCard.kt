@@ -12,6 +12,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
@@ -23,6 +24,7 @@ fun TakaSelectableCard(
   onClick: () -> Unit,
   modifier: Modifier = Modifier,
   verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+  horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
   shape: Shape = MaterialTheme.shapes.small,
   content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -54,6 +56,7 @@ fun TakaSelectableCard(
     Column(
       modifier = Modifier.fillMaxWidth().padding(TakaCardPadding),
       verticalArrangement = verticalArrangement,
+      horizontalAlignment = horizontalAlignment,
     ) {
       content()
     }

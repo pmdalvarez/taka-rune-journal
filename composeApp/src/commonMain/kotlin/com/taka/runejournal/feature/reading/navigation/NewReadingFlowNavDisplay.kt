@@ -40,7 +40,7 @@ fun NewReadingFlowNavDisplay(
       entry<NewReadingStartRoute> {
         NewReadingStartScreen(
           viewModel = viewModel,
-          onBackClick = {
+          onCancelReading = {
             onExitReadingFlow()
           },
           onContinueClick = {
