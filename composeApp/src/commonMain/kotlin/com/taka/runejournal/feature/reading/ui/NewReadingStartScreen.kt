@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -52,6 +50,7 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
@@ -62,6 +61,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_choose_spread
 import taka_rune_journal.composeapp.generated.resources.reading_choose_topic
 import taka_rune_journal.composeapp.generated.resources.reading_question_description
 import taka_rune_journal.composeapp.generated.resources.reading_question_textfield_label
+import taka_rune_journal.composeapp.generated.resources.reading_question_tip
 import taka_rune_journal.composeapp.generated.resources.reading_question_title
 import taka_rune_journal.composeapp.generated.resources.reading_start_topbar_title
 
@@ -310,6 +310,13 @@ fun EnterQuestionPage(
       singleLine = true,
       modifier = Modifier.padding(top = TakaContentSpacing)
     )
+    Text(
+      modifier = Modifier.padding(top = TakaSpaceSm),
+      text =  stringResource(Res.string.reading_question_tip),
+      style = MaterialTheme.typography.labelMedium,
+      color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+
     TakaButton(
       onClick = { onDrawRunesClicked(questionInput) },
       modifier = Modifier
