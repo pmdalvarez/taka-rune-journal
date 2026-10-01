@@ -3,13 +3,16 @@ package com.taka.runejournal.feature.timeline.ui
 import DeleteTimelineEntryDialog
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -55,6 +58,7 @@ fun TimelineScreen(
     val pagingItems = viewModel.timelineItems.collectAsLazyPagingItems()
     val snackbarHostState = remember { SnackbarHostState() }
     val focusManager = LocalFocusManager.current
+    val showWelcomeSection = pagingItems.itemCount == 0
 
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
@@ -70,19 +74,25 @@ fun TimelineScreen(
         modifier = modifier,
         snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
         topBar = {
-            TakaTopBar(
-                action = TakaTopBarAction.TimelineActions(
-                    onNewReadingClick = onNewReadingClick,
-                    onNewJournalEntryClick = onNewJournalEntryClick,
-                    onSettingsClick = onSettingsClick,
-                    onAboutClick = onAboutClick,
-                    onGlossaryClick = onGlossaryClick,
-                    onDesignPlaygroundClick = onDesignPlaygroundClick
-                ),
-            )
+            if (showWelcomeSection) {
+                Spacer(
+                    modifier = Modifier.height(TopAppBarDefaults.TopAppBarExpandedHeight)
+                )
+            } else {
+                TakaTopBar(
+                    action = TakaTopBarAction.TimelineActions(
+                        onNewReadingClick = onNewReadingClick,
+                        onNewJournalEntryClick = onNewJournalEntryClick,
+                        onSettingsClick = onSettingsClick,
+                        onAboutClick = onAboutClick,
+                        onGlossaryClick = onGlossaryClick,
+                        onDesignPlaygroundClick = onDesignPlaygroundClick
+                    )
+                )
+            }
         }
     ) { contentModifier ->
-        if (pagingItems.itemCount == 0) {
+        if (showWelcomeSection) {
             WelcomeSection(
                 onDisplayNameEntered = viewModel::setDisplayName,
                 onNewReadingClick = onNewReadingClick,
