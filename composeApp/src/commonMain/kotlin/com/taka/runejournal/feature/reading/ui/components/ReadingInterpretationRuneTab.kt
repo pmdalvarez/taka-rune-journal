@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,6 +24,8 @@ import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.core.ui.origin
+import com.taka.runejournal.core.ui.theme.DarkThemeRuneColorFilter
+import com.taka.runejournal.core.ui.theme.isAppInDarkTheme
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -71,10 +75,12 @@ fun ReadingInterpretationRuneTab(
         .size(width = 96.dp, height = 144.dp)
         .align(Alignment.CenterHorizontally)
         .then(if (drawnRune.orientation == RuneOrientation.REVERSED) Modifier.rotate(180f) else Modifier)
+      val colorFilter = if (isAppInDarkTheme()) { DarkThemeRuneColorFilter } else null
       Image(
         painter = painterResource(drawnRune.rune.drawable()),
         contentDescription =drawnRuneName,
         contentScale = ContentScale.Fit,
+        colorFilter = colorFilter,
         modifier = imageModifer
       )
       Text(

@@ -10,12 +10,14 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigationevent.NavigationEventInfo
 import androidx.navigationevent.compose.NavigationBackHandler
 import androidx.navigationevent.compose.rememberNavigationEventState
+import com.taka.runejournal.core.domain.model.ThemeMode
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -39,6 +42,8 @@ import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.label
+import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceLg
 import com.taka.runejournal.core.ui.theme.TakaSpaceXs
@@ -47,6 +52,8 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.settings_reversible_runes_description
 import taka_rune_journal.composeapp.generated.resources.settings_reversible_runes_title
+import taka_rune_journal.composeapp.generated.resources.settings_theme
+import taka_rune_journal.composeapp.generated.resources.settings_theme_description
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
 
@@ -100,9 +107,11 @@ fun SettingsScreen(
     SettingsContent(
       displayName = nameInput,
       reversedRunesEnabled = uiState.reversedRunesEnabled,
+      themeMode = uiState.themeMode,
       onDisplayNameChange = { nameInput = it },
       onSaveName = ::onSaveName,
       onReversedRunesEnabledChange = viewModel::setReversedRunesEnabled,
+      onThemeModeChange = viewModel::setThemeMode,
       modifier = contentModifier
     )
   }
@@ -113,9 +122,11 @@ fun SettingsScreen(
 private fun SettingsContent(
   displayName: String = "",
   reversedRunesEnabled: Boolean = true,
+  themeMode: ThemeMode = ThemeMode.SYSTEM,
   onDisplayNameChange: (String) -> Unit = {},
   onSaveName: () -> Unit = {},
   onReversedRunesEnabledChange: (Boolean) -> Unit = {},
+  onThemeModeChange: (ThemeMode) -> Unit = {},
   modifier: Modifier = Modifier,
 ) {
   val focusManager = LocalFocusManager.current
@@ -181,6 +192,43 @@ private fun SettingsContent(
         onCheckedChange = onReversedRunesEnabledChange,
         modifier = Modifier.padding(start = TakaSpaceLg),
       )
+    }
+
+    HorizontalDivider(
+      color = MaterialTheme.colorScheme.outlineVariant,
+    )
+
+    Column(
+      modifier = Modifier.fillMaxWidth(),
+    ) {
+      Text(
+        text = stringResource(Res.string.settings_theme),
+        style = MaterialTheme.typography.titleMedium
+      )
+      Text(
+        modifier = Modifier.padding(top = TakaSpaceXs),
+        text = stringResource(Res.string.settings_theme_description),
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+      SingleChoiceSegmentedButtonRow(
+        modifier = Modifier
+          .align(Alignment.CenterHorizontally)
+          .padding(top = TakaContentSpacing),
+        ) {
+        ThemeMode.entries.forEachIndexed { index, buttonThemeMode ->
+          SegmentedButton(
+            selected = buttonThemeMode == themeMode,
+            onClick = { onThemeModeChange(buttonThemeMode) },
+            shape = SegmentedButtonDefaults.itemShape(
+              index = index,
+              count = ThemeMode.entries.size
+            )
+          ) {
+            Text(text = stringResource(buttonThemeMode.label()))
+          }
+        }
+      }
     }
   }
 }

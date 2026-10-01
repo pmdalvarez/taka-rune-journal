@@ -82,17 +82,14 @@ fun WelcomeSection(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Top,
     ) {
-    TakaCard(
-      modifier = modifier.weight(1f)
-    ) {
-      HorizontalPager(
-        state = pagerState,
-      ) { page ->
-        when (page) {
-          0 -> IntroSlide(onDisplayNameEntered, onContinueClick)
-          1 -> RunesSlide(onContinueClick)
-          2 -> ReadingsSlide(onNewReadingClick)
-        }
+    HorizontalPager(
+      modifier = modifier.weight(1f),
+      state = pagerState
+    ) { page ->
+      when (page) {
+        0 -> IntroSlide(onDisplayNameEntered, onContinueClick)
+        1 -> RunesSlide(onContinueClick)
+        2 -> ReadingsSlide(onNewReadingClick)
       }
     }
     // TODO - figure out where the spacing between card and indicator is coming from, because it isn't visible in preview

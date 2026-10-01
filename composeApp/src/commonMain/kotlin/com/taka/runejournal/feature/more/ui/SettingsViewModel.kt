@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.more.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.taka.runejournal.core.domain.model.ThemeMode
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.domain.repository.SettingsRepository
 import kotlinx.coroutines.CancellationException
@@ -22,10 +23,12 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
     combine(
       repository.displayName,
       repository.reversedRunesEnabled,
-    ) { displayName, reversedRunesEnabled ->
+      repository.themeMode
+    ) { displayName, reversedRunesEnabled, themeMode ->
       SettingsUiState(
         displayName = displayName,
         reversedRunesEnabled = reversedRunesEnabled,
+        themeMode = themeMode,
       )
     }.stateIn(
       scope = viewModelScope,
@@ -56,6 +59,18 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
         } else {
           repository.setDisplayName(displayName)
         }
+      } catch (e: CancellationException) {
+        throw e
+      } catch (_: Exception) {
+        _uiEvent.emit(UiEvent.ShowError(Res.string.settings_save_error))
+      }
+    }
+  }
+
+  fun setThemeMode(themeMode: ThemeMode) {
+    viewModelScope.launch {
+      try {
+        repository.setThemeMode(themeMode)
       } catch (e: CancellationException) {
         throw e
       } catch (_: Exception) {

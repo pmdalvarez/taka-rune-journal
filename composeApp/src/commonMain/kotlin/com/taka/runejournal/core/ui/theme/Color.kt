@@ -22,7 +22,9 @@ val Graphite = Color(0xFF444444)
 
 // Dark grays / black
 val Charcoal = Color(0xFF2F2F2F)
+val Iron = Color(0xFF282828)
 val Coal = Color(0xFF1F1F1F)
+val Ebony = Color(0xFF181818)
 val Ink = Color(0xFF111111)
 val Black = Color(0xFF000000)
 
@@ -32,7 +34,18 @@ val TakaSlateDark = Color(0xFF28343A)
 val TakaSlateSoft = Color(0xFFDDE4E7)
 val TakaSlateSoftVariant = Color(0xFFEAF0F2)
 
+// Dark theme slate action palette
+val TakaSlateDarkPrimary = Color(0xFF9EADB3)
+val TakaSlateDarkContainer = Color(0xFF344248)
+val TakaSlateDarkContainerVariant = Color(0xFF2A363B)
+
 // Error
 val Crimson = Color(0xFFB42318)
 val Blush = Color(0xFFFFE4E0)
 val DeepCrimson = Color(0xFF5F120C)
+
+// Dark theme error
+val TakaErrorDark = Color(0xFFFFB4AB)
+val TakaOnErrorDark = Color(0xFF690005)
+val TakaErrorContainerDark = Color(0xFF93000A)
+val TakaOnErrorContainerDark = Color(0xFFFFDAD6)

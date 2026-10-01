@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -23,7 +24,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,6 +53,7 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
+import com.taka.runejournal.core.ui.theme.isAppInDarkTheme
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import com.taka.runejournal.feature.reading.ui.components.RuneCanvas
 import kotlinx.coroutines.delay
@@ -123,7 +124,10 @@ fun NewReadingDrawScreen(
   }
 
   val clothBackgroundAlpha by animateFloatAsState(
-    targetValue = if (drawState is DrawState.Choose) 1f else 0f,
+    targetValue = when {
+      drawState !is DrawState.Choose -> 0f
+      else -> 1f
+    },
     animationSpec = tween(
       durationMillis = RuneCanvasState.RUNE_REVEAL_CENTERING_RUNES_ANIMATION_MILLIS.toInt(), // Adjust duration as needed
       easing = LinearOutSlowInEasing,

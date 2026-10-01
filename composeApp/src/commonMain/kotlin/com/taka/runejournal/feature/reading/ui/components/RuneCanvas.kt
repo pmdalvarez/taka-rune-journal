@@ -13,6 +13,8 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -22,6 +24,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.glowingDrawable
+import com.taka.runejournal.core.ui.theme.DarkThemeRuneColorFilter
+import com.taka.runejournal.core.ui.theme.isAppInDarkTheme
 import com.taka.runejournal.feature.reading.ui.DrawState
 import com.taka.runejournal.feature.reading.ui.RuneCanvasState
 import com.taka.runejournal.feature.reading.ui.RuneImageDrawState
@@ -115,7 +119,7 @@ fun RuneCanvas(
           )
           val drawCenter = if (isDraggedRune) visualState.center else animatedCenter
           val drawAngle = if (isDraggedRune) visualState.angle else animatedAngle
-
+          val glypthRuneColorFilter = if (isAppInDarkTheme()) { DarkThemeRuneColorFilter } else null
           // Unselected Rune
           add(RuneImageDrawState(image = emptyRuneImage, center =  drawCenter, angle = drawAngle, alpha = emptyRuneProgress))
           // Selected Rune - dragged rune cannot be in selected state
@@ -123,7 +127,7 @@ fun RuneCanvas(
           // Rune being unveiled - has glowing glyph - loading drawable can slow rendering so only doing this if this image is visible
           if (glowingGlyphRuneProgress != 0f) add(RuneImageDrawState(image = imageResource(rune.glowingDrawable()), center =  drawCenter, angle = drawAngle, alpha = glowingGlyphRuneProgress))
           // Rune fully unveiled- has non-glowing glyph - loading drawable can slow rendering so only doing this if this image is visible
-          if (glyphRuneProgress != 0f) add(RuneImageDrawState(image = imageResource(rune.drawable()), center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress))
+          if (glyphRuneProgress != 0f) add(RuneImageDrawState(image = imageResource(rune.drawable()), center =  drawCenter, angle = drawAngle, alpha = glyphRuneProgress, colorFilter = glypthRuneColorFilter))
         }
       }
   }
@@ -184,7 +188,8 @@ fun RuneCanvas(
               angle = runeDrawState.angle,
               alpha = runeDrawState.alpha,
               runeWidth = runeCanvasState.runeWidth,
-              runeHeight = runeCanvasState.runeHeight
+              runeHeight = runeCanvasState.runeHeight,
+              colorFilter = runeDrawState.colorFilter
             )
           }
         }
@@ -199,6 +204,7 @@ private fun DrawScope.drawRune(
   alpha: Float = 1f, // For crossfading if rune is being selected or selected, represents alpha of unselected image
   runeWidth: Float,
   runeHeight: Float,
+  colorFilter: ColorFilter? = null, // for dark mode, we brighten up the rune image in the end
 ) {
   val topLeft = Offset(
     x = center.x - runeWidth / 2,
@@ -220,6 +226,7 @@ private fun DrawScope.drawRune(
         width = runeWidth.roundToInt(),
         height = runeHeight.roundToInt(),
       ),
+      colorFilter = colorFilter
     )
   }
 }
