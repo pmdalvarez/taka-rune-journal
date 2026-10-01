@@ -42,6 +42,7 @@ fun RuneCanvas(
   modifier: Modifier = Modifier,
   runeCanvasState: RuneCanvasState,
   drawState: DrawState,
+  zoom: Float,
   onRuneDragStart: (touchPosition: Offset) -> Unit,
   onRuneDrag: (position: Offset) -> Unit,
   onRuneDragStop: () -> Unit,
@@ -131,18 +132,6 @@ fun RuneCanvas(
         }
       }
   }
-  val zoom by animateFloatAsState(
-    targetValue = when {
-      drawState is DrawState.Choose.Shaking -> RuneCanvasState.ZOOM_SHAKING
-      drawState is DrawState.Reveal -> RuneCanvasState.ZOOM_REVEAL
-      else -> 1f
-    },
-    animationSpec = tween(
-      durationMillis = 200,
-      easing = LinearOutSlowInEasing,
-    ),
-    label = "Rune Canvas Zoom",
-  )
 
   val currentOnRuneDragStart by rememberUpdatedState(onRuneDragStart)
   val currentOnRuneDrag by rememberUpdatedState(onRuneDrag)

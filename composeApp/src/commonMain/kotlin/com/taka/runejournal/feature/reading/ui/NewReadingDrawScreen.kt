@@ -5,10 +5,9 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,10 +29,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +54,7 @@ import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.core.ui.theme.TakaClothDarkTint
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
@@ -64,7 +69,6 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_go_to_reading
 import taka_rune_journal.composeapp.generated.resources.button_reveal_runes
 import taka_rune_journal.composeapp.generated.resources.cloth_background
-import taka_rune_journal.composeapp.generated.resources.cloth_background_zoomed
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_drag
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_shake
 import taka_rune_journal.composeapp.generated.resources.reading_draw_instructions_tap
@@ -88,13 +92,21 @@ fun NewReadingDrawScreen(
   val snackbarHostState = remember { SnackbarHostState() }
   var showInstructionalOverLay by remember { mutableStateOf(true) }
   var drawState by remember { mutableStateOf<DrawState>(DrawState.Choose.Idle) }
-  val clothBackground = if (drawState == DrawState.Choose.Shaking) {
-      imageResource(Res.drawable.cloth_background_zoomed)
-    } else {
-      imageResource(Res.drawable.cloth_background)
-    }
+  val clothBackground = imageResource(Res.drawable.cloth_background)
   var runeCanvasState by remember { mutableStateOf(RuneCanvasState(0f, 0f, 1)) }
   val runeHapticFeedback = rememberRuneHapticFeedback()
+  val zoom by animateFloatAsState(
+    targetValue = when {
+      drawState is DrawState.Choose.Shaking -> RuneCanvasState.ZOOM_SHAKING
+      drawState is DrawState.Reveal -> RuneCanvasState.ZOOM_REVEAL
+      else -> 1f
+    },
+    animationSpec = tween(
+      durationMillis = 200,
+      easing = LinearOutSlowInEasing,
+    ),
+    label = "Rune Canvas Zoom",
+  )
 
   ImmersiveModeEffect(enabled = drawState is DrawState.Choose) // status bar hidden (immersive mode) when shaking phone
   ShakeDetectorEffect(
@@ -134,20 +146,49 @@ fun NewReadingDrawScreen(
     ),
     label = "Background Alpha"
   )
-
+  val tintClothBackground = isAppInDarkTheme()
   BoxWithConstraints(
-    modifier = Modifier.fillMaxSize()
-      .background(
-        brush = ShaderBrush(
+    modifier = Modifier
+      .fillMaxSize()
+      .drawWithCache {
+        val brush = ShaderBrush(
           ImageShader(
             image = clothBackground,
             tileModeX = TileMode.Repeated,
             tileModeY = TileMode.Repeated,
           )
-        ),
-        alpha = clothBackgroundAlpha
-      ),
-      contentAlignment = Alignment.Center
+        )
+
+        onDrawBehind {
+          // Tint background according to light or dark mode
+          if (tintClothBackground) {
+            drawRect(
+              color = TakaClothDarkTint,
+              alpha = clothBackgroundAlpha
+            )
+          }
+
+          // Zoomed tiled texture
+          withTransform({
+            scale(
+              scaleX = zoom,
+              scaleY = zoom,
+              pivot = Offset.Zero,
+            )
+          }) {
+            drawRect(
+              brush = brush,
+              size = Size(
+                width = size.width / zoom,
+                height = size.height / zoom,
+              ),
+              alpha = clothBackgroundAlpha,
+              blendMode = BlendMode.Multiply,
+            )
+          }
+        }
+      },
+    contentAlignment = Alignment.Center
   ) {
     val density = LocalDensity.current
     // Runs once on first composition to set canvas size to device screen size
@@ -162,6 +203,7 @@ fun NewReadingDrawScreen(
         modifier = Modifier.matchParentSize(),
         runeCanvasState = runeCanvasState,
         drawState = drawState,
+        zoom = zoom,
         onRuneDragStart = { position ->
           drawState = DrawState.Choose.Dragging
           showInstructionalOverLay = false
@@ -390,5 +432,23 @@ private fun RevealedRunesOverlay(
     ) {
       Text(stringResource(Res.string.button_go_to_reading))
     }
+  }
+}
+
+@Composable
+fun ClothBackground(
+  modifier: Modifier = Modifier,
+  tint: Color = Color(0xFFC2B8A8),
+  textureAlpha: Float = 0.18f,
+  content: @Composable BoxScope.() -> Unit,
+) {
+  val texture = org.jetbrains.compose.resources.imageResource(
+    Res.drawable.cloth_background
+  )
+
+  Box(
+    modifier = modifier
+  ) {
+    content()
   }
 }

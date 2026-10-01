@@ -49,3 +49,6 @@ val TakaErrorDark = Color(0xFFFFB4AB)
 val TakaOnErrorDark = Color(0xFF690005)
 val TakaErrorContainerDark = Color(0xFF93000A)
 val TakaOnErrorContainerDark = Color(0xFFFFDAD6)
+
+// Cloth background tint
+val TakaClothDarkTint = Color(0xFF8F7E68)
