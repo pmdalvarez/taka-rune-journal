@@ -3,7 +3,7 @@ package com.taka.runejournal.feature.more.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.ui.UiEvent
-import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
+import com.taka.runejournal.core.domain.repository.SettingsRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted

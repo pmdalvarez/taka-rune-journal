@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.more.domain.repository
+package com.taka.runejournal.core.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

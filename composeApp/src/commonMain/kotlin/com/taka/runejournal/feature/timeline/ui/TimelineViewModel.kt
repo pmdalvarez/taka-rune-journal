@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.taka.runejournal.core.ui.UiEvent
-import com.taka.runejournal.feature.more.domain.repository.SettingsRepository
+import com.taka.runejournal.core.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
