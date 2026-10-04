@@ -132,8 +132,20 @@ fun ReadingInterpretationScreen(
             is ReadingInterpretationTab.Share -> ReadingInterpretationShareTab(
               recipient = uiState.recipient!!,
               notes = tab.notes,
-              onDownloadClicked = { notes ->
-                viewModel.saveNotes(notes)
+              onDownloadClicked = { personalMessage ->
+                viewModel.saveNotes(personalMessage)
+                val readingPdfUiModel = ReadingPdfUiModel(
+                  id = uiState.id,
+                  createdAt = uiState.createdAt,
+                  topic = uiState.topic,
+                  recipient = uiState.recipient!!,
+                  question = uiState.question,
+                  personalMessage = personalMessage,
+                  tabs = uiState.tabs.filterIsInstance<ReadingInterpretationTab.Rune>(),
+                )
+                coroutineScope.launch {
+                  downloadReadingPdf(readingPdfUiModel)
+                }
               }
             )
           }

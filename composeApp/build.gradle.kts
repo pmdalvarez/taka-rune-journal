@@ -70,6 +70,8 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.core)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.pdfkmp)
+            implementation(libs.pdfkmp.compose.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.preview)
         }

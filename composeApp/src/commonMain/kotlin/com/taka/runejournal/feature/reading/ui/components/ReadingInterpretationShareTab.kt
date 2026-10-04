@@ -34,7 +34,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_share_title
 
 @Composable
 fun ReadingInterpretationShareTab(recipient: String, notes: String?, onDownloadClicked: (String) -> Unit) {
-  var notesInput by rememberSaveable(notes) { mutableStateOf(notes.orEmpty()) }
+  var personalMessage by rememberSaveable(notes) { mutableStateOf(notes.orEmpty()) }
 
   TakaCard(
     modifier = Modifier
@@ -55,13 +55,13 @@ fun ReadingInterpretationShareTab(recipient: String, notes: String?, onDownloadC
       )
       TakaTextField(
         modifier = Modifier.padding(top = TakaContentSpacing),
-        value = notesInput,
-        onValueChange = { notesInput = it },
+        value = personalMessage,
+        onValueChange = { personalMessage = it },
         minLines = 10,
         label = stringResource(Res.string.reading_share_add_note_label),
       )
       TakaButton(
-        onClick = { onDownloadClicked(notesInput) },
+        onClick = { onDownloadClicked(personalMessage.trim()) },
         modifier = Modifier
           .padding(top = TakaContentSpacing)
           .align(Alignment.CenterHorizontally)

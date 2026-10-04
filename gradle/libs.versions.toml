@@ -1,7 +1,7 @@
 [versions]
 agp = "9.4.0"
 android-compileSdk = "37"
-android-minSdk = "26"
+android-minSdk = "29"
 android-targetSdk = "35"
 androidx-activity = "1.13.0"
 androidx-appcompat = "1.7.1"
@@ -22,6 +22,7 @@ material-icons-core = "1.7.3"
 material3 = "1.9.0"
 multiplatform-nav3-ui = "1.1.1"
 paging = "3.5.0"
+pdfkmp = "1.3.0"
 room = "2.8.4"
 sqlite = "2.6.2"
 
@@ -63,6 +64,8 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+pdfkmp = { module = "io.github.conamobiledev:pdfkmp", version.ref = "pdfkmp" }
+pdfkmp-compose-resources = { module = "io.github.conamobiledev:pdfkmp-compose-resources", version.ref = "pdfkmp" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
