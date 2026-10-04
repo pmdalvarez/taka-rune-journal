@@ -18,8 +18,9 @@ import androidx.room.PrimaryKey
 data class PpfRuneReadingEntity(
   @PrimaryKey
   val timelineItemId: Long,
+  val recipient: String?,
   val question: String?,
-  val category: String,
+  val topic: String,
   @Embedded(prefix = "past_rune_") val pastRune: DrawnRuneEmbedded,
   @Embedded(prefix = "present_rune_") val presentRune: DrawnRuneEmbedded,
   @Embedded(prefix = "future_rune_") val futureRune: DrawnRuneEmbedded

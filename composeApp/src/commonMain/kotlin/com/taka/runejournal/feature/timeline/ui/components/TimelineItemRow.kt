@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.domain.model.RuneOrientation
@@ -27,6 +30,7 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_journal_entry
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
+import taka_rune_journal.composeapp.generated.resources.timeline_item_reading_recipient
 import taka_rune_journal.composeapp.generated.resources.timeline_item_title_no_question
 import taka_rune_journal.composeapp.generated.resources.timeline_item_title_untitled
 
@@ -106,11 +110,41 @@ fun TimelineItemRow(
           overflow = TextOverflow.Ellipsis,
         )
 
-        Text(
-          text = label,
-          style = MaterialTheme.typography.labelMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+            text = label,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+          )
+
+          if (item.recipient != null) {
+            Text(
+              text = " · ",
+              style = MaterialTheme.typography.labelMedium,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+
+            Icon(
+              imageVector = Icons.Outlined.Person,
+              contentDescription = null,
+              modifier = Modifier
+                .size(
+                  with(LocalDensity.current) {
+                    MaterialTheme.typography.labelMedium.lineHeight.toDp() // same size as the label text next to it
+                  }
+                ),
+              tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+
+            Text(
+              text = " " + stringResource(Res.string.timeline_item_reading_recipient, item.recipient),
+              style = MaterialTheme.typography.labelMedium,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+          }
+        }
       }
     }
 

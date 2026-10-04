@@ -30,6 +30,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_tab_future_rune
 import taka_rune_journal.composeapp.generated.resources.reading_tab_notes
 import taka_rune_journal.composeapp.generated.resources.reading_tab_past_rune
 import taka_rune_journal.composeapp.generated.resources.reading_tab_present_rune
+import taka_rune_journal.composeapp.generated.resources.reading_tab_share
 import taka_rune_journal.composeapp.generated.resources.reading_tab_single_rune
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
 
@@ -57,10 +58,11 @@ class ReadingInterpretationViewModel(
             id = timelineItem.id,
             createdAt = timelineItem.createdAt.format(),
             topic = timelineItem.topic,
+            recipient = timelineItem.recipient,
             question = timelineItem.question,
             tabs = listOf(
               getRuneTab(timelineItem.drawnRune, Res.string.reading_tab_single_rune, timelineItem.topic),
-              ReadingInterpretationTab.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              getFinalTab(timelineItem.recipient, timelineItem.notes)
             )
           )
         }
@@ -69,6 +71,7 @@ class ReadingInterpretationViewModel(
             id = timelineItem.id,
             createdAt = timelineItem.createdAt.format(),
             topic = timelineItem.topic,
+            recipient = timelineItem.recipient,
             question = timelineItem.question,
             tabs = listOf(
               getRuneTab(
@@ -89,7 +92,7 @@ class ReadingInterpretationViewModel(
                 timelineItem.topic,
                 Res.string.reading_position_future_description
               ),
-              ReadingInterpretationTab.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              getFinalTab(timelineItem.recipient, timelineItem.notes)
             )
           )
         }
@@ -100,6 +103,18 @@ class ReadingInterpretationViewModel(
       }
     }
   }
+
+  private fun getFinalTab(recipient: String?, notes: String?): ReadingInterpretationTab =
+    recipient?.let {
+      ReadingInterpretationTab.Share(
+        label = Res.string.reading_tab_share,
+        recipient = recipient,
+        notes = notes
+      )
+    } ?: ReadingInterpretationTab.Notes(
+      label = Res.string.reading_tab_notes,
+      notes = notes
+    )
 
   private fun getRuneTab(
     drawnRune: DrawnRune,

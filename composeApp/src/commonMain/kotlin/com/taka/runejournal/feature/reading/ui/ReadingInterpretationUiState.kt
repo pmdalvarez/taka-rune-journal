@@ -19,7 +19,13 @@ sealed class ReadingInterpretationTab {
 
   data class Notes(
     override val label: StringResource,
-    val notes: String? = null,
+    val notes: String?
+  ): ReadingInterpretationTab()
+
+  data class Share(
+    override val label: StringResource,
+    val recipient: String?,
+    val notes: String?
   ): ReadingInterpretationTab()
 }
 
@@ -27,6 +33,7 @@ data class ReadingInterpretationUiState(
   val id: Long = 0L,
   val createdAt: String = "",
   val topic: ReadingTopic = ReadingTopic.GENERAL,
+  val recipient: String? = null,
   val question: String? = null,
   val tabs: List<ReadingInterpretationTab> = emptyList(),
   val showDeleteDialog: Boolean = false

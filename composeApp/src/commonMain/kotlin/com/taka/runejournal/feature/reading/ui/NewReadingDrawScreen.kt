@@ -78,6 +78,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_draw_selected_ru
 import taka_rune_journal.composeapp.generated.resources.reading_draw_your_runes
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune
 import taka_rune_journal.composeapp.generated.resources.reading_draw_youve_drawn_rune_reversed
+import taka_rune_journal.composeapp.generated.resources.reading_interpretation_topbar_subtitle
 import taka_rune_journal.composeapp.generated.resources.reading_type_general
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 
@@ -272,6 +273,9 @@ fun NewReadingDrawScreen(
         topBar = {
           TakaTopBar(
             title = stringResource(uiState.topic?.readingType() ?: Res.string.reading_type_general),
+            subtitle = uiState.recipient?.let { recipient ->
+              stringResource(Res.string.reading_interpretation_topbar_subtitle, recipient)
+            },
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
           )
@@ -432,23 +436,5 @@ private fun RevealedRunesOverlay(
     ) {
       Text(stringResource(Res.string.button_go_to_reading))
     }
-  }
-}
-
-@Composable
-fun ClothBackground(
-  modifier: Modifier = Modifier,
-  tint: Color = Color(0xFFC2B8A8),
-  textureAlpha: Float = 0.18f,
-  content: @Composable BoxScope.() -> Unit,
-) {
-  val texture = org.jetbrains.compose.resources.imageResource(
-    Res.drawable.cloth_background
-  )
-
-  Box(
-    modifier = modifier
-  ) {
-    content()
   }
 }

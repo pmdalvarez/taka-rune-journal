@@ -26,20 +26,21 @@ fun TimelineItemWithDetails.toTimelineItem() = when {
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
     notes = timelineItem.notes,
+    recipient = singleRuneReading.recipient,
     question = singleRuneReading.question,
-    topic = ReadingTopic.fromKey(singleRuneReading.category) ?: error("Unknown topic: $ppfRuneReading.category"),
+    topic = ReadingTopic.fromKey(singleRuneReading.topic) ?: error("Unknown topic: $ppfRuneReading.topic"),
     drawnRune = singleRuneReading.rune.toDomain()
   )
   ppfRuneReading != null -> TimelineItem.PpfRuneReading(
     id = timelineItem.id,
     createdAt = Instant.fromEpochMilliseconds(timelineItem.createdAt),
     notes = timelineItem.notes,
+    recipient = ppfRuneReading.recipient,
     question = ppfRuneReading.question,
-    topic = ReadingTopic.fromKey(ppfRuneReading.category) ?: error("Unknown topic: $ppfRuneReading.category"),
+    topic = ReadingTopic.fromKey(ppfRuneReading.topic) ?: error("Unknown topic: $ppfRuneReading.topic"),
     pastRune = ppfRuneReading.pastRune.toDomain(),
     presentRune = ppfRuneReading.presentRune.toDomain(),
     futureRune = ppfRuneReading.futureRune.toDomain()
-
   )
   else -> TimelineItem.JournalEntry(
     id = timelineItem.id,

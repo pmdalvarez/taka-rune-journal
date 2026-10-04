@@ -2,6 +2,7 @@ package com.taka.runejournal.core.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -89,6 +90,7 @@ sealed class TakaTopBarAction {
 @Composable
 fun TakaTopBar(
   title: String? = null,
+  subtitle: String? = null,
   navigationIcon: TakaTopBarNavigationIcon = TakaTopBarNavigationIcon.None,
   onNavigationClick: () -> Unit = {},
   action: TakaTopBarAction = TakaTopBarAction.None,
@@ -96,7 +98,18 @@ fun TakaTopBar(
   var isMenuExpanded by remember { mutableStateOf(false) }
 
   TopAppBar(
-    title = { title?.let { Text(title) } },
+    title = { title?.let {
+      Column {
+        Text(it)
+        subtitle?.let {
+          Text(
+            text = subtitle,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+          )
+        }
+      }
+    } },
     navigationIcon = {
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {

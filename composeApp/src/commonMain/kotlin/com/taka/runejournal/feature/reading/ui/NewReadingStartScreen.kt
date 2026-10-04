@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -51,6 +52,7 @@ import com.taka.runejournal.core.ui.theme.TakaScreenPadding
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
+import com.taka.runejournal.feature.reading.ui.components.EnterReadingRecipientDialog
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.painterResource
@@ -59,6 +61,9 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.button_draw_runes
 import taka_rune_journal.composeapp.generated.resources.reading_choose_spread
 import taka_rune_journal.composeapp.generated.resources.reading_choose_topic
+import taka_rune_journal.composeapp.generated.resources.reading_filter_chip_me
+import taka_rune_journal.composeapp.generated.resources.reading_filter_chip_named_friend
+import taka_rune_journal.composeapp.generated.resources.reading_filter_chip_unnamed_friend
 import taka_rune_journal.composeapp.generated.resources.reading_question_description
 import taka_rune_journal.composeapp.generated.resources.reading_question_textfield_label
 import taka_rune_journal.composeapp.generated.resources.reading_question_tip
@@ -73,6 +78,8 @@ fun NewReadingStartScreen(
   modifier: Modifier = Modifier
 ) {
   val snackbarHostState = remember { SnackbarHostState() }
+  var recipient by rememberSaveable { mutableStateOf<String?>(null) }
+  var showRecipientDialog by rememberSaveable { mutableStateOf(false) }
   var spreadInput by rememberSaveable { mutableStateOf<RuneSpread?>(null) }
   var topicInput by rememberSaveable { mutableStateOf<ReadingTopic?>(null) }
 
@@ -133,6 +140,36 @@ fun NewReadingStartScreen(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Top,
     ) {
+      Row(
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(
+            start = TakaScreenPadding,
+            end = TakaScreenPadding,
+            bottom = TakaSectionSpacing
+          ),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        FilterChip(
+          selected = recipient == null,
+          onClick = { recipient = null },
+          label = {
+            Text(stringResource(Res.string.reading_filter_chip_me))
+          },
+        )
+
+        Spacer(modifier = Modifier.width(TakaSpaceSm))
+
+        FilterChip(
+          selected = recipient != null,
+          onClick = { showRecipientDialog = true },
+          label = {
+            recipient?.let {
+              Text(stringResource(Res.string.reading_filter_chip_named_friend, it))
+            } ?: Text(stringResource(Res.string.reading_filter_chip_unnamed_friend))
+          },
+        )
+      }
       HorizontalPager(
         modifier = modifier.weight(1f),
         state = pagerState,
@@ -161,9 +198,10 @@ fun NewReadingStartScreen(
           2 -> EnterQuestionPage(
             onDrawRunesClicked = { question ->
               viewModel.updateSelections(
-                spreadInput!!,
-                topicInput!!,
-                question
+                recipient = recipient,
+                spread = spreadInput!!,
+                topic = topicInput!!,
+                question = question
               )
             }
           )
@@ -177,6 +215,17 @@ fun NewReadingStartScreen(
           .padding(bottom=TakaContentSpacing),
       )
     }
+  }
+
+  if (showRecipientDialog) {
+    EnterReadingRecipientDialog(
+      recipient = recipient,
+      onDismiss = { showRecipientDialog = false },
+      onConfirm = { textInput ->
+        recipient = textInput
+        showRecipientDialog = false
+      }
+    )
   }
 }
 
@@ -194,10 +243,10 @@ fun ChooseSpreadPage(
   ) {
     Text(
       text = stringResource(Res.string.reading_choose_spread),
-      style = MaterialTheme.typography.headlineMedium
+      style = MaterialTheme.typography.headlineSmall
     )
     RuneSpread.entries.forEach { spread ->
-      Spacer(modifier = Modifier.padding(top = TakaSectionSpacing))
+      Spacer(modifier = Modifier.padding(top = TakaContentSpacing))
       TakaSelectableCard(
         onClick = { onSpreadSelected(spread) },
         isSelected = isSpreadSelected(spread),
@@ -240,10 +289,10 @@ fun ChooseTopicPage(
   ) {
     Text(
       text = stringResource(Res.string.reading_choose_topic),
-      style = MaterialTheme.typography.headlineMedium
+      style = MaterialTheme.typography.headlineSmall
     )
     ReadingTopic.entries.forEach { topic ->
-      Spacer(modifier = Modifier.padding(top = TakaSectionSpacing))
+      Spacer(modifier = Modifier.padding(top = TakaContentSpacing))
       TakaSelectableCard(
         onClick = { onTopicSelected(topic) },
         isSelected = isTopicSelected(topic),
@@ -297,11 +346,12 @@ fun EnterQuestionPage(
     Text(
       modifier = Modifier.align(Alignment.CenterHorizontally),
       text = stringResource(Res.string.reading_question_title),
-      style = MaterialTheme.typography.headlineMedium    )
+      style = MaterialTheme.typography.headlineSmall
+    )
     Text(
       text = stringResource(Res.string.reading_question_description),
       style = MaterialTheme.typography.bodyMedium,
-      modifier = Modifier.padding(top = TakaSectionSpacing)
+      modifier = Modifier.padding(top = TakaContentSpacing)
     )
     TakaTextField(
       value = questionInput,

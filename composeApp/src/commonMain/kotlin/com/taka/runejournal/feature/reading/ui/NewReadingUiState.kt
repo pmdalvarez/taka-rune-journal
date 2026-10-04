@@ -6,6 +6,7 @@ import com.taka.runejournal.core.domain.model.RuneSpread
 
 data class NewReadingUiState (
   val spread: RuneSpread? = null,
+  val recipient: String? = null,
   val question: String? = null,
   val topic: ReadingTopic? = null,
   val canvasSize: Size = Size.Zero

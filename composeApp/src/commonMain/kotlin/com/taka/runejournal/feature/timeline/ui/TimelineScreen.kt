@@ -1,6 +1,5 @@
 package com.taka.runejournal.feature.timeline.ui
 
-import DeleteTimelineEntryDialog
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +32,7 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.components.showInfoSnackbar
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
+import com.taka.runejournal.feature.timeline.ui.components.DeleteTimelineEntryDialog
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
 import com.taka.runejournal.feature.timeline.ui.components.WelcomeSection
@@ -162,5 +162,4 @@ fun TimelineScreen(
             it.preview
         )
     }
-
 }

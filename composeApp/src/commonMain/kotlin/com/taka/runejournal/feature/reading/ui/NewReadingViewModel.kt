@@ -28,12 +28,14 @@ class NewReadingViewModel(
   val uiEvent = _uiEvent.asSharedFlow()
 
   fun updateSelections(
+    recipient: String?,
     spread: RuneSpread,
     topic: ReadingTopic,
     question: String?,
   ) {
     _uiState.update {
       it.copy(
+        recipient = recipient,
         spread = spread,
         question = question,
         topic = topic
@@ -46,6 +48,7 @@ class NewReadingViewModel(
 
   fun saveAndNavigateToReading(drawnRunes: List<DrawnRune>) {
     val spread = _uiState.value.spread
+    val recipient = _uiState.value.recipient
     val question = _uiState.value.question
     val topic = _uiState.value.topic ?: ReadingTopic.GENERAL
     viewModelScope.launch {
@@ -55,11 +58,13 @@ class NewReadingViewModel(
       }
       val readingId: Long = when (spread) {
         RuneSpread.SINGLE_RUNE-> timelineRepository.createSingleRuneReading(
+          recipient = recipient,
           question = question,
           topic = topic,
           rune = drawnRunes[0],
         )
         RuneSpread.PAST_PRESENT_FUTURE -> timelineRepository.createPpfRuneReading(
+          recipient = recipient,
           question = question,
           topic = topic,
           pastRune = drawnRunes[0],

@@ -37,18 +37,26 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
   }
 
   override suspend fun createSingleRuneReading(
+    recipient: String?,
     question: String?,
-    category: ReadingTopic,
+    topic: ReadingTopic,
     rune: DrawnRune
   ): Long {
     val timelineItemEntity = TimelineItemEntity()
     val runeEmbedded = rune.toEmbedded()
-    return timelineItemDao.insertSingleRuneReading(timelineItemEntity, question, category.key, runeEmbedded)
+    return timelineItemDao.insertSingleRuneReading(
+      timelineItemEntity = timelineItemEntity,
+      recipient = recipient,
+      question = question,
+      topic = topic.key,
+      rune = runeEmbedded
+    )
   }
 
   override suspend fun createPpfRuneReading(
+    recipient: String?,
     question: String?,
-    category: ReadingTopic,
+    topic: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
     futureRune: DrawnRune
@@ -59,8 +67,9 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     val futureRuneEmbedded = futureRune.toEmbedded()
     return timelineItemDao.insertPpfRuneReading(
       timelineItemEntity = timelineItemEntity,
+      recipient = recipient,
       question = question,
-      category = category.key,
+      topic = topic.key,
       pastRune =pastRuneEmbedded,
       presentRune = presentRuneEmbedded,
       futureRune = futureRuneEmbedded

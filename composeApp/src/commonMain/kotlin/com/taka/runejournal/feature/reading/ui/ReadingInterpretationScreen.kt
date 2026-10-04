@@ -1,13 +1,14 @@
 package com.taka.runejournal.feature.reading.ui
 
-import DeleteTimelineEntryDialog
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.PrimaryTabRow
@@ -33,14 +34,18 @@ import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSpaceMd
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationNotesTab
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationRuneTab
+import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationShareTab
+import com.taka.runejournal.feature.timeline.ui.components.DeleteTimelineEntryDialog
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
+import taka_rune_journal.composeapp.generated.resources.reading_interpretation_topbar_subtitle
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -71,6 +76,9 @@ fun ReadingInterpretationScreen(
     topBar = {
           TakaTopBar(
             title = stringResource(uiState.topic.readingType()),
+            subtitle = uiState.recipient?.let { recipient ->
+              stringResource(Res.string.reading_interpretation_topbar_subtitle, recipient)
+            },
             navigationIcon = TakaTopBarNavigationIcon.Back,
             onNavigationClick = onBackClick,
             action = TakaTopBarAction.RuneInterpretationActions(
@@ -85,6 +93,10 @@ fun ReadingInterpretationScreen(
       if (!uiState.question.isNullOrBlank()) {
         ReadingInterpretationContextHeader(
           question = uiState.question!!
+        )
+        HorizontalDivider(
+          modifier = Modifier.padding(top = TakaSpaceMd),
+          color = MaterialTheme.colorScheme.outlineVariant,
         )
       }
       if (uiState.tabs.isNotEmpty()) {
@@ -116,6 +128,13 @@ fun ReadingInterpretationScreen(
             is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
               notes = tab.notes,
               onSaveClicked = viewModel::saveNotes
+            )
+            is ReadingInterpretationTab.Share -> ReadingInterpretationShareTab(
+              recipient = uiState.recipient!!,
+              notes = tab.notes,
+              onDownloadClicked = { notes ->
+                viewModel.saveNotes(notes)
+              }
             )
           }
         }

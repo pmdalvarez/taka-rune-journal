@@ -1,10 +1,8 @@
 package com.taka.runejournal.feature.timeline.ui
 
-import DeleteTimelineEntryDialog
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,6 +17,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBar
 import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
+import com.taka.runejournal.feature.timeline.ui.components.DeleteTimelineEntryDialog
 import com.taka.runejournal.feature.timeline.ui.components.JournalEntryDetail
 import com.taka.runejournal.feature.timeline.ui.components.JournalEntryEditor
 import org.jetbrains.compose.resources.getString

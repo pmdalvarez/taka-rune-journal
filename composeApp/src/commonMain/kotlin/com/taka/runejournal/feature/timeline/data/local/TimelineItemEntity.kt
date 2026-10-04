@@ -2,7 +2,6 @@ package com.taka.runejournal.feature.timeline.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlin.time.Clock
 
 @Entity(tableName = "timeline_items")
@@ -13,17 +12,3 @@ data class TimelineItemEntity(
   val notes: String? = null,
   val title: String? = null,
 )
-
-fun TimelineItem.toTimelineItemEntity(): TimelineItemEntity = TimelineItemEntity(
-  id = id,
-  createdAt = createdAt.toEpochMilliseconds(),
-  notes = notes
-)
-
-fun TimelineItem.JournalEntry.toTimelineItemEntity(): TimelineItemEntity = TimelineItemEntity(
-  id = id,
-  createdAt = createdAt.toEpochMilliseconds(),
-  notes = notes,
-  title = title
-)
-
