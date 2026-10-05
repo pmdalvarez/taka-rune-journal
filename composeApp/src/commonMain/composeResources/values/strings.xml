@@ -92,8 +92,8 @@
     <string name="reading_notes_add_prompt">Add your own thoughts, questions, or anything you want to remember about this reading.</string>
     <string name="reading_notes_texfield_label">Write your notes here</string>
     <string name="reading_notes_save_error">Your notes could not be saved. Please try again.</string>
-    <string name="reading_share_title">Share This Reading with %1$s</string>
-    <string name="reading_share_add_note_prompt">Add a personal message for %1$s to include in the shareable PDF.</string>
+    <string name="reading_share_title">Share with %1$s</string>
+    <string name="reading_share_add_note_prompt">Add a personal message for %1$s to include in this reading.</string>
     <string name="reading_share_add_note_label">Personal Message (Optional)</string>
     <string name="reading_share_download_button">Download PDF</string>
 
