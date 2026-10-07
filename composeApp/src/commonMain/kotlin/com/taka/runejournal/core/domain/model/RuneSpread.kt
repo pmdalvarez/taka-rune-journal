@@ -11,18 +11,21 @@ import taka_rune_journal.composeapp.generated.resources.reading_single_rune_spre
 import taka_rune_journal.composeapp.generated.resources.reading_single_rune_spread_name
 
 enum class RuneSpread(
+  val key: String,
   val icon: DrawableResource,
   val title: StringResource,
   val description: StringResource,
   val runeCount: Int
   ) {
   SINGLE_RUNE(
+    "single_rune",
     Res.drawable.ic_single_rune_spread_icon,
     Res.string.reading_single_rune_spread_name,
     Res.string.reading_single_rune_spread_description,
     1
   ),
   PAST_PRESENT_FUTURE(
+    "past_present_future",
     Res.drawable.ic_ppf_rune_spread_icon,
     Res.string.reading_ppf_spread_name,
     Res.string.reading_ppf_spread_description,
