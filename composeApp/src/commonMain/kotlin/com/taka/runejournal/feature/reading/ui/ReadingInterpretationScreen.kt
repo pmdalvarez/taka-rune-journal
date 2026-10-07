@@ -46,6 +46,7 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.reading_interpretation_topbar_subtitle
+import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -129,25 +130,30 @@ fun ReadingInterpretationScreen(
               notes = tab.notes,
               onSaveClicked = viewModel::saveNotes
             )
-            is ReadingInterpretationTab.Share -> ReadingInterpretationShareTab(
-              recipient = uiState.recipient!!,
-              notes = tab.notes,
-              onDownloadClicked = { personalMessage ->
-                viewModel.saveNotes(personalMessage)
-                val readingPdfUiModel = ReadingPdfUiModel(
-                  id = uiState.id,
-                  createdAt = uiState.createdAt,
-                  topic = uiState.topic,
-                  recipient = uiState.recipient!!,
-                  question = uiState.question,
-                  personalMessage = personalMessage,
-                  tabs = uiState.tabs.filterIsInstance<ReadingInterpretationTab.Rune>(),
-                )
-                coroutineScope.launch {
-                  downloadReadingPdf(readingPdfUiModel)
+            is ReadingInterpretationTab.Share -> {
+              val previewTitle = stringResource(Res.string.reading_share_preview_topbar_title)
+              ReadingInterpretationShareTab(
+                recipient = uiState.recipient!!,
+                notes = tab.notes,
+                onPreviewClicked = { personalMessage ->
+                  viewModel.saveNotes(personalMessage)
+                  val readingPdfUiModel = ReadingPdfUiModel(
+                    id = uiState.id,
+                    createdAt = uiState.createdAt,
+                    topic = uiState.topic,
+                    recipient = uiState.recipient!!,
+                    question = uiState.question,
+                    personalMessage = personalMessage,
+                    tabs = uiState.tabs.filterIsInstance<ReadingInterpretationTab.Rune>(),
+                  )
+                  coroutineScope.launch {
+                    previewReadingPdf(
+                      previewTitle = previewTitle,
+                      readingPdfUiModel)
+                  }
                 }
-              }
-            )
+              )
+            }
           }
         }
       }

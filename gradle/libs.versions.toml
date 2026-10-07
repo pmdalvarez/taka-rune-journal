@@ -66,6 +66,7 @@ kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 pdfkmp = { module = "io.github.conamobiledev:pdfkmp", version.ref = "pdfkmp" }
 pdfkmp-compose-resources = { module = "io.github.conamobiledev:pdfkmp-compose-resources", version.ref = "pdfkmp" }
+pdfkmp-viewer = { module = "io.github.conamobiledev:pdfkmp-viewer", version.ref = "pdfkmp" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

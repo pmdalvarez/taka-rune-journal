@@ -72,6 +72,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.pdfkmp)
             implementation(libs.pdfkmp.compose.resources)
+            implementation(libs.pdfkmp.viewer)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.preview)
         }

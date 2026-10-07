@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,11 +29,11 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.reading_share_add_note_label
 import taka_rune_journal.composeapp.generated.resources.reading_share_add_note_prompt
-import taka_rune_journal.composeapp.generated.resources.reading_share_download_button
+import taka_rune_journal.composeapp.generated.resources.reading_share_preview_button
 import taka_rune_journal.composeapp.generated.resources.reading_share_title
 
 @Composable
-fun ReadingInterpretationShareTab(recipient: String, notes: String?, onDownloadClicked: (String) -> Unit) {
+fun ReadingInterpretationShareTab(recipient: String, notes: String?, onPreviewClicked: (String) -> Unit) {
   var personalMessage by rememberSaveable(notes) { mutableStateOf(notes.orEmpty()) }
 
   TakaCard(
@@ -61,7 +61,7 @@ fun ReadingInterpretationShareTab(recipient: String, notes: String?, onDownloadC
         label = stringResource(Res.string.reading_share_add_note_label),
       )
       TakaButton(
-        onClick = { onDownloadClicked(personalMessage.trim()) },
+        onClick = { onPreviewClicked(personalMessage.trim()) },
         modifier = Modifier
           .padding(top = TakaContentSpacing)
           .align(Alignment.CenterHorizontally)
@@ -71,12 +71,12 @@ fun ReadingInterpretationShareTab(recipient: String, notes: String?, onDownloadC
           verticalAlignment = Alignment.CenterVertically,
         ) {
           Icon(
-            imageVector = Icons.Default.Download,
+            imageVector = Icons.Default.Visibility,
             contentDescription = null,
             modifier = Modifier.size(TakaIconButtonSize),
             tint = MaterialTheme.colorScheme.onPrimary
           )
-          Text(stringResource(Res.string.reading_share_download_button))
+          Text(stringResource(Res.string.reading_share_preview_button))
         }
       }
     }

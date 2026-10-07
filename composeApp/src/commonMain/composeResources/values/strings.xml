@@ -95,7 +95,9 @@
     <string name="reading_share_title">Share with %1$s</string>
     <string name="reading_share_add_note_prompt">Add a personal message for %1$s to include in this reading.</string>
     <string name="reading_share_add_note_label">Personal Message (Optional)</string>
-    <string name="reading_share_download_button">Download PDF</string>
+    <string name="reading_share_preview_button">Preview PDF</string>
+    <string name="reading_share_preview_topbar_title">Reading Preview</string>
+
 
     <string name="reading_start_topbar_title">New Reading</string>
     <string name="reading_filter_chip_me">For Me</string>
