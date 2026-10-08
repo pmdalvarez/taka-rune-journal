@@ -9,7 +9,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_type_relationshi
 import taka_rune_journal.composeapp.generated.resources.reading_type_security
 import taka_rune_journal.composeapp.generated.resources.reading_type_self
 
-fun ReadingTopic.readingType(): StringResource = when (this) {
+fun ReadingTopic.title(): StringResource = when (this) {
   ReadingTopic.GENERAL -> Res.string.reading_type_general
   ReadingTopic.RELATIONSHIPS -> Res.string.reading_type_relationships
   ReadingTopic.PURPOSE -> Res.string.reading_type_purpose

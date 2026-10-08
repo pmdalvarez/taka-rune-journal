@@ -2,9 +2,10 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
+import com.taka.runejournal.feature.reading.domain.model.ReadingQrPayload
 import org.jetbrains.compose.resources.StringResource
 
-sealed class ReadingInterpretationTab {
+sealed class ReadingInterpretationTabUiState {
   abstract val label: StringResource
 
   data class Rune(
@@ -15,18 +16,19 @@ sealed class ReadingInterpretationTab {
     val keywords: StringResource,
     val supplementalKeywords: StringResource?,
     val tabDescription: StringResource?
-  ) : ReadingInterpretationTab()
+  ) : ReadingInterpretationTabUiState()
 
   data class Notes(
     override val label: StringResource,
     val notes: String?
-  ): ReadingInterpretationTab()
+  ): ReadingInterpretationTabUiState()
 
   data class Share(
     override val label: StringResource,
     val recipient: String?,
-    val notes: String?
-  ): ReadingInterpretationTab()
+    val notes: String?,
+    val pdfUiModel: ReadingPdfUiModel,
+  ): ReadingInterpretationTabUiState()
 }
 
 data class ReadingInterpretationUiState(
@@ -35,6 +37,6 @@ data class ReadingInterpretationUiState(
   val topic: ReadingTopic = ReadingTopic.GENERAL,
   val recipient: String? = null,
   val question: String? = null,
-  val tabs: List<ReadingInterpretationTab> = emptyList(),
+  val tabs: List<ReadingInterpretationTabUiState> = emptyList(),
   val showDeleteDialog: Boolean = false
 )

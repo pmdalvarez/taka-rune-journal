@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -272,7 +271,7 @@ fun NewReadingDrawScreen(
         snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
         topBar = {
           TakaTopBar(
-            title = stringResource(uiState.topic?.readingType() ?: Res.string.reading_type_general),
+            title = stringResource(uiState.topic?.title() ?: Res.string.reading_type_general),
             subtitle = uiState.recipient?.let { recipient ->
               stringResource(Res.string.reading_interpretation_topbar_subtitle, recipient)
             },

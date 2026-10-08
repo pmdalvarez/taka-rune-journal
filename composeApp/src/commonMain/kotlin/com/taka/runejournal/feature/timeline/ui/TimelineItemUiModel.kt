@@ -2,7 +2,7 @@ package com.taka.runejournal.feature.timeline.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.ui.utils.format
-import com.taka.runejournal.feature.reading.ui.readingType
+import com.taka.runejournal.feature.reading.ui.title
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -34,7 +34,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     recipient = recipient,
     title = question,
     icon = Res.drawable.ic_rune_reading_icon,
-    typeRes = topic.readingType(),
+    typeRes = topic.title(),
     drawnRunes = listOf(drawnRune),
   )
 
@@ -45,7 +45,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     icon = Res.drawable.ic_rune_reading_icon,
     recipient = recipient,
     title = question,
-    typeRes = topic.readingType(),
+    typeRes = topic.title(),
     drawnRunes = listOf(pastRune, presentRune, futureRune),
   )
 

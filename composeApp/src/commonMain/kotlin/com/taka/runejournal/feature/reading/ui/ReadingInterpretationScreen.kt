@@ -46,7 +46,6 @@ import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.reading_interpretation_topbar_subtitle
-import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 
 @Composable
 fun ReadingInterpretationScreen(
@@ -76,7 +75,7 @@ fun ReadingInterpretationScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
           TakaTopBar(
-            title = stringResource(uiState.topic.readingType()),
+            title = stringResource(uiState.topic.title()),
             subtitle = uiState.recipient?.let { recipient ->
               stringResource(Res.string.reading_interpretation_topbar_subtitle, recipient)
             },
@@ -118,7 +117,7 @@ fun ReadingInterpretationScreen(
         ) { page ->
           val tab = uiState.tabs[page]
           when (tab) {
-            is ReadingInterpretationTab.Rune -> ReadingInterpretationRuneTab(
+            is ReadingInterpretationTabUiState.Rune -> ReadingInterpretationRuneTab(
               drawnRune = tab.drawnRune,
               interpretation = tab.interpretation,
               supplementalInterpretation = tab.supplementalInterpretation,
@@ -126,30 +125,19 @@ fun ReadingInterpretationScreen(
               supplementalKeywords = tab.supplementalKeywords,
               tabDescription = tab.tabDescription
             )
-            is ReadingInterpretationTab.Notes -> ReadingInterpretationNotesTab(
+            is ReadingInterpretationTabUiState.Notes -> ReadingInterpretationNotesTab(
               notes = tab.notes,
               onSaveClicked = viewModel::saveNotes
             )
-            is ReadingInterpretationTab.Share -> {
-              val previewTitle = stringResource(Res.string.reading_share_preview_topbar_title)
+            is ReadingInterpretationTabUiState.Share -> {
               ReadingInterpretationShareTab(
                 recipient = uiState.recipient!!,
                 notes = tab.notes,
                 onPreviewClicked = { personalMessage ->
                   viewModel.saveNotes(personalMessage)
-                  val readingPdfUiModel = ReadingPdfUiModel(
-                    id = uiState.id,
-                    createdAt = uiState.createdAt,
-                    topic = uiState.topic,
-                    recipient = uiState.recipient!!,
-                    question = uiState.question,
-                    personalMessage = personalMessage,
-                    tabs = uiState.tabs.filterIsInstance<ReadingInterpretationTab.Rune>(),
-                  )
+                  val readingPdfUiModel = tab.pdfUiModel.copy(personalMessage = personalMessage)
                   coroutineScope.launch {
-                    previewReadingPdf(
-                      previewTitle = previewTitle,
-                      readingPdfUiModel)
+                    previewReadingPdf(readingPdfUiModel)
                   }
                 }
               )
@@ -172,7 +160,7 @@ fun ReadingInterpretationScreen(
 
 @Composable
 private fun AdaptiveReadingTabRow(
-  tabs: List<ReadingInterpretationTab>,
+  tabs: List<ReadingInterpretationTabUiState>,
   selectedTabIndex: Int,
   onTabSelected: (Int) -> Unit,
 ) {

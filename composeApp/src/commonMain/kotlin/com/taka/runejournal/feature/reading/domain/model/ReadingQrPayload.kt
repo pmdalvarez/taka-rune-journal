@@ -32,7 +32,7 @@ fun DrawnRune.toReadingQrDrawnRuneV1() =
     orientation = orientation.key,
   )
 
-fun TimelineItem.SingleRuneReading.toReadingQrPayloadV1(): ReadingQrPayload.V1 =
+fun TimelineItem.SingleRuneReading.toReadingQrPayload(): ReadingQrPayload =
   ReadingQrPayload.V1(
     spread = RuneSpread.SINGLE_RUNE.key,
     createdAt = createdAt.toEpochMilliseconds(),
@@ -41,7 +41,7 @@ fun TimelineItem.SingleRuneReading.toReadingQrPayloadV1(): ReadingQrPayload.V1 =
     drawnRunes = listOf(drawnRune.toReadingQrDrawnRuneV1()),
   )
 
-fun TimelineItem.PpfRuneReading.toReadingQrPayloadV1(): ReadingQrPayload.V1 =
+fun TimelineItem.PpfRuneReading.toReadingQrPayload(): ReadingQrPayload =
   ReadingQrPayload.V1(
     spread = RuneSpread.PAST_PRESENT_FUTURE.key,
     createdAt = createdAt.toEpochMilliseconds(),
