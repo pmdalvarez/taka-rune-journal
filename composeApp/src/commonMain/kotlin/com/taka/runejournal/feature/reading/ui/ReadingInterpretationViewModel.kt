@@ -123,7 +123,6 @@ class ReadingInterpretationViewModel(
         topic = timelineItem.topic,
         recipient = recipient,
         question = timelineItem.question,
-        personalMessage = timelineItem.notes,
         qrPayload = timelineItem.toReadingQrPayload(),
         runes = listOf(
           getReadingPdfDrawnRuneUiModel(drawnRune = timelineItem.drawnRune, topic = timelineItem.topic)
@@ -143,7 +142,6 @@ class ReadingInterpretationViewModel(
         topic = timelineItem.topic,
         recipient = recipient,
         question = timelineItem.question,
-        personalMessage = timelineItem.notes,
         qrPayload = timelineItem.toReadingQrPayload(),
         runes = listOf(
           getReadingPdfDrawnRuneUiModel(timelineItem.pastRune,Res.string.reading_tab_past_rune, Res.string.reading_position_past_description, timelineItem.topic),
