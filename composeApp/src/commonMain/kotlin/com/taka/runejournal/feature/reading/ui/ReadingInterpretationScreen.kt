@@ -19,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -130,14 +132,15 @@ fun ReadingInterpretationScreen(
               onSaveClicked = viewModel::saveNotes
             )
             is ReadingInterpretationTabUiState.Share -> {
+              var isGeneratingPdf by remember { mutableStateOf(false) }
               ReadingInterpretationShareTab(
                 recipient = uiState.recipient!!,
-                notes = tab.notes,
-                onPreviewClicked = { personalMessage ->
-                  viewModel.saveNotes(personalMessage)
-                  val readingPdfUiModel = tab.pdfUiModel.copy(personalMessage = personalMessage)
+                isGeneratingPdf = isGeneratingPdf,
+                onPreviewClicked = {
+                  isGeneratingPdf = true
                   coroutineScope.launch {
-                    previewReadingPdf(readingPdfUiModel)
+                    previewReadingPdf(tab.pdfUiModel)
+                    isGeneratingPdf = false
                   }
                 }
               )

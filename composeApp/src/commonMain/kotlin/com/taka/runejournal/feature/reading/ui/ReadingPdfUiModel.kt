@@ -25,7 +25,6 @@ data class ReadingPdfUiModel(
   val topic: ReadingTopic,
   val recipient: String,
   val question: String?,
-  val personalMessage: String?,
   val qrPayload: ReadingQrPayload,
   val runes: List<ReadingPdfDrawnRuneUiModel>,
 )

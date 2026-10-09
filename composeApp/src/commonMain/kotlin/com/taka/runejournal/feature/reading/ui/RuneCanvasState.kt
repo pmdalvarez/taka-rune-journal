@@ -244,6 +244,7 @@ data class RuneCanvasState(
     const val RUNE_REVEAL_UNVEILING_GLYPHS_ANIMATION_MILLIS = 1000L
     const val RUNE_REVEAL_COMPLETING_ANIMATIONS_MILLIS = 10000L
     const val IMPULSE_INTERVAL_MILLIS = 120L
+    const val ZOOM_CHANGE_INTERVAL_MILLIS = 200L
     const val ZOOM_SHAKING = 1.5f
     const val ZOOM_REVEAL = 1.25f
     private const val RUNE_HEIGHT_TO_WIDTH_RATIO = 1.5f

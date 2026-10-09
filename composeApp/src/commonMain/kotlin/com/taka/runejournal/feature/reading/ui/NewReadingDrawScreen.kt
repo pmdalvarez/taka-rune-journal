@@ -102,7 +102,7 @@ fun NewReadingDrawScreen(
       else -> 1f
     },
     animationSpec = tween(
-      durationMillis = 200,
+      durationMillis = RuneCanvasState.ZOOM_CHANGE_INTERVAL_MILLIS.toInt(),
       easing = LinearOutSlowInEasing,
     ),
     label = "Rune Canvas Zoom",

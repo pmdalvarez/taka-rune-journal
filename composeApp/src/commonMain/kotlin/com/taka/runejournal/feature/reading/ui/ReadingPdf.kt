@@ -1,9 +1,13 @@
 package com.taka.runejournal.feature.reading.ui
 
 import com.conamobile.pdfkmp.PdfDocument
+import com.conamobile.pdfkmp.composeresources.image
 import com.conamobile.pdfkmp.composeresources.vector
 import com.conamobile.pdfkmp.dsl.PageScope
+import com.conamobile.pdfkmp.geometry.ContentScale
+import com.conamobile.pdfkmp.geometry.PageSize
 import com.conamobile.pdfkmp.layout.BoxAlignment
+import com.conamobile.pdfkmp.layout.PageBreakStrategy
 import com.conamobile.pdfkmp.pdfAsync
 import com.conamobile.pdfkmp.style.PdfColor
 import com.conamobile.pdfkmp.unit.dp
@@ -15,6 +19,7 @@ import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.getString
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.paper_texture
 import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 
@@ -27,10 +32,9 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
     text("Spread:" + spread)
     text("Topic:" + topic)
     text("Question:" + uiModel.question)
-    text(uiModel.personalMessage?: "")
   }
 
-  val outroPage: PageScope.() -> Unit = {
+  val footer: PageScope.() -> Unit = {
     qrCode(
       data = Json.encodeToString(uiModel.qrPayload),
       size = 120.dp,
@@ -82,13 +86,31 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
     )
   }
 
+  val background: PageScope.() -> Unit = {
+    watermark {
+      image(
+        resource = Res.drawable.paper_texture,
+        width = PageSize.A4.width,
+        height =  PageSize.A4.height,
+        contentScale = ContentScale.Crop,
+      )
+    }
+  }
 
   return pdfAsync {
-    page(block = introPage)
-    for (runePage in runePages) {
-      page(block = runePage)
+    defaultPageBreakStrategy  = PageBreakStrategy.Slice
+    page {
+      background()
+      introPage()
+      footer()
     }
-    page(block = outroPage)
+    for (runePage in runePages) {
+      page{
+        background()
+        runePage()
+        footer()
+      }
+    }
   }
 }
 
