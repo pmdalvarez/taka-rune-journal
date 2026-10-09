@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.RuneSpread
+import com.taka.runejournal.core.domain.repository.SettingsRepository
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.generalInterpretation
 import com.taka.runejournal.core.ui.generalKeywords
@@ -12,7 +13,6 @@ import com.taka.runejournal.core.ui.supplementalInterpretation
 import com.taka.runejournal.core.ui.supplementalKeywords
 import com.taka.runejournal.core.ui.utils.format
 import com.taka.runejournal.core.ui.utils.formatAbsolute
-import com.taka.runejournal.feature.reading.domain.model.ReadingQrPayload
 import com.taka.runejournal.feature.reading.domain.model.toReadingQrPayload
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
@@ -21,15 +21,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.reading_load_error
+import taka_rune_journal.composeapp.generated.resources.reading_notes_save_error
 import taka_rune_journal.composeapp.generated.resources.reading_position_future_description
 import taka_rune_journal.composeapp.generated.resources.reading_position_past_description
 import taka_rune_journal.composeapp.generated.resources.reading_position_present_description
-import taka_rune_journal.composeapp.generated.resources.reading_load_error
-import taka_rune_journal.composeapp.generated.resources.reading_notes_save_error
 import taka_rune_journal.composeapp.generated.resources.reading_tab_future_rune
 import taka_rune_journal.composeapp.generated.resources.reading_tab_notes
 import taka_rune_journal.composeapp.generated.resources.reading_tab_past_rune
@@ -37,10 +38,10 @@ import taka_rune_journal.composeapp.generated.resources.reading_tab_present_rune
 import taka_rune_journal.composeapp.generated.resources.reading_tab_share
 import taka_rune_journal.composeapp.generated.resources.reading_tab_single_rune
 import taka_rune_journal.composeapp.generated.resources.timeline_delete_dialog_error
-import kotlin.Long
 
 class ReadingInterpretationViewModel(
   private val id: Long,
+  private val settingsRepository: SettingsRepository,
   private val timelineRepository: TimelineRepository
 ) : ViewModel() {
 
@@ -56,6 +57,7 @@ class ReadingInterpretationViewModel(
 
   private fun loadReading() {
     viewModelScope.launch {
+      val reader = settingsRepository.displayName.first()
       val timelineItem = timelineRepository.getTimelineItem(id)
       when (timelineItem) {
         is TimelineItem.SingleRuneReading -> {
@@ -67,7 +69,7 @@ class ReadingInterpretationViewModel(
             question = timelineItem.question,
             tabs = listOf(
               getRuneTabUiState(timelineItem.drawnRune, Res.string.reading_tab_single_rune, timelineItem.topic),
-              timelineItem.recipient?.let { getShareTabUiState(it, timelineItem) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              timelineItem.recipient?.let { getShareTabUiState(reader, it, timelineItem) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
@@ -82,7 +84,7 @@ class ReadingInterpretationViewModel(
               getRuneTabUiState(timelineItem.pastRune, Res.string.reading_tab_past_rune, timelineItem.topic,Res.string.reading_position_past_description),
               getRuneTabUiState(timelineItem.presentRune, Res.string.reading_tab_present_rune, timelineItem.topic,Res.string.reading_position_present_description),
               getRuneTabUiState(timelineItem.futureRune,Res.string.reading_tab_future_rune, timelineItem.topic,Res.string.reading_position_future_description),
-              timelineItem.recipient?.let { getShareTabUiState(it, timelineItem) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              timelineItem.recipient?.let { getShareTabUiState(reader, it, timelineItem) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
@@ -111,7 +113,7 @@ class ReadingInterpretationViewModel(
       supplementalKeywords = drawnRune.supplementalKeywords(topic)
     )
 
-  private fun getShareTabUiState(recipient: String, timelineItem: TimelineItem.SingleRuneReading): ReadingInterpretationTabUiState.Share =
+  private fun getShareTabUiState(reader: String, recipient: String, timelineItem: TimelineItem.SingleRuneReading): ReadingInterpretationTabUiState.Share =
     ReadingInterpretationTabUiState.Share(
       label = Res.string.reading_tab_share,
       recipient = recipient,
@@ -121,6 +123,7 @@ class ReadingInterpretationViewModel(
         createdAt = timelineItem.createdAt.formatAbsolute(),
         spread = RuneSpread.SINGLE_RUNE,
         topic = timelineItem.topic,
+        reader = reader,
         recipient = recipient,
         question = timelineItem.question,
         qrPayload = timelineItem.toReadingQrPayload(),
@@ -130,7 +133,7 @@ class ReadingInterpretationViewModel(
       )
     )
 
-  private fun getShareTabUiState(recipient: String, timelineItem: TimelineItem.PpfRuneReading): ReadingInterpretationTabUiState.Share =
+  private fun getShareTabUiState(reader: String, recipient: String, timelineItem: TimelineItem.PpfRuneReading): ReadingInterpretationTabUiState.Share =
     ReadingInterpretationTabUiState.Share(
       label = Res.string.reading_tab_share,
       recipient = recipient,
@@ -140,6 +143,7 @@ class ReadingInterpretationViewModel(
         createdAt = timelineItem.createdAt.formatAbsolute(),
         spread = RuneSpread.PAST_PRESENT_FUTURE,
         topic = timelineItem.topic,
+        reader = reader,
         recipient = recipient,
         question = timelineItem.question,
         qrPayload = timelineItem.toReadingQrPayload(),

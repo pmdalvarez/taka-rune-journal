@@ -23,6 +23,7 @@ data class ReadingPdfUiModel(
   val createdAt: String,
   val spread: RuneSpread,
   val topic: ReadingTopic,
+  val reader: String,
   val recipient: String,
   val question: String?,
   val qrPayload: ReadingQrPayload,

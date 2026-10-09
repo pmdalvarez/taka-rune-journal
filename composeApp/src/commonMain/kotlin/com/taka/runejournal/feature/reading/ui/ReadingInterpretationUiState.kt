@@ -2,7 +2,6 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.feature.reading.domain.model.ReadingQrPayload
 import org.jetbrains.compose.resources.StringResource
 
 sealed class ReadingInterpretationTabUiState {

@@ -2,18 +2,16 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.conamobile.pdfkmp.PdfDocument
 import com.conamobile.pdfkmp.composeresources.image
-import com.conamobile.pdfkmp.composeresources.vector
 import com.conamobile.pdfkmp.dsl.PageScope
 import com.conamobile.pdfkmp.geometry.ContentScale
 import com.conamobile.pdfkmp.geometry.PageSize
 import com.conamobile.pdfkmp.layout.BoxAlignment
 import com.conamobile.pdfkmp.layout.PageBreakStrategy
 import com.conamobile.pdfkmp.pdfAsync
-import com.conamobile.pdfkmp.style.PdfColor
 import com.conamobile.pdfkmp.unit.dp
 import com.conamobile.pdfkmp.viewer.KmpPdfLauncher
 import com.taka.runejournal.core.domain.model.RuneOrientation
-import com.taka.runejournal.core.ui.drawableVector
+import com.taka.runejournal.core.ui.drawable
 import com.taka.runejournal.core.ui.origin
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import kotlinx.serialization.json.Json
@@ -28,6 +26,7 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
   val topic = getString(uiModel.topic.title())
   val introPage: PageScope.() -> Unit = {
     text("date: " + uiModel.createdAt)
+    text("Reader: " + uiModel.reader)
     text("Recipient: " + uiModel.recipient)
     text("Spread:" + spread)
     text("Topic:" + topic)
@@ -72,11 +71,11 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
           rotation = if (runeUiModel.orientation == RuneOrientation.REVERSED) 180f else 0f,
         ) {
           aligned(BoxAlignment.Center) {
-            vector(
-              resource = runeUiModel.rune.drawableVector(),
+            image(
+              resource = runeUiModel.rune.drawable(),
               width = runeWidth,
               height = runeHeight,
-              tint = PdfColor.DarkGray,
+              contentScale = ContentScale.Fit
             )
           }
         }
