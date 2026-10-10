@@ -90,22 +90,37 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
   }
 
   val background: PageScope.() -> Unit = {
+    val pageWidth = size.width
+    val pageHeight = size.height
+    val pageInset = 32.dp
+
     watermark {
       image(
         resource = Res.drawable.paper_texture,
-        width = PageSize.A4.width,
-        height =  PageSize.A4.height,
+        width = pageWidth,
+        height = pageHeight,
         contentScale = ContentScale.Crop,
       )
+
+      // border
+      aligned(BoxAlignment.Center) {
+        box(
+          width = pageWidth - (pageInset * 2),
+          height = pageHeight - (pageInset * 2),
+          border = BorderStroke(
+            width = 1.dp,
+            color = PdfColor.fromHex("#8D887F"),
+          ),
+          cornerRadius = 6.dp,
+        ) {}
+      }
     }
   }
-
   return pdfAsync {
     defaultPageBreakStrategy  = PageBreakStrategy.Slice
     page {
       background()
       introPage()
-      footer()
     }
     for (runePage in runePages) {
       page{
@@ -145,11 +160,6 @@ private fun getIntroPage(
   box(
     width = contentWidth,
     height = contentHeight,
-    border = BorderStroke(
-      width = 1.dp,
-      color = PdfColor.fromHex("#8D887F"),
-    ),
-    cornerRadius = 6.dp,
   ) {
     // Branding
     aligned(BoxAlignment.TopCenter) {

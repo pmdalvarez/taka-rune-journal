@@ -120,7 +120,7 @@ fun TakaTopBar(
             Image(
               painter = painterResource(Res.drawable.ic_topbar_icon),
               contentDescription = stringResource(Res.string.app_name),
-              modifier = Modifier.size(28.dp),
+              modifier = Modifier.size(36.dp),
               contentScale = ContentScale.Fit,
               colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
             )

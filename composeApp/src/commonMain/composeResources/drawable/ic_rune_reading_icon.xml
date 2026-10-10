@@ -4,20 +4,39 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
 
+    <!-- Stone outline -->
     <path
         android:fillColor="#FF000000"
         android:pathData="M21,0H3C1.35,0 0,1.35 0,3v18c0,1.65 1.35,3 3,3h18c1.65,0 3,-1.35 3,-3V3c0,-1.65 -1.35,-3 -3,-3zM21,21H3V3h18v18z" />
 
+    <!-- Same 5 marks, each enlarged by 50% -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#FF000000"
-        android:strokeWidth="1.6"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M12,6 L12,18
-                          M12,12 L9,9
-                          M12,12 L15,9
-                          M12,12 L9,15
-                          M12,12 L15,15" />
+        android:fillColor="#FF000000"
+        android:pathData="M6.1,6.38
+                          L8.8,5.93
+                          L7.45,7.88
+                          Z
+
+                          M13.85,8.12
+                          L17.0,7.52
+                          L14.9,10.08
+                          Z
+
+                          M7.7,11.4
+                          L9.8,10.95
+                          L12.05,12.15
+                          L9.65,13.8
+                          Z
+
+                          M13.5,13.7
+                          L15.6,13.1
+                          L18.0,14.15
+                          L15.3,15.95
+                          Z
+
+                          M5.1,16.23
+                          L8.4,15.63
+                          L6.75,17.73
+                          Z" />
 
 </vector>
