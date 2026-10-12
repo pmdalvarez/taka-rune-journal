@@ -3,18 +3,49 @@
     android:height="72dp"
     android:viewportWidth="48"
     android:viewportHeight="72">
+
+    <!-- Upper-left diagonal: (25,15) to (11,29) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M23.586,13.586
+            L9.586,27.586
+            A2,2 0,0 0 12.414,30.414
+            L26.414,16.414
+            A2,2 0,0 0 23.586,13.586
+            Z" />
+
+    <!-- Lower-left diagonal: (11,29) to (25,43) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 25,15 L 11,29 L 25,43 M 23,29 L 37,43 L 23,57" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M9.586,30.414
+            L23.586,44.414
+            A2,2 0,0 0 26.414,41.586
+            L12.414,27.586
+            A2,2 0,0 0 9.586,30.414
+            Z" />
+
+    <!-- Upper-right diagonal: (23,29) to (37,43) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M21.586,30.414
+            L35.586,44.414
+            A2,2 0,0 0 38.414,41.586
+            L24.414,27.586
+            A2,2 0,0 0 21.586,30.414
+            Z" />
+
+    <!-- Lower-right diagonal: (37,43) to (23,57) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M35.586,41.586
+            L21.586,55.586
+            A2,2 0,0 0 24.414,58.414
+            L38.414,44.414
+            A2,2 0,0 0 35.586,41.586
+            Z" />
+
 </vector>

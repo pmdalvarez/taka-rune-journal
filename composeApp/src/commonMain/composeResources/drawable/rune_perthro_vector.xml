@@ -3,18 +3,60 @@
     android:height="72dp"
     android:viewportWidth="48"
     android:viewportHeight="72">
+
+    <!-- Vertical stem: (14,14) to (14,58) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M12,14
+            L12,58
+            A2,2 0,0 0 16,58
+            L16,14
+            A2,2 0,0 0 12,14
+            Z" />
+
+    <!-- Upper-left diagonal: (14,14) to (24,29) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 14,14 L 14,58 M 14,14 L 24,29 L 34,14 M 14,58 L 24,43 L 34,58" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M12.336,15.109
+            L22.336,30.109
+            A2,2 0,0 0 25.664,27.891
+            L15.664,12.891
+            A2,2 0,0 0 12.336,15.109
+            Z" />
+
+    <!-- Upper-right diagonal: (24,29) to (34,14) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M25.664,30.109
+            L35.664,15.109
+            A2,2 0,0 0 32.336,12.891
+            L22.336,27.891
+            A2,2 0,0 0 25.664,30.109
+            Z" />
+
+    <!-- Lower-left diagonal: (14,58) to (24,43) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M15.664,59.109
+            L25.664,44.109
+            A2,2 0,0 0 22.336,41.891
+            L12.336,56.891
+            A2,2 0,0 0 15.664,59.109
+            Z" />
+
+    <!-- Lower-right diagonal: (24,43) to (34,58) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M22.336,44.109
+            L32.336,59.109
+            A2,2 0,0 0 35.664,56.891
+            L25.664,41.891
+            A2,2 0,0 0 22.336,44.109
+            Z" />
+
 </vector>

@@ -3,18 +3,35 @@
     android:height="72dp"
     android:viewportWidth="48"
     android:viewportHeight="72">
+
+    <!-- Vertical stem: original 4dp rounded stroke -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M22,14
+            A2,2 0,0 1 26,14
+            L26,58
+            A2,2 0,0 1 22,58
+            Z" />
+
+    <!-- Upper-left branch: original 4dp rounded stroke -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 24,14 L 24,58 M 24,32 L 14,20 M 24,32 L 34,20" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M25.536,30.720
+            L15.536,18.720
+            A2,2 0,0 0 12.464,21.280
+            L22.464,33.280
+            Z" />
+
+    <!-- Upper-right branch: original 4dp rounded stroke -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M22.464,30.720
+            L32.464,18.720
+            A2,2 0,0 1 35.536,21.280
+            L25.536,33.280
+            Z" />
+
 </vector>

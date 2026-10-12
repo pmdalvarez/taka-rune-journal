@@ -3,18 +3,37 @@
     android:height="72dp"
     android:viewportWidth="48"
     android:viewportHeight="72">
+
+    <!-- Vertical stem: (18,14) to (18,58) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M16,14
+            A2,2 0,0 1 20,14
+            L20,58
+            A2,2 0,0 1 16,58
+            Z" />
+
+    <!-- Upper diagonal: (18,24) to (34,36) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 18,14 L 18,58 M 18,24 L 34,36 M 34,36 L 18,48" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M16.8,25.6
+            L32.8,37.6
+            A2,2 0,0 0 35.2,34.4
+            L19.2,22.4
+            A2,2 0,0 0 16.8,25.6
+            Z" />
+
+    <!-- Lower diagonal: (34,36) to (18,48) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M32.8,34.4
+            L16.8,46.4
+            A2,2 0,0 0 19.2,49.6
+            L35.2,37.6
+            A2,2 0,0 0 32.8,34.4
+            Z" />
+
 </vector>

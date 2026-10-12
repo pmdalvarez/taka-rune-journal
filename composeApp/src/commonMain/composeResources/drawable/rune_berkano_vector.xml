@@ -3,18 +3,60 @@
     android:height="72dp"
     android:viewportWidth="48"
     android:viewportHeight="72">
+
+    <!-- Vertical stem: original 4dp rounded stroke -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="2"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 6,3 H 42 Q 45,3 45,6 V 66 Q 45,69 42,69 H 6 Q 3,69 3,66 V 6 Q 3,3 6,3 Z" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M15,14
+            L15,58
+            A2,2 0,0 0 19,58
+            L19,14
+            A2,2 0,0 0 15,14
+            Z" />
+
+    <!-- Upper diagonal: (17,14) to (33,24) -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#333333"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M 17,14 L 17,58 M 17,14 L 33,24 M 33,24 L 17,34 M 17,34 L 33,46 M 33,46 L 17,58" />
+        android:fillColor="#FF000000"
+        android:pathData="
+            M15.94,15.696
+            L31.94,25.696
+            A2,2 0,0 0 34.06,22.304
+            L18.06,12.304
+            A2,2 0,0 0 15.94,15.696
+            Z" />
+
+    <!-- Upper returning diagonal: (33,24) to (17,34) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M31.94,22.304
+            L15.94,32.304
+            A2,2 0,0 0 18.06,35.696
+            L34.06,25.696
+            A2,2 0,0 0 31.94,22.304
+            Z" />
+
+    <!-- Lower diagonal: (17,34) to (33,46) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M15.8,35.6
+            L31.8,47.6
+            A2,2 0,0 0 34.2,44.4
+            L18.2,32.4
+            A2,2 0,0 0 15.8,35.6
+            Z" />
+
+    <!-- Lower returning diagonal: (33,46) to (17,58) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="
+            M31.8,44.4
+            L15.8,56.4
+            A2,2 0,0 0 18.2,59.6
+            L34.2,47.6
+            A2,2 0,0 0 31.8,44.4
+            Z" />
+
 </vector>
