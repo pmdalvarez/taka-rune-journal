@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.conamobile.pdfkmp.PdfDocument
 import com.conamobile.pdfkmp.composeresources.image
+import com.conamobile.pdfkmp.composeresources.vector
 import com.conamobile.pdfkmp.dsl.PageScope
 import com.conamobile.pdfkmp.geometry.ContentScale
 import com.conamobile.pdfkmp.geometry.Padding
@@ -18,6 +19,7 @@ import com.conamobile.pdfkmp.unit.sp
 import com.conamobile.pdfkmp.viewer.KmpPdfLauncher
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.drawable
+import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.origin
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import kotlinx.serialization.json.Json
@@ -75,11 +77,11 @@ private suspend fun generateReadingPdf(uiModel: ReadingPdfUiModel): PdfDocument 
           rotation = if (runeUiModel.orientation == RuneOrientation.REVERSED) 180f else 0f,
         ) {
           aligned(BoxAlignment.Center) {
-            image(
-              resource = runeUiModel.rune.drawable(),
+            vector(
+              resource = runeUiModel.rune.drawableVector(),
               width = runeWidth,
               height = runeHeight,
-              contentScale = ContentScale.Fit
+              tint = PdfColor.DarkGray,
             )
           }
         }
@@ -256,18 +258,14 @@ private fun getIntroPage(
           box(
             width = coverRuneWidth,
             height = coverRuneHeight,
-            rotation = if (runeUiModel.orientation == RuneOrientation.REVERSED) {
-              180f
-            } else {
-              0f
-            },
+            rotation = if (runeUiModel.orientation == RuneOrientation.REVERSED) 180f else 0f,
           ) {
             aligned(BoxAlignment.Center) {
-              image(
-                resource = runeUiModel.rune.drawable(),
+              vector(
+                resource = runeUiModel.rune.drawableVector(),
                 width = coverRuneWidth,
                 height = coverRuneHeight,
-                contentScale = ContentScale.Fit,
+                tint = PdfColor.DarkGray,
               )
             }
           }
