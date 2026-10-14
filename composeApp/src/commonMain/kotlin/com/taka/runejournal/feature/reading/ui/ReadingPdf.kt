@@ -37,7 +37,8 @@ import taka_rune_journal.composeapp.generated.resources.rune_display_name_revers
  * PDF visual system
  *
  * COLORS
- * Primary   #333333  Main text, titles, rune glyphs, branding, QR
+ * Brand     #4F5D64  Taka branding; matches the app light-theme primary
+ * Primary   #333333  Main text, titles, rune glyphs, QR
  * Secondary #6B6861  Supporting text, labels, metadata
  * Border    #8D887F  Certificate border and header divider
  *
@@ -50,6 +51,7 @@ import taka_rune_journal.composeapp.generated.resources.rune_display_name_revers
  * Small         10sp  Labels / metadata / supporting copy
  */
 
+private val pdfBrandColor = PdfColor.fromHex("#4F5D64")
 private val pdfPrimaryColor = PdfColor.fromHex("#333333")
 private val pdfSecondaryColor = PdfColor.fromHex("#6B6861")
 private val pdfBorderColor = PdfColor.fromHex("#8D887F")
@@ -63,11 +65,10 @@ private val pdfSmallFontSize = 10.sp
 
 private val pdfBodyLineHeight = 17.sp
 
-// Shared Taka brand lockup
 private val pdfBrandWidth = 90.dp
-private val pdfBrandHeight = 30.dp
-private val pdfBrandIconSize = 30.dp
-private val pdfBrandTextStart = 24.dp
+private val pdfBrandHeight = 36.dp
+private val pdfBrandIconSize = 36.dp
+private val pdfBrandTextStart = 30.dp
 private val pdfBrandLetterSpacing = 1.5.sp
 
 private suspend fun generateReadingPdf(
@@ -75,8 +76,8 @@ private suspend fun generateReadingPdf(
 ): PdfDocument {
   val appName = getString(Res.string.app_name).uppercase()
 
-  // Resolve this before entering the PDF DSL because running headers
-  // cannot contain lazy Compose resource nodes.
+  // Running headers cannot contain lazy Compose resource nodes,
+  // so resolve the brand icon before entering the PDF DSL.
   val brandIcon = Res.drawable.ic_topbar_icon.toVectorImage()
 
   val topic = getString(uiModel.topic.title())
@@ -540,7 +541,7 @@ private fun ContainerScope.takaBrandLockup(
         image = brandIcon,
         width = pdfBrandIconSize,
         height = pdfBrandIconSize,
-        tint = pdfPrimaryColor,
+        tint = pdfBrandColor,
       )
     }
 
@@ -552,7 +553,7 @@ private fun ContainerScope.takaBrandLockup(
           fontSize = pdfEmphasisFontSize
           bold = true
           letterSpacing = pdfBrandLetterSpacing
-          color = pdfPrimaryColor
+          color = pdfBrandColor
         }
       }
     }
