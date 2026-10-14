@@ -2,7 +2,9 @@ package com.taka.runejournal.feature.reading.ui
 
 import com.conamobile.pdfkmp.PdfDocument
 import com.conamobile.pdfkmp.composeresources.image
+import com.conamobile.pdfkmp.composeresources.toVectorImage
 import com.conamobile.pdfkmp.composeresources.vector
+import com.conamobile.pdfkmp.dsl.ContainerScope
 import com.conamobile.pdfkmp.dsl.PageScope
 import com.conamobile.pdfkmp.geometry.ContentScale
 import com.conamobile.pdfkmp.geometry.Padding
@@ -16,6 +18,7 @@ import com.conamobile.pdfkmp.style.PdfColor
 import com.conamobile.pdfkmp.style.TextAlign
 import com.conamobile.pdfkmp.unit.dp
 import com.conamobile.pdfkmp.unit.sp
+import com.conamobile.pdfkmp.vector.VectorImage
 import com.conamobile.pdfkmp.viewer.KmpPdfLauncher
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.drawableVector
@@ -24,6 +27,8 @@ import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.getString
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.app_name
+import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.paper_texture
 import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
@@ -32,15 +37,15 @@ import taka_rune_journal.composeapp.generated.resources.rune_display_name_revers
  * PDF visual system
  *
  * COLORS
- * Primary   #333333  Main text, titles, rune glyphs, QR
+ * Primary   #333333  Main text, titles, rune glyphs, branding, QR
  * Secondary #6B6861  Supporting text, labels, metadata
- * Border    #8D887F  Certificate border
+ * Border    #8D887F  Certificate border and header divider
  *
  * FONT SIZES
  * Display       34sp  Recipient name
  * Title         22sp  Rune name
  * Section       16sp  Main reading title
- * Emphasis      14sp  Cover branding / question
+ * Emphasis      14sp  Branding / cover question
  * Body          11sp  Interpretation / prominent secondary text
  * Small         10sp  Labels / metadata / supporting copy
  */
@@ -58,13 +63,28 @@ private val pdfSmallFontSize = 10.sp
 
 private val pdfBodyLineHeight = 17.sp
 
+// Shared Taka brand lockup
+private val pdfBrandWidth = 90.dp
+private val pdfBrandHeight = 30.dp
+private val pdfBrandIconSize = 30.dp
+private val pdfBrandTextStart = 24.dp
+private val pdfBrandLetterSpacing = 1.5.sp
+
 private suspend fun generateReadingPdf(
   uiModel: ReadingPdfUiModel,
 ): PdfDocument {
+  val appName = getString(Res.string.app_name).uppercase()
+
+  // Resolve this before entering the PDF DSL because running headers
+  // cannot contain lazy Compose resource nodes.
+  val brandIcon = Res.drawable.ic_topbar_icon.toVectorImage()
+
   val topic = getString(uiModel.topic.title())
   val spread = getString(uiModel.spread.title)
 
   val introPage = getIntroPage(
+    appName = appName,
+    brandIcon = brandIcon,
     createdAt = uiModel.createdAt,
     topic = topic,
     spread = spread,
@@ -109,6 +129,8 @@ private suspend fun generateReadingPdf(
       }
 
     runePages += getRunePage(
+      appName = appName,
+      brandIcon = brandIcon,
       topic = topic,
       spread = spread,
       question = uiModel.question,
@@ -191,6 +213,8 @@ suspend fun previewReadingPdf(
 }
 
 private fun getIntroPage(
+  appName: String,
+  brandIcon: VectorImage,
   createdAt: String,
   topic: String,
   spread: String,
@@ -213,13 +237,10 @@ private fun getIntroPage(
     aligned(BoxAlignment.TopCenter) {
       spacer(height = 28.dp)
 
-      text("TAKA") {
-        fontSize = pdfEmphasisFontSize
-        bold = true
-        letterSpacing = 4.sp
-        color = pdfPrimaryColor
-        align = TextAlign.Center
-      }
+      takaBrandLockup(
+        appName = appName,
+        brandIcon = brandIcon,
+      )
 
       spacer(height = 3.dp)
 
@@ -342,6 +363,8 @@ private fun getIntroPage(
 }
 
 private fun getRunePage(
+  appName: String,
+  brandIcon: VectorImage,
   topic: String,
   spread: String,
   question: String?,
@@ -364,14 +387,12 @@ private fun getRunePage(
   header { _ ->
     row(
       horizontalArrangement = HorizontalArrangement.SpaceBetween,
-      verticalAlignment = VerticalAlignment.Top,
+      verticalAlignment = VerticalAlignment.Center,
     ) {
-      text("TAKA") {
-        fontSize = pdfSmallFontSize
-        bold = true
-        letterSpacing = 2.sp
-        color = pdfPrimaryColor
-      }
+      takaBrandLockup(
+        appName = appName,
+        brandIcon = brandIcon,
+      )
 
       column(
         spacing = 3.dp,
@@ -413,7 +434,7 @@ private fun getRunePage(
     ) {}
   }
 
-  // Space between the running header and rune-specific content
+  // Space between header and rune-specific content
   spacer(height = 28.dp)
 
   // Position
@@ -503,6 +524,38 @@ private fun getRunePage(
     lineHeight = pdfBodyLineHeight
     color = pdfPrimaryColor
     align = TextAlign.Start
+  }
+}
+
+private fun ContainerScope.takaBrandLockup(
+  appName: String,
+  brandIcon: VectorImage,
+) {
+  box(
+    width = pdfBrandWidth,
+    height = pdfBrandHeight,
+  ) {
+    aligned(BoxAlignment.CenterStart) {
+      vector(
+        image = brandIcon,
+        width = pdfBrandIconSize,
+        height = pdfBrandIconSize,
+        tint = pdfPrimaryColor,
+      )
+    }
+
+    aligned(BoxAlignment.CenterStart) {
+      row {
+        spacer(width = pdfBrandTextStart)
+
+        text(appName) {
+          fontSize = pdfEmphasisFontSize
+          bold = true
+          letterSpacing = pdfBrandLetterSpacing
+          color = pdfPrimaryColor
+        }
+      }
+    }
   }
 }
 
