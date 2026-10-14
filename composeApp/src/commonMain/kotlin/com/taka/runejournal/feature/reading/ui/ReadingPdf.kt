@@ -9,6 +9,7 @@ import com.conamobile.pdfkmp.dsl.PageScope
 import com.conamobile.pdfkmp.geometry.ContentScale
 import com.conamobile.pdfkmp.geometry.Padding
 import com.conamobile.pdfkmp.layout.BoxAlignment
+import com.conamobile.pdfkmp.layout.HorizontalAlignment
 import com.conamobile.pdfkmp.layout.HorizontalArrangement
 import com.conamobile.pdfkmp.layout.PageBreakStrategy
 import com.conamobile.pdfkmp.layout.VerticalAlignment
@@ -20,6 +21,7 @@ import com.conamobile.pdfkmp.unit.dp
 import com.conamobile.pdfkmp.unit.sp
 import com.conamobile.pdfkmp.vector.VectorImage
 import com.conamobile.pdfkmp.viewer.KmpPdfLauncher
+import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.origin
@@ -80,7 +82,7 @@ private suspend fun generateReadingPdf(
   // so resolve the brand icon before entering the PDF DSL.
   val brandIcon = Res.drawable.ic_topbar_icon.toVectorImage()
 
-  val topic = getString(uiModel.topic.title())
+  val topic = if (uiModel.topic != ReadingTopic.GENERAL) getString(uiModel.topic.title()) else ""
   val spread = getString(uiModel.spread.title)
 
   val introPage = getIntroPage(
@@ -286,11 +288,12 @@ private fun getIntroPage(
 
       spacer(height = 32.dp)
 
-      text("$topic Reading") {
-        fontSize = pdfSectionFontSize
-        bold = true
-        color = pdfPrimaryColor
-        align = TextAlign.Center
+      topic.takeIf { it.isNotBlank() }?.let {
+        text(it) {
+          fontSize = pdfSectionFontSize
+          color = pdfPrimaryColor
+          align = TextAlign.Center
+        }
       }
 
       spacer(height = 6.dp)
@@ -308,7 +311,7 @@ private fun getIntroPage(
 
           text("“$it”") {
             fontSize = pdfEmphasisFontSize
-            italic = true
+            bold = true
             color = pdfPrimaryColor
             align = TextAlign.Center
           }
@@ -348,17 +351,15 @@ private fun getIntroPage(
           }
         }
       }
-    }
 
-    // Date
-    aligned(BoxAlignment.BottomCenter) {
+      spacer(height = 30.dp)
+
+      // Date
       text(createdAt) {
         fontSize = pdfSmallFontSize
         color = pdfSecondaryColor
         align = TextAlign.Center
       }
-
-      spacer(height = 28.dp)
     }
   }
 }
@@ -387,7 +388,7 @@ private fun getRunePage(
   // Repeated reading context
   header { _ ->
     row(
-      horizontalArrangement = HorizontalArrangement.SpaceBetween,
+      spacing = 16.dp,
       verticalAlignment = VerticalAlignment.Center,
     ) {
       takaBrandLockup(
@@ -395,36 +396,33 @@ private fun getRunePage(
         brandIcon = brandIcon,
       )
 
+      weighted(1f) {
+        question
+          ?.takeIf { it.isNotBlank() }
+          ?.let {
+            text("“$it”") {
+              fontSize = pdfBodyFontSize
+              bold = true
+              color = pdfPrimaryColor
+              align = TextAlign.Center
+            }
+          }
+      }
       column(
         spacing = 3.dp,
+        horizontalAlignment = HorizontalAlignment.End
       ) {
-        text("$topic Reading") {
+        text(topic) {
           fontSize = pdfSmallFontSize
-          bold = true
           color = pdfPrimaryColor
-          align = TextAlign.End
         }
 
         text(spread) {
           fontSize = pdfSmallFontSize
           color = pdfSecondaryColor
-          align = TextAlign.End
         }
       }
     }
-
-    question
-      ?.takeIf { it.isNotBlank() }
-      ?.let {
-        spacer(height = 12.dp)
-
-        text("“$it”") {
-          fontSize = pdfSmallFontSize
-          italic = true
-          color = pdfSecondaryColor
-          align = TextAlign.Center
-        }
-      }
 
     spacer(height = 12.dp)
 
@@ -454,6 +452,7 @@ private fun getRunePage(
 
     text(it) {
       fontSize = pdfSmallFontSize
+      italic = true
       color = pdfSecondaryColor
       align = TextAlign.Center
     }
