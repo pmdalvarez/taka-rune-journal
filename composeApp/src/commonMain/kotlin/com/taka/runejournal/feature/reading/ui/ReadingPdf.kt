@@ -41,29 +41,25 @@ import taka_rune_journal.composeapp.generated.resources.rune_display_name_revers
  * Title         22sp  Rune name
  * Section       16sp  Main reading title
  * Emphasis      14sp  Cover branding / question
- * Body          11sp  Interpretation / secondary prominent text
+ * Body          11sp  Interpretation / prominent secondary text
  * Small         10sp  Labels / metadata / supporting copy
  */
 
-private object TakaPdfColors {
-  val Primary = PdfColor.fromHex("#333333")
-  val Secondary = PdfColor.fromHex("#6B6861")
-  val Border = PdfColor.fromHex("#8D887F")
-}
+private val pdfPrimaryColor = PdfColor.fromHex("#333333")
+private val pdfSecondaryColor = PdfColor.fromHex("#6B6861")
+private val pdfBorderColor = PdfColor.fromHex("#8D887F")
 
-private object TakaPdfFontSizes {
-  val Display = 34.sp
-  val Title = 22.sp
-  val Section = 16.sp
-  val Emphasis = 14.sp
-  val Body = 11.sp
-  val Small = 10.sp
+private val pdfDisplayFontSize = 34.sp
+private val pdfTitleFontSize = 22.sp
+private val pdfSectionFontSize = 16.sp
+private val pdfEmphasisFontSize = 14.sp
+private val pdfBodyFontSize = 11.sp
+private val pdfSmallFontSize = 10.sp
 
-  val BodyLineHeight = 17.sp
-}
+private val pdfBodyLineHeight = 17.sp
 
 private suspend fun generateReadingPdf(
-  uiModel: ReadingPdfUiModel
+  uiModel: ReadingPdfUiModel,
 ): PdfDocument {
   val topic = getString(uiModel.topic.title())
   val spread = getString(uiModel.spread.title)
@@ -150,7 +146,7 @@ private suspend fun generateReadingPdf(
           height = pageHeight - (pageInset * 2),
           border = BorderStroke(
             width = 1.dp,
-            color = TakaPdfColors.Border,
+            color = pdfBorderColor,
           ),
           cornerRadius = 6.dp,
         ) {}
@@ -180,7 +176,7 @@ private suspend fun generateReadingPdf(
 }
 
 suspend fun previewReadingPdf(
-  uiModel: ReadingPdfUiModel
+  uiModel: ReadingPdfUiModel,
 ) {
   val document = generateReadingPdf(uiModel)
 
@@ -218,19 +214,19 @@ private fun getIntroPage(
       spacer(height = 28.dp)
 
       text("TAKA") {
-        fontSize = TakaPdfFontSizes.Emphasis
+        fontSize = pdfEmphasisFontSize
         bold = true
         letterSpacing = 4.sp
-        color = TakaPdfColors.Primary
+        color = pdfPrimaryColor
         align = TextAlign.Center
       }
 
       spacer(height = 3.dp)
 
       text("Rune Journal") {
-        fontSize = TakaPdfFontSizes.Small
+        fontSize = pdfSmallFontSize
         letterSpacing = 1.sp
-        color = TakaPdfColors.Secondary
+        color = pdfSecondaryColor
         align = TextAlign.Center
       }
     }
@@ -238,19 +234,19 @@ private fun getIntroPage(
     // Main personalized content
     aligned(BoxAlignment.Center) {
       text("A READING FOR") {
-        fontSize = TakaPdfFontSizes.Small
+        fontSize = pdfSmallFontSize
         bold = true
         letterSpacing = 2.sp
-        color = TakaPdfColors.Secondary
+        color = pdfSecondaryColor
         align = TextAlign.Center
       }
 
       spacer(height = 12.dp)
 
       text(recipient) {
-        fontSize = TakaPdfFontSizes.Display
+        fontSize = pdfDisplayFontSize
         bold = true
-        color = TakaPdfColors.Primary
+        color = pdfPrimaryColor
         align = TextAlign.Center
       }
 
@@ -260,8 +256,8 @@ private fun getIntroPage(
           spacer(height = 4.dp)
 
           text("from $it") {
-            fontSize = TakaPdfFontSizes.Body
-            color = TakaPdfColors.Secondary
+            fontSize = pdfBodyFontSize
+            color = pdfSecondaryColor
             align = TextAlign.Center
           }
         }
@@ -269,17 +265,17 @@ private fun getIntroPage(
       spacer(height = 32.dp)
 
       text("$topic Reading") {
-        fontSize = TakaPdfFontSizes.Section
+        fontSize = pdfSectionFontSize
         bold = true
-        color = TakaPdfColors.Primary
+        color = pdfPrimaryColor
         align = TextAlign.Center
       }
 
       spacer(height = 6.dp)
 
       text(spread) {
-        fontSize = TakaPdfFontSizes.Body
-        color = TakaPdfColors.Secondary
+        fontSize = pdfBodyFontSize
+        color = pdfSecondaryColor
         align = TextAlign.Center
       }
 
@@ -289,9 +285,9 @@ private fun getIntroPage(
           spacer(height = 28.dp)
 
           text("“$it”") {
-            fontSize = TakaPdfFontSizes.Emphasis
+            fontSize = pdfEmphasisFontSize
             italic = true
-            color = TakaPdfColors.Primary
+            color = pdfPrimaryColor
             align = TextAlign.Center
           }
         }
@@ -324,7 +320,7 @@ private fun getIntroPage(
                 resource = runeUiModel.rune.drawableVector(),
                 width = coverRuneWidth,
                 height = coverRuneHeight,
-                tint = TakaPdfColors.Primary,
+                tint = pdfPrimaryColor,
               )
             }
           }
@@ -335,8 +331,8 @@ private fun getIntroPage(
     // Date
     aligned(BoxAlignment.BottomCenter) {
       text(createdAt) {
-        fontSize = TakaPdfFontSizes.Small
-        color = TakaPdfColors.Secondary
+        fontSize = pdfSmallFontSize
+        color = pdfSecondaryColor
         align = TextAlign.Center
       }
 
@@ -364,55 +360,69 @@ private fun getRunePage(
     vertical = 48.dp,
   )
 
-  // Branding
-  text("TAKA") {
-    fontSize = TakaPdfFontSizes.Small
-    bold = true
-    letterSpacing = 3.sp
-    color = TakaPdfColors.Primary
-    align = TextAlign.Center
-  }
+  // Repeated reading context
+  header { _ ->
+    row(
+      horizontalArrangement = HorizontalArrangement.SpaceBetween,
+      verticalAlignment = VerticalAlignment.Top,
+    ) {
+      text("TAKA") {
+        fontSize = pdfSmallFontSize
+        bold = true
+        letterSpacing = 2.sp
+        color = pdfPrimaryColor
+      }
 
-  spacer(height = 22.dp)
+      column(
+        spacing = 3.dp,
+      ) {
+        text("$topic Reading") {
+          fontSize = pdfSmallFontSize
+          bold = true
+          color = pdfPrimaryColor
+          align = TextAlign.End
+        }
 
-  // Reading context
-  text("$topic Reading") {
-    fontSize = TakaPdfFontSizes.Body
-    bold = true
-    color = TakaPdfColors.Primary
-    align = TextAlign.Center
-  }
-
-  spacer(height = 4.dp)
-
-  text(spread) {
-    fontSize = TakaPdfFontSizes.Small
-    color = TakaPdfColors.Secondary
-    align = TextAlign.Center
-  }
-
-  question
-    ?.takeIf { it.isNotBlank() }
-    ?.let {
-      spacer(height = 14.dp)
-
-      text("“$it”") {
-        fontSize = TakaPdfFontSizes.Small
-        italic = true
-        color = TakaPdfColors.Secondary
-        align = TextAlign.Center
+        text(spread) {
+          fontSize = pdfSmallFontSize
+          color = pdfSecondaryColor
+          align = TextAlign.End
+        }
       }
     }
 
-  spacer(height = 30.dp)
+    question
+      ?.takeIf { it.isNotBlank() }
+      ?.let {
+        spacer(height = 12.dp)
+
+        text("“$it”") {
+          fontSize = pdfSmallFontSize
+          italic = true
+          color = pdfSecondaryColor
+          align = TextAlign.Center
+        }
+      }
+
+    spacer(height = 12.dp)
+
+    box(
+      width = contentWidth,
+      height = 1.dp,
+      background = pdfBorderColor,
+    ) {}
+  }
+
+  // Space between the running header and rune-specific content
+  spacer(height = 28.dp)
 
   // Position
   position?.let {
     text(it.uppercase()) {
-      fontSize = TakaPdfFontSizes.Small
+      fontSize = pdfSmallFontSize
       bold = true
       letterSpacing = 2.sp
-      color = TakaPdfColors.Secondary
+      color = pdfSecondaryColor
       align = TextAlign.Center
     }
   }
@@ -421,8 +431,8 @@ private fun getRunePage(
     spacer(height = 6.dp)
 
     text(it) {
-      fontSize = TakaPdfFontSizes.Small
-      color = TakaPdfColors.Secondary
+      fontSize = pdfSmallFontSize
+      color = pdfSecondaryColor
       align = TextAlign.Center
     }
   }
@@ -461,7 +471,7 @@ private fun getRunePage(
             resource = runeUiModel.rune.drawableVector(),
             width = runeWidth,
             height = runeHeight,
-            tint = TakaPdfColors.Primary,
+            tint = pdfPrimaryColor,
           )
         }
       }
@@ -471,17 +481,17 @@ private fun getRunePage(
   spacer(height = 14.dp)
 
   text(drawnRuneName) {
-    fontSize = TakaPdfFontSizes.Title
+    fontSize = pdfTitleFontSize
     bold = true
-    color = TakaPdfColors.Primary
+    color = pdfPrimaryColor
     align = TextAlign.Center
   }
 
   spacer(height = 7.dp)
 
   text(keywords) {
-    fontSize = TakaPdfFontSizes.Small
-    color = TakaPdfColors.Secondary
+    fontSize = pdfSmallFontSize
+    color = pdfSecondaryColor
     align = TextAlign.Center
   }
 
@@ -489,9 +499,9 @@ private fun getRunePage(
 
   // Interpretation
   text(fullInterpretation) {
-    fontSize = TakaPdfFontSizes.Body
-    lineHeight = TakaPdfFontSizes.BodyLineHeight
-    color = TakaPdfColors.Primary
+    fontSize = pdfBodyFontSize
+    lineHeight = pdfBodyLineHeight
+    color = pdfPrimaryColor
     align = TextAlign.Start
   }
 }
@@ -509,7 +519,7 @@ private fun getImportFooter(
     qrCode(
       data = qrData,
       size = 64.dp,
-      color = TakaPdfColors.Primary,
+      color = pdfPrimaryColor,
       background = PdfColor.White,
     )
 
@@ -517,16 +527,16 @@ private fun getImportFooter(
       spacing = 4.dp,
     ) {
       text("Keep this reading in Taka") {
-        fontSize = TakaPdfFontSizes.Small
+        fontSize = pdfSmallFontSize
         bold = true
-        color = TakaPdfColors.Primary
+        color = pdfPrimaryColor
       }
 
       text(
         "Scan to import this reading into Taka Rune Journal."
       ) {
-        fontSize = TakaPdfFontSizes.Small
-        color = TakaPdfColors.Secondary
+        fontSize = pdfSmallFontSize
+        color = pdfSecondaryColor
       }
     }
   }

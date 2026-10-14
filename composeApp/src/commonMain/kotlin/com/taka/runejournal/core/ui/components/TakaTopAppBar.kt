@@ -3,7 +3,9 @@ package com.taka.runejournal.core.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -31,7 +33,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.platform.AppBuildConfig
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -114,15 +118,26 @@ fun TakaTopBar(
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {
           Box(
-            modifier = Modifier.size(48.dp),
-            contentAlignment = Alignment.Center,
+            modifier = Modifier.height(48.dp),
+            contentAlignment = Alignment.CenterStart,
           ) {
             Image(
               painter = painterResource(Res.drawable.ic_topbar_icon),
-              contentDescription = stringResource(Res.string.app_name),
+              contentDescription = null,
               modifier = Modifier.size(36.dp),
               contentScale = ContentScale.Fit,
-              colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+              colorFilter = ColorFilter.tint(
+                MaterialTheme.colorScheme.onSurfaceVariant
+              ),
+            )
+            Text(
+              text = stringResource(Res.string.app_name).uppercase(),
+              modifier = Modifier.padding(start = 30.dp),
+              style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.5.sp,
+              ),
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
           }
         }
