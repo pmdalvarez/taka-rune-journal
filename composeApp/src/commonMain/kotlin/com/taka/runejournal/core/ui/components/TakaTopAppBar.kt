@@ -117,6 +117,7 @@ fun TakaTopBar(
     navigationIcon = {
       when (navigationIcon) {
         TakaTopBarNavigationIcon.None -> {
+          val brandColor = MaterialTheme.colorScheme.primary
           Box(
             modifier = Modifier.height(48.dp),
             contentAlignment = Alignment.CenterStart,
@@ -127,7 +128,7 @@ fun TakaTopBar(
               modifier = Modifier.size(36.dp),
               contentScale = ContentScale.Fit,
               colorFilter = ColorFilter.tint(
-                MaterialTheme.colorScheme.onSurfaceVariant
+                brandColor
               ),
             )
             Text(
@@ -137,7 +138,7 @@ fun TakaTopBar(
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 1.5.sp,
               ),
-              color = MaterialTheme.colorScheme.onSurfaceVariant,
+              color = brandColor,
             )
           }
         }
