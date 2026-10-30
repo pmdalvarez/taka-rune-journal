@@ -86,6 +86,8 @@ class JournalEntryDetailViewModel (
   }
 
   fun deleteJournalEntry() {
+    // close dialog before anything that can suspend, e.g. emit waiting on a previous snackbar
+    dismissDeleteDialog()
     viewModelScope.launch {
       val isDeleted = timelineRepository.deleteTimelineItem(_uiState.value.id)
       if (isDeleted) {
@@ -93,7 +95,6 @@ class JournalEntryDetailViewModel (
       } else {
         _uiEvent.emit(UiEvent.ShowError(Res.string.timeline_delete_dialog_error))
       }
-      dismissDeleteDialog() // close dialog regardless if delete succeeded
     }
   }
 
