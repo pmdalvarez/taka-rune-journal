@@ -35,6 +35,7 @@ import com.taka.runejournal.core.ui.components.FadingScrollColumn
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
+import com.taka.runejournal.core.ui.components.TakaTextAction
 import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
@@ -51,6 +52,7 @@ import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.open_book
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
+import taka_rune_journal.composeapp.generated.resources.timeline_welcome_import_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings
@@ -64,6 +66,7 @@ import taka_rune_journal.composeapp.generated.resources.timeline_your_name_promp
 fun WelcomeSection(
   onDisplayNameEntered: (String) -> Unit = {},
   onNewReadingClick: () -> Unit = {},
+  onImportReadingClick: () -> Unit = {},
   modifier: Modifier = Modifier
 ) {
   val pagerState = rememberPagerState (
@@ -89,7 +92,7 @@ fun WelcomeSection(
       when (page) {
         0 -> IntroSlide(onDisplayNameEntered, onContinueClick)
         1 -> RunesSlide(onContinueClick)
-        2 -> ReadingsSlide(onNewReadingClick)
+        2 -> ReadingsSlide(onNewReadingClick, onImportReadingClick)
       }
     }
     // TODO - figure out where the spacing between card and indicator is coming from, because it isn't visible in preview
@@ -195,7 +198,8 @@ fun RunesSlide(
 }
 @Composable
 fun ReadingsSlide(
-  onNewReadingClick: () -> Unit = {}
+  onNewReadingClick: () -> Unit = {},
+  onImportReadingClick: () -> Unit = {}
 ) {
   FadingScrollColumn(
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -244,6 +248,13 @@ fun ReadingsSlide(
         Text(stringResource(Res.string.timeline_button_new_first_reading))
       }
     }
+    TakaTextAction(
+      text = stringResource(Res.string.timeline_welcome_import_reading),
+      onClick = onImportReadingClick,
+      modifier = Modifier
+        .align(Alignment.CenterHorizontally)
+        .padding(top = TakaContentSpacing)
+    )
   }
 }
 
