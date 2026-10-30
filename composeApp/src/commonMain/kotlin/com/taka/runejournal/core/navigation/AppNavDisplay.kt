@@ -74,6 +74,9 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                     onNewJournalEntryClick = {
                         backStack.add(NewJournalEntryRoute)
                     },
+                    onImportReadingClick = {
+                        // TODO: navigate to import reading
+                    },
                     modifier = modifier
                 )
             }

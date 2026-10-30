@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -56,6 +57,7 @@ import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
+import taka_rune_journal.composeapp.generated.resources.timeline_menu_import_reading
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -73,6 +75,7 @@ sealed class TakaTopBarAction {
   data class TimelineActions(
     val onNewReadingClick: () -> Unit,
     val onNewJournalEntryClick: () -> Unit,
+    val onImportReadingClick: () -> Unit,
     val onSettingsClick: () -> Unit,
     val onAboutClick: () -> Unit,
     val onGlossaryClick: () -> Unit,
@@ -207,6 +210,16 @@ fun TakaTopBar(
             expanded = isMenuExpanded,
             onDismissRequest = { isMenuExpanded = false },
           ) {
+            DropdownMenuItem(
+              text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
+              onClick = {
+                isMenuExpanded = false
+                action.onImportReadingClick()
+              },
+            )
+
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+
             DropdownMenuItem(
               text = { Text(stringResource(Res.string.settings_title)) },
               onClick = {

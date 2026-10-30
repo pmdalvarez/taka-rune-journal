@@ -52,6 +52,7 @@ fun TimelineScreen(
     onRuneReadingClick: (Long) -> Unit,
     onNewReadingClick: () -> Unit,
     onNewJournalEntryClick: () -> Unit,
+    onImportReadingClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -83,6 +84,7 @@ fun TimelineScreen(
                     action = TakaTopBarAction.TimelineActions(
                         onNewReadingClick = onNewReadingClick,
                         onNewJournalEntryClick = onNewJournalEntryClick,
+                        onImportReadingClick = onImportReadingClick,
                         onSettingsClick = onSettingsClick,
                         onAboutClick = onAboutClick,
                         onGlossaryClick = onGlossaryClick,
@@ -96,6 +98,7 @@ fun TimelineScreen(
             WelcomeSection(
                 onDisplayNameEntered = viewModel::setDisplayName,
                 onNewReadingClick = onNewReadingClick,
+                onImportReadingClick = onImportReadingClick,
                 modifier = contentModifier
             )
         } else {
