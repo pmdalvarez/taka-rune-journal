@@ -59,7 +59,7 @@
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
     <string name="timeline_menu_import_reading">Import Reading</string>
-    <string name="timeline_welcome_import_reading">Have a reading from a friend? Import it</string>
+    <string name="timeline_welcome_import_reading">Import a Reading</string>
     <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>
     <string name="delete_dialog_title_rune_reading">Delete Rune Reading</string>
     <string name="timeline_delete_dialog_body">Permanently delete this entry?</string>
