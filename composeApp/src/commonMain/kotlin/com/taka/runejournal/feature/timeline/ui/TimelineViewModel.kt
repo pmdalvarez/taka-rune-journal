@@ -71,16 +71,16 @@ class TimelineViewModel(
   }
 
   fun deleteTimelineItem() {
+    val id = _uiState.value.deleteDialogUiState?.id ?: return
+    // close dialog before anything that can suspend, e.g. emit waiting on a previous snackbar
+    dismissDeleteDialog()
     viewModelScope.launch {
-      val isDeleted = _uiState.value.deleteDialogUiState?.let {
-        timelineRepository.deleteTimelineItem(it.id)
-      } ?: false
+      val isDeleted = timelineRepository.deleteTimelineItem(id)
       if (isDeleted) {
         _uiEvent.emit(UiEvent.ShowInfo(Res.string.timeline_delete_dialog_success))
       } else {
         _uiEvent.emit(UiEvent.ShowError(Res.string.timeline_delete_dialog_error))
       }
-      dismissDeleteDialog() // close dialog regardless if delete succeeded
     }
   }
 }
