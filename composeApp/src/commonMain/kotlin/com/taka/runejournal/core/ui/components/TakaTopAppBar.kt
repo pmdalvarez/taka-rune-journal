@@ -210,14 +210,6 @@ fun TakaTopBar(
             onDismissRequest = { isMenuExpanded = false },
           ) {
             DropdownMenuItem(
-              text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
-              onClick = {
-                isMenuExpanded = false
-                action.onImportReadingClick()
-              },
-            )
-
-            DropdownMenuItem(
               text = { Text(stringResource(Res.string.settings_title)) },
               onClick = {
                 isMenuExpanded = false
@@ -238,6 +230,14 @@ fun TakaTopBar(
               onClick = {
                 isMenuExpanded = false
                 action.onGlossaryClick()
+              },
+            )
+
+            DropdownMenuItem(
+              text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
+              onClick = {
+                isMenuExpanded = false
+                action.onImportReadingClick()
               },
             )
 
