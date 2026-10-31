@@ -5,6 +5,8 @@ import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import kotlinx.coroutines.flow.Flow
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 interface TimelineRepository {
 
@@ -18,7 +20,8 @@ interface TimelineRepository {
     recipient: String?,
     question: String?,
     topic: ReadingTopic,
-    rune: DrawnRune
+    rune: DrawnRune,
+    createdAt: Instant = Clock.System.now()
   ): Long
 
   suspend fun createPpfRuneReading(
@@ -27,7 +30,8 @@ interface TimelineRepository {
     topic: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
-    futureRune: DrawnRune
+    futureRune: DrawnRune,
+    createdAt: Instant = Clock.System.now()
   ): Long
 
   suspend fun updateTimelineItem(id: Long, notes: String?, title: String?): Boolean
