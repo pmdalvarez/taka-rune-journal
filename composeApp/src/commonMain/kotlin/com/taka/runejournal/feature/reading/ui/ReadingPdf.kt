@@ -26,7 +26,7 @@ import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.origin
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
-import kotlinx.serialization.json.Json
+import com.taka.runejournal.feature.reading.data.encode
 import org.jetbrains.compose.resources.getString
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.app_name
@@ -146,7 +146,7 @@ private suspend fun generateReadingPdf(
     )
   }
 
-  val qrData = Json.encodeToString(uiModel.qrPayload)
+  val qrData = uiModel.qrPayload.encode()
 
   val importFooter = getImportFooter(
     qrData = qrData,
