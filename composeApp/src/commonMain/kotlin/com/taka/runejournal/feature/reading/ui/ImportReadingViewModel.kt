@@ -10,4 +10,7 @@ class ImportReadingViewModel : ViewModel() {
   private val _uiEvent = MutableSharedFlow<UiEvent>()
   val uiEvent = _uiEvent.asSharedFlow()
 
+  fun importReading(qrCode: String) {
+  }
+
 }
