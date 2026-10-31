@@ -1,4 +1,4 @@
-package com.taka.runejournal.feature.reading.data.model
+package com.taka.runejournal.feature.reading.data
 
 
 import com.taka.runejournal.feature.reading.domain.model.ReadingQrPayload
