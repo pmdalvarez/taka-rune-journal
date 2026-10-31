@@ -27,6 +27,9 @@ data object NewJournalEntryRoute : AppRoute
 data object NewReadingFlowRoute : AppRoute
 
 @Serializable
+data object ImportReadingRoute : AppRoute
+
+@Serializable
 data object SettingsRoute : AppRoute
 
 @Serializable
