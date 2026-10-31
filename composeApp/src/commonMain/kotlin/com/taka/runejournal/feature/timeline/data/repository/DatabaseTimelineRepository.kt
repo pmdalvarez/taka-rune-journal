@@ -14,6 +14,7 @@ import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlin.time.Instant
 
 class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) : TimelineRepository {
 
@@ -40,9 +41,12 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     recipient: String?,
     question: String?,
     topic: ReadingTopic,
-    rune: DrawnRune
+    rune: DrawnRune,
+    createdAt: Instant
   ): Long {
-    val timelineItemEntity = TimelineItemEntity()
+    val timelineItemEntity = TimelineItemEntity(
+      createdAt = createdAt.toEpochMilliseconds()
+    )
     val runeEmbedded = rune.toEmbedded()
     return timelineItemDao.insertSingleRuneReading(
       timelineItemEntity = timelineItemEntity,
@@ -59,9 +63,12 @@ class DatabaseTimelineRepository(private val timelineItemDao: TimelineItemDao) :
     topic: ReadingTopic,
     pastRune: DrawnRune,
     presentRune: DrawnRune,
-    futureRune: DrawnRune
+    futureRune: DrawnRune,
+    createdAt: Instant
   ): Long {
-    val timelineItemEntity = TimelineItemEntity()
+    val timelineItemEntity = TimelineItemEntity(
+      createdAt = createdAt.toEpochMilliseconds()
+    )
     val pastRuneEmbedded = pastRune.toEmbedded()
     val presentRuneEmbedded = presentRune.toEmbedded()
     val futureRuneEmbedded = futureRune.toEmbedded()
