@@ -1,6 +1,7 @@
 package com.taka.runejournal.core.di
 
 import com.taka.runejournal.feature.reading.ui.NewReadingViewModel
+import com.taka.runejournal.feature.reading.ui.ImportReadingViewModel
 import com.taka.runejournal.core.data.repository.DataStoreSettingsRepository
 import com.taka.runejournal.core.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
@@ -67,6 +68,10 @@ val appModule = module {
     NewReadingViewModel(
       timelineRepository = get()
     )
+  }
+
+  viewModel {
+    ImportReadingViewModel()
   }
 
 }
