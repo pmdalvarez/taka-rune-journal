@@ -56,6 +56,7 @@ import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
+import taka_rune_journal.composeapp.generated.resources.timeline_menu_import_reading
 
 enum class TakaTopBarNavigationIcon {
   None,
@@ -73,6 +74,7 @@ sealed class TakaTopBarAction {
   data class TimelineActions(
     val onNewReadingClick: () -> Unit,
     val onNewJournalEntryClick: () -> Unit,
+    val onImportReadingClick: () -> Unit,
     val onSettingsClick: () -> Unit,
     val onAboutClick: () -> Unit,
     val onGlossaryClick: () -> Unit,
@@ -228,6 +230,14 @@ fun TakaTopBar(
               onClick = {
                 isMenuExpanded = false
                 action.onGlossaryClick()
+              },
+            )
+
+            DropdownMenuItem(
+              text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
+              onClick = {
+                isMenuExpanded = false
+                action.onImportReadingClick()
               },
             )
 

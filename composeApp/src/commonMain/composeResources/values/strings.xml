@@ -23,7 +23,7 @@
     <string name="settings_save_error">Settings could not be saved. Please try again.</string>
     <string name="settings_save_error_blank_name">Please enter a name</string>
     <string name="settings_theme">Theme</string>
-    <string name ="settings_theme_description">Choose how Taka appears. System follows your device setting.</string>"
+    <string name ="settings_theme_description">Choose how Taka appears. System follows your device setting.</string>
     <string name="theme_mode_system">System</string>
     <string name="theme_mode_dark">Dark</string>
     <string name="theme_mode_light">Light</string>
@@ -58,6 +58,8 @@
     <string name="timeline_item_reading_recipient">For %1$s</string>
     <string name="timeline_button_new_reading">New Reading</string>
     <string name="timeline_button_new_journal_entry">New Entry</string>
+    <string name="timeline_menu_import_reading">Import Reading</string>
+    <string name="timeline_welcome_import_reading">Import a Reading</string>
     <string name="delete_dialog_title_journal_entry">Delete Journal Entry</string>
     <string name="delete_dialog_title_rune_reading">Delete Rune Reading</string>
     <string name="timeline_delete_dialog_body">Permanently delete this entry?</string>
@@ -127,4 +129,6 @@
     <string name="reading_draw_youve_drawn_rune_reversed">You've drawn reversed %1$s</string>
     <string name="reading_draw_your_runes">Your Runes</string>
     <string name="reading_draw_save_error">Your reading could not be saved. Please try again.</string>
+    <string name="reading_import_topbar_title">Import Reading</string>
+    <string name="reading_import_error">Reading could not be imported. Please try again.</string>
 </resources>
