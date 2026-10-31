@@ -15,6 +15,7 @@ import com.taka.runejournal.feature.reading.navigation.NewReadingFlowNavDisplay
 import com.taka.runejournal.feature.more.ui.SettingsScreen
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.reading.ui.ImportReadingScreen
+import com.taka.runejournal.feature.reading.ui.ImportReadingViewModel
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationScreen
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
@@ -154,7 +155,17 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
             }
 
             entry<ImportReadingRoute> {
+                val viewModel = koinViewModel<ImportReadingViewModel>()
+
                 ImportReadingScreen(
+                    viewModel = viewModel,
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    onNavigateToReading = { id ->
+                        backStack.removeLastOrNull()
+                        backStack.add(ReadingInterpretationRoute(id = id))
+                    },
                     modifier = modifier
                 )
             }
