@@ -13,6 +13,7 @@ compose-multiplatform = "1.12.0"
 lifecycle = "2.10.0"
 datastore = "1.2.1"
 junit = "4.13.2"
+kscan = "0.10.0"
 koin = "4.2.2"
 kotlin = "2.4.0"
 kotlinx-datetime = "0.8.0"
@@ -64,6 +65,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kscan = { module = "io.github.ismai117:KScan", version.ref = "kscan" }
 pdfkmp = { module = "io.github.conamobiledev:pdfkmp", version.ref = "pdfkmp" }
 pdfkmp-compose-resources = { module = "io.github.conamobiledev:pdfkmp-compose-resources", version.ref = "pdfkmp" }
 pdfkmp-viewer = { module = "io.github.conamobiledev:pdfkmp-viewer", version.ref = "pdfkmp" }

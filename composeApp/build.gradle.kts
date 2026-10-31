@@ -43,6 +43,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.uiTooling)
             implementation(libs.datastore.preferences.android)
+            implementation(libs.androidx.activity.compose)
         }
 
         commonMain.dependencies {
@@ -70,6 +71,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.serialization.core)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kscan)
             implementation(libs.pdfkmp)
             implementation(libs.pdfkmp.compose.resources)
             implementation(libs.pdfkmp.viewer)
