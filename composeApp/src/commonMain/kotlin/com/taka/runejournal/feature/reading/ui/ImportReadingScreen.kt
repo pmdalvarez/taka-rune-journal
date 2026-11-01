@@ -46,7 +46,6 @@ import org.ncgroup.kscan.BarcodeFormat
 import org.ncgroup.kscan.BarcodeResult
 import org.ncgroup.kscan.ScannerView
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.reading_import_camera_error
 import taka_rune_journal.composeapp.generated.resources.reading_import_camera_permission_denied
 import taka_rune_journal.composeapp.generated.resources.reading_import_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_import_topbar_title
@@ -69,7 +68,6 @@ fun ImportReadingScreen(
   var scannerSession by remember { mutableIntStateOf(0) }
   var lastScannedCode by remember { mutableStateOf<String?>(null) }
   var rejectedCode by remember { mutableStateOf<String?>(null) }
-  var isCameraFailed by remember { mutableStateOf(false) }
 
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
@@ -116,11 +114,7 @@ fun ImportReadingScreen(
           ),
         contentAlignment = Alignment.Center,
       ) {
-        if (!isCameraPermissionGranted) {
-          ScanAreaMessage(text = stringResource(Res.string.reading_import_camera_permission_denied))
-        } else if (isCameraFailed) {
-          ScanAreaMessage(text = stringResource(Res.string.reading_import_camera_error))
-        } else {
+        if (isCameraPermissionGranted) {
           key(scannerSession) {
             ScannerView(
               codeTypes = listOf(BarcodeFormat.FORMAT_QR_CODE),
@@ -132,7 +126,9 @@ fun ImportReadingScreen(
                   lastScannedCode = result.barcode.data
                   viewModel.importReading(result.barcode.data)
                 }
-                is BarcodeResult.OnFailed -> isCameraFailed = true
+                // Ignored on purpose: this only happens when the camera cannot start, usually because another app
+                // such as a video call is using it, or a frame fails to decode, both of which are rare.
+                is BarcodeResult.OnFailed -> {}
               }
             }
           }
@@ -141,6 +137,14 @@ fun ImportReadingScreen(
             shape = scanAreaShape,
             color = MaterialTheme.colorScheme.background,
             modifier = Modifier.matchParentSize(),
+          )
+        } else {
+          Text(
+            text = stringResource(Res.string.reading_import_camera_permission_denied),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(TakaContentSpacing),
           )
         }
       }
@@ -153,22 +157,6 @@ fun ImportReadingScreen(
       )
     }
   }
-}
-
-/**
- * A short message shown in place of the camera when it cannot be used.
- */
-@Composable
-private fun ScanAreaMessage(
-  text: String,
-) {
-  Text(
-    text = text,
-    style = MaterialTheme.typography.bodyMedium,
-    color = MaterialTheme.colorScheme.onSurfaceVariant,
-    textAlign = TextAlign.Center,
-    modifier = Modifier.padding(TakaContentSpacing),
-  )
 }
 
 /**
