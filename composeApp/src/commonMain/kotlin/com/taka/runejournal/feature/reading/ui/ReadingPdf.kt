@@ -49,7 +49,7 @@ import kotlin.math.ceil
  * Border    #8D887F  Page border and section dividers
  *
  * FONT SIZES
- * Display       30sp  Recipient name
+ * Display       24sp  Reading title, e.g. "A Reading for Ray"
  * Title         18sp  Rune name
  * Emphasis      14sp  Branding / topic / question
  * Body        12.5sp  Interpretation
@@ -61,7 +61,7 @@ private val pdfPrimaryColor = PdfColor.fromHex("#333333")
 private val pdfSecondaryColor = PdfColor.fromHex("#6B6861")
 private val pdfBorderColor = PdfColor.fromHex("#8D887F")
 
-private val pdfDisplayFontSize = 30.sp
+private val pdfDisplayFontSize = 24.sp
 private val pdfTitleFontSize = 18.sp
 private val pdfEmphasisFontSize = 14.sp
 private val pdfBodyFontSize = 12.5.sp
@@ -265,17 +265,7 @@ private fun PageScope.titleBlock(
 
   spacer(height = 24.dp)
 
-  text("A READING FOR") {
-    fontSize = pdfSmallFontSize
-    bold = true
-    letterSpacing = 2.sp
-    color = pdfSecondaryColor
-    align = TextAlign.Center
-  }
-
-  spacer(height = 6.dp)
-
-  text(recipient) {
+  text("A Reading for $recipient") {
     fontSize = pdfDisplayFontSize
     bold = true
     color = pdfPrimaryColor
