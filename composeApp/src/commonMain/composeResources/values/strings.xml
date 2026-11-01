@@ -132,5 +132,6 @@
     <string name="reading_import_topbar_title">Import Reading</string>
     <string name="reading_import_error">Reading could not be imported. Please try again.</string>
     <string name="reading_import_instruction">Scan the QR code.</string>
+    <string name="reading_import_camera_error">Camera could not be started. Please try again.</string>
     <string name="reading_import_camera_permission_denied">Camera access is needed to scan QR codes.</string>
 </resources>
