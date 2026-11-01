@@ -67,13 +67,11 @@ fun ImportReadingScreen(
   // After a failed import the scanner restarts with a new session and skips the code that just failed.
   var scannerSession by remember { mutableIntStateOf(0) }
   var lastScannedCode by remember { mutableStateOf<String?>(null) }
-  var rejectedCode by remember { mutableStateOf<String?>(null) }
 
   LaunchedEffect(Unit) {
     viewModel.uiEvent.collect { event ->
       when (event) {
         is UiEvent.ShowError -> {
-          rejectedCode = lastScannedCode
           scannerSession++
           snackbarHostState.showErrorSnackbar(message = getString(event.messageRes))
         }
@@ -119,7 +117,7 @@ fun ImportReadingScreen(
             ScannerView(
               codeTypes = listOf(BarcodeFormat.FORMAT_QR_CODE),
               modifier = Modifier.fillMaxSize(),
-              filter = { barcode -> barcode.data != rejectedCode },
+              filter = { barcode -> barcode.data != lastScannedCode },
             ) { result ->
               when (result) {
                 is BarcodeResult.OnSuccess -> {
