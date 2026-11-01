@@ -29,44 +29,56 @@ class ImportReadingViewModel(
     viewModelScope.launch {
       // Decoding throws a SerializationException (an IllegalArgumentException) for QR codes that are not Taka readings
       val payload = try {
-        qrCode.decodeReadingQrPayload() as? ReadingQrPayload.V1
+        qrCode.decodeReadingQrPayload()
       } catch (e: IllegalArgumentException) {
         null
       }
-      val spread = payload?.let { RuneSpread.fromKey(it.spread) }
-      val topic = payload?.let { ReadingTopic.fromKey(it.topic) }
-      // Runes with unknown keys are dropped, which the rune count check below then catches
-      val drawnRunes = payload?.drawnRunes?.mapNotNull { drawnRune ->
-        val rune = Rune.fromKey(drawnRune.rune)
-        val orientation = RuneOrientation.fromKey(drawnRune.orientation)
-        if (rune != null && orientation != null) DrawnRune(rune, orientation) else null
+
+      val readingId = when (payload) {
+        is ReadingQrPayload.V1 -> saveReading(payload)
+        null -> null
       }
 
-      if (payload == null || spread == null || topic == null || drawnRunes == null || drawnRunes.size != spread.runeCount) {
+      if (readingId != null) {
+        _uiEvent.emit(UiEvent.NavigateToItem(itemId = readingId))
+      } else {
         _uiEvent.emit(UiEvent.ShowError(Res.string.reading_import_error))
-        return@launch
       }
+    }
+  }
 
-      val createdAt = Instant.fromEpochMilliseconds(payload.createdAt)
-      val readingId: Long = when (spread) {
-        RuneSpread.SINGLE_RUNE -> timelineRepository.createSingleRuneReading(
-          recipient = null,
-          question = payload.question,
-          topic = topic,
-          rune = drawnRunes[0],
-          createdAt = createdAt,
-        )
-        RuneSpread.PAST_PRESENT_FUTURE -> timelineRepository.createPpfRuneReading(
-          recipient = null,
-          question = payload.question,
-          topic = topic,
-          pastRune = drawnRunes[0],
-          presentRune = drawnRunes[1],
-          futureRune = drawnRunes[2],
-          createdAt = createdAt,
-        )
-      }
-      _uiEvent.emit(UiEvent.NavigateToItem(itemId = readingId))
+  /**
+   * Saves a version 1 payload as a reading. Returns its id, or null if the payload contains unknown keys.
+   */
+  private suspend fun saveReading(payload: ReadingQrPayload.V1): Long? {
+    val spread = RuneSpread.fromKey(payload.spread) ?: return null
+    val topic = ReadingTopic.fromKey(payload.topic) ?: return null
+    // Runes with unknown keys are dropped, which the rune count check below then catches
+    val drawnRunes = payload.drawnRunes.mapNotNull { drawnRune ->
+      val rune = Rune.fromKey(drawnRune.rune)
+      val orientation = RuneOrientation.fromKey(drawnRune.orientation)
+      if (rune != null && orientation != null) DrawnRune(rune, orientation) else null
+    }
+    if (drawnRunes.size != spread.runeCount) return null
+
+    val createdAt = Instant.fromEpochMilliseconds(payload.createdAt)
+    return when (spread) {
+      RuneSpread.SINGLE_RUNE -> timelineRepository.createSingleRuneReading(
+        recipient = null,
+        question = payload.question,
+        topic = topic,
+        rune = drawnRunes[0],
+        createdAt = createdAt,
+      )
+      RuneSpread.PAST_PRESENT_FUTURE -> timelineRepository.createPpfRuneReading(
+        recipient = null,
+        question = payload.question,
+        topic = topic,
+        pastRune = drawnRunes[0],
+        presentRune = drawnRunes[1],
+        futureRune = drawnRunes[2],
+        createdAt = createdAt,
+      )
     }
   }
 
