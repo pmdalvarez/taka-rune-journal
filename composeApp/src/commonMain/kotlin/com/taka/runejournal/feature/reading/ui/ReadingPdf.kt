@@ -33,6 +33,11 @@ import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.paper_texture
+import taka_rune_journal.composeapp.generated.resources.reading_pdf_from_reader
+import taka_rune_journal.composeapp.generated.resources.reading_pdf_import_description
+import taka_rune_journal.composeapp.generated.resources.reading_pdf_import_title
+import taka_rune_journal.composeapp.generated.resources.reading_pdf_question
+import taka_rune_journal.composeapp.generated.resources.reading_pdf_title
 import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 import kotlin.math.ceil
@@ -90,9 +95,6 @@ private val pdfSectionRuneWidth = 40.dp
 private val pdfSectionRuneHeight = 60.dp
 private val pdfQrCodeSize = 88.dp
 
-private const val IMPORT_FOOTER_TITLE = "Keep this reading in Taka"
-private const val IMPORT_FOOTER_DESCRIPTION = "Scan to import this reading into Taka Rune Journal."
-
 private class PdfRuneSection(
   val position: String?,
   val positionDescription: String?,
@@ -145,6 +147,19 @@ private suspend fun generateReadingPdf(
     )
   }
 
+  val title = getString(Res.string.reading_pdf_title, uiModel.recipient)
+  val meta =
+    if (uiModel.reader.isNotBlank()) {
+      getString(Res.string.reading_pdf_from_reader, uiModel.reader, uiModel.createdAt)
+    } else {
+      uiModel.createdAt
+    }
+  val question = uiModel.question
+    ?.takeIf { it.isNotBlank() }
+    ?.let { getString(Res.string.reading_pdf_question, it) }
+  val importTitle = getString(Res.string.reading_pdf_import_title)
+  val importDescription = getString(Res.string.reading_pdf_import_description)
+
   val content: PageScope.() -> Unit = {
     padding = pdfContentPadding
     val contentWidth = size.width - pdfContentPadding.left - pdfContentPadding.right
@@ -152,11 +167,10 @@ private suspend fun generateReadingPdf(
     titleBlock(
       appName = appName,
       brandIcon = brandIcon,
-      recipient = uiModel.recipient,
-      reader = uiModel.reader,
-      createdAt = uiModel.createdAt,
+      title = title,
+      meta = meta,
       topic = topic,
-      question = uiModel.question,
+      question = question,
       overviewRunes = if (isMultiRuneSpread) uiModel.runes else emptyList(),
     )
 
@@ -164,7 +178,11 @@ private suspend fun generateReadingPdf(
       runeSection(section = section, contentWidth = contentWidth)
     }
 
-    importFooter(qrData = uiModel.qrPayload.encode())
+    importFooter(
+      qrData = uiModel.qrPayload.encode(),
+      title = importTitle,
+      description = importDescription,
+    )
   }
 
   val measuringDocument = renderReadingPdf(
@@ -174,7 +192,7 @@ private suspend fun generateReadingPdf(
   )
 
   return renderReadingPdf(
-    pageHeight = measureContentHeight(measuringDocument),
+    pageHeight = measureContentHeight(measuringDocument, importTitle),
     drawBackground = true,
     content = content,
   )
@@ -199,10 +217,10 @@ private suspend fun renderReadingPdf(
  * The last text on the page is the import footer. Its QR code is vertically centred against the
  * footer text and taller than it, so the bottom of the QR code is calculated from that text.
  */
-private fun measureContentHeight(document: PdfDocument): Dp {
+private fun measureContentHeight(document: PdfDocument, importTitle: String): Dp {
   val runs = document.textRuns.filter { it.pageIndex == 0 }
   val textBottom = runs.maxOfOrNull { it.yPoints + it.heightPoints } ?: return pdfMeasuringPageHeight
-  val footerTop = runs.lastOrNull { it.text == IMPORT_FOOTER_TITLE }?.yPoints ?: textBottom
+  val footerTop = runs.lastOrNull { it.text == importTitle }?.yPoints ?: textBottom
   val qrBottom = (footerTop + textBottom) / 2f + pdfQrCodeSize.value / 2f
   return (maxOf(textBottom, qrBottom) + pdfContentPadding.bottom.value + pdfMeasuringBuffer.value).dp
 }
@@ -246,9 +264,8 @@ private fun PageScope.background() {
 private fun PageScope.titleBlock(
   appName: String,
   brandIcon: VectorImage,
-  recipient: String,
-  reader: String,
-  createdAt: String,
+  title: String,
+  meta: String,
   topic: String,
   question: String?,
   overviewRunes: List<ReadingPdfDrawnRuneUiModel>,
@@ -262,7 +279,7 @@ private fun PageScope.titleBlock(
 
   spacer(height = 24.dp)
 
-  text("A Reading for $recipient") {
+  text(title) {
     fontSize = pdfDisplayFontSize
     bold = true
     color = pdfPrimaryColor
@@ -271,7 +288,6 @@ private fun PageScope.titleBlock(
 
   spacer(height = 6.dp)
 
-  val meta = if (reader.isNotBlank()) "from $reader · $createdAt" else createdAt
   text(meta) {
     fontSize = pdfSmallFontSize
     color = pdfSecondaryColor
@@ -288,18 +304,16 @@ private fun PageScope.titleBlock(
     }
   }
 
-  question
-    ?.takeIf { it.isNotBlank() }
-    ?.let {
-      spacer(height = 14.dp)
+  question?.let {
+    spacer(height = 14.dp)
 
-      text("“$it”") {
-        fontSize = pdfEmphasisFontSize
-        bold = true
-        color = pdfPrimaryColor
-        align = TextAlign.Center
-      }
+    text(it) {
+      fontSize = pdfEmphasisFontSize
+      bold = true
+      color = pdfPrimaryColor
+      align = TextAlign.Center
     }
+  }
 
   if (overviewRunes.isNotEmpty()) {
     spacer(height = 18.dp)
@@ -392,6 +406,8 @@ private fun PageScope.runeSection(
 
 private fun PageScope.importFooter(
   qrData: String,
+  title: String,
+  description: String,
 ) {
   sectionDivider(top = 30.dp)
 
@@ -411,13 +427,13 @@ private fun PageScope.importFooter(
       column(
         spacing = 3.dp,
       ) {
-        text(IMPORT_FOOTER_TITLE) {
+        text(title) {
           fontSize = pdfSmallFontSize
           bold = true
           color = pdfPrimaryColor
         }
 
-        text(IMPORT_FOOTER_DESCRIPTION) {
+        text(description) {
           fontSize = pdfSmallFontSize
           color = pdfSecondaryColor
         }
