@@ -30,8 +30,6 @@ import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.semantics.heading
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
@@ -50,7 +48,7 @@ import org.ncgroup.kscan.ScannerView
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.reading_import_camera_permission_denied
 import taka_rune_journal.composeapp.generated.resources.reading_import_instruction
-import taka_rune_journal.composeapp.generated.resources.reading_import_title
+import taka_rune_journal.composeapp.generated.resources.reading_import_topbar_title
 
 private const val SCAN_AREA_WIDTH_FRACTION = 0.8f
 private val ScanAreaBorderWidth = 4.dp
@@ -90,6 +88,7 @@ fun ImportReadingScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
       TakaTopBar(
+        title = stringResource(Res.string.reading_import_topbar_title),
         navigationIcon = TakaTopBarNavigationIcon.Back,
         onNavigationClick = onBackClick,
       )
@@ -102,17 +101,8 @@ fun ImportReadingScreen(
     ) {
       val scanAreaShape = MaterialTheme.shapes.extraLarge
 
-      // The screen title sits here instead of the top bar, so it is marked as a heading for screen readers
-      Text(
-        text = stringResource(Res.string.reading_import_title),
-        style = MaterialTheme.typography.headlineSmall,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.semantics { heading() },
-      )
-
       Box(
         modifier = Modifier
-          .padding(top = TakaContentSpacing)
           .fillMaxWidth(SCAN_AREA_WIDTH_FRACTION)
           .aspectRatio(1f)
           .clip(scanAreaShape)
