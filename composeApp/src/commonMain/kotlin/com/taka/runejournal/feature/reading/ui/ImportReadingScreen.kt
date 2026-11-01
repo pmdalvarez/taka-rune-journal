@@ -4,9 +4,11 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -103,9 +105,15 @@ fun ImportReadingScreen(
         textAlign = TextAlign.Center,
       )
 
+      // Equal flexible space above and below keeps the scan area centred in the space under the heading
+      Spacer(
+        modifier = Modifier
+          .heightIn(min = TakaSectionSpacing)
+          .weight(1f)
+      )
+
       Box(
         modifier = Modifier
-          .padding(top = TakaSectionSpacing)
           .fillMaxWidth(SCAN_AREA_WIDTH_FRACTION)
           .aspectRatio(1f)
           .clip(scanAreaShape)
@@ -144,6 +152,8 @@ fun ImportReadingScreen(
           )
         }
       }
+
+      Spacer(modifier = Modifier.weight(1f))
     }
   }
 }
