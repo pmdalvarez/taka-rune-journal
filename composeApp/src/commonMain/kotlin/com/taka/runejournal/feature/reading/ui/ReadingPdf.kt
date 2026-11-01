@@ -117,9 +117,8 @@ private suspend fun generateReadingPdf(
   val brandIcon = Res.drawable.ic_topbar_icon.toVectorImage()
 
   val topic = if (uiModel.topic != ReadingTopic.GENERAL) getString(uiModel.topic.title()) else ""
-  // A single rune needs no spread name or rune overview; both are shown for multi-rune spreads only
+  // A single rune needs no rune overview; it is shown for multi-rune spreads only
   val isMultiRuneSpread = uiModel.spread != RuneSpread.SINGLE_RUNE
-  val spread = if (isMultiRuneSpread) getString(uiModel.spread.title) else ""
 
   val sections = uiModel.runes.map { runeUiModel ->
     val keywords =
@@ -157,7 +156,6 @@ private suspend fun generateReadingPdf(
       reader = uiModel.reader,
       createdAt = uiModel.createdAt,
       topic = topic,
-      spread = spread,
       question = uiModel.question,
       overviewRunes = if (isMultiRuneSpread) uiModel.runes else emptyList(),
     )
@@ -252,7 +250,6 @@ private fun PageScope.titleBlock(
   reader: String,
   createdAt: String,
   topic: String,
-  spread: String,
   question: String?,
   overviewRunes: List<ReadingPdfDrawnRuneUiModel>,
 ) {
@@ -288,28 +285,6 @@ private fun PageScope.titleBlock(
       fontSize = pdfEmphasisFontSize
       color = pdfPrimaryColor
       align = TextAlign.Center
-    }
-  }
-
-  if (spread.isNotBlank()) {
-    if (topic.isNotBlank()) {
-      // Below the topic the spread is supporting detail
-      spacer(height = 4.dp)
-
-      text(spread) {
-        fontSize = pdfSmallFontSize
-        color = pdfSecondaryColor
-        align = TextAlign.Center
-      }
-    } else {
-      // Without a topic the spread takes the topic's place
-      spacer(height = 18.dp)
-
-      text(spread) {
-        fontSize = pdfEmphasisFontSize
-        color = pdfPrimaryColor
-        align = TextAlign.Center
-      }
     }
   }
 
