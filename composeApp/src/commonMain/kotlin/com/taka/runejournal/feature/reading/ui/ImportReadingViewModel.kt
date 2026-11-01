@@ -27,8 +27,12 @@ class ImportReadingViewModel(
 
   fun importReading(qrCode: String) {
     viewModelScope.launch {
-      // Decoding fails for QR codes that are not Taka readings
-      val payload = runCatching { qrCode.decodeReadingQrPayload() }.getOrNull() as? ReadingQrPayload.V1
+      // Decoding throws a SerializationException (an IllegalArgumentException) for QR codes that are not Taka readings
+      val payload = try {
+        qrCode.decodeReadingQrPayload() as? ReadingQrPayload.V1
+      } catch (e: IllegalArgumentException) {
+        null
+      }
       val spread = payload?.let { RuneSpread.fromKey(it.spread) }
       val topic = payload?.let { ReadingTopic.fromKey(it.topic) }
       // Runes with unknown keys are dropped, which the rune count check below then catches
