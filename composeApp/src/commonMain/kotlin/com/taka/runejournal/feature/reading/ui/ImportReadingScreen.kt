@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.reading.ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
@@ -50,7 +52,8 @@ import taka_rune_journal.composeapp.generated.resources.reading_import_camera_pe
 import taka_rune_journal.composeapp.generated.resources.reading_import_instruction
 import taka_rune_journal.composeapp.generated.resources.reading_import_topbar_title
 
-private const val SCAN_AREA_WIDTH_FRACTION = 0.7f
+private const val SCAN_AREA_WIDTH_FRACTION = 0.8f
+private val ScanAreaBorderWidth = 4.dp
 
 @Composable
 fun ImportReadingScreen(
@@ -117,7 +120,12 @@ fun ImportReadingScreen(
           .fillMaxWidth(SCAN_AREA_WIDTH_FRACTION)
           .aspectRatio(1f)
           .clip(scanAreaShape)
-          .background(MaterialTheme.colorScheme.surfaceContainer),
+          .background(MaterialTheme.colorScheme.surfaceContainer)
+          .border(
+            width = ScanAreaBorderWidth,
+            color = MaterialTheme.colorScheme.primary,
+            shape = scanAreaShape,
+          ),
         contentAlignment = Alignment.Center,
       ) {
         if (isCameraPermissionGranted) {
