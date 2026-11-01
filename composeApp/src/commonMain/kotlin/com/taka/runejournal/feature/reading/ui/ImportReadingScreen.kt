@@ -3,13 +3,12 @@ package com.taka.runejournal.feature.reading.ui
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -31,6 +30,8 @@ import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.UiEvent
@@ -41,7 +42,6 @@ import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.rememberCameraPermission
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
-import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.ncgroup.kscan.BarcodeFormat
@@ -50,7 +50,7 @@ import org.ncgroup.kscan.ScannerView
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.reading_import_camera_permission_denied
 import taka_rune_journal.composeapp.generated.resources.reading_import_instruction
-import taka_rune_journal.composeapp.generated.resources.reading_import_topbar_title
+import taka_rune_journal.composeapp.generated.resources.reading_import_title
 
 private const val SCAN_AREA_WIDTH_FRACTION = 0.8f
 private val ScanAreaBorderWidth = 4.dp
@@ -90,7 +90,6 @@ fun ImportReadingScreen(
     snackbarHost = { TakaSnackbarHost(hostState = snackbarHostState) },
     topBar = {
       TakaTopBar(
-        title = stringResource(Res.string.reading_import_topbar_title),
         navigationIcon = TakaTopBarNavigationIcon.Back,
         onNavigationClick = onBackClick,
       )
@@ -98,25 +97,22 @@ fun ImportReadingScreen(
   ) { contentModifier ->
     Column(
       modifier = contentModifier,
+      verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       val scanAreaShape = MaterialTheme.shapes.extraLarge
 
+      // The screen title sits here instead of the top bar, so it is marked as a heading for screen readers
       Text(
-        text = stringResource(Res.string.reading_import_instruction),
+        text = stringResource(Res.string.reading_import_title),
         style = MaterialTheme.typography.headlineSmall,
         textAlign = TextAlign.Center,
-      )
-
-      // Equal flexible space above and below keeps the scan area centred in the space under the heading
-      Spacer(
-        modifier = Modifier
-          .heightIn(min = TakaSectionSpacing)
-          .weight(1f)
+        modifier = Modifier.semantics { heading() },
       )
 
       Box(
         modifier = Modifier
+          .padding(top = TakaContentSpacing)
           .fillMaxWidth(SCAN_AREA_WIDTH_FRACTION)
           .aspectRatio(1f)
           .clip(scanAreaShape)
@@ -161,7 +157,12 @@ fun ImportReadingScreen(
         }
       }
 
-      Spacer(modifier = Modifier.weight(1f))
+      Text(
+        text = stringResource(Res.string.reading_import_instruction),
+        style = MaterialTheme.typography.bodyMedium,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(top = TakaContentSpacing),
+      )
     }
   }
 }
