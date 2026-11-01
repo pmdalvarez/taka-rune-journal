@@ -31,4 +31,9 @@ enum class RuneSpread(
     Res.string.reading_ppf_spread_description,
     3
   );
+
+  companion object {
+    fun fromKey(key: String): RuneSpread? =
+      RuneSpread.entries.firstOrNull { it.key == key }
+  }
 }

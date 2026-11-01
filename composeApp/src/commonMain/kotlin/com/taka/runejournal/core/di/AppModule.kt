@@ -71,7 +71,9 @@ val appModule = module {
   }
 
   viewModel {
-    ImportReadingViewModel()
+    ImportReadingViewModel(
+      timelineRepository = get()
+    )
   }
 
 }
