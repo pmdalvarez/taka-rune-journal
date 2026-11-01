@@ -397,7 +397,6 @@ private fun PageScope.importFooter(
 
   row(
     spacing = 14.dp,
-    horizontalArrangement = HorizontalArrangement.Center,
     verticalAlignment = VerticalAlignment.Center,
   ) {
     qrCode(
@@ -407,18 +406,21 @@ private fun PageScope.importFooter(
       background = PdfColor.White,
     )
 
-    column(
-      spacing = 3.dp,
-    ) {
-      text(IMPORT_FOOTER_TITLE) {
-        fontSize = pdfSmallFontSize
-        bold = true
-        color = pdfPrimaryColor
-      }
+    // Weighted so the text only gets the width left after the QR code and wraps inside the page padding
+    weighted(1f) {
+      column(
+        spacing = 3.dp,
+      ) {
+        text(IMPORT_FOOTER_TITLE) {
+          fontSize = pdfSmallFontSize
+          bold = true
+          color = pdfPrimaryColor
+        }
 
-      text(IMPORT_FOOTER_DESCRIPTION) {
-        fontSize = pdfSmallFontSize
-        color = pdfSecondaryColor
+        text(IMPORT_FOOTER_DESCRIPTION) {
+          fontSize = pdfSmallFontSize
+          color = pdfSecondaryColor
+        }
       }
     }
   }
