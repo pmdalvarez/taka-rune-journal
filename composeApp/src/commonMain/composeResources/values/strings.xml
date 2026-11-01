@@ -99,6 +99,11 @@
     <string name="reading_share_preview_button">Preview PDF</string>
     <string name="reading_generating_pdf_button">Generating PDF</string>
     <string name="reading_share_preview_topbar_title">Reading Preview</string>
+    <string name="reading_pdf_title">A Reading for %1$s</string>
+    <string name="reading_pdf_from_reader">from %1$s · %2$s</string>
+    <string name="reading_pdf_question">“%1$s”</string>
+    <string name="reading_pdf_import_title">Keep this reading in Taka</string>
+    <string name="reading_pdf_import_description">Open Taka and choose Import Reading to scan this code.</string>
 
     <string name="reading_start_topbar_title">New Reading</string>
     <string name="reading_filter_chip_me">For Me</string>
