@@ -2,7 +2,6 @@ package com.taka.runejournal.feature.reading.ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -38,6 +37,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.rememberCameraPermission
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
+import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.ncgroup.kscan.BarcodeFormat
@@ -93,13 +93,19 @@ fun ImportReadingScreen(
   ) { contentModifier ->
     Column(
       modifier = contentModifier,
-      verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       val scanAreaShape = MaterialTheme.shapes.extraLarge
 
+      Text(
+        text = stringResource(Res.string.reading_import_instruction),
+        style = MaterialTheme.typography.headlineSmall,
+        textAlign = TextAlign.Center,
+      )
+
       Box(
         modifier = Modifier
+          .padding(top = TakaSectionSpacing)
           .fillMaxWidth(SCAN_AREA_WIDTH_FRACTION)
           .aspectRatio(1f)
           .clip(scanAreaShape)
@@ -138,13 +144,6 @@ fun ImportReadingScreen(
           )
         }
       }
-
-      Text(
-        text = stringResource(Res.string.reading_import_instruction),
-        style = MaterialTheme.typography.bodyMedium,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.padding(top = TakaContentSpacing),
-      )
     }
   }
 }
