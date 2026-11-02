@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.platform.AppBuildConfig
+import com.taka.runejournal.core.ui.theme.TakaWordmarkVerticalOffset
 import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -147,7 +148,9 @@ fun TakaTopBar(
               )
               Text(
                 text = stringResource(Res.string.app_name).uppercase(),
-                modifier = Modifier.padding(start = 30.dp),
+                modifier = Modifier
+                  .padding(start = 30.dp)
+                  .offset(y = TakaWordmarkVerticalOffset), // centres the capitals on the icon
                 style = MaterialTheme.typography.titleMedium.copy(
                   fontFamily = wordmarkFontFamily(),
                   fontWeight = FontWeight.Bold,

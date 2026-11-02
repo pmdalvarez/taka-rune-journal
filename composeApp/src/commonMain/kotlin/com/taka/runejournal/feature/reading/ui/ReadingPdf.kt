@@ -26,6 +26,7 @@ import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.ui.drawableVector
 import com.taka.runejournal.core.ui.origin
+import com.taka.runejournal.core.ui.theme.TakaWordmarkVerticalOffset
 import com.taka.runejournal.core.ui.toDotSeparatedKeywords
 import com.taka.runejournal.feature.reading.data.encode
 import org.jetbrains.compose.resources.getString
@@ -83,6 +84,7 @@ private val pdfBrandHeight = 36.dp
 private val pdfBrandIconSize = 36.dp
 private val pdfBrandTextStart = 30.dp
 private val pdfBrandLetterSpacing = 2.5.sp
+private val pdfWordmarkVerticalOffset = TakaWordmarkVerticalOffset.value.dp
 
 private val pdfPageWidth = 400.dp
 private val pdfBorderInset = 14.dp
@@ -511,6 +513,8 @@ private fun ContainerScope.takaBrandLockup(
     }
 
     aligned(BoxAlignment.CenterStart) {
+      // Nudges the wordmark down; doubled because the column is centred
+      spacer(height = pdfWordmarkVerticalOffset * 2)
       row {
         spacer(width = pdfBrandTextStart)
 
