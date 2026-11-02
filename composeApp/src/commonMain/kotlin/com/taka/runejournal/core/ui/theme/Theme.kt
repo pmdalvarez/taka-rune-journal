@@ -32,7 +32,7 @@ private val takaLightColorScheme = lightColorScheme(
   onTertiaryContainer = TakaSlateDark,
 
   // Main app background
-  background = Mist,
+  background = Linen,
   onBackground = Ink,
 
   // Default surfaces: text fields, top-level content surfaces
@@ -40,21 +40,21 @@ private val takaLightColorScheme = lightColorScheme(
   onSurface = Ink,
 
   // Secondary surfaces
-  surfaceVariant = Cloud,
+  surfaceVariant = Parchment,
   onSurfaceVariant = Flint,
 
   // Material 3 surface hierarchy
   surfaceContainerLowest = White,
   surfaceContainerLow = Snow,
-  surfaceContainer = Cloud,
+  surfaceContainer = Parchment,
   surfaceContainerHigh = Ash,
-  surfaceContainerHighest = Silver,
+  surfaceContainerHighest = Pebble,
   surfaceDim = Ash,
   surfaceBright = White,
 
   // Borders / outlines
   outline = Stone,
-  outlineVariant = Silver,
+  outlineVariant = Pebble,
 
   // Inverse surfaces
   inverseSurface = Ink,
@@ -105,14 +105,14 @@ private val takaDarkColorScheme = darkColorScheme(
   surfaceContainerLowest = Ink,
   surfaceContainerLow = Ebony,
   surfaceContainer = Coal,
-  surfaceContainerHigh = Iron,
+  surfaceContainerHigh = Soot,
   surfaceContainerHighest = Charcoal,
   surfaceDim = Ink,
-  surfaceBright = Graphite,
+  surfaceBright = Basalt,
 
   // Borders / outlines
-  outline = Slate,
-  outlineVariant = Graphite,
+  outline = Taupe,
+  outlineVariant = Basalt,
 
   // Inverse surfaces
   inverseSurface = Porcelain,
