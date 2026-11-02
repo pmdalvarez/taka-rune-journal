@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.PrimaryTabRow
@@ -96,10 +94,7 @@ fun ReadingInterpretationScreen(
         ReadingInterpretationContextHeader(
           question = uiState.question!!
         )
-        HorizontalDivider(
-          modifier = Modifier.padding(top = TakaSpaceMd),
-          color = MaterialTheme.colorScheme.outlineVariant,
-        )
+        Spacer(modifier = Modifier.height(TakaSpaceMd))
       }
       if (uiState.tabs.isNotEmpty()) {
         AdaptiveReadingTabRow(
