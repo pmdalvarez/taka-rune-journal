@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taka.runejournal.core.domain.model.DrawnRune
 import com.taka.runejournal.core.domain.model.ReadingTopic
-import com.taka.runejournal.core.domain.model.RuneSpread
 import com.taka.runejournal.core.domain.repository.SettingsRepository
 import com.taka.runejournal.core.ui.UiEvent
 import com.taka.runejournal.core.ui.generalInterpretation
@@ -12,8 +11,6 @@ import com.taka.runejournal.core.ui.generalKeywords
 import com.taka.runejournal.core.ui.supplementalInterpretation
 import com.taka.runejournal.core.ui.supplementalKeywords
 import com.taka.runejournal.core.ui.utils.format
-import com.taka.runejournal.core.ui.utils.formatAbsolute
-import com.taka.runejournal.feature.reading.domain.model.toReadingQrPayload
 import com.taka.runejournal.feature.timeline.domain.model.TimelineItem
 import com.taka.runejournal.feature.timeline.domain.repository.TimelineRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -96,41 +93,12 @@ class ReadingInterpretationViewModel(
     }
   }
 
-  private fun getReadingPdfDrawnRuneUiModel(
-    drawnRune: DrawnRune,
-    position: StringResource? = null,
-    positionDescription: StringResource? = null,
-    topic: ReadingTopic,
-  ): ReadingPdfDrawnRuneUiModel =
-    ReadingPdfDrawnRuneUiModel(
-      rune = drawnRune.rune,
-      orientation = drawnRune.orientation,
-      position = position,
-      positionDescription = positionDescription,
-      interpretation = drawnRune.generalInterpretation(),
-      supplementalInterpretation = drawnRune.supplementalInterpretation(topic),
-      keywords = drawnRune.generalKeywords(),
-      supplementalKeywords = drawnRune.supplementalKeywords(topic)
-    )
-
   private fun getShareTabUiState(reader: String, recipient: String, timelineItem: TimelineItem.SingleRuneReading): ReadingInterpretationTabUiState.Share =
     ReadingInterpretationTabUiState.Share(
       label = Res.string.reading_tab_share,
       recipient = recipient,
       notes = timelineItem.notes,
-      pdfUiModel = ReadingPdfUiModel(
-        id = timelineItem.id,
-        createdAt = timelineItem.createdAt.formatAbsolute(),
-        spread = RuneSpread.SINGLE_RUNE,
-        topic = timelineItem.topic,
-        reader = reader,
-        recipient = recipient,
-        question = timelineItem.question,
-        qrPayload = timelineItem.toReadingQrPayload(),
-        runes = listOf(
-          getReadingPdfDrawnRuneUiModel(drawnRune = timelineItem.drawnRune, topic = timelineItem.topic)
-        )
-      )
+      pdfUiModel = timelineItem.toReadingPdfUiModel(reader),
     )
 
   private fun getShareTabUiState(reader: String, recipient: String, timelineItem: TimelineItem.PpfRuneReading): ReadingInterpretationTabUiState.Share =
@@ -138,21 +106,7 @@ class ReadingInterpretationViewModel(
       label = Res.string.reading_tab_share,
       recipient = recipient,
       notes = timelineItem.notes,
-      pdfUiModel = ReadingPdfUiModel(
-        id = timelineItem.id,
-        createdAt = timelineItem.createdAt.formatAbsolute(),
-        spread = RuneSpread.PAST_PRESENT_FUTURE,
-        topic = timelineItem.topic,
-        reader = reader,
-        recipient = recipient,
-        question = timelineItem.question,
-        qrPayload = timelineItem.toReadingQrPayload(),
-        runes = listOf(
-          getReadingPdfDrawnRuneUiModel(timelineItem.pastRune,Res.string.reading_tab_past_rune, Res.string.reading_position_past_description, timelineItem.topic),
-          getReadingPdfDrawnRuneUiModel(timelineItem.presentRune, Res.string.reading_tab_present_rune, Res.string.reading_position_present_description, timelineItem.topic),
-          getReadingPdfDrawnRuneUiModel(timelineItem.futureRune,Res.string.reading_tab_future_rune,Res.string.reading_position_future_description, timelineItem.topic)
-        )
-      )
+      pdfUiModel = timelineItem.toReadingPdfUiModel(reader),
     )
 
   private fun getRuneTabUiState(
