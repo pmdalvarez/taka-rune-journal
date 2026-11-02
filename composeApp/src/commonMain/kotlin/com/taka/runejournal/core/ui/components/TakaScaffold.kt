@@ -18,6 +18,7 @@ fun TakaScaffold(
   snackbarHost: @Composable () -> Unit = {},
   contentPadding: PaddingValues = PaddingValues(
     start = TakaScreenPadding,
+    top = TakaScreenPadding,
     end = TakaScreenPadding,
     bottom = TakaScreenPadding
   ),
