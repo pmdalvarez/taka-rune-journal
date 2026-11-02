@@ -6,12 +6,19 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.newsreader_bold
 import taka_rune_journal.composeapp.generated.resources.newsreader_medium
 
 // Font(resource) is composable in Compose Multiplatform, so the font family and typography are built in composition
 @Composable
 private fun serifFontFamily() = FontFamily(
   Font(Res.font.newsreader_medium, FontWeight.Medium),
+)
+
+/** Bold serif for the TAKA wordmark next to the brand icon. */
+@Composable
+fun wordmarkFontFamily() = FontFamily(
+  Font(Res.font.newsreader_bold, FontWeight.Bold),
 )
 
 /**
