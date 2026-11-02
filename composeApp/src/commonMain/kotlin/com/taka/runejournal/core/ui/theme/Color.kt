@@ -2,30 +2,32 @@ package com.taka.runejournal.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Neutrals are slightly warm, like paper and stone, rather than cool screen grey
+
 // Whites / near-whites
 val White = Color(0xFFFFFFFF)
-val Snow = Color(0xFFFCFCFC)
-val Porcelain = Color(0xFFF9F9FA)
+val Snow = Color(0xFFFCFBF9)
+val Porcelain = Color(0xFFFAF9F6)
 
-// Light grays
-val Mist = Color(0xFFF7F7F8)
-val Cloud = Color(0xFFF4F4F4)
-val Ash = Color(0xFFEFEFEF)
-val Silver = Color(0xFFE6E6E6)
-val Stone = Color(0xFFD9D9D9)
+// Light neutrals
+val Linen = Color(0xFFF7F5F1)
+val Parchment = Color(0xFFF3F1EC)
+val Ash = Color(0xFFEEEBE5)
+val Pebble = Color(0xFFE5E1DA)
+val Stone = Color(0xFFD8D3CA)
 
-// Mid grays
-val Smoke = Color(0xFF9B9B9B)
-val Slate = Color(0xFF6F6F6F)
-val Flint = Color(0xFF565656)
-val Graphite = Color(0xFF444444)
+// Mid neutrals
+val Smoke = Color(0xFF9C978F)
+val Taupe = Color(0xFF716C64)
+val Flint = Color(0xFF58534C)
+val Basalt = Color(0xFF46423C)
 
-// Dark grays / black
-val Charcoal = Color(0xFF2F2F2F)
-val Iron = Color(0xFF282828)
-val Coal = Color(0xFF1F1F1F)
-val Ebony = Color(0xFF181818)
-val Ink = Color(0xFF111111)
+// Dark neutrals / black
+val Charcoal = Color(0xFF302D29)
+val Soot = Color(0xFF292623)
+val Coal = Color(0xFF201E1B)
+val Ebony = Color(0xFF191715)
+val Ink = Color(0xFF12110F)
 val Black = Color(0xFF000000)
 
 // Muted slate action palette
