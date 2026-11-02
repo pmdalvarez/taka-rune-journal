@@ -15,6 +15,7 @@ import com.conamobile.pdfkmp.layout.VerticalAlignment
 import com.conamobile.pdfkmp.pdfAsync
 import com.conamobile.pdfkmp.style.BorderStroke
 import com.conamobile.pdfkmp.style.PdfColor
+import com.conamobile.pdfkmp.style.PdfFont
 import com.conamobile.pdfkmp.style.TextAlign
 import com.conamobile.pdfkmp.unit.Dp
 import com.conamobile.pdfkmp.unit.dp
@@ -52,6 +53,10 @@ import kotlin.math.ceil
  * Primary   #333333  Main text, titles, rune glyphs, QR
  * Secondary #6B6861  Supporting text, labels, metadata
  * Border    #8D887F  Page border and section dividers
+ *
+ * FONTS
+ * Serif (Newsreader Medium, as for the app's headings) for the reading title and rune names;
+ * PdfKmp's default font for everything else
  *
  * FONT SIZES
  * Display       24sp  Reading title, e.g. "A Reading for Ray"
@@ -114,6 +119,10 @@ private suspend fun generateReadingPdf(
   uiModel: ReadingPdfUiModel,
 ): PdfDocument {
   val appName = getString(Res.string.app_name).uppercase()
+  val headingFont = PdfFont.Custom(
+    name = "Newsreader-Medium",
+    bytes = Res.readBytes("font/newsreader_medium.ttf"),
+  )
 
   // Resolve the brand icon before entering the PDF DSL, where lazy Compose resource nodes can fail
   val brandIcon = Res.drawable.ic_topbar_icon.toVectorImage()
@@ -166,6 +175,7 @@ private suspend fun generateReadingPdf(
 
     titleBlock(
       appName = appName,
+      headingFont = headingFont,
       brandIcon = brandIcon,
       title = title,
       meta = meta,
@@ -175,7 +185,7 @@ private suspend fun generateReadingPdf(
     )
 
     sections.forEach { section ->
-      runeSection(section = section, contentWidth = contentWidth)
+      runeSection(section = section, headingFont = headingFont, contentWidth = contentWidth)
     }
 
     importFooter(
@@ -263,6 +273,7 @@ private fun PageScope.background() {
 
 private fun PageScope.titleBlock(
   appName: String,
+  headingFont: PdfFont,
   brandIcon: VectorImage,
   title: String,
   meta: String,
@@ -280,8 +291,8 @@ private fun PageScope.titleBlock(
   spacer(height = 24.dp)
 
   text(title) {
+    font = headingFont
     fontSize = pdfDisplayFontSize
-    bold = true
     color = pdfPrimaryColor
     align = TextAlign.Center
   }
@@ -335,6 +346,7 @@ private fun PageScope.titleBlock(
 
 private fun PageScope.runeSection(
   section: PdfRuneSection,
+  headingFont: PdfFont,
   contentWidth: Dp,
 ) {
   sectionDivider()
@@ -380,8 +392,8 @@ private fun PageScope.runeSection(
   spacer(height = 10.dp)
 
   text(section.drawnRuneName) {
+    font = headingFont
     fontSize = pdfTitleFontSize
-    bold = true
     color = pdfPrimaryColor
     align = TextAlign.Center
   }
