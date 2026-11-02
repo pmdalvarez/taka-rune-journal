@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -103,182 +104,185 @@ fun TakaTopBar(
 ) {
   var isMenuExpanded by remember { mutableStateOf(false) }
 
-  TopAppBar(
-    title = { title?.let {
-      Column {
-        Text(it)
-        subtitle?.let {
-          Text(
-            text = subtitle,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-          )
-        }
-      }
-    } },
-    navigationIcon = {
-      when (navigationIcon) {
-        TakaTopBarNavigationIcon.None -> {
-          val brandColor = MaterialTheme.colorScheme.primary
-          Box(
-            modifier = Modifier.height(48.dp),
-            contentAlignment = Alignment.CenterStart,
-          ) {
-            Image(
-              painter = painterResource(Res.drawable.ic_topbar_icon),
-              contentDescription = null,
-              modifier = Modifier.size(36.dp),
-              contentScale = ContentScale.Fit,
-              colorFilter = ColorFilter.tint(
-                brandColor
-              ),
-            )
+  Column {
+    TopAppBar(
+      title = { title?.let {
+        Column {
+          Text(it)
+          subtitle?.let {
             Text(
-              text = stringResource(Res.string.app_name).uppercase(),
-              modifier = Modifier.padding(start = 30.dp),
-              style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 1.5.sp,
-              ),
-              color = brandColor,
+              text = subtitle,
+              style = MaterialTheme.typography.labelMedium,
+              color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
           }
         }
-
-        TakaTopBarNavigationIcon.Back -> {
-          IconButton(onClick = onNavigationClick) {
-            Icon(
-              imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-              contentDescription = stringResource(Res.string.button_back),
-            )
-          }
-        }
-
-        TakaTopBarNavigationIcon.Close -> {
-          IconButton(onClick = onNavigationClick) {
-            Icon(
-              imageVector = Icons.Default.Close,
-              contentDescription = stringResource(Res.string.button_close),
-            )
-          }
-        }
-      }
-    },
-    actions = {
-      when (action) {
-        is TakaTopBarAction.None -> {}
-        is TakaTopBarAction.Save -> {
-          IconButton(
-            onClick = action.onClick,
-            enabled = action.enabled
-          ) {
-            Icon(
-              imageVector = Icons.Default.Check,
-              contentDescription = stringResource(Res.string.button_save),
-            )
-          }
-        }
-        is TakaTopBarAction.TimelineActions -> {
-          IconButton(
-            onClick = action.onNewReadingClick
-          ) {
-            Icon(
-              painter = painterResource(Res.drawable.ic_new_reading_icon),
-              contentDescription = stringResource(Res.string.timeline_button_new_reading),
-            )
-          }
-          IconButton(
-            onClick = action.onNewJournalEntryClick
-          ) {
-            Icon(
-              painter = painterResource(Res.drawable.ic_new_journal_entry_icon),
-              contentDescription = stringResource(Res.string.timeline_button_new_journal_entry),
-            )
-          }
-          IconButton(
-            onClick = { isMenuExpanded = true }
-          ) {
-            Icon(
-              imageVector = Icons.Default.MoreVert,
-              contentDescription = stringResource(Res.string.button_more_menu),
-              modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
-            )
+      } },
+      navigationIcon = {
+        when (navigationIcon) {
+          TakaTopBarNavigationIcon.None -> {
+            val brandColor = MaterialTheme.colorScheme.primary
+            Box(
+              modifier = Modifier.height(48.dp),
+              contentAlignment = Alignment.CenterStart,
+            ) {
+              Image(
+                painter = painterResource(Res.drawable.ic_topbar_icon),
+                contentDescription = null,
+                modifier = Modifier.size(36.dp),
+                contentScale = ContentScale.Fit,
+                colorFilter = ColorFilter.tint(
+                  brandColor
+                ),
+              )
+              Text(
+                text = stringResource(Res.string.app_name).uppercase(),
+                modifier = Modifier.padding(start = 30.dp),
+                style = MaterialTheme.typography.titleMedium.copy(
+                  fontWeight = FontWeight.Bold,
+                  letterSpacing = 1.5.sp,
+                ),
+                color = brandColor,
+              )
+            }
           }
 
-          DropdownMenu(
-            expanded = isMenuExpanded,
-            onDismissRequest = { isMenuExpanded = false },
-          ) {
-            DropdownMenuItem(
-              text = { Text(stringResource(Res.string.settings_title)) },
-              onClick = {
-                isMenuExpanded = false
-                action.onSettingsClick()
-              },
-            )
+          TakaTopBarNavigationIcon.Back -> {
+            IconButton(onClick = onNavigationClick) {
+              Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = stringResource(Res.string.button_back),
+              )
+            }
+          }
 
-            DropdownMenuItem(
-              text = { Text(stringResource(Res.string.about_title)) },
-              onClick = {
-                isMenuExpanded = false
-                action.onAboutClick()
-              },
-            )
-
-            DropdownMenuItem(
-              text = { Text(stringResource(Res.string.glossary_title)) },
-              onClick = {
-                isMenuExpanded = false
-                action.onGlossaryClick()
-              },
-            )
-
-            DropdownMenuItem(
-              text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
-              onClick = {
-                isMenuExpanded = false
-                action.onImportReadingClick()
-              },
-            )
-
-            if (AppBuildConfig.isDebug) {
-              DropdownMenuItem(
-                text = { Text(stringResource(Res.string.design_system_title)) },
-                onClick = {
-                  isMenuExpanded = false
-                  action.onDesignPlaygroundClick()
-                },
+          TakaTopBarNavigationIcon.Close -> {
+            IconButton(onClick = onNavigationClick) {
+              Icon(
+                imageVector = Icons.Default.Close,
+                contentDescription = stringResource(Res.string.button_close),
               )
             }
           }
         }
-        is TakaTopBarAction.JournalEntryDetailActions -> {
-          IconButton(onClick = action.onEditClick) {
-            Icon(
-              imageVector = Icons.Outlined.Edit,
-              contentDescription = stringResource(Res.string.button_edit),
-            )
+      },
+      actions = {
+        when (action) {
+          is TakaTopBarAction.None -> {}
+          is TakaTopBarAction.Save -> {
+            IconButton(
+              onClick = action.onClick,
+              enabled = action.enabled
+            ) {
+              Icon(
+                imageVector = Icons.Default.Check,
+                contentDescription = stringResource(Res.string.button_save),
+              )
+            }
           }
-          IconButton(onClick = action.onDeleteClick) {
-            Icon(
-              imageVector = Icons.Outlined.Delete,
-              contentDescription = stringResource(Res.string.button_delete),
-            )
+          is TakaTopBarAction.TimelineActions -> {
+            IconButton(
+              onClick = action.onNewReadingClick
+            ) {
+              Icon(
+                painter = painterResource(Res.drawable.ic_new_reading_icon),
+                contentDescription = stringResource(Res.string.timeline_button_new_reading),
+              )
+            }
+            IconButton(
+              onClick = action.onNewJournalEntryClick
+            ) {
+              Icon(
+                painter = painterResource(Res.drawable.ic_new_journal_entry_icon),
+                contentDescription = stringResource(Res.string.timeline_button_new_journal_entry),
+              )
+            }
+            IconButton(
+              onClick = { isMenuExpanded = true }
+            ) {
+              Icon(
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = stringResource(Res.string.button_more_menu),
+                modifier = Modifier.offset(y = (-2).dp) // known issue that this icon is a little lower and needs manual adjustment
+              )
+            }
+
+            DropdownMenu(
+              expanded = isMenuExpanded,
+              onDismissRequest = { isMenuExpanded = false },
+            ) {
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.settings_title)) },
+                onClick = {
+                  isMenuExpanded = false
+                  action.onSettingsClick()
+                },
+              )
+
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.about_title)) },
+                onClick = {
+                  isMenuExpanded = false
+                  action.onAboutClick()
+                },
+              )
+
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.glossary_title)) },
+                onClick = {
+                  isMenuExpanded = false
+                  action.onGlossaryClick()
+                },
+              )
+
+              DropdownMenuItem(
+                text = { Text(stringResource(Res.string.timeline_menu_import_reading)) },
+                onClick = {
+                  isMenuExpanded = false
+                  action.onImportReadingClick()
+                },
+              )
+
+              if (AppBuildConfig.isDebug) {
+                DropdownMenuItem(
+                  text = { Text(stringResource(Res.string.design_system_title)) },
+                  onClick = {
+                    isMenuExpanded = false
+                    action.onDesignPlaygroundClick()
+                  },
+                )
+              }
+            }
+          }
+          is TakaTopBarAction.JournalEntryDetailActions -> {
+            IconButton(onClick = action.onEditClick) {
+              Icon(
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = stringResource(Res.string.button_edit),
+              )
+            }
+            IconButton(onClick = action.onDeleteClick) {
+              Icon(
+                imageVector = Icons.Outlined.Delete,
+                contentDescription = stringResource(Res.string.button_delete),
+              )
+            }
+          }
+          is TakaTopBarAction.RuneInterpretationActions -> {
+            IconButton(onClick = action.onDeleteClick) {
+              Icon(
+                imageVector = Icons.Outlined.Delete,
+                contentDescription = stringResource(Res.string.button_delete),
+              )
+            }
           }
         }
-        is TakaTopBarAction.RuneInterpretationActions -> {
-          IconButton(onClick = action.onDeleteClick) {
-            Icon(
-              imageVector = Icons.Outlined.Delete,
-              contentDescription = stringResource(Res.string.button_delete),
-            )
-          }
-        }
-      }
-    },
-    colors = TopAppBarDefaults.topAppBarColors(
-      containerColor = Color.Transparent,
-      scrolledContainerColor = Color.Transparent,
-    ),
-  )
+      },
+      colors = TopAppBarDefaults.topAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent,
+      ),
+    )
+    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+  }
 }
