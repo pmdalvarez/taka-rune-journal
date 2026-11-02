@@ -69,6 +69,7 @@ fun RuneDetailScreen(
       if (rune.isReversible) {
         Spacer(modifier = Modifier.padding(top = TakaSectionSpacing))
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        Spacer(modifier = Modifier.padding(top = TakaSectionSpacing))
         RuneOrientationDetail(rune, RuneOrientation.REVERSED)
       }
     }
@@ -88,7 +89,6 @@ fun RuneOrientationDetail(
   }
   val iconModifer = Modifier
     .then(if (orientation == RuneOrientation.REVERSED) Modifier.rotate(180f) else Modifier)
-  Spacer(modifier = Modifier.padding(top = TakaSectionSpacing))
 
   Icon(
     painter = painterResource(rune.drawableVector()),
