@@ -62,7 +62,7 @@ class ReadingInterpretationViewModel(
             question = timelineItem.question,
             tabs = listOf(
               getRuneTabUiState(timelineItem.drawnRune, Res.string.reading_tab_single_rune, timelineItem.topic),
-              if (timelineItem.recipient != null) ReadingInterpretationTabUiState.Share(Res.string.reading_tab_share) else ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              timelineItem.recipient?.let { ReadingInterpretationTabUiState.Share(Res.string.reading_tab_share) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
@@ -77,7 +77,7 @@ class ReadingInterpretationViewModel(
               getRuneTabUiState(timelineItem.pastRune, Res.string.reading_tab_past_rune, timelineItem.topic,Res.string.reading_position_past_description),
               getRuneTabUiState(timelineItem.presentRune, Res.string.reading_tab_present_rune, timelineItem.topic,Res.string.reading_position_present_description),
               getRuneTabUiState(timelineItem.futureRune,Res.string.reading_tab_future_rune, timelineItem.topic,Res.string.reading_position_future_description),
-              if (timelineItem.recipient != null) ReadingInterpretationTabUiState.Share(Res.string.reading_tab_share) else ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
+              timelineItem.recipient?.let { ReadingInterpretationTabUiState.Share(Res.string.reading_tab_share) } ?: ReadingInterpretationTabUiState.Notes(Res.string.reading_tab_notes, timelineItem.notes)
             )
           )
         }
