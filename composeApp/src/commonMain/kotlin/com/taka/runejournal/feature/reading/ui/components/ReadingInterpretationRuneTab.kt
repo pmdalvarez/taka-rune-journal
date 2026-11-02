@@ -86,7 +86,7 @@ fun ReadingInterpretationRuneTab(
           .fillMaxWidth()
           .padding(top = TakaSpaceSm),
         text = drawnRuneName,
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
       )
       Text(
