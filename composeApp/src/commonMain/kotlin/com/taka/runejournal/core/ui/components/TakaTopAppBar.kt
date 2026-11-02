@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.platform.AppBuildConfig
+import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
@@ -148,8 +149,9 @@ fun TakaTopBar(
                 text = stringResource(Res.string.app_name).uppercase(),
                 modifier = Modifier.padding(start = 30.dp),
                 style = MaterialTheme.typography.titleMedium.copy(
+                  fontFamily = wordmarkFontFamily(),
                   fontWeight = FontWeight.Bold,
-                  letterSpacing = 1.5.sp,
+                  letterSpacing = 2.5.sp,
                 ),
                 color = brandColor,
               )
