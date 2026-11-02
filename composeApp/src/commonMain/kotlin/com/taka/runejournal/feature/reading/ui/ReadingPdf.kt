@@ -21,7 +21,6 @@ import com.conamobile.pdfkmp.unit.Dp
 import com.conamobile.pdfkmp.unit.dp
 import com.conamobile.pdfkmp.unit.sp
 import com.conamobile.pdfkmp.vector.VectorImage
-import com.conamobile.pdfkmp.viewer.KmpPdfLauncher
 import com.taka.runejournal.core.domain.model.ReadingTopic
 import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.domain.model.RuneSpread
@@ -39,7 +38,6 @@ import taka_rune_journal.composeapp.generated.resources.reading_pdf_import_descr
 import taka_rune_journal.composeapp.generated.resources.reading_pdf_import_title
 import taka_rune_journal.composeapp.generated.resources.reading_pdf_question
 import taka_rune_journal.composeapp.generated.resources.reading_pdf_title
-import taka_rune_journal.composeapp.generated.resources.reading_share_preview_topbar_title
 import taka_rune_journal.composeapp.generated.resources.rune_display_name_reversed
 import kotlin.math.ceil
 
@@ -115,7 +113,7 @@ private class PdfRuneSection(
  * PdfKmp needs the page height up front, so the document is generated twice: first on a very tall
  * page to find where the content ends, then again at exactly that height.
  */
-private suspend fun generateReadingPdf(
+suspend fun generateReadingPdf(
   uiModel: ReadingPdfUiModel,
 ): PdfDocument {
   val appName = getString(Res.string.app_name).uppercase()
@@ -516,19 +514,4 @@ private fun ContainerScope.takaBrandLockup(
       }
     }
   }
-}
-
-suspend fun previewReadingPdf(
-  uiModel: ReadingPdfUiModel,
-) {
-  val document = generateReadingPdf(uiModel)
-
-  KmpPdfLauncher.open(
-    document = document,
-    title = getString(
-      Res.string.reading_share_preview_topbar_title
-    ),
-    fileName = "taka-reading-${uiModel.id}.pdf",
-    showSearch = false,
-  )
 }

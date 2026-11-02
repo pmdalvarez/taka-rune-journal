@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,13 +22,12 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.reading_generating_pdf_button
 import taka_rune_journal.composeapp.generated.resources.reading_share_preview_button
 import taka_rune_journal.composeapp.generated.resources.reading_share_prompt
 import taka_rune_journal.composeapp.generated.resources.reading_share_title
 
 @Composable
-fun ReadingInterpretationShareTab(recipient: String, isGeneratingPdf: Boolean, onPreviewClicked: () -> Unit) {
+fun ReadingInterpretationShareTab(recipient: String, onPreviewClicked: () -> Unit) {
 
   TakaCard(
     modifier = Modifier
@@ -50,36 +48,21 @@ fun ReadingInterpretationShareTab(recipient: String, isGeneratingPdf: Boolean, o
       )
       TakaButton(
         onClick = onPreviewClicked,
-        enabled = !isGeneratingPdf,
         modifier = Modifier
           .padding(top = TakaContentSpacing)
           .align(Alignment.CenterHorizontally)
       ) {
-        if (isGeneratingPdf) {
-          Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-          ) {
-            CircularProgressIndicator(
-              modifier = Modifier.size(TakaIconButtonSize),
-              strokeWidth = 2.dp,
-              color = MaterialTheme.colorScheme.onPrimary,
-            )
-            Text(stringResource(Res.string.reading_generating_pdf_button))
-          }
-        } else {
-          Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-          ) {
-            Icon(
-              imageVector = Icons.Default.Visibility,
-              contentDescription = null,
-              modifier = Modifier.size(TakaIconButtonSize),
-              tint = MaterialTheme.colorScheme.onPrimary
-            )
-            Text(stringResource(Res.string.reading_share_preview_button))
-          }
+        Row(
+          horizontalArrangement = Arrangement.spacedBy(8.dp),
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Icon(
+            imageVector = Icons.Default.Visibility,
+            contentDescription = null,
+            modifier = Modifier.size(TakaIconButtonSize),
+            tint = MaterialTheme.colorScheme.onPrimary
+          )
+          Text(stringResource(Res.string.reading_share_preview_button))
         }
       }
     }

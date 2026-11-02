@@ -21,6 +21,11 @@ data class ReadingInterpretationRoute(
 ) : AppRoute
 
 @Serializable
+data class ReadingPdfPreviewRoute(
+    val id: Long,
+) : AppRoute
+
+@Serializable
 data object NewJournalEntryRoute : AppRoute
 
 @Serializable

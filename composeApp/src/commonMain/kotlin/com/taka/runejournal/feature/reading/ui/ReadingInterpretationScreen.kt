@@ -17,10 +17,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -51,6 +49,7 @@ import taka_rune_journal.composeapp.generated.resources.reading_interpretation_t
 fun ReadingInterpretationScreen(
   viewModel: ReadingInterpretationViewModel,
   onBackClick: () -> Unit,
+  onPreviewPdfClick: () -> Unit,
   modifier: Modifier = Modifier
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -126,20 +125,10 @@ fun ReadingInterpretationScreen(
               notes = tab.notes,
               onSaveClicked = viewModel::saveNotes
             )
-            is ReadingInterpretationTabUiState.Share -> {
-              var isGeneratingPdf by remember { mutableStateOf(false) }
-              ReadingInterpretationShareTab(
-                recipient = uiState.recipient!!,
-                isGeneratingPdf = isGeneratingPdf,
-                onPreviewClicked = {
-                  isGeneratingPdf = true
-                  coroutineScope.launch {
-                    previewReadingPdf(tab.pdfUiModel)
-                    isGeneratingPdf = false
-                  }
-                }
-              )
-            }
+            is ReadingInterpretationTabUiState.Share -> ReadingInterpretationShareTab(
+              recipient = uiState.recipient!!,
+              onPreviewClicked = onPreviewPdfClick
+            )
           }
         }
       }

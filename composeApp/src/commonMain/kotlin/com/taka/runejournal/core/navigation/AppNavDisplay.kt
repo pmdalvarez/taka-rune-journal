@@ -18,6 +18,8 @@ import com.taka.runejournal.feature.reading.ui.ImportReadingScreen
 import com.taka.runejournal.feature.reading.ui.ImportReadingViewModel
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationScreen
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationViewModel
+import com.taka.runejournal.feature.reading.ui.ReadingPdfPreviewScreen
+import com.taka.runejournal.feature.reading.ui.ReadingPdfPreviewViewModel
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryScreen
 import com.taka.runejournal.feature.timeline.ui.NewJournalEntryViewModel
 import com.taka.runejournal.feature.timeline.ui.JournalEntryDetailScreen
@@ -109,6 +111,26 @@ fun AppNavDisplay(modifier: Modifier = Modifier) {
                 )
 
                 ReadingInterpretationScreen(
+                    viewModel = viewModel,
+                    onBackClick = {
+                        backStack.removeLastOrNull()
+                    },
+                    onPreviewPdfClick = {
+                        backStack.add(ReadingPdfPreviewRoute(id = route.id))
+                    },
+                    modifier = modifier
+                )
+            }
+
+            entry<ReadingPdfPreviewRoute> { route ->
+                val viewModel = koinViewModel<ReadingPdfPreviewViewModel>(
+                    key = "reading-pdf-preview-${route.id}",
+                    parameters = {
+                        parametersOf(route.id)
+                    },
+                )
+
+                ReadingPdfPreviewScreen(
                     viewModel = viewModel,
                     onBackClick = {
                         backStack.removeLastOrNull()
