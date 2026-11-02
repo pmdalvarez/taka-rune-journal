@@ -54,6 +54,7 @@ import kotlin.math.ceil
  *
  * FONTS
  * Serif (Newsreader Medium, as for the app's headings) for the reading title and rune names;
+ * Newsreader Bold for the TAKA wordmark, as in the app's top bar;
  * PdfKmp's default font for everything else
  *
  * FONT SIZES
@@ -81,7 +82,7 @@ private val pdfBrandWidth = 90.dp
 private val pdfBrandHeight = 36.dp
 private val pdfBrandIconSize = 36.dp
 private val pdfBrandTextStart = 30.dp
-private val pdfBrandLetterSpacing = 1.5.sp
+private val pdfBrandLetterSpacing = 2.5.sp
 
 private val pdfPageWidth = 400.dp
 private val pdfBorderInset = 14.dp
@@ -120,6 +121,10 @@ suspend fun generateReadingPdf(
   val headingFont = PdfFont.Custom(
     name = "Newsreader-Medium",
     bytes = Res.readBytes("font/newsreader_medium.ttf"),
+  )
+  val wordmarkFont = PdfFont.Custom(
+    name = "Newsreader-Bold",
+    bytes = Res.readBytes("font/newsreader_bold.ttf"),
   )
 
   // Resolve the brand icon before entering the PDF DSL, where lazy Compose resource nodes can fail
@@ -173,6 +178,7 @@ suspend fun generateReadingPdf(
 
     titleBlock(
       appName = appName,
+      wordmarkFont = wordmarkFont,
       headingFont = headingFont,
       brandIcon = brandIcon,
       title = title,
@@ -271,6 +277,7 @@ private fun PageScope.background() {
 
 private fun PageScope.titleBlock(
   appName: String,
+  wordmarkFont: PdfFont,
   headingFont: PdfFont,
   brandIcon: VectorImage,
   title: String,
@@ -282,6 +289,7 @@ private fun PageScope.titleBlock(
   row(horizontalArrangement = HorizontalArrangement.Center) {
     takaBrandLockup(
       appName = appName,
+      wordmarkFont = wordmarkFont,
       brandIcon = brandIcon,
     )
   }
@@ -486,6 +494,7 @@ private fun ContainerScope.runeGlyph(
 
 private fun ContainerScope.takaBrandLockup(
   appName: String,
+  wordmarkFont: PdfFont,
   brandIcon: VectorImage,
 ) {
   box(
@@ -506,8 +515,8 @@ private fun ContainerScope.takaBrandLockup(
         spacer(width = pdfBrandTextStart)
 
         text(appName) {
+          font = wordmarkFont
           fontSize = pdfEmphasisFontSize
-          bold = true
           letterSpacing = pdfBrandLetterSpacing
           color = pdfBrandColor
         }
