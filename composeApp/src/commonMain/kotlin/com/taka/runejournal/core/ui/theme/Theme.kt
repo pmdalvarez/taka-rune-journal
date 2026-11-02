@@ -145,7 +145,7 @@ fun TakaTheme(
       } else {
         takaLightColorScheme
       },
-      typography = takaTypography,
+      typography = takaTypography(),
       shapes = takaShapes,
       content = content,
     )
