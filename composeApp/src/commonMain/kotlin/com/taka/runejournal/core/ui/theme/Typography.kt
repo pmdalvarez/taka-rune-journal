@@ -15,7 +15,7 @@ private fun serifFontFamily() = FontFamily(
 )
 
 /**
- * Serif for display and headline text, to give headings character.
+ * Serif for display, headline and large title text, to give headings character.
  * All other styles keep Material's defaults and the system font.
  */
 @Composable
@@ -30,5 +30,6 @@ fun takaTypography(): Typography {
     headlineLarge = default.headlineLarge.copy(fontFamily = serif, fontWeight = FontWeight.Medium),
     headlineMedium = default.headlineMedium.copy(fontFamily = serif, fontWeight = FontWeight.Medium),
     headlineSmall = default.headlineSmall.copy(fontFamily = serif, fontWeight = FontWeight.Medium),
+    titleLarge = default.titleLarge.copy(fontFamily = serif, fontWeight = FontWeight.Medium),
   )
 }
