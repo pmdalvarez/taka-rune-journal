@@ -34,7 +34,7 @@ import com.taka.runejournal.core.ui.components.TakaTopBarAction
 import com.taka.runejournal.core.ui.components.TakaTopBarNavigationIcon
 import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
-import com.taka.runejournal.core.ui.theme.TakaSpaceMd
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationContextHeader
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationNotesTab
 import com.taka.runejournal.feature.reading.ui.components.ReadingInterpretationRuneTab
@@ -94,7 +94,7 @@ fun ReadingInterpretationScreen(
         ReadingInterpretationContextHeader(
           question = uiState.question!!
         )
-        Spacer(modifier = Modifier.height(TakaSpaceMd))
+        Spacer(modifier = Modifier.height(TakaSpaceSm))
       }
       if (uiState.tabs.isNotEmpty()) {
         AdaptiveReadingTabRow(
