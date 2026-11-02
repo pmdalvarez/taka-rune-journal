@@ -24,3 +24,6 @@ val TakaFieldSpacing = TakaSpaceLg
 
 // Sizes
 val TakaIconButtonSize = 20.dp
+
+// Newsreader's capitals sit high in their line box, so the wordmark is nudged down
+val TakaWordmarkVerticalOffset = 2.dp
