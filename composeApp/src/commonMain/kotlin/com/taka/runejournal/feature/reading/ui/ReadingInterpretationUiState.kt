@@ -24,9 +24,6 @@ sealed class ReadingInterpretationTabUiState {
 
   data class Share(
     override val label: StringResource,
-    val recipient: String?,
-    val notes: String?,
-    val pdfUiModel: ReadingPdfUiModel,
   ): ReadingInterpretationTabUiState()
 }
 
