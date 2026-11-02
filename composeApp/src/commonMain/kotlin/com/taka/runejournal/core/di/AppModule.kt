@@ -47,7 +47,6 @@ val appModule = module {
   viewModel { (id: Long) ->
     ReadingInterpretationViewModel(
       id = id,
-      settingsRepository = get(),
       timelineRepository = get()
     )
   }
