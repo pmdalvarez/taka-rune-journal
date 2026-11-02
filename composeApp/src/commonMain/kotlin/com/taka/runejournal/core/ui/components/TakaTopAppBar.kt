@@ -14,6 +14,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.FileDownload
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,9 +48,11 @@ import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_back
 import taka_rune_journal.composeapp.generated.resources.button_close
 import taka_rune_journal.composeapp.generated.resources.button_delete
+import taka_rune_journal.composeapp.generated.resources.button_download
 import taka_rune_journal.composeapp.generated.resources.button_edit
 import taka_rune_journal.composeapp.generated.resources.button_more_menu
 import taka_rune_journal.composeapp.generated.resources.button_save
+import taka_rune_journal.composeapp.generated.resources.button_share
 import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.glossary_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
@@ -89,6 +93,11 @@ sealed class TakaTopBarAction {
 
   data class RuneInterpretationActions(
     val onDeleteClick: () -> Unit
+  ) : TakaTopBarAction()
+
+  data class PdfPreviewActions(
+    val onShareClick: () -> Unit,
+    val onDownloadClick: () -> Unit
   ) : TakaTopBarAction()
 
 }
@@ -273,6 +282,20 @@ fun TakaTopBar(
               Icon(
                 imageVector = Icons.Outlined.Delete,
                 contentDescription = stringResource(Res.string.button_delete),
+              )
+            }
+          }
+          is TakaTopBarAction.PdfPreviewActions -> {
+            IconButton(onClick = action.onShareClick) {
+              Icon(
+                imageVector = Icons.Outlined.Share,
+                contentDescription = stringResource(Res.string.button_share),
+              )
+            }
+            IconButton(onClick = action.onDownloadClick) {
+              Icon(
+                imageVector = Icons.Outlined.FileDownload,
+                contentDescription = stringResource(Res.string.button_download),
               )
             }
           }
