@@ -1,53 +1,57 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960">
+    android:viewportWidth="24"
+    android:viewportHeight="24">
 
-    <!-- House outline -->
+    <!-- Line thickness matches the timeline row icons on screen: 0.92 at 72dp draws about 2.75dp -->
+
+    <!-- Roof -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="80"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M180,800
-                          V430
-                          L480,200
-                          L780,430
-                          V800" />
+        android:pathData="M3.8,10.8 L12,3.2 L20.2,10.8" />
 
-    <!-- Roof outer edges -->
+    <!-- House walls, only the parts above the garden wall -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="80"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M100,490
-                          L480,200
-                          L860,490" />
+        android:pathData="M5.2,9.5 V15.8 M18.8,15.8 V9.5" />
 
-    <!-- Floor/base -->
+    <!-- Window, clear of the garden wall -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="80"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M180,800 L780,800" />
+        android:pathData="M13.7,10.6 H16.28 V13.18 H13.7 Z" />
 
-    <!-- Small shield inside -->
-    <group
-        android:pivotX="480"
-        android:pivotY="520"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
-        android:translateY="20">
+    <!-- Chimney -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.92"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M14.99,5.97 V4.57 H16.76 V7.61" />
 
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M480,720Q549,703 594.5,640.5Q640,578 640,502L640,400L480,320L320,400L320,502Q320,578 365.5,640.5Q411,703 480,720Z" />
-    </group>
+    <!-- Concrete garden wall, with an opening for the gate -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.92"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6.2,21 V15.8 H2.4 V21 H21.6 V15.8 H14.2 V21" />
+
+    <!-- Steel gate: arch starting below the wall top, and three bars -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.92"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M6.2,17 Q10.2,11.4 14.2,17 M8.2,21 V14.9 M10.2,21 V14.2 M12.2,21 V14.9" />
 
 </vector>
