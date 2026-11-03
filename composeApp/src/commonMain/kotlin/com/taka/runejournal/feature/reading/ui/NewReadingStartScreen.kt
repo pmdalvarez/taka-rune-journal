@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -253,11 +254,14 @@ fun ChooseSpreadPage(
         isSelected = isSpreadSelected(spread),
         verticalArrangement = Arrangement.Center
       ) {
+        val spreadIcon = painterResource(spread.icon)
         Icon(
-          painter = painterResource(spread.icon),
+          painter = spreadIcon,
           contentDescription = stringResource(spread.title),
+          // The width follows from the icon's own proportions, so the three-stone icon is wider
           modifier = Modifier
-            .height(120.dp),
+            .height(120.dp)
+            .aspectRatio(spreadIcon.intrinsicSize.width / spreadIcon.intrinsicSize.height),
           tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
