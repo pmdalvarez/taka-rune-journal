@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Stone outline, subtly uneven; the reading's rune is drawn on top in code -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7.00,3.50 Q11.75,3.05 15.60,3.50 Q18.50,3.50 18.50,6.40 Q18.85,12.00 18.50,18.30 Q18.50,20.50 16.30,20.50 Q11.75,20.90 7.60,20.50 Q5.00,20.50 5.00,17.90 Q4.70,12.00 5.00,5.50 Q5.00,3.50 7.00,3.50 Z" />
+
+    <!-- Two very short facets from the edge -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M14.7,3.32 L14.9,4.6 M5.02,15.6 L6.2,15.9" />
+
+</vector>

@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Back left stone, only the parts not hidden behind the other stones -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="butt"
+        android:strokeLineJoin="round"
+        android:pathData="M6.06,16.44 L5.71,16.38 L5.40,16.28 L5.16,16.16 L4.92,15.97 L4.74,15.77 L4.57,15.49 L4.45,15.22 L4.35,14.85 L4.00,12.89 L3.73,11.15 L3.52,9.44 L3.35,7.62 L3.21,5.63 L3.21,5.24 L3.29,4.68 L3.37,4.44 L3.51,4.15 L3.69,3.90 L3.90,3.68 L4.16,3.49 L4.46,3.34 L4.94,3.17 L5.50,3.07 L6.37,2.85 L7.47,2.64 L8.73,2.48 L9.96,2.38 L11.66,2.32 L11.99,2.33 L12.34,2.40 L12.64,2.52 L12.90,2.70 L13.08,2.90 L13.26,3.19 L13.39,3.54 L13.46,3.90" />
+
+    <!-- Back right stone, slightly lower, only the parts not hidden behind the front stone -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="butt"
+        android:strokeLineJoin="round"
+        android:pathData="M10.37,5.93 L10.48,5.28 L10.54,5.01 L10.68,4.68 L10.86,4.41 L11.09,4.19 L11.36,4.03 L11.68,3.92 L12.10,3.87 L14.12,3.93 L15.62,4.04 L16.92,4.22 L18.29,4.50 L18.71,4.56 L19.24,4.71 L19.69,4.92 L20.06,5.19 L20.23,5.38 L20.38,5.59 L20.50,5.82 L20.59,6.07 L20.66,6.34 L20.71,6.71 L20.71,7.12 L20.62,9.65 L20.50,11.19 L20.30,12.91 L20.08,14.37 L19.73,16.41 L19.63,16.76 L19.49,17.06 L19.32,17.32 L19.06,17.56 L18.81,17.72 L18.52,17.83 L18.19,17.89 L17.81,17.91" />
+
+    <!-- Front stone -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7.97,6.17 Q11.76,5.65 14.67,6.05 Q17.57,6.00 17.62,8.90 Q18.05,13.29 17.79,18.40 Q17.83,20.60 15.63,20.64 Q12.03,21.10 8.83,20.75 Q6.23,20.80 6.18,18.20 Q5.80,13.51 6.01,8.20 Q5.97,6.20 7.97,6.17 Z" />
+
+    <!-- Two very short facets from the edge of the front stone -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M17.74,15.2 L16.6,15.5 M9.2,20.76 L9.35,19.6" />
+
+</vector>
