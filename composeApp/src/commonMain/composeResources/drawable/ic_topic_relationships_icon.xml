@@ -1,76 +1,41 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960">
+    android:viewportWidth="24"
+    android:viewportHeight="24">
 
-    <!-- Bottom connector -->
+    <!-- Line thickness matches the timeline row icons on screen: 0.92 at 72dp draws about 2.75dp -->
+
+    <!-- Front figure, head -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="32"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M435,696.56 L525,696.56" />
+        android:pathData="M14.20,7.50 L14.84,7.57 L15.46,7.77 L16.02,8.09 L16.50,8.53 L16.88,9.05 L17.15,9.64 L17.28,10.28 L17.28,10.92 L17.15,11.56 L16.88,12.15 L16.50,12.67 L16.02,13.11 L15.46,13.43 L14.84,13.63 L14.20,13.70 L13.56,13.63 L12.94,13.43 L12.38,13.11 L11.90,12.67 L11.52,12.15 L11.25,11.56 L11.12,10.92 L11.12,10.28 L11.25,9.64 L11.52,9.05 L11.90,8.53 L12.38,8.09 L12.94,7.77 L13.56,7.57 L14.20,7.50 L14.20,7.50 Z" />
 
-    <!-- Top-left connector, halfway between original and previous adjusted position -->
+    <!-- Front figure, shoulders -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="32"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M321.835,537.58 L366.835,459.68" />
+        android:pathData="M8.00,21.50 L8.01,19.31 L8.07,18.88 L8.18,18.46 L8.34,18.05 L8.55,17.67 L8.79,17.31 L9.08,16.98 L9.41,16.69 L9.77,16.45 L10.15,16.24 L10.56,16.08 L10.98,15.97 L11.41,15.91 L16.70,15.90 L17.13,15.93 L17.56,16.00 L17.98,16.13 L18.38,16.30 L18.76,16.52 L19.10,16.79 L19.42,17.09 L19.69,17.43 L19.93,17.79 L20.12,18.18 L20.26,18.60 L20.35,19.02 L20.40,19.45 L20.40,21.50" />
 
-    <!-- Top-right connector, halfway between original and previous adjusted position -->
+    <!-- Figure behind, part 1 (stops a line width short of the front figure) -->
     <path
-        android:fillColor="#00000000"
         android:strokeColor="#FF000000"
-        android:strokeWidth="32"
+        android:strokeWidth="0.92"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M593.165,459.68 L638.165,537.58" />
+        android:pathData="M9.25,10.91 L8.97,10.99 L8.69,11.03 L8.40,11.05 L8.11,11.03 L7.83,10.99 L7.55,10.91 L7.28,10.81 L7.03,10.68 L6.78,10.52 L6.56,10.34 L6.36,10.14 L6.18,9.92 L6.02,9.68 L5.89,9.42 L5.78,9.15 L5.71,8.87 L5.67,8.59 L5.65,8.30 L5.67,8.01 L5.71,7.73 L5.78,7.45 L5.89,7.18 L6.02,6.93 L6.18,6.68 L6.36,6.46 L6.56,6.26 L6.78,6.08 L7.03,5.92 L7.28,5.79 L7.55,5.69 L7.83,5.61 L8.11,5.57 L8.40,5.55 L8.69,5.57 L8.97,5.61 L9.25,5.69 L9.52,5.79 L9.77,5.92 L10.02,6.08 L10.24,6.26 L10.44,6.46 L10.62,6.68 L10.78,6.93 L10.78,6.93" />
 
-    <!-- Top person -->
-    <group
-        android:pivotX="480"
-        android:pivotY="480"
-        android:scaleX="0.44"
-        android:scaleY="0.44"
-        android:translateX="0"
-        android:translateY="-216.5625">
-
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M367,433Q320,386 320,320Q320,254 367,207Q414,160 480,160Q546,160 593,207Q640,254 640,320Q640,386 593,433Q546,480 480,480Q414,480 367,433ZM160,800L160,688Q160,654 177.5,625.5Q195,597 224,582Q286,551 350,535.5Q414,520 480,520Q546,520 610,535.5Q674,551 736,582Q765,597 782.5,625.5Q800,654 800,688L800,800L160,800ZM240,720L720,720L720,688Q720,677 714.5,668Q709,659 700,654Q646,627 591,613.5Q536,600 480,600Q424,600 369,613.5Q314,627 260,654Q251,659 245.5,668Q240,677 240,688L240,720ZM536.5,376.5Q560,353 560,320Q560,287 536.5,263.5Q513,240 480,240Q447,240 423.5,263.5Q400,287 400,320Q400,353 423.5,376.5Q447,400 480,400Q513,400 536.5,376.5Z" />
-    </group>
-
-    <!-- Bottom-left person -->
-    <group
-        android:pivotX="480"
-        android:pivotY="480"
-        android:scaleX="0.44"
-        android:scaleY="0.44"
-        android:translateX="-250"
-        android:translateY="216.5625">
-
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M367,433Q320,386 320,320Q320,254 367,207Q414,160 480,160Q546,160 593,207Q640,254 640,320Q640,386 593,433Q546,480 480,480Q414,480 367,433ZM160,800L160,688Q160,654 177.5,625.5Q195,597 224,582Q286,551 350,535.5Q414,520 480,520Q546,520 610,535.5Q674,551 736,582Q765,597 782.5,625.5Q800,654 800,688L800,800L160,800ZM240,720L720,720L720,688Q720,677 714.5,668Q709,659 700,654Q646,627 591,613.5Q536,600 480,600Q424,600 369,613.5Q314,627 260,654Q251,659 245.5,668Q240,677 240,688L240,720ZM536.5,376.5Q560,353 560,320Q560,287 536.5,263.5Q513,240 480,240Q447,240 423.5,263.5Q400,287 400,320Q400,353 423.5,376.5Q447,400 480,400Q513,400 536.5,376.5Z" />
-    </group>
-
-    <!-- Bottom-right person -->
-    <group
-        android:pivotX="480"
-        android:pivotY="480"
-        android:scaleX="0.44"
-        android:scaleY="0.44"
-        android:translateX="250"
-        android:translateY="216.5625">
-
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M367,433Q320,386 320,320Q320,254 367,207Q414,160 480,160Q546,160 593,207Q640,254 640,320Q640,386 593,433Q546,480 480,480Q414,480 367,433ZM160,800L160,688Q160,654 177.5,625.5Q195,597 224,582Q286,551 350,535.5Q414,520 480,520Q546,520 610,535.5Q674,551 736,582Q765,597 782.5,625.5Q800,654 800,688L800,800L160,800ZM240,720L720,720L720,688Q720,677 714.5,668Q709,659 700,654Q646,627 591,613.5Q536,600 480,600Q424,600 369,613.5Q314,627 260,654Q251,659 245.5,668Q240,677 240,688L240,720ZM536.5,376.5Q560,353 560,320Q560,287 536.5,263.5Q513,240 480,240Q447,240 423.5,263.5Q400,287 400,320Q400,353 423.5,376.5Q447,400 480,400Q513,400 536.5,376.5Z" />
-    </group>
+    <!-- Figure behind, part 2 (stops a line width short of the front figure) -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.92"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3.10,19.20 L3.10,18.96 L3.10,18.72 L3.10,18.48 L3.10,18.23 L3.10,17.99 L3.10,17.75 L3.10,17.51 L3.10,17.27 L3.10,17.02 L3.10,16.78 L3.10,16.54 L3.10,16.30 L3.12,15.92 L3.19,15.55 L3.30,15.19 L3.45,14.85 L3.64,14.52 L3.87,14.22 L4.13,13.95 L4.42,13.71 L4.74,13.51 L5.08,13.34 L5.43,13.22 L5.80,13.14 L6.17,13.10 L6.46,13.10 L6.70,13.10 L6.95,13.10 L7.19,13.10 L7.43,13.10 L7.67,13.10 L7.92,13.10 L8.16,13.10 L8.40,13.10 L8.64,13.10 L8.88,13.10 L9.13,13.10 L9.37,13.10 L9.61,13.10 L9.85,13.10 L9.85,13.10" />
 
 </vector>
