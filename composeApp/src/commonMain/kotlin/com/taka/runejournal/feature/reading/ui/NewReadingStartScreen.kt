@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -256,7 +257,7 @@ fun ChooseSpreadPage(
           painter = painterResource(spread.icon),
           contentDescription = stringResource(spread.title),
           modifier = Modifier
-            .size(144.dp),
+            .height(120.dp),
           tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
