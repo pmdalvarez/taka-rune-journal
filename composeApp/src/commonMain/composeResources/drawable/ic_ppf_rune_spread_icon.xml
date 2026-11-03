@@ -1,93 +1,79 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
+    android:width="48dp"
     android:height="24dp"
-    android:viewportWidth="24"
+    android:viewportWidth="48"
     android:viewportHeight="24">
 
-    <group
-        android:pivotX="12"
-        android:pivotY="12"
-        android:scaleX="-1">
+    <!-- Past stone: top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M5.50,3.40 Q8.25,3.25 10.40,3.40 Q15.00,3.40 15.00,8.00 Q15.10,11.20 15.00,14.80 Q15.00,19.00 10.80,19.00 Q8.25,19.12 5.90,19.00 Q1.50,19.00 1.50,14.60 Q1.40,11.20 1.50,7.40 Q1.50,3.40 5.50,3.40 Z" />
 
-        <!-- Mirrored playing-cards base -->
-        <path
-            android:fillColor="#FF000000"
-            android:pathData="M4,18.83
-                              L3.18,18.43
-                              Q2.4,18.1 2.13,17.31
-                              Q1.86,16.52 2.2,15.75
-                              L4,11.85
-                              V18.83
-                              Z
+    <!-- Past stone: thickness, the side visible below the top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="butt"
+        android:strokeLineJoin="round"
+        android:pathData="M15.05,12.10 L15.03,15.33 L15.00,16.68 L14.94,17.32 L14.83,17.91 L14.66,18.44 L14.44,18.92 L14.09,19.41 L13.73,19.75 L13.23,20.09 L12.74,20.30 L12.08,20.48 L11.60,20.56 L11.08,20.60 L9.21,20.65 L7.57,20.65 L5.20,20.57 L4.56,20.48 L4.09,20.36 L3.55,20.16 L3.08,19.90 L2.67,19.57 L2.46,19.35 L2.26,19.10 L2.04,18.74 L1.81,18.23 L1.65,17.67 L1.54,17.04 L1.50,16.49 L1.47,14.94 L1.45,11.89" />
 
-                              M8,21
-                              Q7.18,21 6.59,20.4
-                              Q6,19.8 6,18.98
-                              V13
-                              L8.68,20.35
-                              Q8.75,20.52 8.81,20.69
-                              Q8.87,20.86 8.98,21
-                              H8
-                              Z
+    <!-- Past stone: crack from the edge -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M10.30,3.50 L10.10,5.70 L11.70,6.70" />
 
-                              M13.15,20.87
-                              Q12.38,21.15 11.6,20.8
-                              Q10.83,20.45 10.55,19.68
-                              L6.13,7.45
-                              Q5.85,6.68 6.2,5.91
-                              Q6.55,5.14 7.33,4.88
-                              L14.85,2.13
-                              Q15.63,1.85 16.39,2.2
-                              Q17.15,2.55 17.43,3.33
-                              L21.88,15.56
-                              Q22.16,16.34 21.81,17.1
-                              Q21.46,17.86 20.68,18.14
-                              L13.15,20.87
-                              Z
+    <!-- Present stone: top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M21.75,3.40 Q24.00,3.25 26.75,3.40 Q30.75,3.40 30.75,7.40 Q30.85,11.20 30.75,14.40 Q30.75,19.00 26.15,19.00 Q24.00,19.12 21.35,19.00 Q17.25,19.00 17.25,14.90 Q17.15,11.20 17.25,7.90 Q17.25,3.40 21.75,3.40 Z" />
 
-                              M12.45,19
-                              L20,16.25
-                              L15.53,4
-                              L8,6.75
-                              L12.45,19
-                              Z" />
+    <!-- Present stone: thickness, the side visible below the top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="butt"
+        android:strokeLineJoin="round"
+        android:pathData="M30.80,11.84 L30.78,14.70 L30.74,16.30 L30.70,16.87 L30.62,17.41 L30.46,18.01 L30.29,18.45 L30.01,18.94 L29.68,19.37 L29.27,19.74 L28.81,20.04 L28.50,20.19 L28.16,20.31 L27.56,20.47 L26.88,20.57 L24.74,20.65 L23.55,20.66 L22.22,20.63 L20.82,20.58 L20.21,20.51 L19.66,20.38 L19.07,20.14 L18.57,19.83 L18.14,19.43 L17.85,19.04 L17.62,18.59 L17.44,18.08 L17.31,17.40 L17.25,16.77 L17.22,15.40 L17.20,12.10" />
 
-        <!-- Stone-texture marks, spread out more -->
-        <group
-            android:pivotX="14"
-            android:pivotY="11.5"
-            android:rotation="-20">
+    <!-- Present stone: crack from the edge -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M17.30,8.40 L19.25,9.00 L19.65,10.70" />
 
-            <path
-                android:fillColor="#FF000000"
-                android:pathData="M12.2,8.25
-                                  L13.05,8.0
-                                  L12.6,9.0
-                                  Z
+    <!-- Future stone: top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M37.20,3.40 Q39.75,3.25 42.10,3.40 Q46.50,3.40 46.50,7.80 Q46.60,11.20 46.50,15.10 Q46.50,19.00 42.60,19.00 Q39.75,19.12 37.60,19.00 Q33.00,19.00 33.00,14.40 Q32.90,11.20 33.00,7.60 Q33.00,3.40 37.20,3.40 Z" />
 
-                                  M15.1,9.0
-                                  L16.1,8.7
-                                  L15.45,9.9
-                                  Z
+    <!-- Future stone: thickness, the side visible below the top face -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="butt"
+        android:strokeLineJoin="round"
+        android:pathData="M46.55,12.13 L46.53,15.54 L46.50,16.96 L46.45,17.56 L46.34,18.10 L46.19,18.60 L45.98,19.04 L45.65,19.49 L45.32,19.81 L44.85,20.12 L44.31,20.36 L43.68,20.51 L42.98,20.59 L41.76,20.63 L40.43,20.66 L39.11,20.65 L36.87,20.57 L36.32,20.50 L35.70,20.35 L35.15,20.14 L34.66,19.86 L34.23,19.53 L34.00,19.29 L33.80,19.03 L33.56,18.66 L33.33,18.13 L33.15,17.53 L33.05,16.87 L33.01,16.30 L32.97,14.70 L32.95,11.89" />
 
-                                  M12.6,10.85
-                                  L13.3,10.6
-                                  L13.95,11.2
-                                  L13.25,12.0
-                                  Z
-
-                                  M15.0,13.0
-                                  L15.7,12.75
-                                  L16.4,13.4
-                                  L15.6,14.3
-                                  Z
-
-                                  M11.9,14.45
-                                  L12.9,14.15
-                                  L12.4,15.25
-                                  Z" />
-        </group>
-
-    </group>
+    <!-- Future stone: crack from the edge -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="0.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M37.60,3.50 L37.90,5.40" />
 
 </vector>
