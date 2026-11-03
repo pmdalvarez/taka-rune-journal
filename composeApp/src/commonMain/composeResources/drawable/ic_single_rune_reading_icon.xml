@@ -21,4 +21,12 @@
         android:strokeMiterLimit="10"
         android:pathData="M12.12,3.29 L13.05,5.05 L13.71,3.46 M4.95,15.4 L6.2,14.9 L4.88,13.8" />
 
+    <!-- Short inner edge in the bottom right corner, so the stone looks rounded -->
+    <path
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M15.9,15.4 Q15.9,17.9 13.6,17.9" />
+
 </vector>
