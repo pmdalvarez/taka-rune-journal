@@ -10,7 +10,7 @@
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M7.00,3.50 Q11.75,3.05 15.60,3.50 Q18.50,3.50 18.50,6.40 Q18.85,12.00 18.50,18.30 Q18.50,20.50 16.30,20.50 Q11.75,20.90 7.60,20.50 Q5.00,20.50 5.00,17.90 Q4.70,12.00 5.00,5.50 Q5.00,3.50 7.00,3.50 Z" />
+        android:pathData="M9.00,3.50 Q11.75,3.05 13.90,3.50 Q18.50,3.50 18.50,8.10 Q18.85,12.00 18.50,16.30 Q18.50,20.50 14.30,20.50 Q11.75,20.90 9.40,20.50 Q5.00,20.50 5.00,16.10 Q4.70,12.00 5.00,7.50 Q5.00,3.50 9.00,3.50 Z" />
 
     <!-- Two very short facets from the edge -->
     <path
@@ -18,7 +18,7 @@
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M14.72,3.8 L14.9,5.1 M5.02,15.6 L6.2,15.9" />
+        android:pathData="M12.9,3.75 L13.05,5.05 M5.02,14.9 L6.2,15.2" />
 
     <!-- Plus, centred on the stone -->
     <path
