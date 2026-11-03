@@ -8,6 +8,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.ic_journal_entry_icon
+import taka_rune_journal.composeapp.generated.resources.ic_ppf_reading_icon
 import taka_rune_journal.composeapp.generated.resources.ic_single_rune_reading_icon
 import taka_rune_journal.composeapp.generated.resources.timeline_item_type_journal_entry
 import kotlin.collections.List
@@ -42,7 +43,7 @@ fun TimelineItem.toUiModel(): TimelineItemUiModel = when (this) {
     id = id,
     isJournalEntry = false,
     formattedDate = createdAt.format(),
-    icon = Res.drawable.ic_single_rune_reading_icon,
+    icon = Res.drawable.ic_ppf_reading_icon,
     recipient = recipient,
     title = question,
     typeRes = topic.title(),
