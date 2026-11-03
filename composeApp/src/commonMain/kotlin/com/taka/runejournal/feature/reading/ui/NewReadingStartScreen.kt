@@ -1,10 +1,10 @@
 package com.taka.runejournal.feature.reading.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,6 +30,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigationevent.NavigationEventInfo
@@ -254,15 +256,12 @@ fun ChooseSpreadPage(
         isSelected = isSpreadSelected(spread),
         verticalArrangement = Arrangement.Center
       ) {
-        val spreadIcon = painterResource(spread.icon)
-        Icon(
-          painter = spreadIcon,
+        Image(
+          painter = painterResource(spread.icon),
           contentDescription = stringResource(spread.title),
-          // The width follows from the icon's own proportions, so the three-stone icon is wider
-          modifier = Modifier
-            .height(120.dp)
-            .aspectRatio(spreadIcon.intrinsicSize.width / spreadIcon.intrinsicSize.height),
-          tint = MaterialTheme.colorScheme.onSurfaceVariant,
+          modifier = Modifier.height(120.dp),
+          contentScale = ContentScale.FillHeight,
+          colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
         )
         Text(
           text = stringResource(spread.title),
