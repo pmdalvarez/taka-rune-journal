@@ -93,7 +93,7 @@ fun TimelineItemRow(
         contentDescription = title,
         modifier = Modifier
           .padding(top = 1.dp)
-          .size(36.dp),
+          .size(44.dp),
         tint = MaterialTheme.colorScheme.onSurfaceVariant,
       )
 
