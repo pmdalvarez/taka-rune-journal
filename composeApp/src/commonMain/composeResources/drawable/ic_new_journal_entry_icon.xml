@@ -7,7 +7,7 @@
     <!-- Page outline -->
     <path
         android:strokeColor="#FF000000"
-        android:strokeWidth="1.5"
+        android:strokeWidth="2"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
         android:pathData="M6,3.5 H14.5 L18.5,7.5 V19.5 A1,1 0,0 1 17.5,20.5 H6 A1,1 0,0 1 5,19.5 V4.5 A1,1 0,0 1 6,3.5 Z" />
@@ -15,7 +15,7 @@
     <!-- Folded corner -->
     <path
         android:strokeColor="#FF000000"
-        android:strokeWidth="1.5"
+        android:strokeWidth="2"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
         android:pathData="M14.5,3.5 V7.5 H18.5" />
@@ -23,7 +23,7 @@
     <!-- Plus, centred on the page -->
     <path
         android:strokeColor="#FF000000"
-        android:strokeWidth="1.5"
+        android:strokeWidth="2"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
         android:pathData="M8.55,12 H14.95 M11.75,8.8 V15.2" />
