@@ -20,20 +20,21 @@
         android:strokeLineJoin="round"
         android:pathData="M10.44,6.02 L10.57,5.60 L10.79,5.17 L11.05,4.80 L11.38,4.50 L11.69,4.30 L12.11,4.13 L12.59,4.02 L13.12,3.99 L13.71,4.02 L14.86,4.00 L15.73,4.05 L16.47,4.17 L17.29,4.39 L17.76,4.46 L18.20,4.56 L18.79,4.75 L19.05,4.88 L19.37,5.07 L19.78,5.41 L19.96,5.60 L20.16,5.89 L20.28,6.12 L20.42,6.46 L20.52,6.83 L20.59,7.22 L20.62,7.87 L20.59,8.46 L20.58,9.89 L20.50,11.16 L20.35,12.46 L20.18,13.57 L19.91,14.92 L19.81,15.53 L19.69,15.97 L19.52,16.37 L19.32,16.72 L19.08,17.02 L18.80,17.27 L18.48,17.48 L18.12,17.63 L17.65,17.75" />
 
-    <!-- Front stone -->
+    <!-- Front stone, broken where the two chips are -->
     <path
         android:strokeColor="#FF000000"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
-        android:pathData="M9.97,6.13 Q11.76,5.65 12.97,6.08 Q17.57,6.00 17.65,10.60 Q18.05,13.29 17.75,16.40 Q17.83,20.60 13.63,20.67 Q12.03,21.10 10.63,20.72 Q6.23,20.80 6.15,16.40 Q5.80,13.51 6.04,10.20 Q5.97,6.20 9.97,6.13 Z" />
+        android:pathData="M10.95,20.8 Q10.79,20.76 10.63,20.72 Q6.23,20.8 6.15,16.4 Q5.8,13.51 6.04,10.2 Q5.97,6.2 9.97,6.13 Q11.76,5.65 12.97,6.08 Q17.57,6 17.65,10.6 Q17.87,12.06 17.88,13.65 M17.84,15.25 Q17.81,15.82 17.75,16.4 Q17.83,20.6 13.63,20.67 Q13.08,20.82 12.55,20.87" />
 
-    <!-- Two very short facets from the edge of the front stone -->
+    <!-- Two narrow chips in the edge of the front stone, each coming to a sharp point inside -->
     <path
         android:strokeColor="#FF000000"
         android:strokeWidth="1.5"
         android:strokeLineCap="round"
-        android:strokeLineJoin="round"
-        android:pathData="M17.35,14.45 L16.2,14.75 M11.0,20.35 L11.12,19.2" />
+        android:strokeLineJoin="miter"
+        android:strokeMiterLimit="10"
+        android:pathData="M17.88,13.65 L16.2,14.75 L17.84,15.25 M12.55,20.87 L11.85,19.25 L10.95,20.8" />
 
 </vector>
