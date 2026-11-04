@@ -133,10 +133,11 @@ fun IntroSlide(
     Image(
       painter = painterResource(Res.drawable.journal_with_tea_and_runes),
       contentDescription = "test",
-      contentScale = ContentScale.Fit, // the scene is wider than it is tall, so it fits the width
+      contentScale = ContentScale.Fit,
       colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+      // no fixed height: the scene is wider than it is tall, so it takes its height from the width
+      // and the space around it is just the padding, as on the other slides
       modifier = Modifier
-        .height(288.dp)
         .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
