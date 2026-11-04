@@ -2,6 +2,7 @@ package com.taka.runejournal.feature.timeline.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,6 +50,7 @@ import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconHeight
 import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconWidth
+import com.taka.runejournal.core.ui.theme.TakaWelcomeImageWidthFraction
 import com.taka.runejournal.core.ui.theme.TakaWelcomeWordmarkVerticalOffset
 import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import kotlinx.coroutines.launch
@@ -130,18 +132,20 @@ fun IntroSlide(
     WelcomeBrandTitle(
       modifier = Modifier.align(Alignment.CenterHorizontally),
     )
+    val scene = painterResource(Res.drawable.journal_with_tea_and_runes)
     Image(
-      painter = painterResource(Res.drawable.journal_with_tea_and_runes),
+      painter = scene,
       contentDescription = "test",
       contentScale = ContentScale.Fit,
       colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
-      // no fixed height: the scene is wider than it is tall, so it takes its height from the width
-      // and the space around it is just the padding, as on the other slides
+      // sized by width, with the height following the drawing's proportions,
+      // so the space around it is just the padding, as on the other slides
       modifier = Modifier
-        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
         .padding(top = TakaContentSpacing)
-        .padding(TakaSectionSpacing),
+        .padding(vertical = TakaSectionSpacing)
+        .fillMaxWidth(TakaWelcomeImageWidthFraction)
+        .aspectRatio(scene.intrinsicSize.width / scene.intrinsicSize.height),
     )
     Text(
       modifier = Modifier
