@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
@@ -47,10 +48,10 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
-import taka_rune_journal.composeapp.generated.resources.book_with_taka_symbol
 import taka_rune_journal.composeapp.generated.resources.button_continue
 import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
+import taka_rune_journal.composeapp.generated.resources.journal_with_tea_and_runes
 import taka_rune_journal.composeapp.generated.resources.open_book
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
@@ -121,9 +122,10 @@ fun IntroSlide(
       scale = TakaWelcomeBrandLockupScale,
     )
     Image(
-      painter = painterResource(Res.drawable.book_with_taka_symbol),
+      painter = painterResource(Res.drawable.journal_with_tea_and_runes),
       contentDescription = "test",
-      contentScale = ContentScale.FillHeight,
+      contentScale = ContentScale.Fit, // the scene is wider than it is tall, so it fits the width
+      colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
       modifier = Modifier
         .height(288.dp)
         .fillMaxWidth()
