@@ -142,7 +142,6 @@ fun IntroSlide(
       // so the space around it is just the padding, as on the other slides
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
-        .padding(top = TakaContentSpacing)
         .padding(vertical = TakaSectionSpacing)
         .fillMaxWidth(TakaWelcomeImageWidthFraction)
         .aspectRatio(scene.intrinsicSize.width / scene.intrinsicSize.height),
