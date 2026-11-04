@@ -40,16 +40,15 @@
 
     <string name="timeline_welcome_slide_intro_title">Welcome to</string>
     <string name="timeline_welcome_slide_intro">Taka is your personal space for rune readings and reflection.</string>
-    <string name="timeline_your_name_prompt">What should Taka call you?</string>
     <string name="timeline_welcome_slide_runes_title">Drawing Runes</string>
     <string name="timeline_welcome_slide_runes">Runes are symbols for looking at a question or theme more closely.\n\nIn Taka, you draw digital runes inspired by the tradition of choosing rune stones from a bag, then use their interpretation as a starting point for reflection.</string>
     <string name="timeline_welcome_slide_readings_title">Reading Runes</string>
     <string name="timeline_welcome_slide_readings">The readings are meant to help you notice patterns, clarify what you feel, understand what needs attention, and ask better questions.</string>
     <string name="timeline_button_new_first_reading">Start Your First Reading</string>
 
-    <string name="timeline_greeting_morning">Good Morning</string>
-    <string name="timeline_greeting_afternoon">Good Afternoon</string>
-    <string name="timeline_greeting_evening">Good Evening</string>
+    <string name="timeline_greeting_morning">Good Morning, Friend</string>
+    <string name="timeline_greeting_afternoon">Good Afternoon, Friend</string>
+    <string name="timeline_greeting_evening">Good Evening, Friend</string>
     <string name="timeline_greeting_with_name_morning">Good Morning, %1$s</string>
     <string name="timeline_greeting_with_name_afternoon">Good Afternoon, %1$s</string>
     <string name="timeline_greeting_with_name_evening">Good Evening, %1$s</string>

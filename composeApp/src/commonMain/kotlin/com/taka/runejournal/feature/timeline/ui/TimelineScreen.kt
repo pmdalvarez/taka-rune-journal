@@ -96,7 +96,6 @@ fun TimelineScreen(
     ) { contentModifier ->
         if (showWelcomeSection) {
             WelcomeSection(
-                onDisplayNameEntered = viewModel::setDisplayName,
                 onNewReadingClick = onNewReadingClick,
                 onImportReadingClick = onImportReadingClick,
                 modifier = contentModifier

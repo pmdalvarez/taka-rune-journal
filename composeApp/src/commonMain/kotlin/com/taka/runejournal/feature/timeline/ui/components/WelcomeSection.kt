@@ -2,9 +2,9 @@ package com.taka.runejournal.feature.timeline.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,34 +15,22 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.ui.components.FadingScrollColumn
 import com.taka.runejournal.core.ui.components.TakaButton
-import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
 import com.taka.runejournal.core.ui.components.TakaTextAction
-import com.taka.runejournal.core.ui.components.TakaTextField
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
@@ -64,7 +52,6 @@ import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.journal_with_tea_and_runes
 import taka_rune_journal.composeapp.generated.resources.runes_on_cloth_with_candle
-import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_import_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
@@ -73,12 +60,10 @@ import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_r
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes_title
-import taka_rune_journal.composeapp.generated.resources.timeline_your_name_prompt
 
 @Preview
 @Composable
 fun WelcomeSection(
-  onDisplayNameEntered: (String) -> Unit = {},
   onNewReadingClick: () -> Unit = {},
   onImportReadingClick: () -> Unit = {},
   modifier: Modifier = Modifier
@@ -104,7 +89,7 @@ fun WelcomeSection(
       state = pagerState
     ) { page ->
       when (page) {
-        0 -> IntroSlide(onDisplayNameEntered, onContinueClick)
+        0 -> IntroSlide(onContinueClick)
         1 -> RunesSlide(onContinueClick)
         2 -> ReadingsSlide(onNewReadingClick, onImportReadingClick)
       }
@@ -122,7 +107,6 @@ fun WelcomeSection(
 
 @Composable
 fun IntroSlide(
-  onDisplayNameEntered: (String) -> Unit = {},
   onContinueClick: () -> Unit = {}
 ) {
   FadingScrollColumn(
@@ -150,13 +134,9 @@ fun IntroSlide(
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = TakaContentSpacing),
-      text = stringResource(Res.string.timeline_welcome_slide_intro) + "\n\n" + stringResource(Res.string.timeline_your_name_prompt),
+      text = stringResource(Res.string.timeline_welcome_slide_intro),
       style = MaterialTheme.typography.bodyMedium,
     )
-    DisplayNameTextField(
-      onSaveName = onDisplayNameEntered,
-      modifier = Modifier
-      .padding(top = TakaContentSpacing))
     TakaButton(
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
@@ -316,34 +296,4 @@ fun ReadingsSlide(
         .padding(top = TakaContentSpacing)
     )
   }
-}
-
-@Composable
-fun DisplayNameTextField(
-    onSaveName: (String) -> Unit = {},
-    modifier: Modifier = Modifier,
-) {
-  val focusManager = LocalFocusManager.current
-  var nameInput by rememberSaveable { mutableStateOf("") }
-
-  TakaTextField(
-      value = nameInput,
-      onValueChange = { nameInput = it },
-      label = stringResource(Res.string.settings_your_name),
-      singleLine = true,
-      keyboardOptions = KeyboardOptions(
-        imeAction = ImeAction.Done,
-      ),
-      keyboardActions = KeyboardActions(
-          onDone = {
-            focusManager.clearFocus() // trigger the onFocusChanged lambda
-          },
-      ),
-      modifier = modifier
-        .onFocusChanged() { focusState ->
-          if (!focusState.isFocused) {
-            onSaveName(nameInput)
-          }
-      }
-  )
 }
