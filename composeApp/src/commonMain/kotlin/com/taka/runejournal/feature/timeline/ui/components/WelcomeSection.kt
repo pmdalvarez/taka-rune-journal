@@ -2,12 +2,14 @@ package com.taka.runejournal.feature.timeline.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -30,10 +32,11 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.ui.components.FadingScrollColumn
-import com.taka.runejournal.core.ui.components.TakaBrandLockup
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
@@ -43,14 +46,21 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
-import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandLockupScale
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandHeight
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconSize
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandTextStart
+import com.taka.runejournal.core.ui.theme.TakaWelcomeLabelVerticalOffset
+import com.taka.runejournal.core.ui.theme.TakaWelcomeWordmarkVerticalOffset
+import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_continue
 import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.journal_with_tea_and_runes
 import taka_rune_journal.composeapp.generated.resources.open_book
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
@@ -118,10 +128,8 @@ fun IntroSlide(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
-    TakaBrandLockup(
+    WelcomeBrandTitle(
       modifier = Modifier.align(Alignment.CenterHorizontally),
-      scale = TakaWelcomeBrandLockupScale,
-      label = stringResource(Res.string.timeline_welcome_slide_intro_title),
     )
     Image(
       painter = painterResource(Res.drawable.journal_with_tea_and_runes),
@@ -154,6 +162,47 @@ fun IntroSlide(
     ) {
       Text(stringResource(Res.string.button_continue))
     }
+  }
+}
+
+/** "Welcome to" above the brand symbol and TAKA wordmark, with Welcome to starting where TAKA starts. */
+@Composable
+private fun WelcomeBrandTitle(
+  modifier: Modifier = Modifier,
+) {
+  val brandColor = MaterialTheme.colorScheme.primary
+  Box(
+    modifier = modifier.height(TakaWelcomeBrandHeight),
+    contentAlignment = Alignment.CenterStart,
+  ) {
+    Image(
+      painter = painterResource(Res.drawable.ic_topbar_icon),
+      contentDescription = null,
+      modifier = Modifier.size(TakaWelcomeBrandIconSize),
+      contentScale = ContentScale.Fit,
+      colorFilter = ColorFilter.tint(brandColor),
+    )
+    Text(
+      text = stringResource(Res.string.timeline_welcome_slide_intro_title),
+      modifier = Modifier
+        .align(Alignment.TopStart)
+        .padding(start = TakaWelcomeBrandTextStart)
+        .offset(y = TakaWelcomeLabelVerticalOffset),
+      style = MaterialTheme.typography.titleMedium,
+      color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Text(
+      text = stringResource(Res.string.app_name).uppercase(),
+      modifier = Modifier
+        .padding(start = TakaWelcomeBrandTextStart)
+        .offset(y = TakaWelcomeWordmarkVerticalOffset),
+      style = MaterialTheme.typography.headlineMedium.copy(
+        fontFamily = wordmarkFontFamily(),
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 4.4.sp,
+      ),
+      color = brandColor,
+    )
   }
 }
 
