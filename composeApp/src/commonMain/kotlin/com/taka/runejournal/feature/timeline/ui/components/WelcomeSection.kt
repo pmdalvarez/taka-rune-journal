@@ -57,6 +57,7 @@ import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_import_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
+import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes
@@ -120,6 +121,7 @@ fun IntroSlide(
     TakaBrandLockup(
       modifier = Modifier.align(Alignment.CenterHorizontally),
       scale = TakaWelcomeBrandLockupScale,
+      label = stringResource(Res.string.timeline_welcome_slide_intro_title),
     )
     Image(
       painter = painterResource(Res.drawable.journal_with_tea_and_runes),

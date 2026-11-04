@@ -27,11 +27,13 @@ import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 /**
  * The Taka brand lockup: the symbol with the TAKA wordmark, both in the brand colour.
  * [scale] 1 is the top bar size; everything scales together so the proportions stay the same.
+ * [label] is an optional line above TAKA (e.g. "Welcome to"), starting where TAKA starts.
  */
 @Composable
 fun TakaBrandLockup(
   modifier: Modifier = Modifier,
   scale: Float = 1f,
+  label: String? = null,
 ) {
   val brandColor = MaterialTheme.colorScheme.primary
   Box(
@@ -45,6 +47,16 @@ fun TakaBrandLockup(
       contentScale = ContentScale.Fit,
       colorFilter = ColorFilter.tint(brandColor),
     )
+    label?.let {
+      Text(
+        text = it,
+        modifier = Modifier
+          .align(Alignment.TopStart)
+          .padding(start = 30.dp * scale),
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+    }
     Text(
       text = stringResource(Res.string.app_name).uppercase(),
       modifier = Modifier
