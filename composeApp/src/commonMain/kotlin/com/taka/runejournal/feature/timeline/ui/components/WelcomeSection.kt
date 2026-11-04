@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,7 +46,7 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
-import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandGap
+import com.taka.runejournal.core.ui.theme.TakaSpaceXs
 import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconHeight
 import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconWidth
 import com.taka.runejournal.core.ui.theme.TakaWelcomeWordmarkVerticalOffset
@@ -165,52 +164,45 @@ fun IntroSlide(
   }
 }
 
-/**
- * "Welcome to", the brand symbol and TAKA in one row. Both sides take the same width,
- * so the symbol sits exactly in the centre.
- */
+/** The "Welcome to" heading, styled like the other slide titles, with the brand symbol and TAKA centred below it. */
 @Composable
 private fun WelcomeBrandTitle(
   modifier: Modifier = Modifier,
 ) {
   val brandColor = MaterialTheme.colorScheme.primary
-  Row(
-    modifier = modifier.fillMaxWidth(),
-    verticalAlignment = Alignment.CenterVertically,
+  Column(
+    modifier = modifier,
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text(
       text = stringResource(Res.string.timeline_welcome_slide_intro_title),
-      modifier = Modifier
-        .weight(1f)
-        .padding(end = TakaWelcomeBrandGap),
-      style = MaterialTheme.typography.titleMedium,
-      color = MaterialTheme.colorScheme.onSurfaceVariant,
-      textAlign = TextAlign.End,
-      maxLines = 1,
+      style = MaterialTheme.typography.headlineMedium,
     )
-    Image(
-      painter = painterResource(Res.drawable.ic_topbar_icon),
-      contentDescription = null,
-      modifier = Modifier
-        .width(TakaWelcomeBrandIconWidth)
-        .height(TakaWelcomeBrandIconHeight),
-      contentScale = ContentScale.Crop,
-      colorFilter = ColorFilter.tint(brandColor),
-    )
-    Text(
-      text = stringResource(Res.string.app_name).uppercase(),
-      modifier = Modifier
-        .weight(1f)
-        .padding(start = TakaWelcomeBrandGap)
-        .offset(y = TakaWelcomeWordmarkVerticalOffset),
-      style = MaterialTheme.typography.headlineMedium.copy(
-        fontFamily = wordmarkFontFamily(),
-        fontWeight = FontWeight.Bold,
-        letterSpacing = 4.4.sp,
-      ),
-      color = brandColor,
-      maxLines = 1,
-    )
+    Row(
+      modifier = Modifier.padding(top = TakaSpaceXs),
+      horizontalArrangement = Arrangement.spacedBy(TakaSpaceXs),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      Image(
+        painter = painterResource(Res.drawable.ic_topbar_icon),
+        contentDescription = null,
+        modifier = Modifier
+          .width(TakaWelcomeBrandIconWidth)
+          .height(TakaWelcomeBrandIconHeight),
+        contentScale = ContentScale.Crop,
+        colorFilter = ColorFilter.tint(brandColor),
+      )
+      Text(
+        text = stringResource(Res.string.app_name).uppercase(),
+        modifier = Modifier.offset(y = TakaWelcomeWordmarkVerticalOffset),
+        style = MaterialTheme.typography.headlineMedium.copy(
+          fontFamily = wordmarkFontFamily(),
+          fontWeight = FontWeight.Bold,
+          letterSpacing = 4.4.sp,
+        ),
+        color = brandColor,
+      )
+    }
   }
 }
 
