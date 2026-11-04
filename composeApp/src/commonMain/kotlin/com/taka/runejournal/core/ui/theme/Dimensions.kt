@@ -33,5 +33,5 @@ val TakaWelcomeBrandIconHeight = 50.dp
 val TakaWelcomeBrandIconWidth = 25.dp // crops the empty space either side of the symbol, so the brand centres on what is visible
 val TakaWelcomeWordmarkVerticalOffset = 2.75.dp // Newsreader's capitals sit high, so TAKA is nudged down to centre on the symbol
 
-// Width of the first welcome slide's image, as a share of the slide's content width; 0.75 is about 2/3 of a phone screen
+// Width of the welcome slide images, as a share of the slide's content width; 0.75 is about 2/3 of a phone screen
 const val TakaWelcomeImageWidthFraction = 0.75f
