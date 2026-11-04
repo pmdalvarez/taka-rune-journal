@@ -1,7 +1,12 @@
 package com.taka.runejournal.core.ui.components
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -26,14 +31,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.taka.runejournal.core.platform.AppBuildConfig
+import com.taka.runejournal.core.ui.theme.TakaWordmarkVerticalOffset
+import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
 import taka_rune_journal.composeapp.generated.resources.about_title
+import taka_rune_journal.composeapp.generated.resources.app_name
 import taka_rune_journal.composeapp.generated.resources.button_back
 import taka_rune_journal.composeapp.generated.resources.button_close
 import taka_rune_journal.composeapp.generated.resources.button_delete
@@ -46,6 +59,7 @@ import taka_rune_journal.composeapp.generated.resources.design_system_title
 import taka_rune_journal.composeapp.generated.resources.glossary_title
 import taka_rune_journal.composeapp.generated.resources.ic_new_journal_entry_icon
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
+import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.settings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_journal_entry
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_reading
@@ -117,7 +131,35 @@ fun TakaTopBar(
       } },
       navigationIcon = {
         when (navigationIcon) {
-          TakaTopBarNavigationIcon.None -> TakaBrandLockup()
+          TakaTopBarNavigationIcon.None -> {
+            val brandColor = MaterialTheme.colorScheme.primary
+            Box(
+              modifier = Modifier.height(48.dp),
+              contentAlignment = Alignment.CenterStart,
+            ) {
+              Image(
+                painter = painterResource(Res.drawable.ic_topbar_icon),
+                contentDescription = null,
+                modifier = Modifier.size(36.dp),
+                contentScale = ContentScale.Fit,
+                colorFilter = ColorFilter.tint(
+                  brandColor
+                ),
+              )
+              Text(
+                text = stringResource(Res.string.app_name).uppercase(),
+                modifier = Modifier
+                  .padding(start = 30.dp)
+                  .offset(y = TakaWordmarkVerticalOffset), // centres the capitals on the icon
+                style = MaterialTheme.typography.titleMedium.copy(
+                  fontFamily = wordmarkFontFamily(),
+                  fontWeight = FontWeight.Bold,
+                  letterSpacing = 2.5.sp,
+                ),
+                color = brandColor,
+              )
+            }
+          }
 
           TakaTopBarNavigationIcon.Back -> {
             IconButton(onClick = onNavigationClick) {
