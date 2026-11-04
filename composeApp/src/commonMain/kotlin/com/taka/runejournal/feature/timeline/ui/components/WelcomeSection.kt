@@ -224,16 +224,18 @@ fun RunesSlide(
       text = stringResource(Res.string.timeline_welcome_slide_runes_title),
       style = MaterialTheme.typography.headlineMedium
     )
+    val scene = painterResource(Res.drawable.cloth_bag_with_runes)
     Image(
-      painter = painterResource(Res.drawable.cloth_bag_with_runes),
+      painter = scene,
       contentDescription = "test",
-      contentScale = ContentScale.FillHeight,
+      contentScale = ContentScale.Fit,
+      colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+      // sized like the first slide's image: by width, with the height following the drawing's proportions
       modifier = Modifier
-        .height(288.dp)
-        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
-        .padding(top = TakaContentSpacing)
-        .padding(TakaSectionSpacing),
+        .padding(vertical = TakaSectionSpacing)
+        .fillMaxWidth(TakaWelcomeImageWidthFraction)
+        .aspectRatio(scene.intrinsicSize.width / scene.intrinsicSize.height),
     )
     Text(
       modifier = Modifier
