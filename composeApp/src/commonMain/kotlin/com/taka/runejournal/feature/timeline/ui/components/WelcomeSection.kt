@@ -2,7 +2,6 @@ package com.taka.runejournal.feature.timeline.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.text.KeyboardActions
@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,10 +47,9 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
-import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandHeight
-import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconSize
-import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandTextStart
-import com.taka.runejournal.core.ui.theme.TakaWelcomeLabelVerticalOffset
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandGap
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconHeight
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandIconWidth
 import com.taka.runejournal.core.ui.theme.TakaWelcomeWordmarkVerticalOffset
 import com.taka.runejournal.core.ui.theme.wordmarkFontFamily
 import kotlinx.coroutines.launch
@@ -165,36 +165,43 @@ fun IntroSlide(
   }
 }
 
-/** "Welcome to" above the brand symbol and TAKA wordmark, with Welcome to starting where TAKA starts. */
+/**
+ * "Welcome to", the brand symbol and TAKA in one row. Both sides take the same width,
+ * so the symbol sits exactly in the centre.
+ */
 @Composable
 private fun WelcomeBrandTitle(
   modifier: Modifier = Modifier,
 ) {
   val brandColor = MaterialTheme.colorScheme.primary
-  Box(
-    modifier = modifier.height(TakaWelcomeBrandHeight),
-    contentAlignment = Alignment.CenterStart,
+  Row(
+    modifier = modifier.fillMaxWidth(),
+    verticalAlignment = Alignment.CenterVertically,
   ) {
-    Image(
-      painter = painterResource(Res.drawable.ic_topbar_icon),
-      contentDescription = null,
-      modifier = Modifier.size(TakaWelcomeBrandIconSize),
-      contentScale = ContentScale.Fit,
-      colorFilter = ColorFilter.tint(brandColor),
-    )
     Text(
       text = stringResource(Res.string.timeline_welcome_slide_intro_title),
       modifier = Modifier
-        .align(Alignment.TopStart)
-        .padding(start = TakaWelcomeBrandTextStart)
-        .offset(y = TakaWelcomeLabelVerticalOffset),
+        .weight(1f)
+        .padding(end = TakaWelcomeBrandGap),
       style = MaterialTheme.typography.titleMedium,
       color = MaterialTheme.colorScheme.onSurfaceVariant,
+      textAlign = TextAlign.End,
+      maxLines = 1,
+    )
+    Image(
+      painter = painterResource(Res.drawable.ic_topbar_icon),
+      contentDescription = null,
+      modifier = Modifier
+        .width(TakaWelcomeBrandIconWidth)
+        .height(TakaWelcomeBrandIconHeight),
+      contentScale = ContentScale.Crop,
+      colorFilter = ColorFilter.tint(brandColor),
     )
     Text(
       text = stringResource(Res.string.app_name).uppercase(),
       modifier = Modifier
-        .padding(start = TakaWelcomeBrandTextStart)
+        .weight(1f)
+        .padding(start = TakaWelcomeBrandGap)
         .offset(y = TakaWelcomeWordmarkVerticalOffset),
       style = MaterialTheme.typography.headlineMedium.copy(
         fontFamily = wordmarkFontFamily(),
@@ -202,6 +209,7 @@ private fun WelcomeBrandTitle(
         letterSpacing = 4.4.sp,
       ),
       color = brandColor,
+      maxLines = 1,
     )
   }
 }
