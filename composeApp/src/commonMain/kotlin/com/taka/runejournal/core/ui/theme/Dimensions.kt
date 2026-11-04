@@ -27,3 +27,6 @@ val TakaIconButtonSize = 20.dp
 
 // Newsreader's capitals sit high in their line box, so the wordmark is nudged down
 val TakaWordmarkVerticalOffset = 2.dp
+
+// The brand lockup on the first welcome slide; 1.75 makes TAKA the size of the slide headings
+const val TakaWelcomeBrandLockupScale = 1.75f

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taka.runejournal.core.ui.components.FadingScrollColumn
+import com.taka.runejournal.core.ui.components.TakaBrandLockup
 import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.components.TakaPagerIndicator
@@ -41,6 +42,7 @@ import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import com.taka.runejournal.core.ui.theme.TakaIconButtonSize
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceSm
+import com.taka.runejournal.core.ui.theme.TakaWelcomeBrandLockupScale
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -54,7 +56,6 @@ import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_import_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro
-import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_intro_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_readings_title
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_slide_runes
@@ -115,11 +116,9 @@ fun IntroSlide(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
-    Text(
-      modifier = Modifier
-        .align(Alignment.CenterHorizontally),
-      text = stringResource(Res.string.timeline_welcome_slide_intro_title),
-      style = MaterialTheme.typography.headlineMedium
+    TakaBrandLockup(
+      modifier = Modifier.align(Alignment.CenterHorizontally),
+      scale = TakaWelcomeBrandLockupScale,
     )
     Image(
       painter = painterResource(Res.drawable.book_with_taka_symbol),
