@@ -63,7 +63,7 @@ import taka_rune_journal.composeapp.generated.resources.cloth_bag_with_runes
 import taka_rune_journal.composeapp.generated.resources.ic_new_reading_icon
 import taka_rune_journal.composeapp.generated.resources.ic_topbar_icon
 import taka_rune_journal.composeapp.generated.resources.journal_with_tea_and_runes
-import taka_rune_journal.composeapp.generated.resources.open_book
+import taka_rune_journal.composeapp.generated.resources.runes_on_cloth_with_candle
 import taka_rune_journal.composeapp.generated.resources.settings_your_name
 import taka_rune_journal.composeapp.generated.resources.timeline_button_new_first_reading
 import taka_rune_journal.composeapp.generated.resources.timeline_welcome_import_reading
@@ -269,16 +269,18 @@ fun ReadingsSlide(
       text = stringResource(Res.string.timeline_welcome_slide_readings_title),
       style = MaterialTheme.typography.headlineMedium
     )
+    val scene = painterResource(Res.drawable.runes_on_cloth_with_candle)
     Image(
-      painter = painterResource(Res.drawable.open_book),
+      painter = scene,
       contentDescription = "test",
-      contentScale = ContentScale.FillHeight,
+      contentScale = ContentScale.Fit,
+      colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant),
+      // sized like the other slides' images: by width, with the height following the drawing's proportions
       modifier = Modifier
-        .height(260.dp)
-        .fillMaxWidth()
         .align(Alignment.CenterHorizontally)
-        .padding(top = TakaContentSpacing)
-        .padding(TakaSectionSpacing),
+        .padding(vertical = TakaSectionSpacing)
+        .fillMaxWidth(TakaWelcomeImageWidthFraction)
+        .aspectRatio(scene.intrinsicSize.width / scene.intrinsicSize.height),
     )
     Text(
       modifier = Modifier
