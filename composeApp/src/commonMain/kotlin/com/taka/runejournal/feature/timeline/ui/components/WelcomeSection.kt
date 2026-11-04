@@ -164,7 +164,7 @@ fun IntroSlide(
   }
 }
 
-/** The "Welcome to" heading, styled like the other slide titles, with the brand symbol and TAKA centred below it. */
+/** The "Welcome to" heading, styled like the other slide titles, with a slightly smaller brand symbol and TAKA centred below it. */
 @Composable
 private fun WelcomeBrandTitle(
   modifier: Modifier = Modifier,
@@ -195,10 +195,10 @@ private fun WelcomeBrandTitle(
       Text(
         text = stringResource(Res.string.app_name).uppercase(),
         modifier = Modifier.offset(y = TakaWelcomeWordmarkVerticalOffset),
-        style = MaterialTheme.typography.headlineMedium.copy(
+        style = MaterialTheme.typography.titleLarge.copy(
           fontFamily = wordmarkFontFamily(),
           fontWeight = FontWeight.Bold,
-          letterSpacing = 4.4.sp,
+          letterSpacing = 3.4.sp,
         ),
         color = brandColor,
       )

@@ -29,6 +29,6 @@ val TakaIconButtonSize = 20.dp
 val TakaWordmarkVerticalOffset = 2.dp
 
 // Brand on the first welcome slide, below the Welcome to heading
-val TakaWelcomeBrandIconHeight = 63.dp
-val TakaWelcomeBrandIconWidth = 32.dp // crops the empty space either side of the symbol, so the brand centres on what is visible
-val TakaWelcomeWordmarkVerticalOffset = 3.5.dp // Newsreader's capitals sit high, so TAKA is nudged down to centre on the symbol
+val TakaWelcomeBrandIconHeight = 50.dp
+val TakaWelcomeBrandIconWidth = 25.dp // crops the empty space either side of the symbol, so the brand centres on what is visible
+val TakaWelcomeWordmarkVerticalOffset = 2.75.dp // Newsreader's capitals sit high, so TAKA is nudged down to centre on the symbol
