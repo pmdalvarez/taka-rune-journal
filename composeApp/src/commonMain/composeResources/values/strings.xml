@@ -38,8 +38,7 @@
 
     <string name="design_system_title">Design System</string>
 
-    <string name="timeline_welcome_slide_intro_title">Welcome to Taka</string>
-    <string name="timeline_welcome_slide_intro">Taka is your personal space for rune readings and reflection.</string>
+    <string name="timeline_welcome_slide_intro">Welcome to Taka, your personal space for rune readings and reflection.</string>
     <string name="timeline_your_name_prompt">What should Taka call you?</string>
     <string name="timeline_welcome_slide_runes_title">Drawing Runes</string>
     <string name="timeline_welcome_slide_runes">Runes are symbols for looking at a question or theme more closely.\n\nIn Taka, you draw digital runes inspired by the tradition of choosing rune stones from a bag, then use their interpretation as a starting point for reflection.</string>
