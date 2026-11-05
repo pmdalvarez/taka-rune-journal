@@ -23,6 +23,7 @@ import com.taka.runejournal.core.domain.model.RuneOrientation
 import com.taka.runejournal.core.ui.components.TakaCard
 import com.taka.runejournal.core.ui.theme.TakaCardSpacing
 import com.taka.runejournal.core.ui.theme.TakaSpaceMd
+import com.taka.runejournal.core.ui.theme.TakaSpaceSm
 import com.taka.runejournal.feature.timeline.ui.TimelineItemUiModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -157,7 +158,8 @@ fun TimelineItemRow(
         overflow = TextOverflow.Ellipsis,
         modifier = Modifier
           .fillMaxWidth()
-          .padding(top = TakaSpaceMd),
+          // start padding is because not all icons take up full space and text would otherwise be more to left than icon above it
+          .padding(top = TakaSpaceMd, start = TakaSpaceSm),
       )
     }
   }
