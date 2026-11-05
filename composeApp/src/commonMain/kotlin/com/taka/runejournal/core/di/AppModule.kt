@@ -2,7 +2,9 @@ package com.taka.runejournal.core.di
 
 import com.taka.runejournal.feature.reading.ui.NewReadingViewModel
 import com.taka.runejournal.feature.reading.ui.ImportReadingViewModel
+import com.taka.runejournal.core.data.repository.DataStoreAccessRepository
 import com.taka.runejournal.core.data.repository.DataStoreSettingsRepository
+import com.taka.runejournal.core.domain.repository.AccessRepository
 import com.taka.runejournal.core.domain.repository.SettingsRepository
 import com.taka.runejournal.feature.more.ui.SettingsViewModel
 import com.taka.runejournal.feature.reading.ui.ReadingInterpretationViewModel
@@ -19,6 +21,12 @@ val appModule = module {
 
   single<SettingsRepository> {
     DataStoreSettingsRepository(
+      dataStore = get(),
+    )
+  }
+
+  single<AccessRepository> {
+    DataStoreAccessRepository(
       dataStore = get(),
     )
   }
