@@ -8,12 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.taka.runejournal.core.ui.components.TakaTextAction
 import com.taka.runejournal.core.ui.theme.TakaContentSpacing
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_add_name
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_afternoon
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_evening
 import taka_rune_journal.composeapp.generated.resources.timeline_greeting_morning
@@ -23,11 +26,13 @@ import taka_rune_journal.composeapp.generated.resources.timeline_greeting_with_n
 import taka_rune_journal.composeapp.generated.resources.timeline_prompts
 import kotlin.time.Clock
 
+@Preview
 @Composable
 fun GreetingSection(
-  displayName: String?,
-  dailyPrompt: String?,
-  onInitializeDailyPrompt: (List<String>) -> Unit,
+  displayName: String? = "Peter",
+  dailyPrompt: String? = "What are you thinking about today?",
+  onInitializeDailyPrompt: (List<String>) -> Unit = {},
+  onAddNameClicked: () -> Unit = {},
 ) {
   if (dailyPrompt == null) {
     // initialise dailyPrompt only if it hasn't been set yet
@@ -42,6 +47,14 @@ fun GreetingSection(
     style = MaterialTheme.typography.headlineMedium,
     textAlign = TextAlign.Center
   )
+
+  if (displayName.isNullOrBlank()) {
+    TakaTextAction(
+      modifier = Modifier,
+      text = stringResource(Res.string.button_add_name),
+      onClick = onAddNameClicked,
+    )
+  }
 
   dailyPrompt?.let {
     Text(

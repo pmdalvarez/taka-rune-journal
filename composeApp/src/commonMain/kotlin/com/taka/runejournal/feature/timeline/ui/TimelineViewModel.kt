@@ -46,6 +46,14 @@ class TimelineViewModel(
     }
   }
 
+  fun openAddNameDialog(id: Long, title: String, type: String?) {
+    _uiState.update { it.copy(deleteDialogUiState = DeleteTimelineItemDialogUiState(id, title, type)) }
+  }
+
+  fun dismissAddNameDialog(id: Long, title: String, type: String?) {
+    _uiState.update { it.copy(deleteDialogUiState = DeleteTimelineItemDialogUiState(id, title, type)) }
+  }
+
   fun setDisplayName(displayName: String) {
     viewModelScope.launch {
       settingsRepository.setDisplayName(displayName)
@@ -83,4 +91,5 @@ class TimelineViewModel(
       }
     }
   }
+
 }

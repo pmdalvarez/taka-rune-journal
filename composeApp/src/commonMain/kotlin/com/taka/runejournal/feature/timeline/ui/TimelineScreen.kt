@@ -15,7 +15,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -32,6 +35,7 @@ import com.taka.runejournal.core.ui.components.showErrorSnackbar
 import com.taka.runejournal.core.ui.components.showInfoSnackbar
 import com.taka.runejournal.core.ui.theme.TakaSectionSpacing
 import com.taka.runejournal.feature.timeline.ui.components.ActionButtons
+import com.taka.runejournal.feature.timeline.ui.components.AddNameDialog
 import com.taka.runejournal.feature.timeline.ui.components.DeleteTimelineEntryDialog
 import com.taka.runejournal.feature.timeline.ui.components.GreetingSection
 import com.taka.runejournal.feature.timeline.ui.components.TimelineItemRow
@@ -60,6 +64,7 @@ fun TimelineScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val focusManager = LocalFocusManager.current
     val showWelcomeSection = pagingItems.itemCount == 0
+    var showAddNameDialog by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.uiEvent.collect { event ->
@@ -116,7 +121,8 @@ fun TimelineScreen(
                     GreetingSection(
                         uiState.displayName,
                         uiState.dailyPrompt,
-                        viewModel::initializeDailyPrompt
+                        viewModel::initializeDailyPrompt,
+                        { showAddNameDialog = true }
                     )
                 }
                 item { ActionButtons(onNewReadingClick, onNewJournalEntryClick) }
@@ -156,6 +162,16 @@ fun TimelineScreen(
         }
     }
 
+    if (showAddNameDialog) {
+        AddNameDialog(
+            onDismiss = { showAddNameDialog = false },
+            onConfirm = { name ->
+                viewModel.setDisplayName(name)
+                showAddNameDialog = false
+            }
+        )
+    }
+
     uiState.deleteDialogUiState?.let {
         DeleteTimelineEntryDialog(
             onDismiss = viewModel::dismissDeleteDialog,
@@ -164,4 +180,5 @@ fun TimelineScreen(
             it.preview
         )
     }
+
 }

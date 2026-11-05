@@ -15,6 +15,7 @@
     <string name="button_reveal_runes">Reveal Runes</string>
     <string name="button_go_to_reading">Go to Reading</string>
     <string name="button_continue">Continue</string>
+    <string name="button_add_name">Add Your Name</string>
 
     <string name="rune_display_name_reversed">Reversed %1$s</string>
 
@@ -52,6 +53,10 @@
     <string name="timeline_greeting_with_name_morning">Good Morning, %1$s</string>
     <string name="timeline_greeting_with_name_afternoon">Good Afternoon, %1$s</string>
     <string name="timeline_greeting_with_name_evening">Good Evening, %1$s</string>
+
+    <string name="add_name_dialog_title">Add Your Name</string>
+    <string name="add_name_dialog_body">What should Taka call you?</string>
+    <string name="add_name_dialog_name">Your Name</string>
 
     <string name="timeline_item_title_untitled">Untitled</string>
     <string name="timeline_item_title_no_question">Open Inquiry</string>
