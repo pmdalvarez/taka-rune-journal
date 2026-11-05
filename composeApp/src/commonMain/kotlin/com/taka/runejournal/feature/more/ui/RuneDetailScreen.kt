@@ -123,14 +123,14 @@ fun RuneOrientationDetail(
       modifier = Modifier
         .padding(bottom = TakaContentSpacing),
       text = stringResource(rune.origin()),
-      style = MaterialTheme.typography.bodyMedium,
+      style = MaterialTheme.typography.bodyLarge,
       color = MaterialTheme.colorScheme.onSurfaceVariant
     )
   }
 
   Text(
     text = stringResource(drawnRune.generalInterpretation()),
-    style = MaterialTheme.typography.bodyMedium,
+    style = MaterialTheme.typography.bodyLarge,
     color = MaterialTheme.colorScheme.onSurfaceVariant
   )
 
@@ -156,7 +156,7 @@ fun RuneOrientationDetail(
         Text(
           modifier = Modifier.padding(top = TakaContentSpacing),
           text = stringResource(it),
-          style = MaterialTheme.typography.bodyMedium,
+          style = MaterialTheme.typography.bodyLarge,
           color = MaterialTheme.colorScheme.onSurfaceVariant
         )
       }

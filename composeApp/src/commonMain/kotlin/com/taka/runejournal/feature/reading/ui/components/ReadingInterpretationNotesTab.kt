@@ -86,7 +86,7 @@ fun ReadingInterpretationNotesTab(notes: String?, onSaveClicked: (String) -> Uni
   Text(
     modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
     text = notes,
-    style = MaterialTheme.typography.bodyMedium
+    style = MaterialTheme.typography.bodyLarge
   )
 }
 

@@ -58,7 +58,7 @@ fun AboutScreen(
         modifier = Modifier
           .fillMaxWidth(),
         text = stringResource(Res.string.timeline_welcome_slide_intro),
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyLarge,
       )
       Text(
         modifier = Modifier
@@ -70,7 +70,7 @@ fun AboutScreen(
         modifier = Modifier
           .fillMaxWidth(),
         text = stringResource(Res.string.timeline_welcome_slide_runes),
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyLarge,
       )
       Text(
         modifier = Modifier
@@ -82,7 +82,7 @@ fun AboutScreen(
         modifier = Modifier
           .fillMaxWidth(),
         text = stringResource(Res.string.timeline_welcome_slide_readings),
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyLarge,
       )
     }
   }

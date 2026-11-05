@@ -98,7 +98,7 @@ fun ReadingInterpretationRuneTab(
       Text(
         modifier = Modifier.fillMaxWidth().padding(top = TakaContentSpacing),
         text = fullInterpretation,
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyLarge,
       )
     }
   }

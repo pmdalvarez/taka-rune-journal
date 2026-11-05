@@ -135,7 +135,7 @@ fun IntroSlide(
         .fillMaxWidth()
         .padding(top = TakaContentSpacing),
       text = stringResource(Res.string.timeline_welcome_slide_intro),
-      style = MaterialTheme.typography.bodyMedium,
+      style = MaterialTheme.typography.bodyLarge,
     )
     TakaButton(
       modifier = Modifier
@@ -222,7 +222,7 @@ fun RunesSlide(
         .fillMaxWidth()
         .padding(top = TakaContentSpacing),
       text = stringResource(Res.string.timeline_welcome_slide_runes),
-      style = MaterialTheme.typography.bodyMedium,
+      style = MaterialTheme.typography.bodyLarge,
     )
     TakaButton(
       modifier = Modifier
@@ -267,7 +267,7 @@ fun ReadingsSlide(
         .fillMaxWidth()
         .padding(top = TakaContentSpacing),
       text = stringResource(Res.string.timeline_welcome_slide_readings),
-      style = MaterialTheme.typography.bodyMedium,
+      style = MaterialTheme.typography.bodyLarge,
     )
     TakaButton(
       modifier = Modifier
