@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -25,6 +26,8 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.taka.runejournal.core.ui.UiEvent
+import com.taka.runejournal.core.ui.components.ButtonStyle
+import com.taka.runejournal.core.ui.components.TakaButton
 import com.taka.runejournal.core.ui.components.TakaScaffold
 import com.taka.runejournal.core.ui.components.TakaSnackbarHost
 import com.taka.runejournal.core.ui.components.TakaTopBar
@@ -42,6 +45,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import taka_rune_journal.composeapp.generated.resources.Res
+import taka_rune_journal.composeapp.generated.resources.button_go_to_timeline
 import taka_rune_journal.composeapp.generated.resources.delete_dialog_title_rune_reading
 import taka_rune_journal.composeapp.generated.resources.reading_interpretation_topbar_subtitle
 
@@ -130,6 +134,14 @@ fun ReadingInterpretationScreen(
               onPreviewClicked = onPreviewPdfClick
             )
           }
+        }
+        Spacer(modifier = Modifier.height(TakaContentSpacing))
+        TakaButton(
+          onClick = onBackClick,
+          style = ButtonStyle.Secondary,
+          modifier = Modifier.fillMaxWidth()
+        ) {
+          Text(stringResource(Res.string.button_go_to_timeline))
         }
       }
     }

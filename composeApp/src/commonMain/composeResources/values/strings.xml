@@ -14,6 +14,7 @@
     <string name="button_draw_runes">Draw Runes</string>
     <string name="button_reveal_runes">Reveal Runes</string>
     <string name="button_go_to_reading">Go to Reading</string>
+    <string name="button_go_to_timeline">Go to Timeline</string>
     <string name="button_continue">Continue</string>
     <string name="button_add_name">Add Your Name</string>
 
